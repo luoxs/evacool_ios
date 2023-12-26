@@ -80,7 +80,6 @@
     UIImageView *view1 = [UIImageView new];
     [view1 setImage:[UIImage imageNamed:@"trunk"]];
    // [view1 setBackgroundColor:[UIColor redColor]];
-    [view1 setContentMode:UIViewContentModeScaleToFill];
     [self.view addSubview:view1];
     view1.sd_layout
     .leftSpaceToView(self.view, 35.0/frameWidth*viewX)
