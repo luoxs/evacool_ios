@@ -1,0 +1,418 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		216A410DC37138665F2757C0 /* libPods-Evacool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3188207C9A4E0EFE94E730D2 /* libPods-Evacool.a */; };
+		453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E124A2B3AC20200D5C032 /* HomeViewController.m */; };
+		457F8AFA2B1EAB0300FA7ABB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 457F8AF92B1EAB0300FA7ABB /* AppDelegate.m */; };
+		457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 457F8AFC2B1EAB0300FA7ABB /* SceneDelegate.m */; };
+		457F8B032B1EAB0300FA7ABB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 457F8B012B1EAB0300FA7ABB /* Main.storyboard */; };
+		457F8B052B1EAB0700FA7ABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 457F8B042B1EAB0700FA7ABB /* Assets.xcassets */; };
+		457F8B082B1EAB0700FA7ABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 457F8B062B1EAB0700FA7ABB /* LaunchScreen.storyboard */; };
+		457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 457F8B0A2B1EAB0700FA7ABB /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0A2D54A10E4E4677C3A236BC /* Pods-Evacool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Evacool.release.xcconfig"; path = "Target Support Files/Pods-Evacool/Pods-Evacool.release.xcconfig"; sourceTree = "<group>"; };
+		3188207C9A4E0EFE94E730D2 /* libPods-Evacool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Evacool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EFDE5DAEA1B853364A7C78F /* Pods-Evacool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Evacool.debug.xcconfig"; path = "Target Support Files/Pods-Evacool/Pods-Evacool.debug.xcconfig"; sourceTree = "<group>"; };
+		453E12492B3AC20200D5C032 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		453E124A2B3AC20200D5C032 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		457F8AF52B1EAB0300FA7ABB /* Evacool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evacool.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		457F8AF82B1EAB0300FA7ABB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		457F8AF92B1EAB0300FA7ABB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		457F8AFB2B1EAB0300FA7ABB /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		457F8AFC2B1EAB0300FA7ABB /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		457F8B022B1EAB0300FA7ABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		457F8B042B1EAB0700FA7ABB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		457F8B072B1EAB0700FA7ABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		457F8B092B1EAB0700FA7ABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		457F8B0A2B1EAB0700FA7ABB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		457F8AF22B1EAB0300FA7ABB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				216A410DC37138665F2757C0 /* libPods-Evacool.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00B03C0C0C40688E63DC1E1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3188207C9A4E0EFE94E730D2 /* libPods-Evacool.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0739153C318866376E96C897 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3EFDE5DAEA1B853364A7C78F /* Pods-Evacool.debug.xcconfig */,
+				0A2D54A10E4E4677C3A236BC /* Pods-Evacool.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		457F8AEC2B1EAB0300FA7ABB = {
+			isa = PBXGroup;
+			children = (
+				457F8AF72B1EAB0300FA7ABB /* Evacool */,
+				457F8AF62B1EAB0300FA7ABB /* Products */,
+				0739153C318866376E96C897 /* Pods */,
+				00B03C0C0C40688E63DC1E1D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		457F8AF62B1EAB0300FA7ABB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				457F8AF52B1EAB0300FA7ABB /* Evacool.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		457F8AF72B1EAB0300FA7ABB /* Evacool */ = {
+			isa = PBXGroup;
+			children = (
+				457F8AF82B1EAB0300FA7ABB /* AppDelegate.h */,
+				457F8AF92B1EAB0300FA7ABB /* AppDelegate.m */,
+				457F8AFB2B1EAB0300FA7ABB /* SceneDelegate.h */,
+				457F8AFC2B1EAB0300FA7ABB /* SceneDelegate.m */,
+				457F8B012B1EAB0300FA7ABB /* Main.storyboard */,
+				457F8B042B1EAB0700FA7ABB /* Assets.xcassets */,
+				457F8B062B1EAB0700FA7ABB /* LaunchScreen.storyboard */,
+				457F8B092B1EAB0700FA7ABB /* Info.plist */,
+				457F8B0A2B1EAB0700FA7ABB /* main.m */,
+				453E12492B3AC20200D5C032 /* HomeViewController.h */,
+				453E124A2B3AC20200D5C032 /* HomeViewController.m */,
+			);
+			path = Evacool;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		457F8AF42B1EAB0300FA7ABB /* Evacool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 457F8B0E2B1EAB0700FA7ABB /* Build configuration list for PBXNativeTarget "Evacool" */;
+			buildPhases = (
+				8DCA3AE1696C27A229EB7BD7 /* [CP] Check Pods Manifest.lock */,
+				457F8AF12B1EAB0300FA7ABB /* Sources */,
+				457F8AF22B1EAB0300FA7ABB /* Frameworks */,
+				457F8AF32B1EAB0300FA7ABB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Evacool;
+			productName = Evacool;
+			productReference = 457F8AF52B1EAB0300FA7ABB /* Evacool.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		457F8AED2B1EAB0300FA7ABB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					457F8AF42B1EAB0300FA7ABB = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 457F8AF02B1EAB0300FA7ABB /* Build configuration list for PBXProject "Evacool" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 457F8AEC2B1EAB0300FA7ABB;
+			productRefGroup = 457F8AF62B1EAB0300FA7ABB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				457F8AF42B1EAB0300FA7ABB /* Evacool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		457F8AF32B1EAB0300FA7ABB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				457F8B082B1EAB0700FA7ABB /* LaunchScreen.storyboard in Resources */,
+				457F8B052B1EAB0700FA7ABB /* Assets.xcassets in Resources */,
+				457F8B032B1EAB0300FA7ABB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8DCA3AE1696C27A229EB7BD7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Evacool-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		457F8AF12B1EAB0300FA7ABB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				457F8AFA2B1EAB0300FA7ABB /* AppDelegate.m in Sources */,
+				457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */,
+				457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */,
+				453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		457F8B012B1EAB0300FA7ABB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				457F8B022B1EAB0300FA7ABB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		457F8B062B1EAB0700FA7ABB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				457F8B072B1EAB0700FA7ABB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		457F8B0C2B1EAB0700FA7ABB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		457F8B0D2B1EAB0700FA7ABB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		457F8B0F2B1EAB0700FA7ABB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EFDE5DAEA1B853364A7C78F /* Pods-Evacool.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KVC8NZTYE2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Evacool/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luoxs.www.Evacool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		457F8B102B1EAB0700FA7ABB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A2D54A10E4E4677C3A236BC /* Pods-Evacool.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = KVC8NZTYE2;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Evacool/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.luoxs.www.Evacool;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		457F8AF02B1EAB0300FA7ABB /* Build configuration list for PBXProject "Evacool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				457F8B0C2B1EAB0700FA7ABB /* Debug */,
+				457F8B0D2B1EAB0700FA7ABB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		457F8B0E2B1EAB0700FA7ABB /* Build configuration list for PBXNativeTarget "Evacool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				457F8B0F2B1EAB0700FA7ABB /* Debug */,
+				457F8B102B1EAB0700FA7ABB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 457F8AED2B1EAB0300FA7ABB /* Project object */;
+}
