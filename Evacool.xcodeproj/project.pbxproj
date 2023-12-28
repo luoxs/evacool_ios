@@ -123,6 +123,7 @@
 		45D49FDA2B3D820A001A4E22 /* jia.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FD62B3D820A001A4E22 /* jia.png */; };
 		45D49FDB2B3D820A001A4E22 /* jian.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FD72B3D820A001A4E22 /* jian.png */; };
 		45D49FDC2B3D820A001A4E22 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FD82B3D820A001A4E22 /* minus.png */; };
+		45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -250,6 +251,8 @@
 		45D49FD62B3D820A001A4E22 /* jia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jia.png; sourceTree = "<group>"; };
 		45D49FD72B3D820A001A4E22 /* jian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jian.png; sourceTree = "<group>"; };
 		45D49FD82B3D820A001A4E22 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
+		45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SemiCircleProgressView.m; sourceTree = "<group>"; };
+		45D49FDE2B3D952F001A4E22 /* SemiCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SemiCircleProgressView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,6 +420,8 @@
 			isa = PBXGroup;
 			children = (
 				454E9F0C2B3AEE93009F7B3A /* images */,
+				45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */,
+				45D49FDE2B3D952F001A4E22 /* SemiCircleProgressView.h */,
 				453E12492B3AC20200D5C032 /* HomeViewController.h */,
 				453E124A2B3AC20200D5C032 /* HomeViewController.m */,
 				450858A62B3B257100770387 /* TruckViewController.h */,
@@ -640,6 +645,7 @@
 				457F8AFA2B1EAB0300FA7ABB /* AppDelegate.m in Sources */,
 				457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */,
 				450858A82B3B257100770387 /* TruckViewController.m in Sources */,
+				45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */,
 				457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */,
 				453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */,
 			);

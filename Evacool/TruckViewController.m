@@ -9,6 +9,7 @@
 #import "BabyBluetooth.h"
 #import "SDAutoLayout.h"
 #import "MBProgressHUD.h"
+#import "SemiCircleProgressView.h"
 
 @interface TruckViewController ()
 
@@ -74,17 +75,23 @@
     .widthIs(120.0/frameWidth*viewX)
     .heightEqualToWidth();
     
+    //弧形进度条
+    SemiCircleProgressView *progress = [[SemiCircleProgressView alloc] initWithFrame:CGRectMake(150/frameWidth*viewX, 425.0/frameHeight*viewY, 450/frameWidth*viewX, 450.0/frameWidth*viewX)];
+    [self.view addSubview:progress];
+    progress.percent = 0.25;
+    
     //圆形背景
     UIView *view0 = [UIView new];
     [self.view addSubview:view0];
     [view0 setBackgroundColor:[UIColor whiteColor]];
     view0.sd_layout
     .centerXEqualToView(self.view)
-    .topSpaceToView(self.view, 472.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 462.0/frameHeight*viewY)
     .widthIs(380.0/frameWidth*viewX)
     .heightEqualToWidth();
     view0.layer.cornerRadius = view0.width * 0.5;
     view0.layer.masksToBounds = true;
+    
     
     //实时温度
     UILabel *labelTemp= [UILabel new];
@@ -139,7 +146,7 @@
     [self.view addSubview:view1];
     view1.sd_layout
     .centerXEqualToView(self.view)
-    .topSpaceToView(self.view, 918.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 898.0/frameHeight*viewY)
     .widthIs(682.0/frameWidth*viewX)
     .heightIs(168.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
@@ -208,7 +215,7 @@
     [self.view addSubview:view2];
     view2.sd_layout
     .leftEqualToView(view1)
-    .topSpaceToView(self.view, 1102.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
     .widthIs(462.0/frameWidth*viewX)
     .heightIs(168.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
@@ -276,7 +283,7 @@
     [self.view addSubview:view3];
     view3.sd_layout
     .rightEqualToView(view1)
-    .topSpaceToView(self.view, 1102.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
     .widthIs(208.0/frameWidth*viewX)
     .heightIs(168.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
@@ -298,7 +305,7 @@
     [btFan setBackgroundImage:[UIImage imageNamed:@"fanoff"] forState:UIControlStateNormal];
     btFan.sd_layout
     .leftSpaceToView(self.view, 44.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1304.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
     .widthIs(122.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
     
@@ -308,7 +315,7 @@
     [btEco setBackgroundImage:[UIImage imageNamed:@"ecooff"] forState:UIControlStateNormal];
     btEco.sd_layout
     .leftSpaceToView(self.view, 222.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1304.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
     .widthIs(122.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
     
@@ -318,7 +325,7 @@
     [btNormal setBackgroundImage:[UIImage imageNamed:@"cooloff"] forState:UIControlStateNormal];
     btNormal.sd_layout
     .leftSpaceToView(self.view, 402.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1304.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
     .widthIs(122.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
     
@@ -328,7 +335,7 @@
     [btTurbo setBackgroundImage:[UIImage imageNamed:@"turbooff"] forState:UIControlStateNormal];
     btTurbo.sd_layout
     .rightSpaceToView(self.view, 44.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1304.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
     .widthIs(122.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
     
@@ -339,7 +346,7 @@
     [self.view addSubview:buttonDetails];
     buttonDetails.sd_layout
     .leftSpaceToView(self.view, 124.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1508.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
     .widthIs(226.0/frameWidth*viewX)
     .heightIs(70.0/frameHeight*viewY);
     [buttonDetails setSd_cornerRadius:@12.0];
@@ -351,7 +358,7 @@
     [self.view addSubview:buttonFaults];
     buttonFaults.sd_layout
     .rightSpaceToView(self.view, 124.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1508.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
     .widthIs(226.0/frameWidth*viewX)
     .heightIs(70.0/frameHeight*viewY);
     [buttonFaults setSd_cornerRadius:@12.0];
