@@ -24,6 +24,7 @@
 @property (nonatomic,retain) UIImageView *imgfan5;
 @property (nonatomic,retain) UILabel *labelTimer;
 @property (nonatomic,retain) UISwitch *switchSleep;
+@property (nonatomic,retain) UIButton *btfan;
 @property (nonatomic,retain) UIButton *bteco;
 @property (nonatomic,retain) UIButton *btnormal;
 @property (nonatomic,retain) UIButton *btturbo;
@@ -330,15 +331,15 @@
     .heightEqualToWidth();
     
     //风量
-    UIButton *btFan = [UIButton new];
-    [self.view addSubview:btFan];
-    [btFan setBackgroundImage:[UIImage imageNamed:@"fanoff"] forState:UIControlStateNormal];
-    btFan.sd_layout
+    self.btfan = [UIButton new];
+    [self.view addSubview:self.btfan];
+    [self.btfan setBackgroundImage:[UIImage imageNamed:@"fanoff"] forState:UIControlStateNormal];
+    self.btfan.sd_layout
     .leftSpaceToView(self.view, 44.0/frameWidth*viewX)
     .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
     .widthIs(122.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
-    [btFan addTarget:self action:@selector(chgfan) forControlEvents:UIControlEventTouchUpInside];
+    [self.btfan addTarget:self action:@selector(chgfan) forControlEvents:UIControlEventTouchUpInside];
     
     //节能
     UIButton *btEco = [UIButton new];
@@ -349,6 +350,7 @@
     .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
     .widthIs(122.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
+    [btEco addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //普通模式
     UIButton *btNormal = [UIButton new];
@@ -359,6 +361,7 @@
     .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
     .widthIs(122.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
+    [btNormal addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //加强模式
     UIButton *btTurbo = [UIButton new];
@@ -369,6 +372,7 @@
     .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
     .widthIs(122.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
+    [btTurbo addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //底部左边按钮
     UIButton *buttonDetails = [UIButton new];
@@ -439,7 +443,7 @@
                 weakSelf.dataRead.crcH = r[12];  //CRC 校验高八位
                 weakSelf.dataRead.crcL = r[13];
                 weakSelf.dataRead.end = r[17];  //通讯结束
-                //[weakSelf updateStatus];
+                [weakSelf updateStatus];
             }
         }
     }];
@@ -462,7 +466,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-        [self updateStatus];
+       // [self updateStatus];
     }
 }
 
@@ -484,7 +488,7 @@
         
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
-        [self updateStatus];
+       // [self updateStatus];
     }
 }
 
@@ -501,7 +505,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-        [self updateStatus];
+       // [self updateStatus];
     }
 }
 
@@ -518,7 +522,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-        [self updateStatus];
+       // [self updateStatus];
     }
 }
 
@@ -538,11 +542,27 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-        [self updateStatus];
+       // [self updateStatus];
     }
-    
-    
 }
+
+-(void) chgmod:(id)sender{
+    if(self.characteristic != nil){
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x05;
+        write[2] = 0x01;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+       // [self updateStatus];
+    }
+}
+
 
 //更新控件
 -(void) updateStatus{
@@ -550,6 +570,7 @@
     //温度
     self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
     self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
+    [self.progress setNeedsDisplay];
     
     //风量
     [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];
@@ -559,12 +580,27 @@
     [self.imgfan5 setImage:[UIImage imageNamed:@"d5"]];
     
     switch(self.dataRead.wind){
-        case 0x00: [self.imgfan1 setImage:[UIImage imageNamed:@"f1"]];break;
-        case 0x01: [self.imgfan2 setImage:[UIImage imageNamed:@"f2"]];break;
-        case 0x02: [self.imgfan3 setImage:[UIImage imageNamed:@"f3"]];break;
-        case 0x03: [self.imgfan4 setImage:[UIImage imageNamed:@"f4"]];break;
-        case 0x04: [self.imgfan5 setImage:[UIImage imageNamed:@"f5"]];break;
+        case 0x01: [self.imgfan1 setImage:[UIImage imageNamed:@"f1"]];break;
+        case 0x02: [self.imgfan2 setImage:[UIImage imageNamed:@"f2"]];break;
+        case 0x03: [self.imgfan3 setImage:[UIImage imageNamed:@"f3"]];break;
+        case 0x04: [self.imgfan4 setImage:[UIImage imageNamed:@"f4"]];break;
+        case 0x00: [self.imgfan5 setImage:[UIImage imageNamed:@"f5"]];break;
     }
+    
+    //模式
+    [self.btfan setBackgroundImage:[UIImage imageNamed:@"fanoff"] forState:UIControlStateNormal];
+    [self.bteco setBackgroundImage:[UIImage imageNamed:@"ecooff"] forState:UIControlStateNormal];
+    [self.btnormal setBackgroundImage:[UIImage imageNamed:@"normaloff"] forState:UIControlStateNormal];
+    [self.btturbo setBackgroundImage:[UIImage imageNamed:@"turbooff"] forState:UIControlStateNormal];
+    
+    switch(self.dataRead.mode){
+        case 0x01:  [self.btfan setBackgroundImage:[UIImage imageNamed:@"fanon"] forState:UIControlStateNormal];break;
+        case 0x02:  [self.bteco setBackgroundImage:[UIImage imageNamed:@"ecoon"] forState:UIControlStateNormal];break;
+        case 0x03:  [self.btnormal setBackgroundImage:[UIImage imageNamed:@"normalon"] forState:UIControlStateNormal];break;
+        case 0x00:  [self.btturbo setBackgroundImage:[UIImage imageNamed:@"turboon"] forState:UIControlStateNormal];break;
+        
+    }
+    
     
     
 }
