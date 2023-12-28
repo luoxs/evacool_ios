@@ -46,24 +46,26 @@
     [self.view addSubview:labelUp];
     labelUp.text = @"EVA 24V";
     [labelUp setTextAlignment:NSTextAlignmentLeft];
+    [labelUp setTextColor:[UIColor blackColor]];
     [labelUp setFont:[UIFont fontWithName:@"Arial" size:22.0]];
     labelUp.sd_layout
     .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
     .topSpaceToView(self.view, 249.0/frameHeight*viewY)
     .widthIs(300.0/frameWidth*viewX)
-    .heightIs(38.0/frameHeight*viewY);
+    .heightIs(44.0/frameHeight*viewY);
     
     //左上文字2
     UILabel *labelDown = [UILabel new];
     [self.view addSubview:labelDown];
     labelDown.text = @"Truck Air Conditioner";
     [labelDown setTextAlignment:NSTextAlignmentLeft];
+    [labelDown setTextColor:[UIColor blackColor]];
     [labelDown setFont:[UIFont fontWithName:@"Arial" size:22.0]];
     labelDown.sd_layout
     .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
     .topSpaceToView(self.view, 295.0/frameHeight*viewY)
     .widthIs(600.0/frameWidth*viewX)
-    .heightIs(38.0/frameHeight*viewY);
+    .heightIs(44.0/frameHeight*viewY);
     
     //开关
     UIButton *btPower = [UIButton new];
@@ -79,7 +81,8 @@
     SemiCircleProgressView *progress = [[SemiCircleProgressView alloc] initWithFrame:CGRectMake(150/frameWidth*viewX, 425.0/frameHeight*viewY, 450/frameWidth*viewX, 450.0/frameWidth*viewX)];
     [self.view addSubview:progress];
     progress.percent = 0.25;
-    
+     
+
     //圆形背景
     UIView *view0 = [UIView new];
     [self.view addSubview:view0];
@@ -98,24 +101,27 @@
     [self.view addSubview:labelTemp];
     labelTemp.text = @"0°C";
     [labelTemp setTextAlignment:NSTextAlignmentCenter];
+    [labelTemp setTextColor:[UIColor blackColor]];
     [labelTemp setFont:[UIFont fontWithName:@"Arial" size:36.0]];
     labelTemp.sd_layout
     .centerXEqualToView(self.view)
     .centerYEqualToView(view0)
     .widthIs(200.0/frameWidth*viewX)
-    .heightIs(52.0/frameHeight*viewY);
+    .heightIs(64.0/frameHeight*viewY);
     
     //状态
     UILabel *labelStatus= [UILabel new];
     [self.view addSubview:labelStatus];
     labelStatus.text = @"In Good Condition";
     [labelStatus setTextAlignment:NSTextAlignmentCenter];
+    [labelStatus setTextColor:[UIColor blackColor]];
     [labelStatus setFont:[UIFont fontWithName:@"Arial" size:12.0]];
     labelStatus.sd_layout
     .centerXEqualToView(self.view)
     .topSpaceToView(labelTemp, 30.0/frameHeight*viewY)
     .widthIs(600.0/frameWidth*viewX)
     .heightIs(12.0/frameHeight*viewY);
+     
     
     //温度减
     UIButton *btTempMinus = [UIButton new];
@@ -137,7 +143,7 @@
     .bottomEqualToView(labelTemp)
     .widthIs(54.0/frameWidth*viewX)
     .heightEqualToWidth();
-    
+
     
 #pragma mark 显示风速
     //一个水平视图
