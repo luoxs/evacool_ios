@@ -229,7 +229,6 @@
 }
 
 -(void)connect{
-
     //baby.scanForPeripherals().begin();
     baby.scanForPeripherals().connectToPeripherals().begin();
     self.hud = [[MBProgressHUD alloc] init];
@@ -254,12 +253,10 @@
             [weakSelf.devices addObject:peripheral];
             [weakSelf.localNames addObject:advertiseName];
             weakSelf.currPeripheral = peripheral;
-        }
-
-        if([weakSelf.devices count]>1){
             [central stopScan];
         }
         
+        /*
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *uuidString = [defaults objectForKey:@"UUID"];
         if([peripheral.identifier.UUIDString isEqual:uuidString]){
@@ -267,7 +264,7 @@
             [baby cancelAllPeripheralsConnection];
             [central connectPeripheral:peripheral options:nil];
             weakSelf.currPeripheral = peripheral;
-        }
+        }*/
     }];
     
     //设置连接设备失败的委托
@@ -296,19 +293,21 @@
         [weakSelf.hud setMinShowTime:1];
         [weakSelf.hud hideAnimated:YES];
         [peripheral discoverServices:nil];
-        
+        /*
         TruckViewController *truckViewController = [[TruckViewController alloc]init];
         [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-        [weakSelf presentViewController:truckViewController animated:YES completion:nil];
+        [weakSelf presentViewController:truckViewController animated:YES completion:nil];*/
     }];
     
     //设置发现设备的Services的委托
     [baby setBlockOnDiscoverServices:^(CBPeripheral *peripheral, NSError *error) {
         for (CBService *service in peripheral.services) {
             NSLog(@"搜索到服务:%@",service.UUID.UUIDString);
-            for(CBService *service in peripheral.services){
-                [peripheral discoverCharacteristics:nil forService:service];
-            }
+            //for(CBService *service in peripheral.services){
+                if([service.UUID.UUIDString isEqualToString:@"FFE0"]){
+                 [peripheral discoverCharacteristics:nil forService:service];
+                }
+            //}
         }
     }];
     
@@ -317,8 +316,17 @@
         NSLog(@"===service name:%@",service.UUID);
         for (CBCharacteristic *c in service.characteristics) {
             NSLog(@"charateristic name is :%@",c.UUID);
-            [peripheral readValueForCharacteristic:c];
+           // [peripheral readValueForCharacteristic:c];
+            
+            if([c.UUID.UUIDString isEqualToString:@"FFE1"]){
+                TruckViewController *truckViewController = [[TruckViewController alloc]init];
+                [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+                truckViewController.currPeripheral = weakSelf.currPeripheral;
+                truckViewController.characteristic = c;
+                [weakSelf presentViewController:truckViewController animated:YES completion:nil];
+            }
         }
+        
     }];
     
     //设置读取characteristics的委托

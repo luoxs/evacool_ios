@@ -10,9 +10,10 @@
 #import "SDAutoLayout.h"
 #import "MBProgressHUD.h"
 #import "SemiCircleProgressView.h"
+#import "crc.h"
 
 @interface TruckViewController ()
-
+@property (nonatomic,retain) MBProgressHUD *hud;
 @end
 
 @implementation TruckViewController
@@ -21,6 +22,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setAutoLayout];
+    self.dataRead = [[DataRead alloc] init];
+    baby = [BabyBluetooth shareBabyBluetooth];
+    [self babyDelegate];
+    [self getStatus];
     
 }
 
@@ -76,6 +81,7 @@
     .topSpaceToView(self.view, 222.0/frameHeight*viewY)
     .widthIs(120.0/frameWidth*viewX)
     .heightEqualToWidth();
+    [btPower addTarget:self action:@selector(powerswitch) forControlEvents:UIControlEventTouchUpInside];
     
     //弧形进度条
     SemiCircleProgressView *progress = [[SemiCircleProgressView alloc] initWithFrame:CGRectMake(150/frameWidth*viewX, 425.0/frameHeight*viewY, 450/frameWidth*viewX, 450.0/frameWidth*viewX)];
@@ -370,6 +376,86 @@
     [buttonFaults setSd_cornerRadius:@12.0];
     
     
+}
+
+#pragma mark babyDelegate
+
+
+-(void)babyDelegate{
+    __weak typeof(self) weakSelf = self;
+    //设置扫描到设备的委托
+   
+    
+   
+    //设置断开设备的委托
+    [baby setBlockOnDisconnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
+        weakSelf.hud.mode = MBProgressHUDModeIndeterminate;
+        weakSelf.hud.label.text = @"Disconnet devices";
+        [weakSelf.hud setMinShowTime:1];
+        [weakSelf.hud showAnimated:YES];
+    }];
+    
+   
+    //设置读取characteristics的委托
+    [baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
+     //   NSLog(@"read characteristic successfully!");
+        
+        if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
+            NSData *data = characteristics.value;
+            Byte r[15] ={0};
+            if(data.length == 23){
+                weakSelf.dataRead.start = r[0]; //通讯开始
+                weakSelf.dataRead.power = r[1]; //0x01开机，0x00关机
+                weakSelf.dataRead.tempSetting = r[2];  //设定温度
+                weakSelf.dataRead.tempReal = r[3];  //实时温度
+                weakSelf.dataRead.mode = r[4];  //工作模式
+                weakSelf.dataRead.wind = r[5];  //风速档位 0-自动 1-4 是手动风速
+                weakSelf.dataRead.errorcode = r[6];  //强冷模式开关
+                weakSelf.dataRead.vhigh = r[7];
+                weakSelf.dataRead.vlow = r[8];
+                weakSelf.dataRead.battery = r[9];  //倒计时关机时间
+                weakSelf.dataRead.light = r[10];  //LOGO 灯开关
+                weakSelf.dataRead.lock = r[11];  //氛围灯模式或氛围灯变化时间
+                weakSelf.dataRead.crcH = r[12];  //CRC 校验高八位
+                weakSelf.dataRead.crcL = r[13];
+                weakSelf.dataRead.end = r[17];  //通讯结束
+                [weakSelf updateStatus];
+            }
+        }
+    }];
+    
+    //扫描选项->CBCentralManagerScanOptionAllowDuplicatesKey:同一个Peripheral端的多个发现事件被聚合成一个发现事件
+    NSDictionary *scanForPeripheralsWithOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@NO};
+   
+}
+//开关
+-(void) powerswitch{
+    
+    
+
+}
+
+-(void) getStatus{
+    if(self.characteristic != nil){
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x01;
+        write[2] = 0x00;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+        [self updateStatus];
+    }
+}
+
+//更新控件
+-(void) updateStatus{
+    
+    NSLog(@"hh");
 }
 
 
