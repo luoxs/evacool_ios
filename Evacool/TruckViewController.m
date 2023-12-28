@@ -14,6 +14,21 @@
 
 @interface TruckViewController ()
 @property (nonatomic,retain) MBProgressHUD *hud;
+@property (nonatomic,retain) UILabel *labelUp;
+@property (nonatomic,retain) UILabel *labelTemp;
+@property (nonatomic,retain) SemiCircleProgressView *progress;
+@property (nonatomic,retain) UIImageView *imgfan1;
+@property (nonatomic,retain) UIImageView *imgfan2;
+@property (nonatomic,retain) UIImageView *imgfan3;
+@property (nonatomic,retain) UIImageView *imgfan4;
+@property (nonatomic,retain) UIImageView *imgfan5;
+@property (nonatomic,retain) UILabel *labelTimer;
+@property (nonatomic,retain) UISwitch *switchSleep;
+@property (nonatomic,retain) UIButton *bteco;
+@property (nonatomic,retain) UIButton *btnormal;
+@property (nonatomic,retain) UIButton *btturbo;
+
+
 @end
 
 @implementation TruckViewController
@@ -47,13 +62,13 @@
     .heightIs(82.0/frameHeight*viewY);
    
     //左上文字1
-    UILabel *labelUp = [UILabel new];
-    [self.view addSubview:labelUp];
-    labelUp.text = @"EVA 24V";
-    [labelUp setTextAlignment:NSTextAlignmentLeft];
-    [labelUp setTextColor:[UIColor blackColor]];
-    [labelUp setFont:[UIFont fontWithName:@"Arial" size:22.0]];
-    labelUp.sd_layout
+    self.labelUp = [UILabel new];
+    [self.view addSubview: self.labelUp];
+    self.labelUp.text = @"EVA 24V";
+    [ self.labelUp setTextAlignment:NSTextAlignmentLeft];
+    [ self.labelUp setTextColor:[UIColor blackColor]];
+    [ self.labelUp setFont:[UIFont fontWithName:@"Arial" size:22.0]];
+    self.labelUp.sd_layout
     .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
     .topSpaceToView(self.view, 249.0/frameHeight*viewY)
     .widthIs(300.0/frameWidth*viewX)
@@ -84,9 +99,9 @@
     [btPower addTarget:self action:@selector(powerswitch) forControlEvents:UIControlEventTouchUpInside];
     
     //弧形进度条
-    SemiCircleProgressView *progress = [[SemiCircleProgressView alloc] initWithFrame:CGRectMake(150/frameWidth*viewX, 425.0/frameHeight*viewY, 450/frameWidth*viewX, 450.0/frameWidth*viewX)];
-    [self.view addSubview:progress];
-    progress.percent = 0.25;
+    self.progress = [[SemiCircleProgressView alloc] initWithFrame:CGRectMake(150/frameWidth*viewX, 425.0/frameHeight*viewY, 450/frameWidth*viewX, 450.0/frameWidth*viewX)];
+    [self.view addSubview:self.progress];
+    self.progress.percent = 0.25;
      
 
     //圆形背景
@@ -103,13 +118,13 @@
     
     
     //实时温度
-    UILabel *labelTemp= [UILabel new];
-    [self.view addSubview:labelTemp];
-    labelTemp.text = @"0°C";
-    [labelTemp setTextAlignment:NSTextAlignmentCenter];
-    [labelTemp setTextColor:[UIColor blackColor]];
-    [labelTemp setFont:[UIFont fontWithName:@"Arial" size:36.0]];
-    labelTemp.sd_layout
+    self.labelTemp= [UILabel new];
+    [self.view addSubview:self.labelTemp];
+    self.labelTemp.text = @"0°C";
+    [self.labelTemp setTextAlignment:NSTextAlignmentCenter];
+    [self.labelTemp setTextColor:[UIColor blackColor]];
+    [self.labelTemp setFont:[UIFont fontWithName:@"Arial" size:36.0]];
+    self.labelTemp.sd_layout
     .centerXEqualToView(self.view)
     .centerYEqualToView(view0)
     .widthIs(200.0/frameWidth*viewX)
@@ -124,7 +139,7 @@
     [labelStatus setFont:[UIFont fontWithName:@"Arial" size:12.0]];
     labelStatus.sd_layout
     .centerXEqualToView(self.view)
-    .topSpaceToView(labelTemp, 30.0/frameHeight*viewY)
+    .topSpaceToView(self.labelTemp, 30.0/frameHeight*viewY)
     .widthIs(600.0/frameWidth*viewX)
     .heightIs(12.0/frameHeight*viewY);
      
@@ -135,9 +150,10 @@
     [btTempMinus setBackgroundImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     btTempMinus.sd_layout
     .leftSpaceToView(self.view, 210.0/frameWidth*viewX)
-    .bottomEqualToView(labelTemp)
+    .bottomEqualToView(self.labelTemp)
     .widthIs(54.0/frameWidth*viewX)
     .heightEqualToWidth();
+    [btTempMinus addTarget:self action:@selector(subtemp) forControlEvents:UIControlEventTouchUpInside];
     
     
     //温度加
@@ -146,10 +162,11 @@
     [self.view addSubview:btTempAdd];
     btTempAdd.sd_layout
     .rightSpaceToView(self.view, 210.0/frameWidth*viewX)
-    .bottomEqualToView(labelTemp)
+    .bottomEqualToView(self.labelTemp)
     .widthIs(54.0/frameWidth*viewX)
     .heightEqualToWidth();
-
+    [btTempAdd addTarget:self action:@selector(addtemp) forControlEvents:UIControlEventTouchUpInside];
+    
     
 #pragma mark 显示风速
     //一个水平视图
@@ -176,45 +193,45 @@
     .heightIs(30.0/frameHeight*viewY);
     
     //风速1
-    UIImageView *imgfan1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d1"]];
-    [view1 addSubview:imgfan1];
-    imgfan1.sd_layout
+    self.imgfan1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d1"]];
+    [view1 addSubview: self.imgfan1];
+    self.imgfan1.sd_layout
     .leftSpaceToView(view1, 64.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
     .widthIs(92.0/frameWidth*viewX)
     .heightIs(16.0/frameHeight*viewY);
     
     //风速2
-    UIImageView *imgfan2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d2"]];
-    [view1 addSubview:imgfan2];
-    imgfan2.sd_layout
+    self.imgfan2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d2"]];
+    [view1 addSubview:self.imgfan2];
+    self.imgfan2.sd_layout
     .leftSpaceToView(view1, 178.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
     .widthIs(92.0/frameWidth*viewX)
     .heightIs(26.0/frameHeight*viewY);
     
     //风速3
-    UIImageView *imgfan3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d3"]];
-    [view1 addSubview:imgfan3];
-    imgfan3.sd_layout
+    self.imgfan3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d3"]];
+    [view1 addSubview:self.imgfan3];
+    self.imgfan3.sd_layout
     .leftSpaceToView(view1, 294.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
     .widthIs(92.0/frameWidth*viewX)
     .heightIs(36.0/frameHeight*viewY);
     
     //风速4
-    UIImageView *imgfan4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d4"]];
-    [view1 addSubview:imgfan4];
-    imgfan4.sd_layout
+    self.imgfan4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d4"]];
+    [view1 addSubview:self.imgfan4];
+    self.imgfan4.sd_layout
     .leftSpaceToView(view1, 410.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
     .widthIs(92.0/frameWidth*viewX)
     .heightIs(46.0/frameHeight*viewY);
     
     //风速5
-    UIImageView *imgfan5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d5"]];
-    [view1 addSubview:imgfan5];
-    imgfan5.sd_layout
+    self.imgfan5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d5"]];
+    [view1 addSubview:self.imgfan5 ];
+    self.imgfan5 .sd_layout
     .leftSpaceToView(view1, 524.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
     .widthIs(92.0/frameWidth*viewX)
@@ -245,22 +262,23 @@
     .heightIs(30.0/frameHeight*viewY);
     
     //开关
-    UISwitch *switchSleep = [UISwitch new];
-    [view2 addSubview:switchSleep];
-    switchSleep.sd_layout
+    self.switchSleep = [UISwitch new];
+    [view2 addSubview:self.switchSleep];
+    self.switchSleep.sd_layout
     .rightSpaceToView(view2, 22.0/frameWidth*viewX)
     .topSpaceToView(view2, 22.0/frameHeight*viewY)
     .widthIs(94.0/frameWidth*viewX)
     .heightIs(36.0/frameHeight*viewY);
     
     //定时量
-    UILabel *labelTimer= [UILabel new];
-    [view2 addSubview:labelTimer];
-    labelTimer.text = @"0.5h";
-    [labelTimer setTextAlignment:NSTextAlignmentLeft];
-    [labelTimer setFont:[UIFont fontWithName:@"Arial" size:20.0]];
-    [labelTimer setTextAlignment:NSTextAlignmentCenter];
-    labelTimer.sd_layout
+    self.labelTimer= [UILabel new];
+    [view2 addSubview:self.labelTimer];
+    self.labelTimer.text = @"0.5h";
+    [self.labelTimer setTextAlignment:NSTextAlignmentLeft];
+    [self.labelTimer setTextColor:[UIColor blackColor]];
+    [self.labelTimer setFont:[UIFont fontWithName:@"Arial" size:20.0]];
+    [self.labelTimer setTextAlignment:NSTextAlignmentCenter];
+    self.labelTimer.sd_layout
     .centerXEqualToView(view2)
     .widthIs(100.0/frameWidth*viewX)
     .heightIs(40.0/frameHeight*viewY)
@@ -272,7 +290,7 @@
     [view2 addSubview:btTimeMinus];
     btTimeMinus.sd_layout
     .leftSpaceToView(view2, 98.0/frameWidth*viewX)
-    .centerYEqualToView(labelTimer)
+    .centerYEqualToView(self.labelTimer)
     .widthIs(42.0/frameWidth*viewX)
     .heightEqualToWidth();
     
@@ -283,7 +301,7 @@
     [view2 addSubview:btTimeAdd];
     btTimeAdd.sd_layout
     .rightSpaceToView(view2, 98.0/frameWidth*viewX)
-    .centerYEqualToView(labelTimer)
+    .centerYEqualToView(self.labelTimer)
     .widthIs(42.0/frameWidth*viewX)
     .heightEqualToWidth();
     
@@ -320,6 +338,7 @@
     .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
     .widthIs(122.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
+    [btFan addTarget:self action:@selector(chgfan) forControlEvents:UIControlEventTouchUpInside];
     
     //节能
     UIButton *btEco = [UIButton new];
@@ -403,7 +422,8 @@
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
             NSData *data = characteristics.value;
             Byte r[15] ={0};
-            if(data.length == 23){
+            if(data.length == 15){
+                memcpy(r, [data bytes], 15);
                 weakSelf.dataRead.start = r[0]; //通讯开始
                 weakSelf.dataRead.power = r[1]; //0x01开机，0x00关机
                 weakSelf.dataRead.tempSetting = r[2];  //设定温度
@@ -419,7 +439,7 @@
                 weakSelf.dataRead.crcH = r[12];  //CRC 校验高八位
                 weakSelf.dataRead.crcL = r[13];
                 weakSelf.dataRead.end = r[17];  //通讯结束
-                [weakSelf updateStatus];
+                //[weakSelf updateStatus];
             }
         }
     }];
@@ -427,12 +447,6 @@
     //扫描选项->CBCentralManagerScanOptionAllowDuplicatesKey:同一个Peripheral端的多个发现事件被聚合成一个发现事件
     NSDictionary *scanForPeripheralsWithOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@NO};
    
-}
-//开关
--(void) powerswitch{
-    
-    
-
 }
 
 -(void) getStatus{
@@ -452,10 +466,107 @@
     }
 }
 
+//开关
+-(void) powerswitch{
+    if(self.characteristic != nil){
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x02;
+        if(self.dataRead.power == 0x00){
+            write[2] = 0x01;
+            [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+        }else{
+            write[2] = 0x00;
+        }
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self updateStatus];
+    }
+}
+
+//温度减
+-(void) subtemp{
+    if(self.characteristic != nil){
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x03;
+        write[2] = 0x00;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+        [self updateStatus];
+    }
+}
+
+//温度增加
+-(void) addtemp{
+    if(self.characteristic != nil){
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x03;
+        write[2] = 0x01;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+        [self updateStatus];
+    }
+}
+
+
+//改变风速
+-(void)chgfan{
+    
+    if(self.characteristic != nil){
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x04;
+        write[2] = 0x01;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+        [self updateStatus];
+    }
+    
+    
+}
+
 //更新控件
 -(void) updateStatus{
     
-    NSLog(@"hh");
+    //温度
+    self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
+    self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
+    
+    //风量
+    [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];
+    [self.imgfan2 setImage:[UIImage imageNamed:@"d3"]];
+    [self.imgfan3 setImage:[UIImage imageNamed:@"d3"]];
+    [self.imgfan4 setImage:[UIImage imageNamed:@"d4"]];
+    [self.imgfan5 setImage:[UIImage imageNamed:@"d5"]];
+    
+    switch(self.dataRead.wind){
+        case 0x00: [self.imgfan1 setImage:[UIImage imageNamed:@"f1"]];break;
+        case 0x01: [self.imgfan2 setImage:[UIImage imageNamed:@"f2"]];break;
+        case 0x02: [self.imgfan3 setImage:[UIImage imageNamed:@"f3"]];break;
+        case 0x03: [self.imgfan4 setImage:[UIImage imageNamed:@"f4"]];break;
+        case 0x04: [self.imgfan5 setImage:[UIImage imageNamed:@"f5"]];break;
+    }
+    
+    
 }
 
 
