@@ -12,7 +12,7 @@
 #import "SemiCircleProgressView.h"
 #import "crc.h"
 
-@interface TruckViewController ()
+@interface TruckViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property (nonatomic,retain) MBProgressHUD *hud;
 @property (nonatomic,retain) UILabel *labelUp;
 @property (nonatomic,retain) UILabel *labelTemp;
@@ -28,7 +28,10 @@
 @property (nonatomic,retain) UIButton *bteco;
 @property (nonatomic,retain) UIButton *btnormal;
 @property (nonatomic,retain) UIButton *btturbo;
-
+@property (nonatomic,retain) UIView *viewMusk;
+@property (nonatomic,retain) UIView *viewDetails;
+@property (nonatomic,retain) UIView*viewFault;
+@property (nonatomic,retain) UIView *batteryprotect;
 
 @end
 
@@ -38,6 +41,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setAutoLayout];
+    [self.viewMusk setHidden:YES];
     self.dataRead = [[DataRead alloc] init];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
@@ -113,6 +117,7 @@
     .centerXEqualToView(self.view)
     .topSpaceToView(self.view, 462.0/frameHeight*viewY)
     .widthIs(380.0/frameWidth*viewX)
+
     .heightEqualToWidth();
     view0.layer.cornerRadius = view0.width * 0.5;
     view0.layer.masksToBounds = true;
@@ -321,14 +326,15 @@
     
     
     //电池
-    UIButton *buttonBattry = [UIButton new];
-    [buttonBattry setBackgroundImage:[UIImage imageNamed:@"battery"] forState:UIControlStateNormal];
-    [view3 addSubview:buttonBattry];
-    buttonBattry.sd_layout
+    UIButton *btBattry = [UIButton new];
+    [btBattry setBackgroundImage:[UIImage imageNamed:@"battery"] forState:UIControlStateNormal];
+    [view3 addSubview:btBattry];
+    btBattry.sd_layout
     .centerXEqualToView(view3)
     .centerYEqualToView(view3)
     .widthIs(82.0/frameWidth*viewX)
     .heightEqualToWidth();
+    [btBattry addTarget:self action:@selector(openbattery) forControlEvents:UIControlEventTouchUpInside];
     
     //风量
     self.btfan = [UIButton new];
@@ -385,8 +391,9 @@
     .widthIs(226.0/frameWidth*viewX)
     .heightIs(70.0/frameHeight*viewY);
     [buttonDetails setSd_cornerRadius:@12.0];
+    [buttonDetails addTarget:self action:@selector(opendetails) forControlEvents:UIControlEventTouchUpInside];
     
-    //底部左边按钮
+    //底部右边边按钮
     UIButton *buttonFaults = [UIButton new];
     [buttonFaults setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
     [buttonFaults setTitle:@"Faults Record" forState:UIControlStateNormal];
@@ -397,8 +404,121 @@
     .widthIs(226.0/frameWidth*viewX)
     .heightIs(70.0/frameHeight*viewY);
     [buttonFaults setSd_cornerRadius:@12.0];
+    [buttonFaults addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
+    
+    //蒙层
+    self.viewMusk = [UIView new];
+    [self.view addSubview:self.viewMusk];
+    [self.viewMusk setBackgroundColor:[UIColor colorWithRed:16/255.0 green:16/255.0 blue:16/255.0 alpha:0.6]];
+    self.viewMusk.sd_layout
+        .leftSpaceToView(self.view, 0)
+        .rightSpaceToView(self.view, 0)
+        .topSpaceToView(self.view, 0)
+        .bottomSpaceToView(self.view, 0);
+    self.viewMusk.layer.masksToBounds = YES;
     
     
+    //详细
+    self.viewDetails = [UIView new];
+    [self.viewMusk addSubview:self.viewDetails];
+    [self.viewDetails setBackgroundColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
+    self.viewDetails.sd_layout
+        .topSpaceToView(self.viewMusk, 565/frameHeight*viewY)
+        .leftSpaceToView(self.viewMusk, 0)
+        .heightIs(424/frameHeight*viewY)
+        .widthIs(frameWidth);         //原设计390
+    self.viewDetails.layer.cornerRadius = 20.0f;
+    self.viewDetails.layer.masksToBounds = YES;
+    
+    
+    //详细
+    self.batteryprotect = [UIView new];
+    [self.viewMusk addSubview:self.batteryprotect];
+    [self.batteryprotect setBackgroundColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
+    self.batteryprotect.sd_layout
+        .topSpaceToView(self.viewMusk, 812/frameHeight*viewY)
+        .centerXEqualToView(self.viewMusk)
+        .heightIs(812.0/frameHeight*viewY)
+        .widthIs(750.0/frameWidth*viewX);         //原设计390
+    self.batteryprotect.layer.cornerRadius = 20.0f;
+    self.batteryprotect.layer.masksToBounds = YES;
+    
+    UILabel *labellevel = [UILabel new];
+    [self.batteryprotect addSubview:labellevel];
+    [labellevel setTextColor:[UIColor blackColor]];
+    [labellevel setText:@"Battery Protection Level"];
+    [labellevel setTextAlignment:NSTextAlignmentCenter];
+    [labellevel  setFont:[UIFont fontWithName:@"Arial" size:18]];
+    labellevel.sd_layout
+    .topSpaceToView(self.batteryprotect, 30.0/frameHeight*viewY)
+    .centerXEqualToView(self.batteryprotect)
+    .widthIs(750/frameWidth*viewX)
+    .heightIs(40.0/frameHeight*viewY);
+
+    
+    UIPickerView *pickerView = [UIPickerView new];
+    pickerView.delegate = self;
+    pickerView.dataSource = self;
+    [self.batteryprotect addSubview:pickerView];
+    pickerView.sd_layout
+    .topSpaceToView(_batteryprotect, 30.0/frameHeight*viewY)
+    .leftSpaceToView(self.batteryprotect, 0)
+    .rightSpaceToView(self.batteryprotect, 0)
+    .bottomSpaceToView(self.batteryprotect, 30);
+
+    UIButton *btconfirm = [UIButton new];
+    [self.batteryprotect addSubview:btconfirm];
+    [btconfirm setTitle:@"Confirm" forState:UIControlStateNormal];
+    [btconfirm setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
+    btconfirm.sd_layout
+    .bottomSpaceToView(self.batteryprotect, 30.0/frameHeight*viewY)
+    .centerXEqualToView(self.batteryprotect)
+    .widthIs(200.0/frameWidth*viewX)
+    .heightIs(58.0/frameHeight*viewY);
+    [btconfirm setSd_cornerRadius:@10.0];
+    [btconfirm addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
+    
+
+}
+
+#pragma  mark pickviewdelegate
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return 10;
+}
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    
+    UILabel *titleLabel = [[UILabel alloc] init];
+    [titleLabel setText:[NSString stringWithFormat:@"%.1f",21.1+row*0.2]];
+    [titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [titleLabel setFont:[UIFont systemFontOfSize:16]];
+    [titleLabel setTextColor:[UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1]];
+    
+    return titleLabel;
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return 40.0f;
+}
+
+
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    Byte  write[6];
+    write[0] = 0xAA;
+    write[1] = 0x08;
+    write[2] = row;
+    write[4] = 0xFF & CalcCRC(&write[1], 2);
+    write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+    write[5] = 0x55;
+    
+    NSData *data = [[NSData alloc]initWithBytes:write length:6];
+    [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+    [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+   // [self updateStatus];
 }
 
 #pragma mark babyDelegate
@@ -601,10 +721,31 @@
         
     }
     
-    
-    
 }
 
+-(void) opendetails{
+    [self.viewMusk setHidden:NO];
+    [self.batteryprotect removeFromSuperview];
+    [self.viewMusk addSubview:self.viewDetails];
+}
+
+-(void) openfaults{
+  //  [self.viewMusk setHidden:NO];
+    //[self.viewDetails removeFromSuperview];
+  //  [self.viewMusk addSubview:self.viewFault];
+}
+
+
+-(void) openbattery{
+    [self.viewMusk setHidden:NO];
+    [self.viewDetails removeFromSuperview];
+    [self.viewMusk addSubview:self.batteryprotect];
+}
+
+
+-(void) confirm{
+    [self.viewMusk setHidden:YES];
+}
 
 /*
 #pragma mark - Navigation
