@@ -291,7 +291,7 @@
     
     //电池
     UIButton *buttonBattry = [UIButton new];
-    [buttonBattry setBackgroundImage:[UIImage imageNamed:@"batteryoff"] forState:UIControlStateNormal];
+    [buttonBattry setBackgroundImage:[UIImage imageNamed:@"battery"] forState:UIControlStateNormal];
     [view3 addSubview:buttonBattry];
     buttonBattry.sd_layout
     .centerXEqualToView(view3)

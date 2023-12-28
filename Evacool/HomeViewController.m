@@ -9,9 +9,13 @@
 #import "BabyBluetooth.h"
 #import "SDAutoLayout.h"
 #import "MBProgressHUD.h"
+#import "TruckViewController.h"
 
 @interface HomeViewController ()
-
+@property (retain, nonatomic)  MBProgressHUD *hud;
+@property (nonatomic,retain) NSMutableArray <CBPeripheral*> *devices;;
+@property (nonatomic,retain) NSMutableArray *localNames;
+@property (nonatomic,strong) NSString *strType;
 @end
 
 @implementation HomeViewController
@@ -19,7 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.strType = [NSString new];
     [self setAutoLayout];
+    baby = [BabyBluetooth shareBabyBluetooth];
+    [self babyDelegate];
     
 }
 
@@ -162,6 +169,7 @@
     .topSpaceToView(view5, 46.0/frameHeight*viewY)
     .widthIs(54.0/frameWidth*viewX)
     .heightEqualToWidth();
+    [imageBluetooth addTarget:self action:@selector(connect) forControlEvents:UIControlEventTouchUpInside];
     
     //蓝牙文字
     UILabel *labelBluetooth = [UILabel new];
@@ -220,6 +228,148 @@
     
 }
 
+-(void)connect{
+
+    //baby.scanForPeripherals().begin();
+    baby.scanForPeripherals().connectToPeripherals().begin();
+    self.hud = [[MBProgressHUD alloc] init];
+    [self.view addSubview:self.hud];
+    self.hud.mode = MBProgressHUDModeIndeterminate;
+    self.hud.label.text = @"Search for device...";
+    [self.hud  showAnimated:YES];
+}
+
+
+#pragma mark - babyDelegate
+//蓝牙网关初始化和委托方法设置
+-(void)babyDelegate{
+    __weak typeof(self) weakSelf = self;
+    //设置扫描到设备的委托
+    [baby setBlockOnDiscoverToPeripherals:^(CBCentralManager *central, CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI) {
+        NSLog(@"Device discovered :%@",peripheral.name);
+        
+//        if(([peripheral.name hasPrefix:@"CCA"]||[peripheral.name hasPrefix:@"GCA"]) && ![self.devices containsObject:peripheral])  {
+        NSString *advertiseName = advertisementData[@"kCBAdvDataLocalName"];
+        if([advertiseName hasPrefix:@"G29"]||[advertiseName hasPrefix:@"G29A"])  {
+            [weakSelf.devices addObject:peripheral];
+            [weakSelf.localNames addObject:advertiseName];
+            weakSelf.currPeripheral = peripheral;
+        }
+
+        if([weakSelf.devices count]>1){
+            [central stopScan];
+        }
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *uuidString = [defaults objectForKey:@"UUID"];
+        if([peripheral.identifier.UUIDString isEqual:uuidString]){
+            [central stopScan];
+            [baby cancelAllPeripheralsConnection];
+            [central connectPeripheral:peripheral options:nil];
+            weakSelf.currPeripheral = peripheral;
+        }
+    }];
+    
+    //设置连接设备失败的委托
+    [baby setBlockOnFailToConnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
+        weakSelf.hud.label.text = @"Device connected failed!\nPlease check the bluetooth!";
+        [weakSelf.hud setMinShowTime:1];
+        [weakSelf.hud showAnimated:YES];
+        [weakSelf.hud hideAnimated:YES];
+    }];
+    
+    //设置断开设备的委托
+    [baby setBlockOnDisconnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
+        weakSelf.hud.mode = MBProgressHUDModeIndeterminate;
+        weakSelf.hud.label.text = @"Disconnet devices";
+        [weakSelf.hud setMinShowTime:1];
+        [weakSelf.hud showAnimated:YES];
+    }];
+    
+    //设置设备连接成功的委托
+    [baby setBlockOnConnected:^(CBCentralManager *central, CBPeripheral *peripheral) {
+        [central stopScan];
+        NSLog(@"设备：%@--连接成功",peripheral.name);
+        weakSelf.currPeripheral = peripheral;
+        weakSelf.hud.mode = MBProgressHUDModeText;
+        weakSelf.hud.label.text = @"Device connected!";
+        [weakSelf.hud setMinShowTime:1];
+        [weakSelf.hud hideAnimated:YES];
+        [peripheral discoverServices:nil];
+        
+        TruckViewController *truckViewController = [[TruckViewController alloc]init];
+        [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+        [weakSelf presentViewController:truckViewController animated:YES completion:nil];
+    }];
+    
+    //设置发现设备的Services的委托
+    [baby setBlockOnDiscoverServices:^(CBPeripheral *peripheral, NSError *error) {
+        for (CBService *service in peripheral.services) {
+            NSLog(@"搜索到服务:%@",service.UUID.UUIDString);
+            for(CBService *service in peripheral.services){
+                [peripheral discoverCharacteristics:nil forService:service];
+            }
+        }
+    }];
+    
+    //设置发现设service的Characteristics的委托
+    [baby setBlockOnDiscoverCharacteristics:^(CBPeripheral *peripheral, CBService *service, NSError *error) {
+        NSLog(@"===service name:%@",service.UUID);
+        for (CBCharacteristic *c in service.characteristics) {
+            NSLog(@"charateristic name is :%@",c.UUID);
+            [peripheral readValueForCharacteristic:c];
+        }
+    }];
+    
+    //设置读取characteristics的委托
+    [baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
+     //   NSLog(@"read characteristic successfully!");
+        
+        if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
+            weakSelf.characteristic = characteristics;
+            weakSelf.currPeripheral = peripheral;
+        }
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setValue:peripheral.identifier.UUIDString forKey:@"UUID"];
+        [defaults synchronize];
+    }];
+    
+    //扫描选项->CBCentralManagerScanOptionAllowDuplicatesKey:同一个Peripheral端的多个发现事件被聚合成一个发现事件
+    NSDictionary *scanForPeripheralsWithOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@NO};
+    //连接设备->
+    [baby setBabyOptionsWithScanForPeripheralsWithOptions:scanForPeripheralsWithOptions connectPeripheralWithOptions:nil scanForPeripheralsWithServices:nil discoverWithServices:nil discoverWithCharacteristics:nil];
+    
+    //设置连接的设备的过滤器
+    
+     __block BOOL isFirst = YES;
+     [baby setFilterOnConnectToPeripherals:^BOOL(NSString *peripheralName, NSDictionary *advertisementData, NSNumber *RSSI) {
+     if(isFirst && [advertisementData[@"kCBAdvDataLocalName"] hasPrefix:@"G29"]){
+     isFirst = NO;
+     return YES;
+     }
+     return NO;
+     }];
+    /*
+    __block BOOL isFirst = YES;
+    [baby setFilterOnConnectToPeripherals:^BOOL(NSString *peripheralName, NSDictionary *advertisementData, NSNumber *RSSI) {
+        if(isFirst){
+            isFirst = NO;
+            return YES;
+        }
+        return NO;
+    }];*/
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+   // TruckViewController *ViewController = (TruckViewController *) segue.destinationViewController;
+   // ViewController.currPeripheral = self.currPeripheral;
+   // ViewController.characteristic = self.characteristic;
+}
 
 /*
 #pragma mark - Navigation

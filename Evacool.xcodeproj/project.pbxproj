@@ -124,6 +124,9 @@
 		45D49FDB2B3D820A001A4E22 /* jian.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FD72B3D820A001A4E22 /* jian.png */; };
 		45D49FDC2B3D820A001A4E22 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FD82B3D820A001A4E22 /* minus.png */; };
 		45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */; };
+		45D49FE72B3DAC47001A4E22 /* DataRead.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE12B3DAC47001A4E22 /* DataRead.m */; };
+		45D49FE82B3DAC47001A4E22 /* DataWrite.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE32B3DAC47001A4E22 /* DataWrite.m */; };
+		45D49FE92B3DAC47001A4E22 /* crc.c in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE62B3DAC47001A4E22 /* crc.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -253,6 +256,12 @@
 		45D49FD82B3D820A001A4E22 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
 		45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SemiCircleProgressView.m; sourceTree = "<group>"; };
 		45D49FDE2B3D952F001A4E22 /* SemiCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SemiCircleProgressView.h; sourceTree = "<group>"; };
+		45D49FE12B3DAC47001A4E22 /* DataRead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataRead.m; sourceTree = "<group>"; };
+		45D49FE22B3DAC47001A4E22 /* crc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crc.h; sourceTree = "<group>"; };
+		45D49FE32B3DAC47001A4E22 /* DataWrite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataWrite.m; sourceTree = "<group>"; };
+		45D49FE42B3DAC47001A4E22 /* DataRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataRead.h; sourceTree = "<group>"; };
+		45D49FE52B3DAC47001A4E22 /* DataWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataWrite.h; sourceTree = "<group>"; };
+		45D49FE62B3DAC47001A4E22 /* crc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crc.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -419,6 +428,7 @@
 		457F8AF72B1EAB0300FA7ABB /* Evacool */ = {
 			isa = PBXGroup;
 			children = (
+				45D49FE02B3DAC47001A4E22 /* Datas */,
 				454E9F0C2B3AEE93009F7B3A /* images */,
 				45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */,
 				45D49FDE2B3D952F001A4E22 /* SemiCircleProgressView.h */,
@@ -437,6 +447,20 @@
 				457F8B0A2B1EAB0700FA7ABB /* main.m */,
 			);
 			path = Evacool;
+			sourceTree = "<group>";
+		};
+		45D49FE02B3DAC47001A4E22 /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+				45D49FE12B3DAC47001A4E22 /* DataRead.m */,
+				45D49FE22B3DAC47001A4E22 /* crc.h */,
+				45D49FE32B3DAC47001A4E22 /* DataWrite.m */,
+				45D49FE42B3DAC47001A4E22 /* DataRead.h */,
+				45D49FE52B3DAC47001A4E22 /* DataWrite.h */,
+				45D49FE62B3DAC47001A4E22 /* crc.c */,
+			);
+			name = Datas;
+			path = ../../../Mycoolman/MyCoolMan/MyCoolMan/Datas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -643,7 +667,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				457F8AFA2B1EAB0300FA7ABB /* AppDelegate.m in Sources */,
+				45D49FE72B3DAC47001A4E22 /* DataRead.m in Sources */,
 				457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */,
+				45D49FE92B3DAC47001A4E22 /* crc.c in Sources */,
+				45D49FE82B3DAC47001A4E22 /* DataWrite.m in Sources */,
 				450858A82B3B257100770387 /* TruckViewController.m in Sources */,
 				45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */,
 				457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */,
@@ -723,7 +750,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -775,7 +802,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
