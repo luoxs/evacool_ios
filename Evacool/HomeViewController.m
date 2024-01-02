@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.brand = [[NSString alloc]init];
     self.strType = [NSString new];
     [self setAutoLayout];
     baby = [BabyBluetooth shareBabyBluetooth];
@@ -249,22 +250,19 @@
         
 //        if(([peripheral.name hasPrefix:@"CCA"]||[peripheral.name hasPrefix:@"GCA"]) && ![self.devices containsObject:peripheral])  {
         NSString *advertiseName = advertisementData[@"kCBAdvDataLocalName"];
-        if([advertiseName hasPrefix:@"G29"]||[advertiseName hasPrefix:@"G29A"])  {
+        if([advertiseName hasPrefix:@"G29"]||[advertiseName hasPrefix:@"G29A"]||[advertiseName hasPrefix:@"EVA"])  {
             [weakSelf.devices addObject:peripheral];
             [weakSelf.localNames addObject:advertiseName];
             weakSelf.currPeripheral = peripheral;
             [central stopScan];
+            if([advertiseName hasPrefix:@"EVA24"]) {
+                weakSelf.brand = @"EVA24";
+            }else{
+                weakSelf.brand = @"EVA12";
+            }
         }
         
-        /*
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *uuidString = [defaults objectForKey:@"UUID"];
-        if([peripheral.identifier.UUIDString isEqual:uuidString]){
-            [central stopScan];
-            [baby cancelAllPeripheralsConnection];
-            [central connectPeripheral:peripheral options:nil];
-            weakSelf.currPeripheral = peripheral;
-        }*/
+       
     }];
     
     //设置连接设备失败的委托
@@ -323,6 +321,7 @@
                 [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
                 truckViewController.currPeripheral = weakSelf.currPeripheral;
                 truckViewController.characteristic = c;
+                truckViewController.brand = self.brand;
                 [weakSelf presentViewController:truckViewController animated:YES completion:nil];
             }
         }
@@ -351,7 +350,7 @@
     
      __block BOOL isFirst = YES;
      [baby setFilterOnConnectToPeripherals:^BOOL(NSString *peripheralName, NSDictionary *advertisementData, NSNumber *RSSI) {
-     if(isFirst && [advertisementData[@"kCBAdvDataLocalName"] hasPrefix:@"G29"]){
+     if(isFirst && ([advertisementData[@"kCBAdvDataLocalName"] hasPrefix:@"G29"]|| [advertisementData[@"kCBAdvDataLocalName"] hasPrefix:@"EVA"])){
      isFirst = NO;
      return YES;
      }

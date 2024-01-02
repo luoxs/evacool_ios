@@ -492,7 +492,11 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    [titleLabel setText:[NSString stringWithFormat:@"%.1f",21.1+row*0.2]];
+    if([self.brand isEqual:@"EVA24"]){
+        [titleLabel setText:[NSString stringWithFormat:@"%.1f",21.5+row*0.2]];
+    }else{
+        [titleLabel setText:[NSString stringWithFormat:@"%.1f",10.8+row*0.1]];
+    }
     [titleLabel setTextAlignment:NSTextAlignmentCenter];
     [titleLabel setFont:[UIFont systemFontOfSize:16]];
     [titleLabel setTextColor:[UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1]];
