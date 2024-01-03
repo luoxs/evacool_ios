@@ -48,6 +48,7 @@
     [self setAutoLayout];
     [self.viewMusk setHidden:YES];
     self.datacode = [[dataCode alloc] init];
+    self.dataRead = [[DataRead alloc] init];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
     [self getStatus];
