@@ -631,6 +631,11 @@
                 weakSelf.datacode.code34=r[34];
                 weakSelf.datacode.code35=r[35];
                 weakSelf.datacode.code36=r[36];
+                weakSelf.datacode.code37=r[37];
+                weakSelf.datacode.code38=r[38];
+                weakSelf.datacode.code39=r[39];
+                weakSelf.datacode.code40=r[40];
+                weakSelf.datacode.code41=r[41];
                 [weakSelf pushViewController];
             }
         }

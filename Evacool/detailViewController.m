@@ -32,7 +32,7 @@
     self.tableView.delegate = self;
     [self autolayout];
     
-    self.titles =[ NSArray arrayWithObjects:@"Power",@"Mode",@"Fan Speed",@"Voltage",@"Compressor Current",@"Outer Fan Current",@"inner Fan Current",@"Inlet Air Tempreture",@"Outlet Air Tempreture",@"Battery Pretection Lever",nil];
+    self.titles =[ NSArray arrayWithObjects:@"Power",@"Mode",@"Fan Speed",@"Voltage",@"Compressor Current",@"Outer Fan Current",@"Inner Fan Current",@"Inlet Air Tempreture",@"Outlet Air Tempreture",@"Battery Pretection Lever",nil];
 }
 
 -(void) autolayout{
@@ -119,9 +119,11 @@
     }
     cell.detailTextLabel.text = str;
     return cell;
-    
 }
 
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
+    return NO;
+}
 
 
 /*
