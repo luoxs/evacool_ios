@@ -754,6 +754,7 @@
 -(void) opendetails{
     detailViewController *detail = [[detailViewController alloc]init];
     [detail setModalPresentationStyle:UIModalPresentationFullScreen];
+    detail.dataRead = self.dataRead;
     [self presentViewController:detail animated:YES completion:nil];
     
 }

@@ -12,9 +12,11 @@
 #import "MBProgressHUD.h"
 #import "crc.h"
 
-@interface detailViewController ()
+@interface detailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong) UIButton *btback;
 @property(nonatomic,strong) UILabel *labeltitle;
+@property(nonatomic,strong) NSArray *titles;
+@property(nonatomic,strong) UITableView *tableView;
 
 @end
 
@@ -24,7 +26,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    self.tableView = [[UITableView alloc]init];
+    [self.tableView setBackgroundColor:[UIColor whiteColor]];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     [self autolayout];
+    
+    self.titles =[ NSArray arrayWithObjects:@"Power",@"Mode",@"Fan Speed",@"Voltage",@"Compressor Current",@"Outer Fan Current",@"inner Fan Current",@"Inlet Air Tempreture",@"Outlet Air Tempreture",@"Battery Pretection Lever",nil];
 }
 
 -(void) autolayout{
@@ -47,9 +55,16 @@
     .centerXEqualToView(self.view)
     .topSpaceToView(self.view, 40.0)
     .widthIs(self.view.width)
-    .heightIs(80);
+    .heightIs(40);
     [self.labeltitle setTextAlignment:NSTextAlignmentCenter];
     [self.labeltitle setText:@"EVA 24V Trunck Air Conditioner"];
+    
+    [self.view addSubview:self.tableView];
+    self.tableView.sd_layout
+    .centerXEqualToView(self.view)
+    .topSpaceToView(self.view, 80)
+    .widthIs(self.view.width-20)
+    .bottomSpaceToView(self.view, 10.0);
 
 }
 
@@ -57,6 +72,58 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellID = @"cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
+    }
+    cell.backgroundColor = [UIColor whiteColor];
+    //cell.backgroundColor = [UIColor colorWithRed:204/255.0 green:208/255.0 blue:195/255.0 alpha:1.0];
+    cell.textLabel.text = [self.titles objectAtIndex:indexPath.row];
+    cell.textLabel.textColor = [UIColor grayColor];
+    cell.detailTextLabel.textColor = [UIColor grayColor];
+    //cell.detailTextLabel.text = @"aaaaa";
+    NSString *str = [[NSString alloc]init];
+    switch(indexPath.row){
+        case 0: str = self.dataRead.power == 0x00 ? @"Off":@"On";break;
+        case 1: {
+            if(self.dataRead.mode == 0x00){
+                str = @"Eco";
+            }else if(self.dataRead.mode == 0x01){
+                str = @"Cool";
+            }else if(self.dataRead.mode == 0x02){
+                str = @"Fan";
+            }else{
+                str = @"Turbo";
+            }
+        }; break;
+        case 2: str = [NSString stringWithFormat:@"%d",self.dataRead.wind ];break;
+        case 3: str = [NSString stringWithFormat:@"%dV",self.dataRead.vhigh*256+self.dataRead.vlow];break;
+        case 4: str = @"0A";break;
+        case 5: str = @"0A";break;
+        case 6: str = @"0A";break;
+        case 7: str = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];break;
+        case 8: str = [NSString stringWithFormat:@"%d°C",self.dataRead.tempReal];break;
+        case 9: str = [NSString stringWithFormat:@"%d",self.dataRead.battery];break;
+            
+    }
+    cell.detailTextLabel.text = str;
+    return cell;
+    
+}
+
+
+
 /*
 #pragma mark - Navigation
 
