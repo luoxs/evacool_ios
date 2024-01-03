@@ -760,9 +760,10 @@
 }
 
 -(void) openfaults{
+    /*
     faultsViewController *faults = [[faultsViewController alloc]init];
     [faults setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:faults animated:YES completion:nil];
+    [self presentViewController:faults animated:YES completion:nil];*/
 }
 
 

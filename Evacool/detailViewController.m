@@ -42,7 +42,7 @@
     [self.btback setBackgroundImage:[UIImage imageNamed:@"jian"] forState:UIControlStateNormal];
     self.btback.sd_layout
     .leftSpaceToView(self.view, 30)
-    .topSpaceToView(self.view, 20.0)
+    .topSpaceToView(self.view, 40.0)
     .widthIs(10)
     .heightIs(20);
     [self.btback addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
@@ -53,7 +53,7 @@
     [self.labeltitle setFont:[UIFont fontWithName:@"Arial" size:18.0]];
     self.labeltitle.sd_layout
     .centerXEqualToView(self.view)
-    .topSpaceToView(self.view, 40.0)
+    .topSpaceToView(self.view, 60.0)
     .widthIs(self.view.width)
     .heightIs(40);
     [self.labeltitle setTextAlignment:NSTextAlignmentCenter];
@@ -62,7 +62,7 @@
     [self.view addSubview:self.tableView];
     self.tableView.sd_layout
     .centerXEqualToView(self.view)
-    .topSpaceToView(self.view, 80)
+    .topSpaceToView(self.view, 100)
     .widthIs(self.view.width-20)
     .bottomSpaceToView(self.view, 10.0);
 
@@ -114,7 +114,7 @@
         case 6: str = @"0A";break;
         case 7: str = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];break;
         case 8: str = [NSString stringWithFormat:@"%d°C",self.dataRead.tempReal];break;
-        case 9: str = [NSString stringWithFormat:@"%d",self.dataRead.battery];break;
+        case 9: str = [NSString stringWithFormat:@"%0.1lf",self.dataRead.battery*0.2+21.5];break;
             
     }
     cell.detailTextLabel.text = str;
