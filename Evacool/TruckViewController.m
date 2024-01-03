@@ -11,6 +11,8 @@
 #import "MBProgressHUD.h"
 #import "SemiCircleProgressView.h"
 #import "crc.h"
+#import "detailViewController.h"
+#import "faultsViewController.h"
 
 @interface TruckViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property (nonatomic,retain) MBProgressHUD *hud;
@@ -750,15 +752,16 @@
 }
 
 -(void) opendetails{
-    [self.viewMusk setHidden:NO];
-    [self.batteryprotect removeFromSuperview];
-    [self.viewMusk addSubview:self.viewDetails];
+    detailViewController *detail = [[detailViewController alloc]init];
+    [detail setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self presentViewController:detail animated:YES completion:nil];
+    
 }
 
 -(void) openfaults{
-  //  [self.viewMusk setHidden:NO];
-    //[self.viewDetails removeFromSuperview];
-  //  [self.viewMusk addSubview:self.viewFault];
+    faultsViewController *faults = [[faultsViewController alloc]init];
+    [faults setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self presentViewController:faults animated:YES completion:nil];
 }
 
 

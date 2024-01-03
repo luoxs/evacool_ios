@@ -128,6 +128,8 @@
 		45D49FE82B3DAC47001A4E22 /* DataWrite.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE32B3DAC47001A4E22 /* DataWrite.m */; };
 		45D49FE92B3DAC47001A4E22 /* crc.c in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE62B3DAC47001A4E22 /* crc.c */; };
 		45D4A13D2B45357B001A4E22 /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D4A13C2B45357B001A4E22 /* switch.png */; };
+		45DF31252B4547BA00519C55 /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31242B4547BA00519C55 /* detailViewController.m */; };
+		45DF31282B4547E000519C55 /* faultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31272B4547E000519C55 /* faultsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -264,6 +266,10 @@
 		45D49FE52B3DAC47001A4E22 /* DataWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataWrite.h; sourceTree = "<group>"; };
 		45D49FE62B3DAC47001A4E22 /* crc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crc.c; sourceTree = "<group>"; };
 		45D4A13C2B45357B001A4E22 /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch.png; sourceTree = "<group>"; };
+		45DF31232B4547BA00519C55 /* detailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = detailViewController.h; sourceTree = "<group>"; };
+		45DF31242B4547BA00519C55 /* detailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = detailViewController.m; sourceTree = "<group>"; };
+		45DF31262B4547E000519C55 /* faultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = faultsViewController.h; sourceTree = "<group>"; };
+		45DF31272B4547E000519C55 /* faultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = faultsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,6 +445,10 @@
 				453E124A2B3AC20200D5C032 /* HomeViewController.m */,
 				450858A62B3B257100770387 /* TruckViewController.h */,
 				450858A72B3B257100770387 /* TruckViewController.m */,
+				45DF31232B4547BA00519C55 /* detailViewController.h */,
+				45DF31242B4547BA00519C55 /* detailViewController.m */,
+				45DF31262B4547E000519C55 /* faultsViewController.h */,
+				45DF31272B4547E000519C55 /* faultsViewController.m */,
 				457F8AF82B1EAB0300FA7ABB /* AppDelegate.h */,
 				457F8AF92B1EAB0300FA7ABB /* AppDelegate.m */,
 				457F8AFB2B1EAB0300FA7ABB /* SceneDelegate.h */,
@@ -673,9 +683,11 @@
 				457F8AFA2B1EAB0300FA7ABB /* AppDelegate.m in Sources */,
 				45D49FE72B3DAC47001A4E22 /* DataRead.m in Sources */,
 				457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */,
+				45DF31252B4547BA00519C55 /* detailViewController.m in Sources */,
 				45D49FE92B3DAC47001A4E22 /* crc.c in Sources */,
 				45D49FE82B3DAC47001A4E22 /* DataWrite.m in Sources */,
 				450858A82B3B257100770387 /* TruckViewController.m in Sources */,
+				45DF31282B4547E000519C55 /* faultsViewController.m in Sources */,
 				45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */,
 				457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */,
 				453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */,
