@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "BabyBluetooth.h"
 #import "DataRead.h"
+#import "datacode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,8 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) CBCharacteristic *characteristic;
 @property (nonatomic,strong) CBPeripheral *currPeripheral;
 @property (nonatomic,strong) NSString *brand;
-
+@property  NSInteger tag;
 @property (nonatomic,retain) DataRead *dataRead;
+@property (nonatomic,retain) dataCode *datacode;
 @end
 
 NS_ASSUME_NONNULL_END

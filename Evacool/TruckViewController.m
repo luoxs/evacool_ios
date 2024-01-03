@@ -47,15 +47,13 @@
     // Do any additional setup after loading the view.
     [self setAutoLayout];
     [self.viewMusk setHidden:YES];
-    self.dataRead = [[DataRead alloc] init];
+    self.datacode = [[dataCode alloc] init];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
     [self getStatus];
-    
 }
 
 -(void)setAutoLayout{
-    
     double frameWidth = 750;
     double frameHeight = 1624;
     double viewX = [UIScreen mainScreen].bounds.size.width;
@@ -455,7 +453,6 @@
     self.viewDetails.layer.cornerRadius = 20.0f;
     self.viewDetails.layer.masksToBounds = YES;
     
-    
     //详细
     self.batteryprotect = [UIView new];
     [self.viewMusk addSubview:self.batteryprotect];
@@ -551,13 +548,10 @@
 }
 
 #pragma mark babyDelegate
-
-
 -(void)babyDelegate{
     __weak typeof(self) weakSelf = self;
     //设置扫描到设备的委托
-   
-    
+
    
     //设置断开设备的委托
     [baby setBlockOnDisconnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
@@ -574,8 +568,9 @@
         
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
             NSData *data = characteristics.value;
-            Byte r[15] ={0};
+           // Byte r[15] ={0};
             if(data.length == 15){
+                Byte r[15] = {0};
                 memcpy(r, [data bytes], 15);
                 weakSelf.dataRead.start = r[0]; //通讯开始
                 weakSelf.dataRead.power = r[1]; //0x01开机，0x00关机
@@ -593,6 +588,49 @@
                 weakSelf.dataRead.crcL = r[13];
                 weakSelf.dataRead.end = r[17];  //通讯结束
                 [weakSelf updateStatus];
+            }
+            
+            if(data.length == 41){
+                Byte r[41] = {0};
+                memcpy(r, [data bytes], 37);
+                weakSelf.datacode.code0=r[0];
+                weakSelf.datacode.code1=r[1];
+                weakSelf.datacode.code2=r[2];
+                weakSelf.datacode.code3=r[3];
+                weakSelf.datacode.code4=r[4];
+                weakSelf.datacode.code5=r[5];
+                weakSelf.datacode.code6=r[6];
+                weakSelf.datacode.code7=r[7];
+                weakSelf.datacode.code8=r[8];
+                weakSelf.datacode.code9=r[9];
+                weakSelf.datacode.code10=r[10];
+                weakSelf.datacode.code11=r[11];
+                weakSelf.datacode.code12=r[12];
+                weakSelf.datacode.code13=r[13];
+                weakSelf.datacode.code14=r[14];
+                weakSelf.datacode.code15=r[15];
+                weakSelf.datacode.code16=r[16];
+                weakSelf.datacode.code17=r[17];
+                weakSelf.datacode.code18=r[18];
+                weakSelf.datacode.code19=r[19];
+                weakSelf.datacode.code20=r[20];
+                weakSelf.datacode.code21=r[21];
+                weakSelf.datacode.code22=r[22];
+                weakSelf.datacode.code23=r[23];
+                weakSelf.datacode.code24=r[24];
+                weakSelf.datacode.code25=r[25];
+                weakSelf.datacode.code26=r[26];
+                weakSelf.datacode.code27=r[27];
+                weakSelf.datacode.code28=r[28];
+                weakSelf.datacode.code29=r[29];
+                weakSelf.datacode.code30=r[30];
+                weakSelf.datacode.code31=r[31];
+                weakSelf.datacode.code32=r[32];
+                weakSelf.datacode.code33=r[33];
+                weakSelf.datacode.code34=r[34];
+                weakSelf.datacode.code35=r[35];
+                weakSelf.datacode.code36=r[36];
+                [weakSelf pushViewController];
             }
         }
     }];
@@ -678,7 +716,6 @@
 
 //改变风速
 -(void)chgfan{
-    
     if(self.characteristic != nil){
         Byte  write[6];
         write[0] = 0xAA;
@@ -751,19 +788,59 @@
 
 }
 
--(void) opendetails{
-    detailViewController *detail = [[detailViewController alloc]init];
-    [detail setModalPresentationStyle:UIModalPresentationFullScreen];
-    detail.dataRead = self.dataRead;
-    [self presentViewController:detail animated:YES completion:nil];
+//页面跳转
+-(void)pushViewController{
     
+    if(self.tag == 0){
+        detailViewController *detail = [[detailViewController alloc]init];
+        [detail setModalPresentationStyle:UIModalPresentationFullScreen];
+        detail.datacode = self.datacode;
+        [self presentViewController:detail animated:YES completion:nil];
+        
+    }else{
+        faultsViewController *faults = [[faultsViewController alloc]init];
+        [faults setModalPresentationStyle:UIModalPresentationFullScreen];
+        faults.datacode = self.datacode;
+        [self presentViewController:faults animated:YES completion:nil];
+    }
 }
 
+
+//获取详细参数
+-(void) opendetails{
+    self.tag = 0;
+    if(self.characteristic != nil){
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x06;
+        write[2] = 0x01;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+    }
+}
+
+//获取故障信息
 -(void) openfaults{
-    /*
-    faultsViewController *faults = [[faultsViewController alloc]init];
-    [faults setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:faults animated:YES completion:nil];*/
+    self.tag = 1;
+    if(self.characteristic != nil){
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x07;
+        write[2] = 0x01;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+       // [self updateStatus];
+    }
 }
 
 

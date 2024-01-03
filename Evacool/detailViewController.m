@@ -95,26 +95,26 @@
     //cell.detailTextLabel.text = @"aaaaa";
     NSString *str = [[NSString alloc]init];
     switch(indexPath.row){
-        case 0: str = self.dataRead.power == 0x00 ? @"Off":@"On";break;
+        case 0: str = self.datacode.code22 == 0x00 ? @"Off":@"On";break;
         case 1: {
-            if(self.dataRead.mode == 0x00){
+            if(self.datacode.code29 == 0x00){
                 str = @"Eco";
-            }else if(self.dataRead.mode == 0x01){
+            }else if(self.datacode.code29 == 0x01){
                 str = @"Cool";
-            }else if(self.dataRead.mode == 0x02){
+            }else if(self.datacode.code29 == 0x02){
                 str = @"Fan";
             }else{
                 str = @"Turbo";
             }
         }; break;
-        case 2: str = [NSString stringWithFormat:@"%d",self.dataRead.wind ];break;
-        case 3: str = [NSString stringWithFormat:@"%dV",self.dataRead.vhigh*256+self.dataRead.vlow];break;
-        case 4: str = @"0A";break;
-        case 5: str = @"0A";break;
-        case 6: str = @"0A";break;
-        case 7: str = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];break;
-        case 8: str = [NSString stringWithFormat:@"%d°C",self.dataRead.tempReal];break;
-        case 9: str = [NSString stringWithFormat:@"%0.1lf",self.dataRead.battery*0.2+21.5];break;
+        case 2: str = [NSString stringWithFormat:@"%d",self.datacode.code36 ];break;
+        case 3: str = [NSString stringWithFormat:@"%.1fV",(self.datacode.code26*256+self.datacode.code27)/10.0];break;
+        case 4: str = [NSString stringWithFormat:@"%.1fA",self.datacode.code30/5.0];break;
+        case 5: str = [NSString stringWithFormat:@"%.1fA",self.datacode.code31/10.0];break;
+        case 6: str = [NSString stringWithFormat:@"%.1fA",self.datacode.code32/10.0];break;
+        case 7: str = [NSString stringWithFormat:@"%d°C",self.datacode.code23];break;
+        case 8: str = [NSString stringWithFormat:@"%d°C",self.datacode.code24];break;
+        case 9: str = [NSString stringWithFormat:@"%0.1lfV",self.datacode.code28*0.2+21.5];break;
             
     }
     cell.detailTextLabel.text = str;

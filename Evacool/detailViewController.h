@@ -6,12 +6,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DataRead.h"
+#import "dataCode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface detailViewController : UIViewController
-@property (nonatomic,strong) DataRead *dataRead;
+@property (nonatomic,strong) dataCode *datacode;
 @end
 
 NS_ASSUME_NONNULL_END

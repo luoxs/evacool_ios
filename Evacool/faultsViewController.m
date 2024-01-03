@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.datacode = [[dataCode alloc]init];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self autolayout];
 }

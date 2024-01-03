@@ -130,6 +130,7 @@
 		45D4A13D2B45357B001A4E22 /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D4A13C2B45357B001A4E22 /* switch.png */; };
 		45DF31252B4547BA00519C55 /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31242B4547BA00519C55 /* detailViewController.m */; };
 		45DF31282B4547E000519C55 /* faultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31272B4547E000519C55 /* faultsViewController.m */; };
+		45DF312B2B45805600519C55 /* dataCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF312A2B45805600519C55 /* dataCode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -270,6 +271,8 @@
 		45DF31242B4547BA00519C55 /* detailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = detailViewController.m; sourceTree = "<group>"; };
 		45DF31262B4547E000519C55 /* faultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = faultsViewController.h; sourceTree = "<group>"; };
 		45DF31272B4547E000519C55 /* faultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = faultsViewController.m; sourceTree = "<group>"; };
+		45DF31292B45805600519C55 /* dataCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dataCode.h; sourceTree = "<group>"; };
+		45DF312A2B45805600519C55 /* dataCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dataCode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,12 +468,14 @@
 		45D49FE02B3DAC47001A4E22 /* Datas */ = {
 			isa = PBXGroup;
 			children = (
-				45D49FE12B3DAC47001A4E22 /* DataRead.m */,
 				45D49FE22B3DAC47001A4E22 /* crc.h */,
-				45D49FE32B3DAC47001A4E22 /* DataWrite.m */,
-				45D49FE42B3DAC47001A4E22 /* DataRead.h */,
-				45D49FE52B3DAC47001A4E22 /* DataWrite.h */,
 				45D49FE62B3DAC47001A4E22 /* crc.c */,
+				45D49FE42B3DAC47001A4E22 /* DataRead.h */,
+				45D49FE12B3DAC47001A4E22 /* DataRead.m */,
+				45D49FE52B3DAC47001A4E22 /* DataWrite.h */,
+				45D49FE32B3DAC47001A4E22 /* DataWrite.m */,
+				45DF31292B45805600519C55 /* dataCode.h */,
+				45DF312A2B45805600519C55 /* dataCode.m */,
 			);
 			name = Datas;
 			path = ../../../Mycoolman/MyCoolMan/MyCoolMan/Datas;
@@ -690,6 +695,7 @@
 				45DF31282B4547E000519C55 /* faultsViewController.m in Sources */,
 				45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */,
 				457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */,
+				45DF312B2B45805600519C55 /* dataCode.m in Sources */,
 				453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

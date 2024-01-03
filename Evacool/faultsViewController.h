@@ -6,10 +6,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "dataCode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface faultsViewController : UIViewController
+@property (nonatomic,strong) dataCode *datacode;
 
 @end
 
