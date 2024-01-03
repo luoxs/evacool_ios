@@ -36,8 +36,7 @@
 @property (nonatomic,retain) UIView *viewDetails;
 @property (nonatomic,retain) UIView*viewFault;
 @property (nonatomic,retain) UIView *batteryprotect;
-
-
+@property Byte sleeplevel; //睡眠定时级别
 @end
 
 @implementation TruckViewController
@@ -290,6 +289,7 @@
     .topSpaceToView(view2, 22.0/frameHeight*viewY)
     .widthIs(94.0/frameWidth*viewX)
     .heightIs(36.0/frameHeight*viewY);
+    [self.switchSleep addTarget:self action:@selector(setSleep:) forControlEvents:UIControlEventValueChanged];
     
     //定时量
     self.labelTimer= [UILabel new];
@@ -314,6 +314,7 @@
     .centerYEqualToView(self.labelTimer)
     .widthIs(42.0/frameWidth*viewX)
     .heightEqualToWidth();
+    [btTimeMinus addTarget:self action:@selector(droptimer) forControlEvents:UIControlEventTouchUpInside];
     
     
     //定时加
@@ -325,7 +326,7 @@
     .centerYEqualToView(self.labelTimer)
     .widthIs(42.0/frameWidth*viewX)
     .heightEqualToWidth();
-    
+    [btTimeAdd addTarget:self action:@selector(addtimer) forControlEvents:UIControlEventTouchUpInside];
     
     
 #pragma  mark 显示电池
@@ -719,7 +720,6 @@
     }
 }
 
-
 //改变风速
 -(void)chgfan{
     if(self.characteristic != nil){
@@ -753,6 +753,77 @@
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
        // [self updateStatus];
     }
+}
+
+//设置睡眠时间
+-(void)setSleep:(id)sender{
+    UISwitch *swc = (UISwitch * )sender;
+    if(swc.isOn == YES){
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x0B;
+        write[2] = 0x01;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+        self.sleeplevel = 1;
+    }else{
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x0B;
+        write[2] = 0x00;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+    }
+}
+
+//睡眠定时减
+-(void)droptimer{
+    if(self.sleeplevel>1 && self.switchSleep.isOn){
+        self.sleeplevel--;
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x0B;
+        write[2] = self.sleeplevel;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+        
+        self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
+    }
+}
+
+//睡眠定时加
+-(void)addtimer{
+    if(self.sleeplevel<16 && self.switchSleep.isOn){
+        self.sleeplevel++;
+        Byte  write[6];
+        write[0] = 0xAA;
+        write[1] = 0x0B;
+        write[2] = self.sleeplevel;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        NSData *data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+        self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
+    }
+    
 }
 
 
