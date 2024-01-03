@@ -22,16 +22,19 @@
 @property (nonatomic,retain) UIImageView *imgfan3;
 @property (nonatomic,retain) UIImageView *imgfan4;
 @property (nonatomic,retain) UIImageView *imgfan5;
+@property (nonatomic,retain) UIButton *btswitchfan;
 @property (nonatomic,retain) UILabel *labelTimer;
 @property (nonatomic,retain) UISwitch *switchSleep;
-@property (nonatomic,retain) UIButton *btfan;
-@property (nonatomic,retain) UIButton *bteco;
-@property (nonatomic,retain) UIButton *btnormal;
-@property (nonatomic,retain) UIButton *btturbo;
+@property (nonatomic,retain) UIImageView *imgfan;
+@property (nonatomic,retain) UIImageView *imgeco;
+@property (nonatomic,retain) UIImageView *imgnormal;
+@property (nonatomic,retain) UIImageView *imgturbo;
+@property (nonatomic,retain) UIButton *btswitchmode;
 @property (nonatomic,retain) UIView *viewMusk;
 @property (nonatomic,retain) UIView *viewDetails;
 @property (nonatomic,retain) UIView*viewFault;
 @property (nonatomic,retain) UIView *batteryprotect;
+
 
 @end
 
@@ -204,44 +207,55 @@
     self.imgfan1.sd_layout
     .leftSpaceToView(view1, 64.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(92.0/frameWidth*viewX)
+    .widthIs(76.0/frameWidth*viewX)
     .heightIs(16.0/frameHeight*viewY);
     
     //风速2
     self.imgfan2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d2"]];
     [view1 addSubview:self.imgfan2];
     self.imgfan2.sd_layout
-    .leftSpaceToView(view1, 178.0/frameWidth*viewX)
+    .leftSpaceToView(view1, 160.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(92.0/frameWidth*viewX)
+    .widthIs(76.0/frameWidth*viewX)
     .heightIs(26.0/frameHeight*viewY);
     
     //风速3
     self.imgfan3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d3"]];
     [view1 addSubview:self.imgfan3];
     self.imgfan3.sd_layout
-    .leftSpaceToView(view1, 294.0/frameWidth*viewX)
+    .leftSpaceToView(view1, 256.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(92.0/frameWidth*viewX)
+    .widthIs(76.0/frameWidth*viewX)
     .heightIs(36.0/frameHeight*viewY);
     
     //风速4
     self.imgfan4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d4"]];
     [view1 addSubview:self.imgfan4];
     self.imgfan4.sd_layout
-    .leftSpaceToView(view1, 410.0/frameWidth*viewX)
+    .leftSpaceToView(view1, 352.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(92.0/frameWidth*viewX)
+    .widthIs(76.0/frameWidth*viewX)
     .heightIs(46.0/frameHeight*viewY);
     
     //风速5
     self.imgfan5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d5"]];
     [view1 addSubview:self.imgfan5 ];
     self.imgfan5 .sd_layout
-    .leftSpaceToView(view1, 524.0/frameWidth*viewX)
+    .leftSpaceToView(view1, 448.0/frameWidth*viewX)
     .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(92.0/frameWidth*viewX)
+    .widthIs(76.0/frameWidth*viewX)
     .heightIs(56.0/frameHeight*viewY);
+    
+    //切换
+    self.btswitchfan = [UIButton new];
+    [view1 addSubview:self.btswitchfan ];
+    [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+    self.btswitchfan.sd_layout
+    .leftSpaceToView(view1, 544.0/frameWidth*viewX)
+    .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
+    .widthIs(76.0/frameWidth*viewX)
+    .heightEqualToWidth();
+    [self.btswitchfan addTarget:self action:@selector(chgfan) forControlEvents:UIControlEventTouchUpInside];
     
 #pragma mark 显示睡眠定时
     //视图2
@@ -336,49 +350,58 @@
     .heightEqualToWidth();
     [btBattry addTarget:self action:@selector(openbattery) forControlEvents:UIControlEventTouchUpInside];
     
-    //风量
-    self.btfan = [UIButton new];
-    [self.view addSubview:self.btfan];
-    [self.btfan setBackgroundImage:[UIImage imageNamed:@"fanoff"] forState:UIControlStateNormal];
-    self.btfan.sd_layout
+    //通风
+    self.imgfan = [UIImageView new];
+    [self.view addSubview:self.imgfan];
+    [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
+    self.imgfan.sd_layout
     .leftSpaceToView(self.view, 44.0/frameWidth*viewX)
     .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(122.0/frameWidth*viewX)
+    .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
-    [self.btfan addTarget:self action:@selector(chgfan) forControlEvents:UIControlEventTouchUpInside];
+   
     
     //节能
-    UIButton *btEco = [UIButton new];
-    [self.view addSubview:btEco];
-    [btEco setBackgroundImage:[UIImage imageNamed:@"ecooff"] forState:UIControlStateNormal];
-    btEco.sd_layout
-    .leftSpaceToView(self.view, 222.0/frameWidth*viewX)
+    self.imgeco = [UIImageView new];
+    [self.view addSubview:self.imgeco];
+    [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
+    self.imgeco.sd_layout
+    .leftSpaceToView(self.view, 174.0/frameWidth*viewX)
     .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(122.0/frameWidth*viewX)
+    .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
-    [btEco addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
+   
     
     //普通模式
-    UIButton *btNormal = [UIButton new];
-    [self.view addSubview:btNormal];
-    [btNormal setBackgroundImage:[UIImage imageNamed:@"cooloff"] forState:UIControlStateNormal];
-    btNormal.sd_layout
-    .leftSpaceToView(self.view, 402.0/frameWidth*viewX)
+    self.imgnormal = [UIImageView new];
+    [self.view addSubview:self.imgnormal];
+    [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
+    self.imgnormal.sd_layout
+    .leftSpaceToView(self.view, 304.0/frameWidth*viewX)
     .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(122.0/frameWidth*viewX)
+    .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
-    [btNormal addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //加强模式
-    UIButton *btTurbo = [UIButton new];
-    [self.view addSubview:btTurbo];
-    [btTurbo setBackgroundImage:[UIImage imageNamed:@"turbooff"] forState:UIControlStateNormal];
-    btTurbo.sd_layout
-    .rightSpaceToView(self.view, 44.0/frameWidth*viewX)
+    self.imgturbo = [UIImageView new];
+    [self.view addSubview:self.imgturbo];
+    [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
+    self.imgturbo.sd_layout
+    .leftSpaceToView(self.view, 434.0/frameWidth*viewX)
     .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(122.0/frameWidth*viewX)
+    .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
-    [btTurbo addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //切换
+    self.btswitchmode = [UIButton new];
+    [self.view addSubview:self.btswitchmode ];
+    [self.btswitchmode setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+    self.btswitchmode.sd_layout
+    .leftSpaceToView(self.view, 564.0/frameWidth*viewX)
+    .topSpaceToView(self.view, 1294.0/frameHeight*viewY)
+    .widthIs(96.0/frameWidth*viewX)
+    .heightEqualToWidth();
+    [self.btswitchmode addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //底部左边按钮
     UIButton *buttonDetails = [UIButton new];
@@ -710,21 +733,20 @@
         case 0x03: [self.imgfan4 setImage:[UIImage imageNamed:@"f4"]];break;
         case 0x04: [self.imgfan5 setImage:[UIImage imageNamed:@"f5"]];break;
     }
-    
+
     //模式
-    [self.btfan setBackgroundImage:[UIImage imageNamed:@"fanoff"] forState:UIControlStateNormal];
-    [self.bteco setBackgroundImage:[UIImage imageNamed:@"ecooff"] forState:UIControlStateNormal];
-    [self.btnormal setBackgroundImage:[UIImage imageNamed:@"normaloff"] forState:UIControlStateNormal];
-    [self.btturbo setBackgroundImage:[UIImage imageNamed:@"turbooff"] forState:UIControlStateNormal];
-    
+    [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
+    [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
+    [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
+    [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
+
     switch(self.dataRead.mode){
-        case 0x01:  [self.btfan setBackgroundImage:[UIImage imageNamed:@"fanon"] forState:UIControlStateNormal];break;
-        case 0x02:  [self.bteco setBackgroundImage:[UIImage imageNamed:@"ecoon"] forState:UIControlStateNormal];break;
-        case 0x03:  [self.btnormal setBackgroundImage:[UIImage imageNamed:@"normalon"] forState:UIControlStateNormal];break;
-        case 0x00:  [self.btturbo setBackgroundImage:[UIImage imageNamed:@"turboon"] forState:UIControlStateNormal];break;
-        
+        case 0x00:[self.imgeco setImage:[UIImage imageNamed:@"ecoon"]];break;
+        case 0x01:[self.imgnormal setImage:[UIImage imageNamed:@"coolon"]];break;
+        case 0x02:[self.imgfan setImage:[UIImage imageNamed:@"fanon"]];break;
+        case 0x03:[self.imgturbo setImage:[UIImage imageNamed:@"turboon"]]; break;
     }
-    
+
 }
 
 -(void) opendetails{

@@ -127,6 +127,7 @@
 		45D49FE72B3DAC47001A4E22 /* DataRead.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE12B3DAC47001A4E22 /* DataRead.m */; };
 		45D49FE82B3DAC47001A4E22 /* DataWrite.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE32B3DAC47001A4E22 /* DataWrite.m */; };
 		45D49FE92B3DAC47001A4E22 /* crc.c in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE62B3DAC47001A4E22 /* crc.c */; };
+		45D4A13D2B45357B001A4E22 /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D4A13C2B45357B001A4E22 /* switch.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -262,6 +263,7 @@
 		45D49FE42B3DAC47001A4E22 /* DataRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataRead.h; sourceTree = "<group>"; };
 		45D49FE52B3DAC47001A4E22 /* DataWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataWrite.h; sourceTree = "<group>"; };
 		45D49FE62B3DAC47001A4E22 /* crc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crc.c; sourceTree = "<group>"; };
+		45D4A13C2B45357B001A4E22 /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +298,7 @@
 		454E9F0C2B3AEE93009F7B3A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				45D4A13C2B45357B001A4E22 /* switch.png */,
 				45D49FD52B3D820A001A4E22 /* add.png */,
 				45D49FD62B3D820A001A4E22 /* jia.png */,
 				45D49FD72B3D820A001A4E22 /* jian.png */,
@@ -600,6 +603,7 @@
 				454E9F5E2B3AF08F009F7B3A /* speed-1.png in Resources */,
 				454E9F762B3AF08F009F7B3A /* sleep_on.png in Resources */,
 				45D49FDC2B3D820A001A4E22 /* minus.png in Resources */,
+				45D4A13D2B45357B001A4E22 /* switch.png in Resources */,
 				454E9F8B2B3AF08F009F7B3A /* mode1.png in Resources */,
 				454E9F692B3AF08F009F7B3A /* minus_red.png in Resources */,
 				45D49FC22B3C7352001A4E22 /* d3.png in Resources */,
