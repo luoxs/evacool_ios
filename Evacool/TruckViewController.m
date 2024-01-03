@@ -704,11 +704,11 @@
     [self.imgfan5 setImage:[UIImage imageNamed:@"d5"]];
     
     switch(self.dataRead.wind){
-        case 0x01: [self.imgfan1 setImage:[UIImage imageNamed:@"f1"]];break;
-        case 0x02: [self.imgfan2 setImage:[UIImage imageNamed:@"f2"]];break;
-        case 0x03: [self.imgfan3 setImage:[UIImage imageNamed:@"f3"]];break;
-        case 0x04: [self.imgfan4 setImage:[UIImage imageNamed:@"f4"]];break;
-        case 0x00: [self.imgfan5 setImage:[UIImage imageNamed:@"f5"]];break;
+        case 0x00: [self.imgfan1 setImage:[UIImage imageNamed:@"f1"]];break;
+        case 0x01: [self.imgfan2 setImage:[UIImage imageNamed:@"f2"]];break;
+        case 0x02: [self.imgfan3 setImage:[UIImage imageNamed:@"f3"]];break;
+        case 0x03: [self.imgfan4 setImage:[UIImage imageNamed:@"f4"]];break;
+        case 0x04: [self.imgfan5 setImage:[UIImage imageNamed:@"f5"]];break;
     }
     
     //模式

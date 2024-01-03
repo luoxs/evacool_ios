@@ -261,8 +261,6 @@
                 weakSelf.brand = @"EVA12";
             }
         }
-        
-       
     }];
     
     //设置连接设备失败的委托
@@ -291,10 +289,6 @@
         [weakSelf.hud setMinShowTime:1];
         [weakSelf.hud hideAnimated:YES];
         [peripheral discoverServices:nil];
-        /*
-        TruckViewController *truckViewController = [[TruckViewController alloc]init];
-        [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-        [weakSelf presentViewController:truckViewController animated:YES completion:nil];*/
     }];
     
     //设置发现设备的Services的委托
@@ -305,7 +299,6 @@
                 if([service.UUID.UUIDString isEqualToString:@"FFE0"]){
                  [peripheral discoverCharacteristics:nil forService:service];
                 }
-            //}
         }
     }];
     
@@ -314,23 +307,21 @@
         NSLog(@"===service name:%@",service.UUID);
         for (CBCharacteristic *c in service.characteristics) {
             NSLog(@"charateristic name is :%@",c.UUID);
-           // [peripheral readValueForCharacteristic:c];
-            
+    
             if([c.UUID.UUIDString isEqualToString:@"FFE1"]){
                 TruckViewController *truckViewController = [[TruckViewController alloc]init];
                 [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
                 truckViewController.currPeripheral = weakSelf.currPeripheral;
                 truckViewController.characteristic = c;
-                truckViewController.brand = self.brand;
+                truckViewController.brand = weakSelf.brand;
                 [weakSelf presentViewController:truckViewController animated:YES completion:nil];
             }
         }
-        
     }];
     
     //设置读取characteristics的委托
     [baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
-     //   NSLog(@"read characteristic successfully!");
+        NSLog(@"read characteristic successfully!");
         
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
             weakSelf.characteristic = characteristics;
@@ -356,15 +347,6 @@
      }
      return NO;
      }];
-    /*
-    __block BOOL isFirst = YES;
-    [baby setFilterOnConnectToPeripherals:^BOOL(NSString *peripheralName, NSDictionary *advertisementData, NSNumber *RSSI) {
-        if(isFirst){
-            isFirst = NO;
-            return YES;
-        }
-        return NO;
-    }];*/
 }
 
 #pragma mark - Navigation
