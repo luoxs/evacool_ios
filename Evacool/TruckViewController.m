@@ -823,7 +823,6 @@
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
         self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
     }
-    
 }
 
 
@@ -834,6 +833,16 @@
     self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
     self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
     [self.progress setNeedsDisplay];
+    
+    //故障
+    if(self.dataRead.errorcode == 0x00){
+        self.labelStatus.text = @"In Good Condition";
+        [self.labelStatus setTextColor:[UIColor blackColor]];
+    }else{
+        self.labelStatus.text = [NSString stringWithFormat:@"Fault Code:E%d",self.dataRead.errorcode];
+        [self.labelStatus setTextColor:[UIColor redColor]];
+    }
+    
     
     //风量
     [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];
