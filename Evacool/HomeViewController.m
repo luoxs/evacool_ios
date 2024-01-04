@@ -11,11 +11,13 @@
 #import "MBProgressHUD.h"
 #import "TruckViewController.h"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (retain, nonatomic)  MBProgressHUD *hud;
 @property (nonatomic,retain) NSMutableArray <CBPeripheral*> *devices;;
 @property (nonatomic,retain) NSMutableArray *localNames;
 @property (nonatomic,strong) NSString *strType;
+@property (nonatomic,strong) UIView *viewMusk;
+@property (nonatomic,strong) UITableView *tableview;
 @end
 
 @implementation HomeViewController
@@ -23,12 +25,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableview = [[UITableView alloc]init];
+    self.tableview.delegate = self;
+    self.tableview.dataSource = self;
+    self.devices = [[NSMutableArray alloc]init];
+    self.localNames = [[NSMutableArray alloc]init];
     self.brand = [[NSString alloc]init];
     self.strType = [NSString new];
     [self setAutoLayout];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
-    
+   
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self.tableview reloadData];
+    [self babyDelegate];
+    baby.scanForPeripherals().begin();
+    //[self.viewMusk setHidden:NO];
 }
 
 
@@ -170,7 +184,7 @@
     .topSpaceToView(view5, 46.0/frameHeight*viewY)
     .widthIs(54.0/frameWidth*viewX)
     .heightEqualToWidth();
-    [imageBluetooth addTarget:self action:@selector(connect) forControlEvents:UIControlEventTouchUpInside];
+    [imageBluetooth addTarget:self action:@selector(scan) forControlEvents:UIControlEventTouchUpInside];
     
     //蓝牙文字
     UILabel *labelBluetooth = [UILabel new];
@@ -227,16 +241,42 @@
     .widthIs(400.0/frameWidth*viewX)
     .heightIs(20.0/frameHeight*viewY);
     
+    
+    //蒙层
+    self.viewMusk = [UIView new];
+    [self.view addSubview:self.viewMusk];
+    [self.viewMusk setBackgroundColor:[UIColor colorWithRed:16/255.0 green:16/255.0 blue:16/255.0 alpha:0.6]];
+    self.viewMusk.sd_layout
+        .leftSpaceToView(self.view, 0)
+        .rightSpaceToView(self.view, 0)
+        .topSpaceToView(self.view, 0)
+        .bottomSpaceToView(self.view, 0);
+    self.viewMusk.layer.masksToBounds = YES;
+    [self.viewMusk setHidden:YES];
+    
+    
+    [self.viewMusk addSubview:self.tableview];
+    [self.tableview setBackgroundColor:[UIColor whiteColor]];
+    self.tableview.sd_layout
+    .centerXEqualToView(self.viewMusk)
+    .widthRatioToView(self.viewMusk, 0.9)
+    .bottomSpaceToView(self.viewMusk, 0)
+    .heightRatioToView(self.viewMusk, 0.5);
+    self.tableview.layer.cornerRadius = 10.0f;
+    self.tableview.layer.masksToBounds = YES;
+    
 }
 
--(void)connect{
+-(void)scan{
     //baby.scanForPeripherals().begin();
-    baby.scanForPeripherals().connectToPeripherals().begin();
+    [self.viewMusk setHidden:NO];
+    //baby.scanForPeripherals().connectToPeripherals().begin();
+    /*
     self.hud = [[MBProgressHUD alloc] init];
     [self.view addSubview:self.hud];
     self.hud.mode = MBProgressHUDModeIndeterminate;
     self.hud.label.text = @"Search for device...";
-    [self.hud  showAnimated:YES];
+    [self.hud  showAnimated:YES];*/
 }
 
 
@@ -253,8 +293,11 @@
         if([advertiseName hasPrefix:@"G29"]||[advertiseName hasPrefix:@"G29A"]||[advertiseName hasPrefix:@"EVA"])  {
             [weakSelf.devices addObject:peripheral];
             [weakSelf.localNames addObject:advertiseName];
-            weakSelf.currPeripheral = peripheral;
-            [central stopScan];
+           // weakSelf.currPeripheral = peripheral;
+            [weakSelf.tableview reloadData];
+            if([weakSelf.devices count]>5){
+                 [central stopScan];
+            }
             if([advertiseName hasPrefix:@"EVA24"]) {
                 weakSelf.brand = @"EVA24";
             }else{
@@ -289,6 +332,7 @@
         [weakSelf.hud setMinShowTime:1];
         [weakSelf.hud hideAnimated:YES];
         [peripheral discoverServices:nil];
+        
     }];
     
     //设置发现设备的Services的委托
@@ -309,6 +353,9 @@
             NSLog(@"charateristic name is :%@",c.UUID);
     
             if([c.UUID.UUIDString isEqualToString:@"FFE1"]){
+                
+                [weakSelf.viewMusk setHidden:YES];
+                
                 TruckViewController *truckViewController = [[TruckViewController alloc]init];
                 [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
                 truckViewController.currPeripheral = weakSelf.currPeripheral;
@@ -349,6 +396,41 @@
      }];
 }
 
+
+#pragma mark tableviewdatasource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [self.devices count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *cellID = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if(!cell){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
+    }
+    [cell setBackgroundColor:[UIColor whiteColor]];
+    
+    CBPeripheral *peripheral = [self.devices objectAtIndex:indexPath.row];
+    NSString *advertiseName = [self.localNames objectAtIndex:indexPath.row];
+    [cell.textLabel setText:advertiseName];
+    [cell.textLabel setTextColor:[UIColor blackColor]];
+    
+    return cell;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [baby.centralManager stopScan];
+    [baby cancelAllPeripheralsConnection];
+    [baby.centralManager connectPeripheral:[self.devices objectAtIndex:indexPath.row] options:nil];
+    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.viewMusk animated:YES];
+    self.hud.mode = MBProgressHUDModeIndeterminate;
+    self.hud.label.text = @"connect to device.....";
+    [self.hud showAnimated:YES];
+    
+}
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -359,6 +441,8 @@
    // ViewController.currPeripheral = self.currPeripheral;
    // ViewController.characteristic = self.characteristic;
 }
+
+
 
 /*
 #pragma mark - Navigation
