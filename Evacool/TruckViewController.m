@@ -18,6 +18,7 @@
 @property (nonatomic,retain) MBProgressHUD *hud;
 @property (nonatomic,retain) UILabel *labelUp;
 @property (nonatomic,retain) UILabel *labelTemp;
+@property (nonatomic,retain) UILabel *labelStatus;
 @property (nonatomic,retain) SemiCircleProgressView *progress;
 @property (nonatomic,retain) UIImageView *imgfan1;
 @property (nonatomic,retain) UIImageView *imgfan2;
@@ -111,7 +112,6 @@
     [self.view addSubview:self.progress];
     self.progress.percent = 0.25;
      
-
     //圆形背景
     UIView *view0 = [UIView new];
     [self.view addSubview:view0];
@@ -137,22 +137,21 @@
     .centerXEqualToView(self.view)
     .centerYEqualToView(view0)
     .widthIs(200.0/frameWidth*viewX)
-    .heightIs(64.0/frameHeight*viewY);
+    .heightIs(72.0/frameHeight*viewY);
     
     //状态
-    UILabel *labelStatus= [UILabel new];
-    [self.view addSubview:labelStatus];
-    labelStatus.text = @"In Good Condition";
-    [labelStatus setTextAlignment:NSTextAlignmentCenter];
-    [labelStatus setTextColor:[UIColor blackColor]];
-    [labelStatus setFont:[UIFont fontWithName:@"Arial" size:12.0]];
-    labelStatus.sd_layout
+    self.labelStatus= [UILabel new];
+    [self.view addSubview:self.labelStatus];
+    self.labelStatus.text = @"In Good Condition";
+    [self.labelStatus setTextAlignment:NSTextAlignmentCenter];
+    [self.labelStatus setTextColor:[UIColor blackColor]];
+    [self.labelStatus setFont:[UIFont fontWithName:@"Arial" size:12.0]];
+    self.labelStatus.sd_layout
     .centerXEqualToView(self.view)
     .topSpaceToView(self.labelTemp, 30.0/frameHeight*viewY)
     .widthIs(600.0/frameWidth*viewX)
-    .heightIs(12.0/frameHeight*viewY);
+    .heightIs(24.0/frameHeight*viewY);
      
-    
     //温度减
     UIButton *btTempMinus = [UIButton new];
     [self.view addSubview:btTempMinus];
@@ -294,7 +293,7 @@
     //定时量
     self.labelTimer= [UILabel new];
     [view2 addSubview:self.labelTimer];
-    self.labelTimer.text = @"0.5h";
+    self.labelTimer.text = @"0.0h";
     [self.labelTimer setTextAlignment:NSTextAlignmentLeft];
     [self.labelTimer setTextColor:[UIColor blackColor]];
     [self.labelTimer setFont:[UIFont fontWithName:@"Arial" size:20.0]];
@@ -771,6 +770,7 @@
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
         self.sleeplevel = 1;
+        self.labelTimer.text = @"0.5h";
     }else{
         Byte  write[6];
         write[0] = 0xAA;
@@ -783,6 +783,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+        self.labelTimer.text = @"0.0h";
     }
 }
 
@@ -801,7 +802,6 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-        
         self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
     }
 }
