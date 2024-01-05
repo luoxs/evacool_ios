@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) CBPeripheral *currPeripheral;
 @property (nonatomic,strong) NSString *brand;
 @property  NSInteger tag;
-@property (nonatomic,retain) DataReadR *dataRead;
+@property (nonatomic,retain) DataRead *dataRead;
 @property (nonatomic,retain) dataCode *datacode;
 @end
 
