@@ -1,11 +1,11 @@
 //
-//  TruckViewController.m
+//  RoomViewcontrollerViewController.m
 //  Evacool
 //
-//  Created by 罗路雅 on 2023/12/26.
+//  Created by 罗路雅 on 2024/1/5.
 //
 
-#import "TruckViewController.h"
+#import "RoomViewcontrollerViewController.h"
 #import "BabyBluetooth.h"
 #import "SDAutoLayout.h"
 #import "MBProgressHUD.h"
@@ -14,7 +14,7 @@
 #import "detailViewController.h"
 #import "faultsViewController.h"
 
-@interface TruckViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
+@interface RoomViewcontrollerViewController ()
 @property (nonatomic,retain) MBProgressHUD *hud;
 @property (nonatomic,retain) UILabel *labelUp;
 @property (nonatomic,retain) UILabel *labelTemp;
@@ -41,14 +41,13 @@
 @property (nonatomic,strong) NSMutableArray *dataError;
 @end
 
-@implementation TruckViewController
+@implementation RoomViewcontrollerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setAutoLayout];
     [self.viewMusk setHidden:YES];
-    self.datacode = [[dataCode alloc] init];
     self.dataRead = [[DataRead alloc] init];
     self.dataError = [[NSMutableArray alloc]init];
     baby = [BabyBluetooth shareBabyBluetooth];

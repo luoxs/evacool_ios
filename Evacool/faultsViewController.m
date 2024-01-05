@@ -27,6 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
     self.tableView1 = [[UITableView alloc]init];
     [self.tableView1 setBackgroundColor:[UIColor whiteColor]];
     self.tableView1.dataSource = self;
