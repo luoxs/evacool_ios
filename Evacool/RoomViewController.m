@@ -186,7 +186,7 @@
     .centerXEqualToView(self.view)
     .topSpaceToView(self.view, 898.0/frameHeight*viewY)
     .widthIs(682.0/frameWidth*viewX)
-    .heightIs(168.0/frameHeight*viewY);
+    .heightIs(132.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
     
     UILabel *labelscale = [UILabel new];
@@ -257,6 +257,61 @@
     .heightEqualToWidth();
     [self.btswitchfan addTarget:self action:@selector(chgfan) forControlEvents:UIControlEventTouchUpInside];
     
+#pragma mark 模式切换
+    
+    //通风
+    self.imgfan = [UIImageView new];
+    [self.view addSubview:self.imgfan];
+    [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
+    self.imgfan.sd_layout
+    .leftSpaceToView(self.view, 44.0/frameWidth*viewX)
+    .topSpaceToView(self.view, 1048.0/frameHeight*viewY)
+    .widthIs(108.0/frameWidth*viewX)
+    .autoHeightRatio(142.0/122.0);
+   
+    
+    //节能
+    self.imgeco = [UIImageView new];
+    [self.view addSubview:self.imgeco];
+    [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
+    self.imgeco.sd_layout
+    .leftSpaceToView(self.view, 174.0/frameWidth*viewX)
+    .topEqualToView(self.imgfan)
+    .widthIs(108.0/frameWidth*viewX)
+    .autoHeightRatio(142.0/122.0);
+   
+    
+    //普通模式
+    self.imgnormal = [UIImageView new];
+    [self.view addSubview:self.imgnormal];
+    [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
+    self.imgnormal.sd_layout
+    .leftSpaceToView(self.view, 304.0/frameWidth*viewX)
+    .topEqualToView(self.imgfan)
+    .widthIs(108.0/frameWidth*viewX)
+    .autoHeightRatio(142.0/122.0);
+    
+    //加强模式
+    self.imgturbo = [UIImageView new];
+    [self.view addSubview:self.imgturbo];
+    [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
+    self.imgturbo.sd_layout
+    .leftSpaceToView(self.view, 434.0/frameWidth*viewX)
+    .topEqualToView(self.imgfan)
+    .widthIs(108.0/frameWidth*viewX)
+    .autoHeightRatio(142.0/122.0);
+    
+    //切换
+    self.btswitchmode = [UIButton new];
+    [self.view addSubview:self.btswitchmode ];
+    [self.btswitchmode setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+    self.btswitchmode.sd_layout
+    .leftSpaceToView(self.view, 564.0/frameWidth*viewX)
+    .topEqualToView(self.imgfan)
+    .widthIs(108.0/frameWidth*viewX)
+    .heightEqualToWidth();
+    [self.btswitchmode addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
+    
 #pragma mark 显示睡眠定时
     //视图2
     UIView *view2 = [UIView new];
@@ -264,7 +319,7 @@
     [self.view addSubview:view2];
     view2.sd_layout
     .leftEqualToView(view1)
-    .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1216.0/frameHeight*viewY)
     .widthIs(462.0/frameWidth*viewX)
     .heightIs(168.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
@@ -335,11 +390,10 @@
     [self.view addSubview:view3];
     view3.sd_layout
     .rightEqualToView(view1)
-    .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
+    .topSpaceToView(self.view, 1216.0/frameHeight*viewY)
     .widthIs(208.0/frameWidth*viewX)
     .heightIs(168.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
-    
     
     //电池
     UIButton *btBattry = [UIButton new];
@@ -352,156 +406,42 @@
     .heightEqualToWidth();
     [btBattry addTarget:self action:@selector(openbattery) forControlEvents:UIControlEventTouchUpInside];
     
-    //通风
-    self.imgfan = [UIImageView new];
-    [self.view addSubview:self.imgfan];
-    [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
-    self.imgfan.sd_layout
-    .leftSpaceToView(self.view, 44.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(108.0/frameWidth*viewX)
-    .autoHeightRatio(142.0/122.0);
-   
-    
-    //节能
-    self.imgeco = [UIImageView new];
-    [self.view addSubview:self.imgeco];
-    [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
-    self.imgeco.sd_layout
-    .leftSpaceToView(self.view, 174.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(108.0/frameWidth*viewX)
-    .autoHeightRatio(142.0/122.0);
-   
-    
-    //普通模式
-    self.imgnormal = [UIImageView new];
-    [self.view addSubview:self.imgnormal];
-    [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
-    self.imgnormal.sd_layout
-    .leftSpaceToView(self.view, 304.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(108.0/frameWidth*viewX)
-    .autoHeightRatio(142.0/122.0);
-    
-    //加强模式
-    self.imgturbo = [UIImageView new];
-    [self.view addSubview:self.imgturbo];
-    [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
-    self.imgturbo.sd_layout
-    .leftSpaceToView(self.view, 434.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(108.0/frameWidth*viewX)
-    .autoHeightRatio(142.0/122.0);
-    
-    //切换
-    self.btswitchmode = [UIButton new];
-    [self.view addSubview:self.btswitchmode ];
-    [self.btswitchmode setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
-    self.btswitchmode.sd_layout
-    .leftSpaceToView(self.view, 564.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1294.0/frameHeight*viewY)
-    .widthIs(96.0/frameWidth*viewX)
-    .heightEqualToWidth();
-    [self.btswitchmode addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //底部左边按钮
-    UIButton *buttonDetails = [UIButton new];
-    [buttonDetails setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
-    [buttonDetails setTitle:@"Details" forState:UIControlStateNormal];
-    [self.view addSubview:buttonDetails];
-    buttonDetails.sd_layout
-    .leftSpaceToView(self.view, 124.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
+    //底部左边turbo
+    UIButton *btTurbo = [UIButton new];
+    [btTurbo setImage:[UIImage imageNamed:@"16"] forState:UIControlStateNormal];
+    [self.view addSubview:btTurbo];
+    btTurbo.sd_layout
+    .leftEqualToView(view1)
+    .topSpaceToView(self.view, 1400.0/frameHeight*viewY)
     .widthIs(226.0/frameWidth*viewX)
-    .heightIs(70.0/frameHeight*viewY);
-    [buttonDetails setSd_cornerRadius:@12.0];
-    [buttonDetails addTarget:self action:@selector(opendetails) forControlEvents:UIControlEventTouchUpInside];
-    
-    //底部右边边按钮
-    UIButton *buttonFaults = [UIButton new];
-    [buttonFaults setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
-    [buttonFaults setTitle:@"Faults Record" forState:UIControlStateNormal];
-    [self.view addSubview:buttonFaults];
-    buttonFaults.sd_layout
-    .rightSpaceToView(self.view, 124.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
+    .heightIs(168.0/frameHeight*viewY);
+    [btTurbo setSd_cornerRadius:@12.0];
+    [btTurbo addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
+     
+    //底部中间 sleep
+    UIButton *btSleep = [UIButton new];
+    [btSleep setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
+    [self.view addSubview:btSleep];
+    btSleep.sd_layout
+    .centerXEqualToView(self.view)
+    .topSpaceToView(self.view, 1400.0/frameHeight*viewY)
     .widthIs(226.0/frameWidth*viewX)
-    .heightIs(70.0/frameHeight*viewY);
-    [buttonFaults setSd_cornerRadius:@12.0];
-    [buttonFaults addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
-    
-    //蒙层
-    self.viewMusk = [UIView new];
-    [self.view addSubview:self.viewMusk];
-    [self.viewMusk setBackgroundColor:[UIColor colorWithRed:16/255.0 green:16/255.0 blue:16/255.0 alpha:0.6]];
-    self.viewMusk.sd_layout
-        .leftSpaceToView(self.view, 0)
-        .rightSpaceToView(self.view, 0)
-        .topSpaceToView(self.view, 0)
-        .bottomSpaceToView(self.view, 0);
-    self.viewMusk.layer.masksToBounds = YES;
-    
-    
-    //详细
-    self.viewDetails = [UIView new];
-    [self.viewMusk addSubview:self.viewDetails];
-    [self.viewDetails setBackgroundColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
-    self.viewDetails.sd_layout
-        .topSpaceToView(self.viewMusk, 565/frameHeight*viewY)
-        .leftSpaceToView(self.viewMusk, 0)
-        .heightIs(424/frameHeight*viewY)
-        .widthIs(frameWidth);         //原设计390
-    self.viewDetails.layer.cornerRadius = 20.0f;
-    self.viewDetails.layer.masksToBounds = YES;
-    
-    //详细
-    self.batteryprotect = [UIView new];
-    [self.viewMusk addSubview:self.batteryprotect];
-    [self.batteryprotect setBackgroundColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
-    self.batteryprotect.sd_layout
-        .topSpaceToView(self.viewMusk, 812/frameHeight*viewY)
-        .centerXEqualToView(self.viewMusk)
-        .heightIs(812.0/frameHeight*viewY)
-        .widthIs(750.0/frameWidth*viewX);         //原设计390
-    self.batteryprotect.layer.cornerRadius = 20.0f;
-    self.batteryprotect.layer.masksToBounds = YES;
-    
-    UILabel *labellevel = [UILabel new];
-    [self.batteryprotect addSubview:labellevel];
-    [labellevel setTextColor:[UIColor blackColor]];
-    [labellevel setText:@"Battery Protection Level"];
-    [labellevel setTextAlignment:NSTextAlignmentCenter];
-    [labellevel  setFont:[UIFont fontWithName:@"Arial" size:18]];
-    labellevel.sd_layout
-    .topSpaceToView(self.batteryprotect, 30.0/frameHeight*viewY)
-    .centerXEqualToView(self.batteryprotect)
-    .widthIs(750/frameWidth*viewX)
-    .heightIs(40.0/frameHeight*viewY);
+    .heightIs(168.0/frameHeight*viewY);
+    [btSleep setSd_cornerRadius:@12.0];
+    [btSleep addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
 
-    
-    UIPickerView *pickerView = [UIPickerView new];
-    pickerView.delegate = self;
-    pickerView.dataSource = self;
-    [self.batteryprotect addSubview:pickerView];
-    pickerView.sd_layout
-    .topSpaceToView(_batteryprotect, 30.0/frameHeight*viewY)
-    .leftSpaceToView(self.batteryprotect, 0)
-    .rightSpaceToView(self.batteryprotect, 0)
-    .bottomSpaceToView(self.batteryprotect, 30);
-
-    UIButton *btconfirm = [UIButton new];
-    [self.batteryprotect addSubview:btconfirm];
-    [btconfirm setTitle:@"Confirm" forState:UIControlStateNormal];
-    [btconfirm setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
-    btconfirm.sd_layout
-    .bottomSpaceToView(self.batteryprotect, 30.0/frameHeight*viewY)
-    .centerXEqualToView(self.batteryprotect)
-    .widthIs(200.0/frameWidth*viewX)
-    .heightIs(58.0/frameHeight*viewY);
-    [btconfirm setSd_cornerRadius:@10.0];
-    [btconfirm addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
-    
+    //底部左边右边
+    UIButton *btLight = [UIButton new];
+    [btLight setImage:[UIImage imageNamed:@"20"] forState:UIControlStateNormal];
+    [self.view addSubview:btLight];
+    btLight.sd_layout
+    .rightEqualToView(view1)
+    .topSpaceToView(self.view, 1400.0/frameHeight*viewY)
+    .widthIs(226.0/frameWidth*viewX)
+    .heightIs(168.0/frameHeight*viewY);
+    [btLight setSd_cornerRadius:@12.0];
+    [btLight addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
+     
 
 }
 
