@@ -20,11 +20,11 @@
 		450858A52B3B195900770387 /* instein.png in Resources */ = {isa = PBXBuildFile; fileRef = 450858A32B3B195900770387 /* instein.png */; };
 		450858A82B3B257100770387 /* TruckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 450858A72B3B257100770387 /* TruckViewController.m */; };
 		453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E124A2B3AC20200D5C032 /* HomeViewController.m */; };
-		4543B0322B4810590070A847 /* DataReadR.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B0282B4810580070A847 /* DataReadR.m */; };
 		4543B0332B4810590070A847 /* crc.c in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02A2B4810580070A847 /* crc.c */; };
 		4543B0342B4810590070A847 /* DataWrite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02B2B4810580070A847 /* DataWrite.m */; };
 		4543B0352B4810590070A847 /* dataCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02D2B4810580070A847 /* dataCode.m */; };
 		4543B0362B4810590070A847 /* DataRead.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B0302B4810580070A847 /* DataRead.m */; };
+		4543B03B2B4814BD0070A847 /* DataReadR.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B0392B4814BC0070A847 /* DataReadR.m */; };
 		454E9F102B3AEE93009F7B3A /* rv12.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F0D2B3AEE93009F7B3A /* rv12.png */; };
 		454E9F112B3AEE93009F7B3A /* trunk.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F0E2B3AEE93009F7B3A /* trunk.png */; };
 		454E9F122B3AEE93009F7B3A /* rv24.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F0F2B3AEE93009F7B3A /* rv24.png */; };
@@ -153,7 +153,6 @@
 		450858A72B3B257100770387 /* TruckViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TruckViewController.m; path = Evacool/TruckViewController.m; sourceTree = SOURCE_ROOT; };
 		453E12492B3AC20200D5C032 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		453E124A2B3AC20200D5C032 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		4543B0282B4810580070A847 /* DataReadR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataReadR.m; path = Evacool/Datas/DataReadR.m; sourceTree = SOURCE_ROOT; };
 		4543B0292B4810580070A847 /* DataWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataWrite.h; path = Evacool/Datas/DataWrite.h; sourceTree = SOURCE_ROOT; };
 		4543B02A2B4810580070A847 /* crc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crc.c; path = Evacool/Datas/crc.c; sourceTree = SOURCE_ROOT; };
 		4543B02B2B4810580070A847 /* DataWrite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataWrite.m; path = Evacool/Datas/DataWrite.m; sourceTree = SOURCE_ROOT; };
@@ -161,8 +160,9 @@
 		4543B02E2B4810580070A847 /* dataCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dataCode.h; path = Evacool/Datas/dataCode.h; sourceTree = SOURCE_ROOT; };
 		4543B02F2B4810580070A847 /* crc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crc.h; path = Evacool/Datas/crc.h; sourceTree = SOURCE_ROOT; };
 		4543B0302B4810580070A847 /* DataRead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataRead.m; path = Evacool/Datas/DataRead.m; sourceTree = SOURCE_ROOT; };
-		4543B0312B4810590070A847 /* DataReadR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataReadR.h; path = Evacool/Datas/DataReadR.h; sourceTree = SOURCE_ROOT; };
 		4543B0382B4812620070A847 /* DataRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataRead.h; path = Evacool/Datas/DataRead.h; sourceTree = SOURCE_ROOT; };
+		4543B0392B4814BC0070A847 /* DataReadR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataReadR.m; path = Evacool/Datas/DataReadR.m; sourceTree = SOURCE_ROOT; };
+		4543B03A2B4814BC0070A847 /* DataReadR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataReadR.h; path = Evacool/Datas/DataReadR.h; sourceTree = SOURCE_ROOT; };
 		454E4D4A2B48086F00B0423E /* SemiCircleProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SemiCircleProgressView.h; path = Evacool/SemiCircleProgressView.h; sourceTree = SOURCE_ROOT; };
 		454E9F0D2B3AEE93009F7B3A /* rv12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rv12.png; sourceTree = "<group>"; };
 		454E9F0E2B3AEE93009F7B3A /* trunk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trunk.png; sourceTree = "<group>"; };
@@ -478,14 +478,14 @@
 		45D49FE02B3DAC47001A4E22 /* Datas */ = {
 			isa = PBXGroup;
 			children = (
-				4543B0382B4812620070A847 /* DataRead.h */,
+				4543B03A2B4814BC0070A847 /* DataReadR.h */,
+				4543B0392B4814BC0070A847 /* DataReadR.m */,
 				4543B02F2B4810580070A847 /* crc.h */,
 				4543B02A2B4810580070A847 /* crc.c */,
 				4543B02E2B4810580070A847 /* dataCode.h */,
 				4543B02D2B4810580070A847 /* dataCode.m */,
+				4543B0382B4812620070A847 /* DataRead.h */,
 				4543B0302B4810580070A847 /* DataRead.m */,
-				4543B0312B4810590070A847 /* DataReadR.h */,
-				4543B0282B4810580070A847 /* DataReadR.m */,
 				4543B0292B4810580070A847 /* DataWrite.h */,
 				4543B02B2B4810580070A847 /* DataWrite.m */,
 			);
@@ -703,10 +703,10 @@
 				457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */,
 				45DF31252B4547BA00519C55 /* detailViewController.m in Sources */,
 				450858A82B3B257100770387 /* TruckViewController.m in Sources */,
+				4543B03B2B4814BD0070A847 /* DataReadR.m in Sources */,
 				4543B0352B4810590070A847 /* dataCode.m in Sources */,
 				45DF31282B4547E000519C55 /* faultsViewController.m in Sources */,
 				45A82F762B47EB5C002413AC /* RoomViewController.m in Sources */,
-				4543B0322B4810590070A847 /* DataReadR.m in Sources */,
 				45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */,
 				457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */,
 				453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */,

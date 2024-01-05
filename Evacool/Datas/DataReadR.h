@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DataRead : NSObject
+@interface DataReadR: NSObject
 @property Byte  start; //通讯开始
 @property Byte  power; //0x01开机，0x00关机
 @property Byte  tempSetting;  //设定温度
