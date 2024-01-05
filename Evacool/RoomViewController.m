@@ -28,15 +28,12 @@
 @property (nonatomic,retain) UIButton *btswitchfan;
 @property (nonatomic,retain) UILabel *labelTimer;
 @property (nonatomic,retain) UISwitch *switchSleep;
-@property (nonatomic,retain) UIImageView *imgfan;
-@property (nonatomic,retain) UIImageView *imgeco;
-@property (nonatomic,retain) UIImageView *imgnormal;
-@property (nonatomic,retain) UIImageView *imgturbo;
-@property (nonatomic,retain) UIButton *btswitchmode;
-@property (nonatomic,retain) UIView *viewMusk;
-@property (nonatomic,retain) UIView *viewDetails;
-@property (nonatomic,retain) UIView*viewFault;
-@property (nonatomic,retain) UIView *batteryprotect;
+@property (nonatomic,retain) UIButton *btauto;
+@property (nonatomic,retain) UIButton *btcool;
+@property (nonatomic,retain) UIButton *bthuimit;
+@property (nonatomic,retain) UIButton *btvent;
+@property (nonatomic,retain) UIButton *btheat;
+
 @property Byte sleeplevel; //睡眠定时级别
 @property (nonatomic,strong) NSMutableArray *dataError;
 @end
@@ -47,7 +44,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setAutoLayout];
-    [self.viewMusk setHidden:YES];
     self.dataRead = [[DataReadR alloc] init];
     self.dataError = [[NSMutableArray alloc]init];
     baby = [BabyBluetooth shareBabyBluetooth];
@@ -259,58 +255,56 @@
     
 #pragma mark 模式切换
     
-    //通风
-    self.imgfan = [UIImageView new];
-    [self.view addSubview:self.imgfan];
-    [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
-    self.imgfan.sd_layout
+    //自动模式
+    self.btauto = [UIButton new];
+    [self.view addSubview:self.btauto];
+    [self.btauto setBackgroundImage:[UIImage imageNamed:@"3"] forState:UIControlStateNormal];
+    self.btauto.sd_layout
     .leftSpaceToView(self.view, 44.0/frameWidth*viewX)
     .topSpaceToView(self.view, 1048.0/frameHeight*viewY)
     .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
    
-    
-    //节能
-    self.imgeco = [UIImageView new];
-    [self.view addSubview:self.imgeco];
-    [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
-    self.imgeco.sd_layout
+    //制冷
+    self.btcool = [UIButton new];
+    [self.view addSubview:self.btcool];
+    [self.btcool setBackgroundImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];
+    self.btcool.sd_layout
     .leftSpaceToView(self.view, 174.0/frameWidth*viewX)
-    .topEqualToView(self.imgfan)
+    .topEqualToView(self.btauto)
     .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
-   
     
-    //普通模式
-    self.imgnormal = [UIImageView new];
-    [self.view addSubview:self.imgnormal];
-    [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
-    self.imgnormal.sd_layout
+    //除湿
+    self.bthuimit = [UIButton new];
+    [self.view addSubview:self.bthuimit];
+    [self.bthuimit setBackgroundImage:[UIImage imageNamed:@"7"] forState:UIControlStateNormal];
+    self.bthuimit.sd_layout
     .leftSpaceToView(self.view, 304.0/frameWidth*viewX)
-    .topEqualToView(self.imgfan)
+    .topEqualToView(self.btauto)
     .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
     
-    //加强模式
-    self.imgturbo = [UIImageView new];
-    [self.view addSubview:self.imgturbo];
-    [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
-    self.imgturbo.sd_layout
+    //通风
+    self.btvent = [UIButton new];
+    [self.view addSubview:self.btvent];
+    [self.btvent setBackgroundImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
+    self.btvent.sd_layout
     .leftSpaceToView(self.view, 434.0/frameWidth*viewX)
-    .topEqualToView(self.imgfan)
+    .topEqualToView(self.btauto)
     .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
     
-    //切换
-    self.btswitchmode = [UIButton new];
-    [self.view addSubview:self.btswitchmode ];
-    [self.btswitchmode setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
-    self.btswitchmode.sd_layout
+    //加热
+    self.btheat = [UIButton new];
+    [self.view addSubview:self.btheat];
+    [self.btheat setBackgroundImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
+    self.btheat.sd_layout
     .leftSpaceToView(self.view, 564.0/frameWidth*viewX)
-    .topEqualToView(self.imgfan)
+    .topEqualToView(self.btauto)
     .widthIs(108.0/frameWidth*viewX)
-    .heightEqualToWidth();
-    [self.btswitchmode addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
+    .autoHeightRatio(142.0/122.0);
+    [self.btheat addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
 #pragma mark 显示睡眠定时
     //视图2
@@ -384,7 +378,7 @@
     [btTimeAdd addTarget:self action:@selector(addtimer) forControlEvents:UIControlEventTouchUpInside];
     
     
-#pragma  mark 显示电池
+#pragma  mark  温度切换
     UIView *view3 = [UIView new];
     [view3 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:view3];
@@ -395,17 +389,31 @@
     .heightIs(168.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
     
-    //电池
-    UIButton *btBattry = [UIButton new];
-    [btBattry setBackgroundImage:[UIImage imageNamed:@"battery"] forState:UIControlStateNormal];
-    [view3 addSubview:btBattry];
-    btBattry.sd_layout
+    //温度单位
+    UILabel *labelUnit= [UILabel new];
+    [view3 addSubview:labelUnit];
+    labelUnit.text = @"°C/°F";
+    [labelUnit setTextAlignment:NSTextAlignmentLeft];
+    [labelUnit setTextColor:[UIColor blackColor]];
+    [labelUnit setFont:[UIFont fontWithName:@"Arial" size:12.0]];
+    [labelUnit setTextAlignment:NSTextAlignmentCenter];
+    labelUnit.sd_layout
     .centerXEqualToView(view3)
-    .centerYEqualToView(view3)
-    .widthIs(82.0/frameWidth*viewX)
-    .heightEqualToWidth();
-    [btBattry addTarget:self action:@selector(openbattery) forControlEvents:UIControlEventTouchUpInside];
+    .widthIs(300/frameWidth*viewX)
+    .heightIs(24.0/frameHeight*viewY)
+    .topSpaceToView(view3, 20.0/frameHeight*viewY);
     
+    //温度单位切换按钮
+    UISwitch *swtUnit = [UISwitch new];
+    [view3 addSubview:swtUnit];
+    swtUnit.sd_layout
+    .centerXEqualToView(view3)
+    .bottomSpaceToView(view3, 30.0/frameHeight*viewY)
+    .widthIs(82.0/frameWidth*viewX)
+    .heightIs(10.0/frameHeight*viewY);
+    [swtUnit addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
+
+     
     //底部左边turbo
     UIButton *btTurbo = [UIButton new];
     [btTurbo setImage:[UIImage imageNamed:@"16"] forState:UIControlStateNormal];
@@ -443,50 +451,6 @@
     [btLight addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
      
 
-}
-
-#pragma  mark pickviewdelegate
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 10;
-}
-
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
-    
-    UILabel *titleLabel = [[UILabel alloc] init];
-    if([self.brand isEqual:@"EVA24"]){
-        [titleLabel setText:[NSString stringWithFormat:@"%.1f",21.5+row*0.2]];
-    }else{
-        [titleLabel setText:[NSString stringWithFormat:@"%.1f",10.8+row*0.1]];
-    }
-    [titleLabel setTextAlignment:NSTextAlignmentCenter];
-    [titleLabel setFont:[UIFont systemFontOfSize:16]];
-    [titleLabel setTextColor:[UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1]];
-    
-    return titleLabel;
-}
-
-- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    return 40.0f;
-}
-
-
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    Byte  write[6];
-    write[0] = 0xAA;
-    write[1] = 0x08;
-    write[2] = row;
-    write[4] = 0xFF & CalcCRC(&write[1], 2);
-    write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
-    write[5] = 0x55;
-    
-    NSData *data = [[NSData alloc]initWithBytes:write length:6];
-    [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
-    [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-   // [self updateStatus];
 }
 
 #pragma mark babyDelegate
@@ -753,16 +717,19 @@
     }
 
     //模式
-    [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
-    [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
-    [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
-    [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
-
+    [self.btauto setImage:[UIImage imageNamed:@"3"] forState:UIControlStateNormal];
+    [self.btcool setImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];
+    [self.btheat setImage:[UIImage imageNamed:@"7"] forState:UIControlStateNormal];
+    [self.btvent setImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
+    [self.btheat setImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
+    
+   
     switch(self.dataRead.mode){
-        case 0x00:[self.imgeco setImage:[UIImage imageNamed:@"ecoon"]];break;
-        case 0x01:[self.imgnormal setImage:[UIImage imageNamed:@"coolon"]];break;
-        case 0x02:[self.imgfan setImage:[UIImage imageNamed:@"fanon"]];break;
-        case 0x03:[self.imgturbo setImage:[UIImage imageNamed:@"turboon"]]; break;
+        case 0x00:[self.btauto setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];break;
+        case 0x01:[self.btauto setImage:[UIImage imageNamed:@"4"] forState:UIControlStateNormal];break;
+        case 0x02:[self.btauto setImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];break;
+        case 0x03:[self.btauto setImage:[UIImage imageNamed:@"8"] forState:UIControlStateNormal];break;
+        case 0x04:[self.btauto setImage:[UIImage imageNamed:@"10"] forState:UIControlStateNormal];break;
     }
 
 }
@@ -820,18 +787,6 @@
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
        // [self updateStatus];
     }
-}
-
-
--(void) openbattery{
-    [self.viewMusk setHidden:NO];
-    [self.viewDetails removeFromSuperview];
-    [self.viewMusk addSubview:self.batteryprotect];
-}
-
-
--(void) confirm{
-    [self.viewMusk setHidden:YES];
 }
 
 /*
