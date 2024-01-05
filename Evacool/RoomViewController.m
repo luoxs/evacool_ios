@@ -5,7 +5,7 @@
 //  Created by 罗路雅 on 2024/1/5.
 //
 
-#import "RoomViewcontrollerViewController.h"
+#import "RoomViewController.h"
 #import "BabyBluetooth.h"
 #import "SDAutoLayout.h"
 #import "MBProgressHUD.h"
@@ -14,7 +14,7 @@
 #import "detailViewController.h"
 #import "faultsViewController.h"
 
-@interface RoomViewcontrollerViewController ()
+@interface RoomViewController ()
 @property (nonatomic,retain) MBProgressHUD *hud;
 @property (nonatomic,retain) UILabel *labelUp;
 @property (nonatomic,retain) UILabel *labelTemp;
@@ -41,14 +41,14 @@
 @property (nonatomic,strong) NSMutableArray *dataError;
 @end
 
-@implementation RoomViewcontrollerViewController
+@implementation RoomViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setAutoLayout];
     [self.viewMusk setHidden:YES];
-    self.dataRead = [[DataRead alloc] init];
+    self.dataRead = [[DataReadR alloc] init];
     self.dataError = [[NSMutableArray alloc]init];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
@@ -570,84 +570,44 @@
         weakSelf.labelUp.text = peripheral.name;
         
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
+            weakSelf.characteristic = characteristics;
             NSData *data = characteristics.value;
-           // Byte r[15] ={0};
-            if(data.length == 15){
-                Byte r[15] = {0};
-                memcpy(r, [data bytes], 15);
+            Byte r[23] = {0};
+            if(data.length == 23){
+                memcpy(r, [data bytes], 23);
+                // NSLog(@"copy data successfully!");
                 weakSelf.dataRead.start = r[0]; //通讯开始
                 weakSelf.dataRead.power = r[1]; //0x01开机，0x00关机
                 weakSelf.dataRead.tempSetting = r[2];  //设定温度
                 weakSelf.dataRead.tempReal = r[3];  //实时温度
                 weakSelf.dataRead.mode = r[4];  //工作模式
                 weakSelf.dataRead.wind = r[5];  //风速档位 0-自动 1-4 是手动风速
-                weakSelf.dataRead.errorcode = r[6];  //强冷模式开关
-                weakSelf.dataRead.vhigh = r[7];
-                weakSelf.dataRead.vlow = r[8];
-                weakSelf.dataRead.battery = r[9];  //倒计时关机时间
-                weakSelf.dataRead.light = r[10];  //LOGO 灯开关
-                weakSelf.dataRead.lock = r[11];  //氛围灯模式或氛围灯变化时间
-                weakSelf.dataRead.crcH = r[12];  //CRC 校验高八位
-                weakSelf.dataRead.crcL = r[13];
-                weakSelf.dataRead.end = r[17];  //通讯结束
+                weakSelf.dataRead.turbo = r[6];  //强冷模式开关
+                weakSelf.dataRead.sleep = r[7];  //睡眠模式开关
+                weakSelf.dataRead.unit = r[8];   //温度单位 0-摄氏度 1-华氏度
+                weakSelf.dataRead.countdown = r[9];  //倒计时关机时间
+                weakSelf.dataRead.logo = r[10];  //LOGO 灯开关
+                weakSelf.dataRead.atmosphere = r[11];  //氛围灯模式或氛围灯变化时间
+                weakSelf.dataRead.red = r[12];   //R(红色数据值)
+                weakSelf.dataRead.green = r[13];  //G(绿色数值)
+                weakSelf.dataRead.blue = r[14];   //B(蓝色数值)
+                weakSelf.dataRead.brightness = r[15];  //氛围灯亮度
+                weakSelf.dataRead.errcode = r[16];  //故障代码
+                weakSelf.dataRead.version = r[17];  //空调版本 0-国内版 1-国外版
+                weakSelf.dataRead.reserve1 = r[18];  //备用
+                weakSelf.dataRead.reserve2 = r[19];  //备用
+                weakSelf.dataRead.crcH = r[20];  //CRC 校验高八位
+                weakSelf.dataRead.crcL = r[21];  //CRC 校验高八位
+                weakSelf.dataRead.end = r[22];  //通讯结束
                 [weakSelf updateStatus];
-            }
-            
-            if(data.length == 41){
-                Byte r[41] = {0};
-                memcpy(r, [data bytes], 37);
-                weakSelf.datacode.code0=r[0];
-                weakSelf.datacode.code1=r[1];
-                weakSelf.datacode.code2=r[2];
-                weakSelf.datacode.code3=r[3];
-                weakSelf.datacode.code4=r[4];
-                weakSelf.datacode.code5=r[5];
-                weakSelf.datacode.code6=r[6];
-                weakSelf.datacode.code7=r[7];
-                weakSelf.datacode.code8=r[8];
-                weakSelf.datacode.code9=r[9];
-                weakSelf.datacode.code10=r[10];
-                weakSelf.datacode.code11=r[11];
-                weakSelf.datacode.code12=r[12];
-                weakSelf.datacode.code13=r[13];
-                weakSelf.datacode.code14=r[14];
-                weakSelf.datacode.code15=r[15];
-                weakSelf.datacode.code16=r[16];
-                weakSelf.datacode.code17=r[17];
-                weakSelf.datacode.code18=r[18];
-                weakSelf.datacode.code19=r[19];
-                weakSelf.datacode.code20=r[20];
-                weakSelf.datacode.code21=r[21];
-                weakSelf.datacode.code22=r[22];
-                weakSelf.datacode.code23=r[23];
-                weakSelf.datacode.code24=r[24];
-                weakSelf.datacode.code25=r[25];
-                weakSelf.datacode.code26=r[26];
-                weakSelf.datacode.code27=r[27];
-                weakSelf.datacode.code28=r[28];
-                weakSelf.datacode.code29=r[29];
-                weakSelf.datacode.code30=r[30];
-                weakSelf.datacode.code31=r[31];
-                weakSelf.datacode.code32=r[32];
-                weakSelf.datacode.code33=r[33];
-                weakSelf.datacode.code34=r[34];
-                weakSelf.datacode.code35=r[35];
-                weakSelf.datacode.code36=r[36];
-                weakSelf.datacode.code37=r[37];
-                weakSelf.datacode.code38=r[38];
-                weakSelf.datacode.code39=r[39];
-                weakSelf.datacode.code40=r[40];
-                weakSelf.datacode.code41=r[41];
-                [weakSelf.dataError addObject:weakSelf.datacode];
-                [weakSelf pushViewController];
             }
         }
     }];
     
     //扫描选项->CBCentralManagerScanOptionAllowDuplicatesKey:同一个Peripheral端的多个发现事件被聚合成一个发现事件
     NSDictionary *scanForPeripheralsWithOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@NO};
-   
 }
+
 
 -(void) getStatus{
     if(self.characteristic != nil){
@@ -836,16 +796,6 @@
     self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
     self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
     [self.progress setNeedsDisplay];
-    
-    //故障
-    if(self.dataRead.errorcode == 0x00){
-        self.labelStatus.text = @"In Good Condition";
-        [self.labelStatus setTextColor:[UIColor blackColor]];
-    }else{
-        self.labelStatus.text = [NSString stringWithFormat:@"Fault Code:E%d",self.dataRead.errorcode];
-        [self.labelStatus setTextColor:[UIColor redColor]];
-    }
-    
     
     //风量
     [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];

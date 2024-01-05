@@ -96,8 +96,12 @@
 		457F8B052B1EAB0700FA7ABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 457F8B042B1EAB0700FA7ABB /* Assets.xcassets */; };
 		457F8B082B1EAB0700FA7ABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 457F8B062B1EAB0700FA7ABB /* LaunchScreen.storyboard */; };
 		457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 457F8B0A2B1EAB0700FA7ABB /* main.m */; };
-		45A82F762B47EB5C002413AC /* RoomViewcontrollerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A82F752B47EB5B002413AC /* RoomViewcontrollerViewController.m */; };
-		45AED0352B47F8AE0082FDF9 /* DataReadR.m in Sources */ = {isa = PBXBuildFile; fileRef = 45AED0342B47F8AE0082FDF9 /* DataReadR.m */; };
+		45A82F762B47EB5C002413AC /* RoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A82F752B47EB5B002413AC /* RoomViewController.m */; };
+		45AED0442B48032D0082FDF9 /* DataReadR.m in Sources */ = {isa = PBXBuildFile; fileRef = 45AED03C2B48032C0082FDF9 /* DataReadR.m */; };
+		45AED0452B48032D0082FDF9 /* crc.c in Sources */ = {isa = PBXBuildFile; fileRef = 45AED03D2B48032C0082FDF9 /* crc.c */; };
+		45AED0462B48032D0082FDF9 /* DataWrite.m in Sources */ = {isa = PBXBuildFile; fileRef = 45AED03F2B48032D0082FDF9 /* DataWrite.m */; };
+		45AED0472B48032D0082FDF9 /* dataCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 45AED0412B48032D0082FDF9 /* dataCode.m */; };
+		45AED0482B48032D0082FDF9 /* DataRead.m in Sources */ = {isa = PBXBuildFile; fileRef = 45AED0432B48032D0082FDF9 /* DataRead.m */; };
 		45D49FBE2B3C7352001A4E22 /* d5.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FA72B3C7350001A4E22 /* d5.png */; };
 		45D49FBF2B3C7352001A4E22 /* turbooff.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FA82B3C7350001A4E22 /* turbooff.png */; };
 		45D49FC02B3C7352001A4E22 /* ecooff.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FA92B3C7350001A4E22 /* ecooff.png */; };
@@ -126,13 +130,9 @@
 		45D49FDB2B3D820A001A4E22 /* jian.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FD72B3D820A001A4E22 /* jian.png */; };
 		45D49FDC2B3D820A001A4E22 /* minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FD82B3D820A001A4E22 /* minus.png */; };
 		45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */; };
-		45D49FE72B3DAC47001A4E22 /* DataRead.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE12B3DAC47001A4E22 /* DataRead.m */; };
-		45D49FE82B3DAC47001A4E22 /* DataWrite.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE32B3DAC47001A4E22 /* DataWrite.m */; };
-		45D49FE92B3DAC47001A4E22 /* crc.c in Sources */ = {isa = PBXBuildFile; fileRef = 45D49FE62B3DAC47001A4E22 /* crc.c */; };
 		45D4A13D2B45357B001A4E22 /* switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D4A13C2B45357B001A4E22 /* switch.png */; };
 		45DF31252B4547BA00519C55 /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31242B4547BA00519C55 /* detailViewController.m */; };
 		45DF31282B4547E000519C55 /* faultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF31272B4547E000519C55 /* faultsViewController.m */; };
-		45DF312B2B45805600519C55 /* dataCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 45DF312A2B45805600519C55 /* dataCode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +153,7 @@
 		450858A72B3B257100770387 /* TruckViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TruckViewController.m; path = Evacool/TruckViewController.m; sourceTree = SOURCE_ROOT; };
 		453E12492B3AC20200D5C032 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		453E124A2B3AC20200D5C032 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		454E4D4A2B48086F00B0423E /* SemiCircleProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SemiCircleProgressView.h; path = Evacool/SemiCircleProgressView.h; sourceTree = SOURCE_ROOT; };
 		454E9F0D2B3AEE93009F7B3A /* rv12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rv12.png; sourceTree = "<group>"; };
 		454E9F0E2B3AEE93009F7B3A /* trunk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trunk.png; sourceTree = "<group>"; };
 		454E9F0F2B3AEE93009F7B3A /* rv24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rv24.png; sourceTree = "<group>"; };
@@ -233,10 +234,18 @@
 		457F8B072B1EAB0700FA7ABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		457F8B092B1EAB0700FA7ABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		457F8B0A2B1EAB0700FA7ABB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		45A82F742B47EB5B002413AC /* RoomViewcontrollerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomViewcontrollerViewController.h; sourceTree = "<group>"; };
-		45A82F752B47EB5B002413AC /* RoomViewcontrollerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomViewcontrollerViewController.m; sourceTree = "<group>"; };
-		45AED0332B47F8AE0082FDF9 /* DataReadR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataReadR.h; sourceTree = "<group>"; };
-		45AED0342B47F8AE0082FDF9 /* DataReadR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataReadR.m; sourceTree = "<group>"; };
+		45A82F742B47EB5B002413AC /* RoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomViewController.h; sourceTree = "<group>"; };
+		45A82F752B47EB5B002413AC /* RoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomViewController.m; sourceTree = "<group>"; };
+		45AED03A2B48032C0082FDF9 /* dataCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dataCode.h; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/dataCode.h; sourceTree = "<group>"; };
+		45AED03B2B48032C0082FDF9 /* DataRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataRead.h; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/DataRead.h; sourceTree = "<group>"; };
+		45AED03C2B48032C0082FDF9 /* DataReadR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataReadR.m; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/DataReadR.m; sourceTree = "<group>"; };
+		45AED03D2B48032C0082FDF9 /* crc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crc.c; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/crc.c; sourceTree = "<group>"; };
+		45AED03E2B48032C0082FDF9 /* DataWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataWrite.h; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/DataWrite.h; sourceTree = "<group>"; };
+		45AED03F2B48032D0082FDF9 /* DataWrite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataWrite.m; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/DataWrite.m; sourceTree = "<group>"; };
+		45AED0402B48032D0082FDF9 /* DataReadR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataReadR.h; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/DataReadR.h; sourceTree = "<group>"; };
+		45AED0412B48032D0082FDF9 /* dataCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dataCode.m; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/dataCode.m; sourceTree = "<group>"; };
+		45AED0422B48032D0082FDF9 /* crc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = crc.h; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/crc.h; sourceTree = "<group>"; };
+		45AED0432B48032D0082FDF9 /* DataRead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataRead.m; path = Desktop/Evacool/Evacool_ios/Evacool/Datas/DataRead.m; sourceTree = "<group>"; };
 		45D49FA72B3C7350001A4E22 /* d5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = d5.png; sourceTree = "<group>"; };
 		45D49FA82B3C7350001A4E22 /* turbooff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = turbooff.png; sourceTree = "<group>"; };
 		45D49FA92B3C7350001A4E22 /* ecooff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ecooff.png; sourceTree = "<group>"; };
@@ -266,19 +275,11 @@
 		45D49FD82B3D820A001A4E22 /* minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minus.png; sourceTree = "<group>"; };
 		45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SemiCircleProgressView.m; sourceTree = "<group>"; };
 		45D49FDE2B3D952F001A4E22 /* SemiCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SemiCircleProgressView.h; sourceTree = "<group>"; };
-		45D49FE12B3DAC47001A4E22 /* DataRead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataRead.m; sourceTree = "<group>"; };
-		45D49FE22B3DAC47001A4E22 /* crc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crc.h; sourceTree = "<group>"; };
-		45D49FE32B3DAC47001A4E22 /* DataWrite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataWrite.m; sourceTree = "<group>"; };
-		45D49FE42B3DAC47001A4E22 /* DataRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataRead.h; sourceTree = "<group>"; };
-		45D49FE52B3DAC47001A4E22 /* DataWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataWrite.h; sourceTree = "<group>"; };
-		45D49FE62B3DAC47001A4E22 /* crc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crc.c; sourceTree = "<group>"; };
 		45D4A13C2B45357B001A4E22 /* switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switch.png; sourceTree = "<group>"; };
 		45DF31232B4547BA00519C55 /* detailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = detailViewController.h; sourceTree = "<group>"; };
 		45DF31242B4547BA00519C55 /* detailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = detailViewController.m; sourceTree = "<group>"; };
 		45DF31262B4547E000519C55 /* faultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = faultsViewController.h; sourceTree = "<group>"; };
 		45DF31272B4547E000519C55 /* faultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = faultsViewController.m; sourceTree = "<group>"; };
-		45DF31292B45805600519C55 /* dataCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dataCode.h; sourceTree = "<group>"; };
-		45DF312A2B45805600519C55 /* dataCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = dataCode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +314,7 @@
 		454E9F0C2B3AEE93009F7B3A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				45D49FDE2B3D952F001A4E22 /* SemiCircleProgressView.h */,
 				45D4A13C2B45357B001A4E22 /* switch.png */,
 				45D49FD52B3D820A001A4E22 /* add.png */,
 				45D49FD62B3D820A001A4E22 /* jia.png */,
@@ -449,7 +451,7 @@
 				45D49FE02B3DAC47001A4E22 /* Datas */,
 				454E9F0C2B3AEE93009F7B3A /* images */,
 				45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */,
-				45D49FDE2B3D952F001A4E22 /* SemiCircleProgressView.h */,
+				454E4D4A2B48086F00B0423E /* SemiCircleProgressView.h */,
 				453E12492B3AC20200D5C032 /* HomeViewController.h */,
 				453E124A2B3AC20200D5C032 /* HomeViewController.m */,
 				450858A62B3B257100770387 /* TruckViewController.h */,
@@ -458,8 +460,8 @@
 				45DF31242B4547BA00519C55 /* detailViewController.m */,
 				45DF31262B4547E000519C55 /* faultsViewController.h */,
 				45DF31272B4547E000519C55 /* faultsViewController.m */,
-				45A82F742B47EB5B002413AC /* RoomViewcontrollerViewController.h */,
-				45A82F752B47EB5B002413AC /* RoomViewcontrollerViewController.m */,
+				45A82F742B47EB5B002413AC /* RoomViewController.h */,
+				45A82F752B47EB5B002413AC /* RoomViewController.m */,
 				457F8AF82B1EAB0300FA7ABB /* AppDelegate.h */,
 				457F8AF92B1EAB0300FA7ABB /* AppDelegate.m */,
 				457F8AFB2B1EAB0300FA7ABB /* SceneDelegate.h */,
@@ -476,16 +478,16 @@
 		45D49FE02B3DAC47001A4E22 /* Datas */ = {
 			isa = PBXGroup;
 			children = (
-				45AED0332B47F8AE0082FDF9 /* DataReadR.h */,
-				45AED0342B47F8AE0082FDF9 /* DataReadR.m */,
-				45D49FE22B3DAC47001A4E22 /* crc.h */,
-				45D49FE62B3DAC47001A4E22 /* crc.c */,
-				45D49FE42B3DAC47001A4E22 /* DataRead.h */,
-				45D49FE12B3DAC47001A4E22 /* DataRead.m */,
-				45D49FE52B3DAC47001A4E22 /* DataWrite.h */,
-				45D49FE32B3DAC47001A4E22 /* DataWrite.m */,
-				45DF31292B45805600519C55 /* dataCode.h */,
-				45DF312A2B45805600519C55 /* dataCode.m */,
+				45AED03D2B48032C0082FDF9 /* crc.c */,
+				45AED0422B48032D0082FDF9 /* crc.h */,
+				45AED03A2B48032C0082FDF9 /* dataCode.h */,
+				45AED0412B48032D0082FDF9 /* dataCode.m */,
+				45AED03B2B48032C0082FDF9 /* DataRead.h */,
+				45AED0432B48032D0082FDF9 /* DataRead.m */,
+				45AED0402B48032D0082FDF9 /* DataReadR.h */,
+				45AED03C2B48032C0082FDF9 /* DataReadR.m */,
+				45AED03E2B48032C0082FDF9 /* DataWrite.h */,
+				45AED03F2B48032D0082FDF9 /* DataWrite.m */,
 			);
 			name = Datas;
 			path = ../../../Mycoolman/MyCoolMan/MyCoolMan/Datas;
@@ -696,18 +698,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				457F8AFA2B1EAB0300FA7ABB /* AppDelegate.m in Sources */,
-				45D49FE72B3DAC47001A4E22 /* DataRead.m in Sources */,
+				45AED0482B48032D0082FDF9 /* DataRead.m in Sources */,
 				457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */,
 				45DF31252B4547BA00519C55 /* detailViewController.m in Sources */,
-				45D49FE92B3DAC47001A4E22 /* crc.c in Sources */,
-				45D49FE82B3DAC47001A4E22 /* DataWrite.m in Sources */,
-				45AED0352B47F8AE0082FDF9 /* DataReadR.m in Sources */,
 				450858A82B3B257100770387 /* TruckViewController.m in Sources */,
 				45DF31282B4547E000519C55 /* faultsViewController.m in Sources */,
-				45A82F762B47EB5C002413AC /* RoomViewcontrollerViewController.m in Sources */,
+				45AED0442B48032D0082FDF9 /* DataReadR.m in Sources */,
+				45AED0462B48032D0082FDF9 /* DataWrite.m in Sources */,
+				45AED0452B48032D0082FDF9 /* crc.c in Sources */,
+				45AED0472B48032D0082FDF9 /* dataCode.m in Sources */,
+				45A82F762B47EB5C002413AC /* RoomViewController.m in Sources */,
 				45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */,
 				457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */,
-				45DF312B2B45805600519C55 /* dataCode.m in Sources */,
 				453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

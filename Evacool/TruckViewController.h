@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TruckViewController : UIViewController{
 @public BabyBluetooth *baby;
 }
+
 @property (nonatomic, strong) NSData *data;
 @property (nonatomic,strong) CBCharacteristic *characteristic;
 @property (nonatomic,strong) CBPeripheral *currPeripheral;
