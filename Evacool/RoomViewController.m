@@ -81,8 +81,9 @@
     self.labelUp.sd_layout
     .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
     .topSpaceToView(self.view, 249.0/frameHeight*viewY)
-    .widthIs(600.0/frameWidth*viewX)
+    .widthIs(self.view.width/2.0)
     .heightIs(44.0/frameHeight*viewY);
+    [self.labelUp setAdjustsFontSizeToFitWidth:YES];
     
     //左上文字2
     UILabel *labelDown = [UILabel new];
@@ -94,8 +95,9 @@
     labelDown.sd_layout
     .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
     .topSpaceToView(self.view, 295.0/frameHeight*viewY)
-    .widthIs(600.0/frameWidth*viewX)
+    .widthIs(self.view.width/2.0)
     .heightIs(44.0/frameHeight*viewY);
+    [labelDown setAdjustsFontSizeToFitWidth:YES];
     
     //开关
     UIButton *btPower = [UIButton new];
@@ -595,7 +597,7 @@
 
 //改变风速
 -(void)chgfan{
-    if(self.characteristic != nil && self.dataRead.mode==0x04 ){
+    if(self.characteristic != nil ){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x12;

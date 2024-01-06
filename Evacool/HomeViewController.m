@@ -289,7 +289,7 @@
         
 //        if(([peripheral.name hasPrefix:@"CCA"]||[peripheral.name hasPrefix:@"GCA"]) && ![self.devices containsObject:peripheral])  {
         NSString *advertiseName = advertisementData[@"kCBAdvDataLocalName"];
-        if([advertiseName hasPrefix:@"G29"]||[advertiseName hasPrefix:@"G29A"]||[advertiseName hasPrefix:@"EVA"])  {
+        if([advertiseName hasPrefix:@"G29"]||[advertiseName hasPrefix:@"G29A"]||[advertiseName hasPrefix:@"EVA"]||[advertiseName hasPrefix:@"GCA"])  {
             [weakSelf.devices addObject:peripheral];
             [weakSelf.localNames addObject:advertiseName];
            // weakSelf.currPeripheral = peripheral;
@@ -404,7 +404,7 @@
     
      __block BOOL isFirst = YES;
      [baby setFilterOnConnectToPeripherals:^BOOL(NSString *peripheralName, NSDictionary *advertisementData, NSNumber *RSSI) {
-     if(isFirst && ([advertisementData[@"kCBAdvDataLocalName"] hasPrefix:@"G29"]|| [advertisementData[@"kCBAdvDataLocalName"] hasPrefix:@"EVA"])){
+     if(isFirst && ([advertisementData[@"kCBAdvDataLocalName"] hasPrefix:@"G29"]|| [advertisementData[@"kCBAdvDataLocalName"] hasPrefix:@"EVA"]||[advertisementData[@"kCBAdvDataLocalName"] hasPrefix:@"GCA"])){
      isFirst = NO;
      return YES;
      }
