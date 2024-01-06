@@ -47,12 +47,12 @@
     self.dataRead = [[DataReadR alloc] init];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
-    [self getStatus];
 }
 
 
 -(void) viewDidAppear:(BOOL)animated{
     self.labelUp.text = self.brand;
+    [self getStatus];
 }
 
 -(void)setAutoLayout{
@@ -479,7 +479,7 @@
     //设置读取characteristics的委托
     [baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
      //   NSLog(@"read characteristic successfully!");
-       
+        weakSelf.labelUp.text = peripheral.name;
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
             weakSelf.characteristic = characteristics;
             NSData *data = characteristics.value;

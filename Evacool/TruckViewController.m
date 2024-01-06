@@ -37,8 +37,10 @@
 @property (nonatomic,retain) UIView *viewDetails;
 @property (nonatomic,retain) UIView*viewFault;
 @property (nonatomic,retain) UIView *batteryprotect;
+@property (nonatomic,retain) UIButton *btBattery;
+@property Byte batterylevel; //电池保护
 @property Byte sleeplevel; //睡眠定时级别
-@property (nonatomic,strong) NSMutableArray *dataErrors;
+@property (nonatomic,retain) NSMutableArray *dataErrors;
 @property (nonatomic,retain) NSTimer *timer;
 @end
 
@@ -68,11 +70,11 @@
     UIImageView *imageTop = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"imagetop"]];
     [self.view addSubview:imageTop];
     imageTop.sd_layout
-    .centerXEqualToView(self.view)
-    .topSpaceToView(self.view, 92.0/frameHeight*viewY)
-    .widthIs(228.0/frameWidth*viewX)
-    .heightIs(82.0/frameHeight*viewY);
-   
+        .centerXEqualToView(self.view)
+        .topSpaceToView(self.view, 92.0/frameHeight*viewY)
+        .widthIs(228.0/frameWidth*viewX)
+        .heightIs(82.0/frameHeight*viewY);
+    
     //左上文字1
     self.labelUp = [UILabel new];
     [self.view addSubview: self.labelUp];
@@ -81,11 +83,11 @@
     [self.labelUp setTextColor:[UIColor blackColor]];
     [self.labelUp setFont:[UIFont fontWithName:@"Arial" size:22.0]];
     self.labelUp.sd_layout
-    .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 249.0/frameHeight*viewY)
+        .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 249.0/frameHeight*viewY)
     //.widthIs(600.0/frameWidth*viewX)
-    .widthIs(self.view.width *0.5)
-    .heightIs(44.0/frameHeight*viewY);
+        .widthIs(self.view.width *0.5)
+        .heightIs(44.0/frameHeight*viewY);
     [self.labelUp setAdjustsFontSizeToFitWidth:YES];
     
     //左上文字2
@@ -96,11 +98,11 @@
     [labelDown setTextColor:[UIColor blackColor]];
     [labelDown setFont:[UIFont fontWithName:@"Arial" size:22.0]];
     labelDown.sd_layout
-    .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 295.0/frameHeight*viewY)
+        .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 295.0/frameHeight*viewY)
     //.widthIs(600.0/frameWidth*viewX)
-    .widthIs(self.view.width *0.5)
-    .heightIs(44.0/frameHeight*viewY);
+        .widthIs(self.view.width *0.5)
+        .heightIs(44.0/frameHeight*viewY);
     [labelDown setAdjustsFontSizeToFitWidth:YES];
     
     //开关
@@ -108,27 +110,27 @@
     [btPower setBackgroundImage:[UIImage imageNamed:@"power"] forState:UIControlStateNormal];
     [self.view addSubview:btPower];
     btPower.sd_layout
-    .rightSpaceToView(self.view, 36.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 222.0/frameHeight*viewY)
-    .widthIs(120.0/frameWidth*viewX)
-    .heightEqualToWidth();
+        .rightSpaceToView(self.view, 36.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 222.0/frameHeight*viewY)
+        .widthIs(120.0/frameWidth*viewX)
+        .heightEqualToWidth();
     [btPower addTarget:self action:@selector(powerswitch) forControlEvents:UIControlEventTouchUpInside];
     
     //弧形进度条
     self.progress = [[SemiCircleProgressView alloc] initWithFrame:CGRectMake(150/frameWidth*viewX, 425.0/frameHeight*viewY, 450/frameWidth*viewX, 450.0/frameWidth*viewX)];
     [self.view addSubview:self.progress];
     self.progress.percent = 0.25;
-     
+    
     //圆形背景
     UIView *view0 = [UIView new];
     [self.view addSubview:view0];
     [view0 setBackgroundColor:[UIColor whiteColor]];
     view0.sd_layout
-    .centerXEqualToView(self.view)
-    .topSpaceToView(self.view, 462.0/frameHeight*viewY)
-    .widthIs(380.0/frameWidth*viewX)
-
-    .heightEqualToWidth();
+        .centerXEqualToView(self.view)
+        .topSpaceToView(self.view, 462.0/frameHeight*viewY)
+        .widthIs(380.0/frameWidth*viewX)
+    
+        .heightEqualToWidth();
     view0.layer.cornerRadius = view0.width * 0.5;
     view0.layer.masksToBounds = true;
     
@@ -141,10 +143,10 @@
     [self.labelTemp setTextColor:[UIColor blackColor]];
     [self.labelTemp setFont:[UIFont fontWithName:@"Arial" size:36.0]];
     self.labelTemp.sd_layout
-    .centerXEqualToView(self.view)
-    .centerYEqualToView(view0)
-    .widthIs(200.0/frameWidth*viewX)
-    .heightIs(72.0/frameHeight*viewY);
+        .centerXEqualToView(self.view)
+        .centerYEqualToView(view0)
+        .widthIs(200.0/frameWidth*viewX)
+        .heightIs(72.0/frameHeight*viewY);
     
     //状态
     self.labelStatus= [UILabel new];
@@ -154,20 +156,20 @@
     [self.labelStatus setTextColor:[UIColor blackColor]];
     [self.labelStatus setFont:[UIFont fontWithName:@"Arial" size:12.0]];
     self.labelStatus.sd_layout
-    .centerXEqualToView(self.view)
-    .topSpaceToView(self.labelTemp, 30.0/frameHeight*viewY)
-    .widthIs(600.0/frameWidth*viewX)
-    .heightIs(24.0/frameHeight*viewY);
-     
+        .centerXEqualToView(self.view)
+        .topSpaceToView(self.labelTemp, 30.0/frameHeight*viewY)
+        .widthIs(600.0/frameWidth*viewX)
+        .heightIs(24.0/frameHeight*viewY);
+    
     //温度减
     UIButton *btTempMinus = [UIButton new];
     [self.view addSubview:btTempMinus];
     [btTempMinus setBackgroundImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     btTempMinus.sd_layout
-    .leftSpaceToView(self.view, 210.0/frameWidth*viewX)
-    .bottomEqualToView(self.labelTemp)
-    .widthIs(54.0/frameWidth*viewX)
-    .heightEqualToWidth();
+        .leftSpaceToView(self.view, 210.0/frameWidth*viewX)
+        .bottomEqualToView(self.labelTemp)
+        .widthIs(54.0/frameWidth*viewX)
+        .heightEqualToWidth();
     [btTempMinus addTarget:self action:@selector(subtemp) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -176,10 +178,10 @@
     [btTempAdd setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
     [self.view addSubview:btTempAdd];
     btTempAdd.sd_layout
-    .rightSpaceToView(self.view, 210.0/frameWidth*viewX)
-    .bottomEqualToView(self.labelTemp)
-    .widthIs(54.0/frameWidth*viewX)
-    .heightEqualToWidth();
+        .rightSpaceToView(self.view, 210.0/frameWidth*viewX)
+        .bottomEqualToView(self.labelTemp)
+        .widthIs(54.0/frameWidth*viewX)
+        .heightEqualToWidth();
     [btTempAdd addTarget:self action:@selector(addtemp) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -189,10 +191,10 @@
     [view1 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:view1];
     view1.sd_layout
-    .centerXEqualToView(self.view)
-    .topSpaceToView(self.view, 898.0/frameHeight*viewY)
-    .widthIs(682.0/frameWidth*viewX)
-    .heightIs(168.0/frameHeight*viewY);
+        .centerXEqualToView(self.view)
+        .topSpaceToView(self.view, 898.0/frameHeight*viewY)
+        .widthIs(682.0/frameWidth*viewX)
+        .heightIs(168.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
     
     UILabel *labelscale = [UILabel new];
@@ -202,65 +204,65 @@
     [labelscale setTextColor:[UIColor grayColor]];
     [labelscale setFont:[UIFont fontWithName:@"Arial" size:12.0]];
     labelscale.sd_layout
-    .leftSpaceToView(view1, 74.0/frameWidth*viewX)
-    .topSpaceToView(view1, 32.0/frameHeight*viewY)
-    .widthIs(100.0/frameWidth*viewX)
-    .heightIs(30.0/frameHeight*viewY);
+        .leftSpaceToView(view1, 74.0/frameWidth*viewX)
+        .topSpaceToView(view1, 32.0/frameHeight*viewY)
+        .widthIs(100.0/frameWidth*viewX)
+        .heightIs(30.0/frameHeight*viewY);
     
     //风速1
     self.imgfan1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d1"]];
     [view1 addSubview: self.imgfan1];
     self.imgfan1.sd_layout
-    .leftSpaceToView(view1, 64.0/frameWidth*viewX)
-    .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(76.0/frameWidth*viewX)
-    .heightIs(16.0/frameHeight*viewY);
+        .leftSpaceToView(view1, 64.0/frameWidth*viewX)
+        .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
+        .widthIs(76.0/frameWidth*viewX)
+        .heightIs(16.0/frameHeight*viewY);
     
     //风速2
     self.imgfan2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d2"]];
     [view1 addSubview:self.imgfan2];
     self.imgfan2.sd_layout
-    .leftSpaceToView(view1, 160.0/frameWidth*viewX)
-    .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(76.0/frameWidth*viewX)
-    .heightIs(26.0/frameHeight*viewY);
+        .leftSpaceToView(view1, 160.0/frameWidth*viewX)
+        .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
+        .widthIs(76.0/frameWidth*viewX)
+        .heightIs(26.0/frameHeight*viewY);
     
     //风速3
     self.imgfan3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d3"]];
     [view1 addSubview:self.imgfan3];
     self.imgfan3.sd_layout
-    .leftSpaceToView(view1, 256.0/frameWidth*viewX)
-    .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(76.0/frameWidth*viewX)
-    .heightIs(36.0/frameHeight*viewY);
+        .leftSpaceToView(view1, 256.0/frameWidth*viewX)
+        .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
+        .widthIs(76.0/frameWidth*viewX)
+        .heightIs(36.0/frameHeight*viewY);
     
     //风速4
     self.imgfan4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d4"]];
     [view1 addSubview:self.imgfan4];
     self.imgfan4.sd_layout
-    .leftSpaceToView(view1, 352.0/frameWidth*viewX)
-    .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(76.0/frameWidth*viewX)
-    .heightIs(46.0/frameHeight*viewY);
+        .leftSpaceToView(view1, 352.0/frameWidth*viewX)
+        .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
+        .widthIs(76.0/frameWidth*viewX)
+        .heightIs(46.0/frameHeight*viewY);
     
     //风速5
     self.imgfan5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"d5"]];
     [view1 addSubview:self.imgfan5 ];
     self.imgfan5 .sd_layout
-    .leftSpaceToView(view1, 448.0/frameWidth*viewX)
-    .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(76.0/frameWidth*viewX)
-    .heightIs(56.0/frameHeight*viewY);
+        .leftSpaceToView(view1, 448.0/frameWidth*viewX)
+        .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
+        .widthIs(76.0/frameWidth*viewX)
+        .heightIs(56.0/frameHeight*viewY);
     
     //切换
     self.btswitchfan = [UIButton new];
     [view1 addSubview:self.btswitchfan ];
     [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
     self.btswitchfan.sd_layout
-    .leftSpaceToView(view1, 544.0/frameWidth*viewX)
-    .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
-    .widthIs(76.0/frameWidth*viewX)
-    .heightEqualToWidth();
+        .leftSpaceToView(view1, 544.0/frameWidth*viewX)
+        .bottomSpaceToView(view1, 40.0/frameHeight*viewY)
+        .widthIs(76.0/frameWidth*viewX)
+        .heightEqualToWidth();
     [self.btswitchfan addTarget:self action:@selector(chgfan) forControlEvents:UIControlEventTouchUpInside];
     
 #pragma mark 显示睡眠定时
@@ -269,10 +271,10 @@
     [view2 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:view2];
     view2.sd_layout
-    .leftEqualToView(view1)
-    .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
-    .widthIs(462.0/frameWidth*viewX)
-    .heightIs(168.0/frameHeight*viewY);
+        .leftEqualToView(view1)
+        .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
+        .widthIs(462.0/frameWidth*viewX)
+        .heightIs(168.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
     
     UILabel *labelsleep= [UILabel new];
@@ -282,19 +284,19 @@
     [labelsleep setTextColor:[UIColor grayColor]];
     [labelsleep setFont:[UIFont fontWithName:@"Arial" size:12.0]];
     labelsleep.sd_layout
-    .leftSpaceToView(view2, 74.0/frameWidth*viewX)
-    .topSpaceToView(view2, 32.0/frameHeight*viewY)
-    .widthIs(100.0/frameWidth*viewX)
-    .heightIs(30.0/frameHeight*viewY);
+        .leftSpaceToView(view2, 74.0/frameWidth*viewX)
+        .topSpaceToView(view2, 32.0/frameHeight*viewY)
+        .widthIs(100.0/frameWidth*viewX)
+        .heightIs(30.0/frameHeight*viewY);
     
     //开关
     self.switchSleep = [UISwitch new];
     [view2 addSubview:self.switchSleep];
     self.switchSleep.sd_layout
-    .rightSpaceToView(view2, 22.0/frameWidth*viewX)
-    .topSpaceToView(view2, 22.0/frameHeight*viewY)
-    .widthIs(94.0/frameWidth*viewX)
-    .heightIs(36.0/frameHeight*viewY);
+        .rightSpaceToView(view2, 22.0/frameWidth*viewX)
+        .topSpaceToView(view2, 22.0/frameHeight*viewY)
+        .widthIs(94.0/frameWidth*viewX)
+        .heightIs(36.0/frameHeight*viewY);
     [self.switchSleep addTarget:self action:@selector(setSleep:) forControlEvents:UIControlEventValueChanged];
     
     //定时量
@@ -306,20 +308,20 @@
     [self.labelTimer setFont:[UIFont fontWithName:@"Arial" size:20.0]];
     [self.labelTimer setTextAlignment:NSTextAlignmentCenter];
     self.labelTimer.sd_layout
-    .centerXEqualToView(view2)
-    .widthIs(100.0/frameWidth*viewX)
-    .heightIs(40.0/frameHeight*viewY)
-    .bottomSpaceToView(view2, 34.0/frameHeight*viewY);
+        .centerXEqualToView(view2)
+        .widthIs(100.0/frameWidth*viewX)
+        .heightIs(40.0/frameHeight*viewY)
+        .bottomSpaceToView(view2, 34.0/frameHeight*viewY);
     
     //定时减
     UIButton *btTimeMinus = [UIButton new];
     [btTimeMinus setBackgroundImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     [view2 addSubview:btTimeMinus];
     btTimeMinus.sd_layout
-    .leftSpaceToView(view2, 98.0/frameWidth*viewX)
-    .centerYEqualToView(self.labelTimer)
-    .widthIs(42.0/frameWidth*viewX)
-    .heightEqualToWidth();
+        .leftSpaceToView(view2, 98.0/frameWidth*viewX)
+        .centerYEqualToView(self.labelTimer)
+        .widthIs(42.0/frameWidth*viewX)
+        .heightEqualToWidth();
     [btTimeMinus addTarget:self action:@selector(droptimer) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -328,87 +330,104 @@
     [btTimeAdd setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
     [view2 addSubview:btTimeAdd];
     btTimeAdd.sd_layout
-    .rightSpaceToView(view2, 98.0/frameWidth*viewX)
-    .centerYEqualToView(self.labelTimer)
-    .widthIs(42.0/frameWidth*viewX)
-    .heightEqualToWidth();
+        .rightSpaceToView(view2, 98.0/frameWidth*viewX)
+        .centerYEqualToView(self.labelTimer)
+        .widthIs(42.0/frameWidth*viewX)
+        .heightEqualToWidth();
     [btTimeAdd addTarget:self action:@selector(addtimer) forControlEvents:UIControlEventTouchUpInside];
     
     
 #pragma  mark 显示电池
-    UIView *view3 = [UIView new];
-    [view3 setBackgroundColor:[UIColor whiteColor]];
-    [self.view addSubview:view3];
-    view3.sd_layout
-    .rightEqualToView(view1)
-    .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
-    .widthIs(208.0/frameWidth*viewX)
-    .heightIs(168.0/frameHeight*viewY);
-    [view1 setSd_cornerRadius:@10.0];
+    /*
+     UIView *view3 = [UIView new];
+     [view3 setBackgroundColor:[UIColor whiteColor]];
+     [self.view addSubview:view3];
+     view3.sd_layout
+     .rightEqualToView(view1)
+     .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
+     .widthIs(208.0/frameWidth*viewX)
+     .heightIs(168.0/frameHeight*viewY);
+     [view1 setSd_cornerRadius:@10.0];
+     */
+    
+    self.btBattery = [UIButton new];
+    //[view3 setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview: self.btBattery ];
+    self.btBattery .sd_layout
+        .rightEqualToView(view1)
+        .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
+        .widthIs(208.0/frameWidth*viewX)
+        .heightIs(168.0/frameHeight*viewY);
+    [self.btBattery  setSd_cornerRadius:@10.0];
+    [self.btBattery setBackgroundImage:[UIImage imageNamed:@"batteryon"] forState:UIControlStateNormal];
+    [self.btBattery addTarget:self action:@selector(openbattery) forControlEvents:UIControlEventTouchUpInside];
     
     
-    //电池
-    UIButton *btBattry = [UIButton new];
-    [btBattry setBackgroundImage:[UIImage imageNamed:@"battery"] forState:UIControlStateNormal];
-    [view3 addSubview:btBattry];
-    btBattry.sd_layout
-    .centerXEqualToView(view3)
-    .centerYEqualToView(view3)
-    .widthIs(82.0/frameWidth*viewX)
-    .heightEqualToWidth();
-    [btBattry addTarget:self action:@selector(openbattery) forControlEvents:UIControlEventTouchUpInside];
+    /*
+     //电池
+     self.btBattry = [UIButton new];
+     [self.btBattry setBackgroundImage:[UIImage imageNamed:@"battery"] forState:UIControlStateNormal];
+     [view3 addSubview:  self.btBattry];
+     self.btBattry.sd_layout
+     .centerXEqualToView(view3)
+     .centerYEqualToView(view3)
+     .widthIs(82.0/frameWidth*viewX)
+     .heightEqualToWidth();
+     [self.btBattry addTarget:self action:@selector(openbattery) forControlEvents:UIControlEventTouchUpInside];
+     */
+    
     
     //通风
     self.imgfan = [UIImageView new];
     [self.view addSubview:self.imgfan];
     [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
     self.imgfan.sd_layout
-    .leftSpaceToView(self.view, 44.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(108.0/frameWidth*viewX)
-    .autoHeightRatio(142.0/122.0);
-   
+        .leftSpaceToView(self.view, 44.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
+        .widthIs(108.0/frameWidth*viewX)
+        .autoHeightRatio(142.0/122.0);
+    
     
     //节能
     self.imgeco = [UIImageView new];
     [self.view addSubview:self.imgeco];
     [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
     self.imgeco.sd_layout
-    .leftSpaceToView(self.view, 174.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(108.0/frameWidth*viewX)
-    .autoHeightRatio(142.0/122.0);
-   
+        .leftSpaceToView(self.view, 174.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
+        .widthIs(108.0/frameWidth*viewX)
+        .autoHeightRatio(142.0/122.0);
+    
     
     //普通模式
     self.imgnormal = [UIImageView new];
     [self.view addSubview:self.imgnormal];
     [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
     self.imgnormal.sd_layout
-    .leftSpaceToView(self.view, 304.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(108.0/frameWidth*viewX)
-    .autoHeightRatio(142.0/122.0);
+        .leftSpaceToView(self.view, 304.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
+        .widthIs(108.0/frameWidth*viewX)
+        .autoHeightRatio(142.0/122.0);
     
     //加强模式
     self.imgturbo = [UIImageView new];
     [self.view addSubview:self.imgturbo];
     [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
     self.imgturbo.sd_layout
-    .leftSpaceToView(self.view, 434.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
-    .widthIs(108.0/frameWidth*viewX)
-    .autoHeightRatio(142.0/122.0);
+        .leftSpaceToView(self.view, 434.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 1284.0/frameHeight*viewY)
+        .widthIs(108.0/frameWidth*viewX)
+        .autoHeightRatio(142.0/122.0);
     
     //切换
     self.btswitchmode = [UIButton new];
     [self.view addSubview:self.btswitchmode ];
     [self.btswitchmode setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
     self.btswitchmode.sd_layout
-    .leftSpaceToView(self.view, 564.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1294.0/frameHeight*viewY)
-    .widthIs(96.0/frameWidth*viewX)
-    .heightEqualToWidth();
+        .leftSpaceToView(self.view, 564.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 1294.0/frameHeight*viewY)
+        .widthIs(96.0/frameWidth*viewX)
+        .heightEqualToWidth();
     [self.btswitchmode addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //底部左边按钮
@@ -417,10 +436,10 @@
     [buttonDetails setTitle:@"Details" forState:UIControlStateNormal];
     [self.view addSubview:buttonDetails];
     buttonDetails.sd_layout
-    .leftSpaceToView(self.view, 124.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
-    .widthIs(226.0/frameWidth*viewX)
-    .heightIs(70.0/frameHeight*viewY);
+        .leftSpaceToView(self.view, 124.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
+        .widthIs(226.0/frameWidth*viewX)
+        .heightIs(70.0/frameHeight*viewY);
     [buttonDetails setSd_cornerRadius:@12.0];
     [buttonDetails addTarget:self action:@selector(opendetails) forControlEvents:UIControlEventTouchUpInside];
     
@@ -430,10 +449,10 @@
     [buttonFaults setTitle:@"Faults Record" forState:UIControlStateNormal];
     [self.view addSubview:buttonFaults];
     buttonFaults.sd_layout
-    .rightSpaceToView(self.view, 124.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
-    .widthIs(226.0/frameWidth*viewX)
-    .heightIs(70.0/frameHeight*viewY);
+        .rightSpaceToView(self.view, 124.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
+        .widthIs(226.0/frameWidth*viewX)
+        .heightIs(70.0/frameHeight*viewY);
     [buttonFaults setSd_cornerRadius:@12.0];
     [buttonFaults.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [buttonFaults addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
@@ -481,36 +500,34 @@
     [labellevel setTextAlignment:NSTextAlignmentCenter];
     [labellevel  setFont:[UIFont fontWithName:@"Arial" size:18]];
     labellevel.sd_layout
-    .topSpaceToView(self.batteryprotect, 30.0/frameHeight*viewY)
-    .centerXEqualToView(self.batteryprotect)
-    .widthIs(750/frameWidth*viewX)
-    .heightIs(40.0/frameHeight*viewY);
-
+        .topSpaceToView(self.batteryprotect, 30.0/frameHeight*viewY)
+        .centerXEqualToView(self.batteryprotect)
+        .widthIs(750/frameWidth*viewX)
+        .heightIs(40.0/frameHeight*viewY);
+    
     
     UIPickerView *pickerView = [UIPickerView new];
     pickerView.delegate = self;
     pickerView.dataSource = self;
     [self.batteryprotect addSubview:pickerView];
     pickerView.sd_layout
-    .topSpaceToView(_batteryprotect, 30.0/frameHeight*viewY)
-    .leftSpaceToView(self.batteryprotect, 0)
-    .rightSpaceToView(self.batteryprotect, 0)
-    .bottomSpaceToView(self.batteryprotect, 30);
-
+        .topSpaceToView(_batteryprotect, 30.0/frameHeight*viewY)
+        .leftSpaceToView(self.batteryprotect, 0)
+        .rightSpaceToView(self.batteryprotect, 0)
+        .bottomSpaceToView(self.batteryprotect, 30);
+    
     UIButton *btconfirm = [UIButton new];
     [self.batteryprotect addSubview:btconfirm];
     [btconfirm setTitle:@"Confirm" forState:UIControlStateNormal];
     [btconfirm setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
     btconfirm.sd_layout
-    .bottomSpaceToView(self.batteryprotect, 30.0/frameHeight*viewY)
-    .centerXEqualToView(self.batteryprotect)
-    .widthIs(200.0/frameWidth*viewX)
-    .heightIs(58.0/frameHeight*viewY);
+        .bottomSpaceToView(self.batteryprotect, 30.0/frameHeight*viewY)
+        .centerXEqualToView(self.batteryprotect)
+        .widthIs(200.0/frameWidth*viewX)
+        .heightIs(58.0/frameHeight*viewY);
     [btconfirm setSd_cornerRadius:@10.0];
     [btconfirm.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [btconfirm addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
-    
-
 }
 
 #pragma  mark pickviewdelegate
@@ -524,7 +541,7 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    if([self.brand isEqual:@"EVA24"]){
+    if([self.brand isEqual:@"EVA24VTR"]){
         [titleLabel setText:[NSString stringWithFormat:@"%.1f",21.5+row*0.2]];
     }else{
         [titleLabel setText:[NSString stringWithFormat:@"%.1f",10.8+row*0.1]];
@@ -540,13 +557,15 @@
     return 40.0f;
 }
 
-
-
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.batterylevel = row;
+}
+
+-(void) confirm{
     Byte  write[6];
     write[0] = 0xAA;
     write[1] = 0x08;
-    write[2] = row;
+    write[2] = self.batterylevel;
     write[4] = 0xFF & CalcCRC(&write[1], 2);
     write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
     write[5] = 0x55;
@@ -554,15 +573,17 @@
     NSData *data = [[NSData alloc]initWithBytes:write length:6];
     [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
     [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-   // [self updateStatus];
+    // [self updateStatus];
+    [self.viewMusk setHidden:YES];
 }
+
 
 #pragma mark babyDelegate
 -(void)babyDelegate{
     __weak typeof(self) weakSelf = self;
     //设置扫描到设备的委托
-
-   
+    
+    
     //设置断开设备的委托
     [baby setBlockOnDisconnect:^(CBCentralManager *central, CBPeripheral *peripheral, NSError *error) {
         weakSelf.hud.mode = MBProgressHUDModeIndeterminate;
@@ -571,15 +592,15 @@
         [weakSelf.hud showAnimated:YES];
     }];
     
-   
+    
     //设置读取characteristics的委托
     [baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
-     //   NSLog(@"read characteristic successfully!");
+        //   NSLog(@"read characteristic successfully!");
         weakSelf.labelUp.text = peripheral.name;
         
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
             NSData *data = characteristics.value;
-           // Byte r[15] ={0};
+            // Byte r[15] ={0};
             if(data.length == 15){
                 Byte r[15] = {0};
                 memcpy(r, [data bytes], 15);
@@ -647,14 +668,13 @@
                 weakSelf.datacode.code40=r[40];
                 weakSelf.datacode.code41=r[41];
                 [weakSelf.dataErrors addObject:weakSelf.datacode];
-               // [weakSelf pushViewController];
             }
         }
     }];
     
     //扫描选项->CBCentralManagerScanOptionAllowDuplicatesKey:同一个Peripheral端的多个发现事件被聚合成一个发现事件
     NSDictionary *scanForPeripheralsWithOptions = @{CBCentralManagerScanOptionAllowDuplicatesKey:@NO};
-   
+    
 }
 
 -(void) getStatus{
@@ -670,7 +690,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-       // [self updateStatus];
+        // [self updateStatus];
     }
 }
 
@@ -692,7 +712,7 @@
         
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
-       // [self updateStatus];
+        // [self updateStatus];
     }
 }
 
@@ -709,7 +729,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-       // [self updateStatus];
+        // [self updateStatus];
     }
 }
 
@@ -726,7 +746,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-       // [self updateStatus];
+        // [self updateStatus];
     }
 }
 
@@ -744,7 +764,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-       // [self updateStatus];
+        // [self updateStatus];
     }
 }
 
@@ -761,7 +781,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-       // [self updateStatus];
+        // [self updateStatus];
     }
 }
 
@@ -837,53 +857,6 @@
 }
 
 
-//更新控件
--(void) updateStatus{
-    
-    //温度
-    self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
-    self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
-    [self.progress setNeedsDisplay];
-    
-    //故障
-    if(self.dataRead.errorcode == 0x00){
-        self.labelStatus.text = @"In Good Condition";
-        [self.labelStatus setTextColor:[UIColor blackColor]];
-    }else{
-        self.labelStatus.text = [NSString stringWithFormat:@"Fault Code:E%d",self.dataRead.errorcode];
-        [self.labelStatus setTextColor:[UIColor redColor]];
-    }
-    
-    
-    //风量
-    [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];
-    [self.imgfan2 setImage:[UIImage imageNamed:@"d3"]];
-    [self.imgfan3 setImage:[UIImage imageNamed:@"d3"]];
-    [self.imgfan4 setImage:[UIImage imageNamed:@"d4"]];
-    [self.imgfan5 setImage:[UIImage imageNamed:@"d5"]];
-    
-    switch(self.dataRead.wind){
-        case 0x00: [self.imgfan1 setImage:[UIImage imageNamed:@"f1"]];break;
-        case 0x01: [self.imgfan2 setImage:[UIImage imageNamed:@"f2"]];break;
-        case 0x02: [self.imgfan3 setImage:[UIImage imageNamed:@"f3"]];break;
-        case 0x03: [self.imgfan4 setImage:[UIImage imageNamed:@"f4"]];break;
-        case 0x04: [self.imgfan5 setImage:[UIImage imageNamed:@"f5"]];break;
-    }
-
-    //模式
-    [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
-    [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
-    [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
-    [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
-
-    switch(self.dataRead.mode){
-        case 0x00:[self.imgeco setImage:[UIImage imageNamed:@"ecoon"]];break;
-        case 0x01:[self.imgnormal setImage:[UIImage imageNamed:@"coolon"]];break;
-        case 0x02:[self.imgfan setImage:[UIImage imageNamed:@"fanon"]];break;
-        case 0x03:[self.imgturbo setImage:[UIImage imageNamed:@"turboon"]]; break;
-    }
-}
-
 //页面跳转
 -(void)pushViewController{
     
@@ -915,6 +888,10 @@
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
         write[5] = 0x55;
         
+        [self.dataErrors removeAllObjects];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(pushViewController) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop]addTimer:self.timer forMode:NSRunLoopCommonModes];
+        
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
@@ -940,7 +917,7 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-       
+        
     }
 }
 
@@ -952,23 +929,82 @@
 }
 
 
--(void) confirm{
-    [self.viewMusk setHidden:YES];
+//更新控件
+-(void) updateStatus{
+    if(self.dataRead.power == 0x00){ //关机状态
+        [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];
+        [self.imgfan2 setImage:[UIImage imageNamed:@"d3"]];
+        [self.imgfan3 setImage:[UIImage imageNamed:@"d3"]];
+        [self.imgfan4 setImage:[UIImage imageNamed:@"d4"]];
+        [self.imgfan5 setImage:[UIImage imageNamed:@"d5"]];
+        [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
+        [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
+        [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
+        [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
+        [self.btBattery setBackgroundImage:[UIImage imageNamed:@"batteryoff"] forState:UIControlStateNormal];
+        
+    }else{ //开机状态
+        [self.btBattery setBackgroundImage:[UIImage imageNamed:@"batteryon"] forState:UIControlStateNormal];
+        //温度
+        self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
+        self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
+        [self.progress setNeedsDisplay];
+        
+        //故障
+        if(self.dataRead.errorcode == 0x00){
+            self.labelStatus.text = @"In Good Condition";
+            [self.labelStatus setTextColor:[UIColor blackColor]];
+        }else{
+            self.labelStatus.text = [NSString stringWithFormat:@"Fault Code:E%d",self.dataRead.errorcode];
+            [self.labelStatus setTextColor:[UIColor redColor]];
+        }
+        
+        //风量
+        [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];
+        [self.imgfan2 setImage:[UIImage imageNamed:@"d3"]];
+        [self.imgfan3 setImage:[UIImage imageNamed:@"d3"]];
+        [self.imgfan4 setImage:[UIImage imageNamed:@"d4"]];
+        [self.imgfan5 setImage:[UIImage imageNamed:@"d5"]];
+        
+        switch(self.dataRead.wind){
+            case 0x00: [self.imgfan1 setImage:[UIImage imageNamed:@"f1"]];break;
+            case 0x01: [self.imgfan2 setImage:[UIImage imageNamed:@"f2"]];break;
+            case 0x02: [self.imgfan3 setImage:[UIImage imageNamed:@"f3"]];break;
+            case 0x03: [self.imgfan4 setImage:[UIImage imageNamed:@"f4"]];break;
+            case 0x04: [self.imgfan5 setImage:[UIImage imageNamed:@"f5"]];break;
+        }
+        
+        //模式
+        [self.imgfan setImage:[UIImage imageNamed:@"fanoff"]];
+        [self.imgeco setImage:[UIImage imageNamed:@"ecooff"]];
+        [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
+        [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
+        
+        switch(self.dataRead.mode){
+            case 0x00:[self.imgeco setImage:[UIImage imageNamed:@"ecoon"]];break;
+            case 0x01:[self.imgnormal setImage:[UIImage imageNamed:@"coolon"]];break;
+            case 0x02:[self.imgfan setImage:[UIImage imageNamed:@"fanon"]];break;
+            case 0x03:[self.imgturbo setImage:[UIImage imageNamed:@"turboon"]]; break;
+        }
+    }
+    //[self.view setNeedsLayout];
+   // [self.view setNeedsDisplay];
 }
+
 
 -(void)dealloc{
     [self.timer invalidate];
     self.timer = nil;
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
 
