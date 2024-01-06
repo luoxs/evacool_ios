@@ -99,6 +99,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return  20;
 }
+- (BOOL)tableView:(UITableView *)tv shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Determine if row is selectable based on the NSIndexPath.
+
+    return NO;
+}
+
 
  // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
  // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
@@ -149,7 +156,7 @@
      label1.text = [self.titles1 objectAtIndex:indexPath.row];
      label3.text = [self.titles2 objectAtIndex:indexPath.row];
      
-     self.datacode = [self.dataErrors objectAtIndex:indexPath.section];
+     self.datacode = [self.dataErrors objectAtIndex:[self.dataErrors count] - indexPath.section -1 ];
      
      NSString *str = [[NSString alloc]init];
      switch(indexPath.row){

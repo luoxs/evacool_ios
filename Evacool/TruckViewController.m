@@ -625,7 +625,7 @@
             if(data.length == 41){
                 weakSelf.datacode = [[dataCode alloc] init];
                 Byte r[41] = {0};
-                memcpy(r, [data bytes], 37);
+                memcpy(r, [data bytes], 41);
                 weakSelf.datacode.code0=r[0];
                 weakSelf.datacode.code1=r[1];
                 weakSelf.datacode.code2=r[2];
