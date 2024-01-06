@@ -10,12 +10,14 @@
 #import "SDAutoLayout.h"
 #import "MBProgressHUD.h"
 #import "TruckViewController.h"
+#import "RoomViewController.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (retain, nonatomic)  MBProgressHUD *hud;
 @property (nonatomic,retain) NSMutableArray <CBPeripheral*> *devices;;
 @property (nonatomic,retain) NSMutableArray *localNames;
-@property (nonatomic,strong) NSString *strType;
+@property (nonatomic,strong) NSString *brand;  //卡车 EVA24VTR EVA12VTR 房车 EVA2700RV
+//@property (nonatomic,strong) NSString *strType;   //卡车 EVA24VTR EVA12VTR 房车 EVA2700RV
 @property (nonatomic,strong) UIView *viewMusk;
 @property (nonatomic,strong) UITableView *tableview;
 @end
@@ -30,8 +32,7 @@
     self.tableview.dataSource = self;
     self.devices = [[NSMutableArray alloc]init];
     self.localNames = [[NSMutableArray alloc]init];
-    self.brand = [[NSString alloc]init];
-    self.strType = [NSString new];
+   // self.strType = [NSString new];
     [self setAutoLayout];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
@@ -66,7 +67,7 @@
     //中间文字上
     UILabel *labelUp = [UILabel new];
     [self.view addSubview:labelUp];
-    labelUp.text = @"Product Catalogue";
+    labelUp.text = self.brand;
     [labelUp setTextAlignment:NSTextAlignmentCenter];
     [labelUp setFont:[UIFont fontWithName:@"Arial" size:28.0]];
     labelUp.sd_layout
@@ -129,7 +130,6 @@
     .widthIs(244.0/frameWidth*viewX)
     .heightIs(340.0/frameHeight*viewY);
     [view3 setSd_cornerRadius:@10.0];
-    
     
     //水平视图,扫描
     UIView *view4 = [UIView new];
@@ -198,7 +198,6 @@
     .widthIs(300.0/frameWidth*viewX)
     .heightIs(30.0/frameHeight*viewY);
    
-    
     //底部logo1
     UIImageView *imageLogo1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"germany"]];
     [self.view addSubview:imageLogo1];
@@ -299,9 +298,11 @@
                  [central stopScan];
             }
             if([advertiseName hasPrefix:@"EVA24"]) {
-                weakSelf.brand = @"EVA24";
+                weakSelf.brand = @"EVA24VTR";
+            }else if([advertiseName hasPrefix:@"EVA12"]){
+                weakSelf.brand = @"EVA12VTR";
             }else{
-                weakSelf.brand = @"EVA12";
+                weakSelf.brand = @"EVA2700RV";
             }
         }
     }];
@@ -342,7 +343,7 @@
             //for(CBService *service in peripheral.services){
                 if([service.UUID.UUIDString isEqualToString:@"FFE0"]){
                  [peripheral discoverCharacteristics:nil forService:service];
-                }
+            }
         }
     }];
     
@@ -353,15 +354,30 @@
             NSLog(@"charateristic name is :%@",c.UUID);
     
             if([c.UUID.UUIDString isEqualToString:@"FFE1"]){
-                
                 [weakSelf.viewMusk setHidden:YES];
                 
-                TruckViewController *truckViewController = [[TruckViewController alloc]init];
-                [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
-                truckViewController.currPeripheral = weakSelf.currPeripheral;
-                truckViewController.characteristic = c;
-                truckViewController.brand = weakSelf.brand;
-                [weakSelf presentViewController:truckViewController animated:YES completion:nil];
+                if([weakSelf.brand isEqualToString:@"EVA24VTR"]){
+                    TruckViewController *truckViewController = [[TruckViewController alloc]init];
+                    [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+                    truckViewController.currPeripheral = weakSelf.currPeripheral;
+                    truckViewController.characteristic = c;
+                    truckViewController.brand = weakSelf.brand;
+                    [weakSelf presentViewController:truckViewController animated:YES completion:nil];
+                }else  if([weakSelf.brand isEqualToString:@"EVA12VTR"]){
+                    TruckViewController *truckViewController = [[TruckViewController alloc]init];
+                    [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+                    truckViewController.currPeripheral = weakSelf.currPeripheral;
+                    truckViewController.characteristic = c;
+                    truckViewController.brand = weakSelf.brand;
+                    [weakSelf presentViewController:truckViewController animated:YES completion:nil];
+                }else{
+                    RoomViewController *roomViewController = [[RoomViewController alloc]init];
+                    [roomViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+                    roomViewController.currPeripheral = weakSelf.currPeripheral;
+                    roomViewController.characteristic = c;
+                    roomViewController.brand = weakSelf.brand;
+                    [weakSelf presentViewController:roomViewController animated:YES completion:nil];
+                }
             }
         }
     }];

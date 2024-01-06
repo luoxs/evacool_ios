@@ -27,15 +27,15 @@
 @property (nonatomic,retain) UIImageView *imgfan5;
 @property (nonatomic,retain) UIButton *btswitchfan;
 @property (nonatomic,retain) UILabel *labelTimer;
-@property (nonatomic,retain) UISwitch *switchSleep;
+@property (nonatomic,retain) UISwitch *switchCount;
 @property (nonatomic,retain) UIButton *btauto;
 @property (nonatomic,retain) UIButton *btcool;
 @property (nonatomic,retain) UIButton *bthuimit;
 @property (nonatomic,retain) UIButton *btvent;
 @property (nonatomic,retain) UIButton *btheat;
-
-@property Byte sleeplevel; //睡眠定时级别
-@property (nonatomic,strong) NSMutableArray *dataError;
+@property (nonatomic,retain) UIButton *btTurbo;
+@property (nonatomic,retain) UIButton *btSleep;
+@property (nonatomic,retain) UIButton *btLight;
 @end
 
 @implementation RoomViewController
@@ -45,10 +45,14 @@
     // Do any additional setup after loading the view.
     [self setAutoLayout];
     self.dataRead = [[DataReadR alloc] init];
-    self.dataError = [[NSMutableArray alloc]init];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
     [self getStatus];
+}
+
+
+-(void) viewDidAppear:(BOOL)animated{
+    self.labelUp.text = self.brand;
 }
 
 -(void)setAutoLayout{
@@ -70,7 +74,7 @@
     //左上文字1
     self.labelUp = [UILabel new];
     [self.view addSubview: self.labelUp];
-    self.labelUp.text = @"EVA 24V";
+    self.labelUp.text = @"Eva 2700 RV";
     [ self.labelUp setTextAlignment:NSTextAlignmentLeft];
     [ self.labelUp setTextColor:[UIColor blackColor]];
     [ self.labelUp setFont:[UIFont fontWithName:@"Arial" size:22.0]];
@@ -83,7 +87,7 @@
     //左上文字2
     UILabel *labelDown = [UILabel new];
     [self.view addSubview:labelDown];
-    labelDown.text = @"Truck Air Conditioner";
+    labelDown.text = @"RV Air Conditioner";
     [labelDown setTextAlignment:NSTextAlignmentLeft];
     [labelDown setTextColor:[UIColor blackColor]];
     [labelDown setFont:[UIFont fontWithName:@"Arial" size:22.0]];
@@ -264,6 +268,7 @@
     .topSpaceToView(self.view, 1048.0/frameHeight*viewY)
     .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
+    [self.btauto addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
    
     //制冷
     self.btcool = [UIButton new];
@@ -274,6 +279,7 @@
     .topEqualToView(self.btauto)
     .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
+    [self.btcool addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //除湿
     self.bthuimit = [UIButton new];
@@ -284,6 +290,7 @@
     .topEqualToView(self.btauto)
     .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
+    [self.bthuimit addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //通风
     self.btvent = [UIButton new];
@@ -294,6 +301,7 @@
     .topEqualToView(self.btauto)
     .widthIs(108.0/frameWidth*viewX)
     .autoHeightRatio(142.0/122.0);
+    [self.btvent addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //加热
     self.btheat = [UIButton new];
@@ -330,15 +338,15 @@
     .widthIs(100.0/frameWidth*viewX)
     .heightIs(30.0/frameHeight*viewY);
     
-    //开关
-    self.switchSleep = [UISwitch new];
-    [view2 addSubview:self.switchSleep];
-    self.switchSleep.sd_layout
+    //倒计时开关
+    self.switchCount = [UISwitch new];
+    [view2 addSubview:self.switchCount];
+    self.switchCount.sd_layout
     .rightSpaceToView(view2, 22.0/frameWidth*viewX)
     .topSpaceToView(view2, 22.0/frameHeight*viewY)
     .widthIs(94.0/frameWidth*viewX)
     .heightIs(36.0/frameHeight*viewY);
-    [self.switchSleep addTarget:self action:@selector(setSleep:) forControlEvents:UIControlEventValueChanged];
+    [self.switchCount addTarget:self action:@selector(setCount:) forControlEvents:UIControlEventValueChanged];
     
     //定时量
     self.labelTimer= [UILabel new];
@@ -411,44 +419,44 @@
     .bottomSpaceToView(view3, 30.0/frameHeight*viewY)
     .widthIs(82.0/frameWidth*viewX)
     .heightIs(10.0/frameHeight*viewY);
-    [swtUnit addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
+    [swtUnit addTarget:self action:@selector(chgunit) forControlEvents:UIControlEventTouchUpInside];
 
      
     //底部左边turbo
-    UIButton *btTurbo = [UIButton new];
-    [btTurbo setImage:[UIImage imageNamed:@"16"] forState:UIControlStateNormal];
-    [self.view addSubview:btTurbo];
-    btTurbo.sd_layout
+    self.btTurbo = [UIButton new];
+    [self.btTurbo setImage:[UIImage imageNamed:@"16"] forState:UIControlStateNormal];
+    [self.view addSubview:self.btTurbo];
+    self.btTurbo.sd_layout
     .leftEqualToView(view1)
     .topSpaceToView(self.view, 1400.0/frameHeight*viewY)
     .widthIs(226.0/frameWidth*viewX)
     .heightIs(168.0/frameHeight*viewY);
-    [btTurbo setSd_cornerRadius:@12.0];
-    [btTurbo addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
+    [self.btTurbo setSd_cornerRadius:@12.0];
+    [self.btTurbo addTarget:self action:@selector(setturbo) forControlEvents:UIControlEventTouchUpInside];
      
     //底部中间 sleep
-    UIButton *btSleep = [UIButton new];
-    [btSleep setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
-    [self.view addSubview:btSleep];
-    btSleep.sd_layout
+    self.btSleep = [UIButton new];
+    [self.btSleep setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
+    [self.view addSubview:self.btSleep];
+    self.btSleep.sd_layout
     .centerXEqualToView(self.view)
     .topSpaceToView(self.view, 1400.0/frameHeight*viewY)
     .widthIs(226.0/frameWidth*viewX)
     .heightIs(168.0/frameHeight*viewY);
-    [btSleep setSd_cornerRadius:@12.0];
-    [btSleep addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
+    [self.btSleep setSd_cornerRadius:@12.0];
+    [self.btSleep addTarget:self action:@selector(setsleep) forControlEvents:UIControlEventTouchUpInside];
 
     //底部左边右边
-    UIButton *btLight = [UIButton new];
-    [btLight setImage:[UIImage imageNamed:@"20"] forState:UIControlStateNormal];
-    [self.view addSubview:btLight];
-    btLight.sd_layout
+    self.btLight = [UIButton new];
+    [self.btLight setImage:[UIImage imageNamed:@"20"] forState:UIControlStateNormal];
+    [self.view addSubview:self.btLight];
+    self.btLight.sd_layout
     .rightEqualToView(view1)
     .topSpaceToView(self.view, 1400.0/frameHeight*viewY)
     .widthIs(226.0/frameWidth*viewX)
     .heightIs(168.0/frameHeight*viewY);
-    [btLight setSd_cornerRadius:@12.0];
-    [btLight addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
+    [self.btLight setSd_cornerRadius:@12.0];
+    [self.btLight addTarget:self action:@selector(setlight) forControlEvents:UIControlEventTouchUpInside];
      
 
 }
@@ -471,8 +479,7 @@
     //设置读取characteristics的委托
     [baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
      //   NSLog(@"read characteristic successfully!");
-        weakSelf.labelUp.text = peripheral.name;
-        
+       
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
             weakSelf.characteristic = characteristics;
             NSData *data = characteristics.value;
@@ -535,7 +542,7 @@
     if(self.characteristic != nil){
         Byte  write[6];
         write[0] = 0xAA;
-        write[1] = 0x02;
+        write[1] = 0x10;
         if(self.dataRead.power == 0x00){
             write[2] = 0x01;
             [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
@@ -557,8 +564,8 @@
     if(self.characteristic != nil){
         Byte  write[6];
         write[0] = 0xAA;
-        write[1] = 0x03;
-        write[2] = 0x00;
+        write[1] = 0x11;
+        write[2] = self.dataRead.tempSetting - 1;
         write[4] = 0xFF & CalcCRC(&write[1], 2);
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
         write[5] = 0x55;
@@ -574,8 +581,8 @@
     if(self.characteristic != nil){
         Byte  write[6];
         write[0] = 0xAA;
-        write[1] = 0x03;
-        write[2] = 0x01;
+        write[1] = 0x11;
+        write[2] = self.dataRead.tempSetting + 1;
         write[4] = 0xFF & CalcCRC(&write[1], 2);
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
         write[5] = 0x55;
@@ -588,11 +595,15 @@
 
 //改变风速
 -(void)chgfan{
-    if(self.characteristic != nil){
+    if(self.characteristic != nil && self.dataRead.mode==0x04 ){
         Byte  write[6];
         write[0] = 0xAA;
-        write[1] = 0x04;
-        write[2] = 0x01;
+        write[1] = 0x12;
+      //  if(self.dataRead.mode!=4){
+            write[2] = (self.dataRead.wind+1)%5;
+      //  }else{
+    //     write[2] = 0;
+      //  }
         write[4] = 0xFF & CalcCRC(&write[1], 2);
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
         write[5] = 0x55;
@@ -608,8 +619,20 @@
     if(self.characteristic != nil){
         Byte  write[6];
         write[0] = 0xAA;
-        write[1] = 0x05;
-        write[2] = 0x01;
+        write[1] = 0x13;
+        
+        if(sender == self.btauto){
+            write[2] = 0x04;
+        }else if(sender == self.btcool){
+            write[2] = 0x00;
+        }else if(sender == self.bthuimit){
+            write[2] = 0x01;
+        }else if(sender == self.btvent){
+            write[2] = 0x02;
+        }else {
+            write[2] = 0x03;
+        }
+        
         write[4] = 0xFF & CalcCRC(&write[1], 2);
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
         write[5] = 0x55;
@@ -618,17 +641,38 @@
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
        // [self updateStatus];
+        [self.btauto setImage:[UIImage imageNamed:@"3"] forState:UIControlStateNormal];
+        [self.btcool setImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];
+        [self.bthuimit setImage:[UIImage imageNamed:@"7"] forState:UIControlStateNormal];
+        [self.btvent setImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
+        [self.btheat setImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
     }
+}
+//切换单位
+-(void)chgunit{
+    Byte  write[6];
+    write[0] = 0xAA;
+    write[1] = 0x17;
+    write[2] = self.dataRead.unit;
+    write[4] = 0xFF & CalcCRC(&write[1], 2);
+    write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+    write[5] = 0x55;
+    
+    NSData *data = [[NSData alloc]initWithBytes:write length:6];
+    [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+    [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+ //   self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
+    
 }
 
 //设置睡眠时间
--(void)setSleep:(id)sender{
+-(void)setCount:(id)sender{
     UISwitch *swc = (UISwitch * )sender;
-    if(swc.isOn == YES){
+    if(swc.isOn == NO){
         Byte  write[6];
         write[0] = 0xAA;
-        write[1] = 0x0B;
-        write[2] = 0x01;
+        write[1] = 0x16;
+        write[2] = 0x05;
         write[4] = 0xFF & CalcCRC(&write[1], 2);
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
         write[5] = 0x55;
@@ -636,12 +680,12 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-        self.sleeplevel = 1;
+     //   self.sleeplevel = 1;
         self.labelTimer.text = @"0.5h";
     }else{
         Byte  write[6];
         write[0] = 0xAA;
-        write[1] = 0x0B;
+        write[1] = 0x16;
         write[2] = 0x00;
         write[4] = 0xFF & CalcCRC(&write[1], 2);
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
@@ -656,12 +700,12 @@
 
 //睡眠定时减
 -(void)droptimer{
-    if(self.sleeplevel>1 && self.switchSleep.isOn){
-        self.sleeplevel--;
+    if(self.dataRead.sleep>5 && self.switchCount.isOn){
+
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x0B;
-        write[2] = self.sleeplevel;
+        write[2] = self.dataRead.countdown -5;
         write[4] = 0xFF & CalcCRC(&write[1], 2);
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
         write[5] = 0x55;
@@ -669,18 +713,16 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-        self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
     }
 }
 
 //睡眠定时加
 -(void)addtimer{
-    if(self.sleeplevel<16 && self.switchSleep.isOn){
-        self.sleeplevel++;
+    if(self.dataRead.sleep<115 && self.switchCount.isOn){
         Byte  write[6];
         write[0] = 0xAA;
-        write[1] = 0x0B;
-        write[2] = self.sleeplevel;
+        write[1] = 0x16;
+        write[2] = self.dataRead.countdown + 5;
         write[4] = 0xFF & CalcCRC(&write[1], 2);
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
         write[5] = 0x55;
@@ -688,16 +730,87 @@
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-        self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
+      //  self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
     }
 }
+
+//设置超强模式
+-(void)setturbo{
+    Byte  write[6];
+    write[0] = 0xAA;
+    write[1] = 0x14;
+    write[2] = (self.dataRead.turbo+1)%2;
+    write[4] = 0xFF & CalcCRC(&write[1], 2);
+    write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+    write[5] = 0x55;
+    
+    NSData *data = [[NSData alloc]initWithBytes:write length:6];
+    [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+    [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+}
+
+
+
+//设置安静模式
+-(void) setsleep{
+    Byte  write[6];
+    write[0] = 0xAA;
+    write[1] = 0x15;
+    write[2] = (self.dataRead.sleep+1)%2;
+    write[4] = 0xFF & CalcCRC(&write[1], 2);
+    write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+    write[5] = 0x55;
+    
+    NSData *data = [[NSData alloc]initWithBytes:write length:6];
+    [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+    [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+    
+    [NSThread sleepForTimeInterval:0.1];
+    
+    //温度设为26度
+    if(self.dataRead.sleep == 0x00 ){
+        write[0] = 0xAA;
+        write[1] = 0x11;
+        write[2] = 0x1A;
+        write[4] = 0xFF & CalcCRC(&write[1], 2);
+        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+        write[5] = 0x55;
+        
+        data = [[NSData alloc]initWithBytes:write length:6];
+        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+    }
+}
+
+//设置灯光
+-(void) setlight{
+    Byte  write[6];
+    write[0] = 0xAA;
+    write[1] = 0x18;
+    write[2] = (self.dataRead.logo +1)%2;
+    write[4] = 0xFF & CalcCRC(&write[1], 2);
+    write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
+    write[5] = 0x55;
+    
+    NSData *data = [[NSData alloc]initWithBytes:write length:6];
+    [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
+    [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
+    
+}
+
 
 
 //更新控件
 -(void) updateStatus{
     
     //温度
-    self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
+    
+    if(self.dataRead.unit == 0x01){
+        self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
+    }else{
+        self.labelTemp.text = [NSString stringWithFormat:@"%d°F",self.dataRead.tempSetting];
+    }
+    
     self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
     [self.progress setNeedsDisplay];
     
@@ -717,77 +830,56 @@
     }
 
     //模式
-    [self.btauto setImage:[UIImage imageNamed:@"3"] forState:UIControlStateNormal];
-    [self.btcool setImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];
-    [self.btheat setImage:[UIImage imageNamed:@"7"] forState:UIControlStateNormal];
-    [self.btvent setImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
-    [self.btheat setImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
     
-   
-    switch(self.dataRead.mode){
-        case 0x00:[self.btauto setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];break;
-        case 0x01:[self.btauto setImage:[UIImage imageNamed:@"4"] forState:UIControlStateNormal];break;
-        case 0x02:[self.btauto setImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];break;
-        case 0x03:[self.btauto setImage:[UIImage imageNamed:@"8"] forState:UIControlStateNormal];break;
-        case 0x04:[self.btauto setImage:[UIImage imageNamed:@"10"] forState:UIControlStateNormal];break;
+    switch (self.dataRead.mode) {
+        case 0:
+            [self.btcool setImage:[UIImage imageNamed:@"4"] forState:UIControlStateNormal];break;
+        case 1:
+            [self.bthuimit setImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];break;
+        case 002:
+            [self.btvent setImage:[UIImage imageNamed:@"8"] forState:UIControlStateNormal];break;
+        case 003:
+            [self.btheat setImage:[UIImage imageNamed:@"10"] forState:UIControlStateNormal];break;
+        case 004:
+            [self.btauto setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];break;
+        default:
+            break;
     }
-
-}
-
-//页面跳转
--(void)pushViewController{
     
-    if(self.tag == 0){
-        detailViewController *detail = [[detailViewController alloc]init];
-        [detail setModalPresentationStyle:UIModalPresentationFullScreen];
-        detail.datacode = self.datacode;
-        [self presentViewController:detail animated:YES completion:nil];
-        
+    //定时显示
+    
+    
+    //超强模式显示
+    if(self.dataRead.turbo == 0x01){
+        [self.btTurbo setImage:[UIImage imageNamed:@"17"] forState:UIControlStateNormal];
     }else{
-        faultsViewController *faults = [[faultsViewController alloc]init];
-        [faults setModalPresentationStyle:UIModalPresentationFullScreen];
-        faults.datacode = self.datacode;
-        [self presentViewController:faults animated:YES completion:nil];
+        [self.btTurbo setImage:[UIImage imageNamed:@"16"] forState:UIControlStateNormal];
     }
+    
+    //睡眠模式显示
+    if(self.dataRead.sleep == 0x01){
+        [self.btSleep setImage:[UIImage imageNamed:@"19"] forState:UIControlStateNormal];
+    }else{
+        [self.btSleep setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
+    }
+    
+    if(self.dataRead.logo == 0x01){
+        [self.btLight setImage:[UIImage imageNamed:@"21"] forState:UIControlStateNormal];
+    }else{
+        [self.btLight setImage:[UIImage imageNamed:@"20"] forState:UIControlStateNormal];
+    }
+    
+    //故障
+    if(self.dataRead.errcode == 0x00){
+        self.labelStatus.text = @"In Good Condition";
+        [self.labelStatus setTextColor:[UIColor blackColor]];
+    }else{
+        self.labelStatus.text = [NSString stringWithFormat:@"Fault Code:E%d",self.dataRead.errcode];
+        [self.labelStatus setTextColor:[UIColor redColor]];
+    }
+
 }
 
-
-//获取详细参数
--(void) opendetails{
-    self.tag = 0;
-    if(self.characteristic != nil){
-        Byte  write[6];
-        write[0] = 0xAA;
-        write[1] = 0x06;
-        write[2] = 0x01;
-        write[4] = 0xFF & CalcCRC(&write[1], 2);
-        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
-        write[5] = 0x55;
-        
-        NSData *data = [[NSData alloc]initWithBytes:write length:6];
-        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
-        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-    }
-}
-
-//获取故障信息
--(void) openfaults{
-    self.tag = 1;
-    if(self.characteristic != nil){
-        Byte  write[6];
-        write[0] = 0xAA;
-        write[1] = 0x07;
-        write[2] = 0x01;
-        write[4] = 0xFF & CalcCRC(&write[1], 2);
-        write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
-        write[5] = 0x55;
-        
-        NSData *data = [[NSData alloc]initWithBytes:write length:6];
-        [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
-        [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-       // [self updateStatus];
-    }
-}
 
 /*
 #pragma mark - Navigation
