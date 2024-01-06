@@ -51,7 +51,7 @@
     // Do any additional setup after loading the view.
     [self setAutoLayout];
     [self.viewMusk setHidden:YES];
-    self.datacode = [[dataCode alloc] init];
+    //self.datacode = [[dataCode alloc] init];
     self.dataRead = [[DataRead alloc] init];
     self.dataErrors = [[NSMutableArray alloc]init];
     baby = [BabyBluetooth shareBabyBluetooth];
@@ -623,6 +623,7 @@
             }
             
             if(data.length == 41){
+                weakSelf.datacode = [[dataCode alloc] init];
                 Byte r[41] = {0};
                 memcpy(r, [data bytes], 37);
                 weakSelf.datacode.code0=r[0];
