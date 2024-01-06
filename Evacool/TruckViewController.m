@@ -38,7 +38,8 @@
 @property (nonatomic,retain) UIView*viewFault;
 @property (nonatomic,retain) UIView *batteryprotect;
 @property Byte sleeplevel; //睡眠定时级别
-@property (nonatomic,strong) NSMutableArray *dataError;
+@property (nonatomic,strong) NSMutableArray *dataErrors;
+@property (nonatomic,retain) NSTimer *timer;
 @end
 
 @implementation TruckViewController
@@ -50,7 +51,7 @@
     [self.viewMusk setHidden:YES];
     self.datacode = [[dataCode alloc] init];
     self.dataRead = [[DataRead alloc] init];
-    self.dataError = [[NSMutableArray alloc]init];
+    self.dataErrors = [[NSMutableArray alloc]init];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
     [self getStatus];
@@ -76,14 +77,16 @@
     self.labelUp = [UILabel new];
     [self.view addSubview: self.labelUp];
     self.labelUp.text = @"EVA 24V";
-    [ self.labelUp setTextAlignment:NSTextAlignmentLeft];
-    [ self.labelUp setTextColor:[UIColor blackColor]];
-    [ self.labelUp setFont:[UIFont fontWithName:@"Arial" size:22.0]];
+    [self.labelUp setTextAlignment:NSTextAlignmentLeft];
+    [self.labelUp setTextColor:[UIColor blackColor]];
+    [self.labelUp setFont:[UIFont fontWithName:@"Arial" size:22.0]];
     self.labelUp.sd_layout
     .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
     .topSpaceToView(self.view, 249.0/frameHeight*viewY)
-    .widthIs(600.0/frameWidth*viewX)
+    //.widthIs(600.0/frameWidth*viewX)
+    .widthIs(self.view.width *0.5)
     .heightIs(44.0/frameHeight*viewY);
+    [self.labelUp setAdjustsFontSizeToFitWidth:YES];
     
     //左上文字2
     UILabel *labelDown = [UILabel new];
@@ -95,8 +98,10 @@
     labelDown.sd_layout
     .leftSpaceToView(self.view, 64.0/frameWidth*viewX)
     .topSpaceToView(self.view, 295.0/frameHeight*viewY)
-    .widthIs(600.0/frameWidth*viewX)
+    //.widthIs(600.0/frameWidth*viewX)
+    .widthIs(self.view.width *0.5)
     .heightIs(44.0/frameHeight*viewY);
+    [labelDown setAdjustsFontSizeToFitWidth:YES];
     
     //开关
     UIButton *btPower = [UIButton new];
@@ -430,6 +435,7 @@
     .widthIs(226.0/frameWidth*viewX)
     .heightIs(70.0/frameHeight*viewY);
     [buttonFaults setSd_cornerRadius:@12.0];
+    [buttonFaults.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [buttonFaults addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
     
     //蒙层
@@ -501,6 +507,7 @@
     .widthIs(200.0/frameWidth*viewX)
     .heightIs(58.0/frameHeight*viewY);
     [btconfirm setSd_cornerRadius:@10.0];
+    [btconfirm.titleLabel setAdjustsFontSizeToFitWidth:YES];
     [btconfirm addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     
 
@@ -639,8 +646,8 @@
                 weakSelf.datacode.code39=r[39];
                 weakSelf.datacode.code40=r[40];
                 weakSelf.datacode.code41=r[41];
-                [weakSelf.dataError addObject:weakSelf.datacode];
-                [weakSelf pushViewController];
+                [weakSelf.dataErrors addObject:weakSelf.datacode];
+               // [weakSelf pushViewController];
             }
         }
     }];
@@ -889,7 +896,8 @@
     }else{
         faultsViewController *faults = [[faultsViewController alloc]init];
         [faults setModalPresentationStyle:UIModalPresentationFullScreen];
-        faults.datacode = self.datacode;
+        //faults.datacode = self.datacode;
+        faults.dataErrors = self.dataErrors;
         [self presentViewController:faults animated:YES completion:nil];
     }
 }
@@ -925,10 +933,14 @@
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
         write[5] = 0x55;
         
+        [self.dataErrors removeAllObjects];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(pushViewController) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop]addTimer:self.timer forMode:NSRunLoopCommonModes];
+        
         NSData *data = [[NSData alloc]initWithBytes:write length:6];
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
-       // [self updateStatus];
+       
     }
 }
 
@@ -944,6 +956,10 @@
     [self.viewMusk setHidden:YES];
 }
 
+-(void)dealloc{
+    [self.timer invalidate];
+    self.timer = nil;
+}
 /*
 #pragma mark - Navigation
 

@@ -28,14 +28,18 @@
      // Do any additional setup after loading the view.
      [self.view setBackgroundColor:[UIColor whiteColor]];
      
-     self.tableView = [[UITableView alloc]init];
-     [self.tableView setBackgroundColor:[UIColor whiteColor]];
+     if (@available(iOS 13.0, *)) {
+         self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 100, self.view.width, self.view.height-110) style:UITableViewStyleInsetGrouped];
+     } else {
+         // Fallback on earlier versions
+     }
+     [self.tableView setBackgroundColor:[UIColor grayColor]];
      self.tableView.dataSource = self;
      self.tableView.delegate = self;
+     //[self.tableView setSeparatorColor : [UIColor grayColor]];
+     [self.tableView setShowsVerticalScrollIndicator:NO]; //不显示滚动条
      [self autolayout];
-     /*
-     self.titles1 =[ NSArray arrayWithObjects:@"No",@"Mode",@"Fan Speed",@"Compressor Current",@"Outer Fan Current",@"Inner Air Temperature",@"Lowest Voltage before Fault",@"Inlet Lowest Temperature",@"Outlet Lowest Temperature",@"Battery Protection Level",nil];
-     self.titles2 =[ NSArray arrayWithObjects:@"Time",@"Temperature Set",@"Working Time",@"Voltage At Fault",@"Inner Fan Current",@"Outlet Air Temperature",@"Highest Voltage before Fault",@"Inner Highest Temperature",@"Outlet highest Temperature",@"",nil]; */
+ 
      self.titles1 =[ NSArray arrayWithObjects:@"No",@"Time",@"Temperature Set",@"Accumulated Running Time",@"Voltage At Fault",@"Inner Fan Current",@"Outlet Air Temperature",@"Highest Voltage before Fault",@"Inner Highest Temperature",@"Outlet highest Temperature",nil];
      self.titles2 =[ NSArray arrayWithObjects: @"Fault Code", @"Mode",@"Fan Speed",@"Compressor Current",@"Outer Fan Current",@"Inner Air Temperature",@"Lowest Voltage before Fault",@"Inlet Lowest Temperature",@"Outlet Lowest Temperature",@"Battery Protection Level",nil];
  }
@@ -63,22 +67,38 @@
          .heightIs(40);
      [self.labeltitle setTextAlignment:NSTextAlignmentCenter];
      [self.labeltitle setText:@"EVA 24V Trunck Air Conditioner"];
-     
+    
      [self.view addSubview:self.tableView];
-     self.tableView.sd_layout
+    /* self.tableView.sd_layout
          .leftSpaceToView(self.view, 16.0)
          .topSpaceToView(self.view, 100)
          .widthIs(self.view.width-32)
-         .bottomSpaceToView(self.view, 10.0);
+         .bottomSpaceToView(self.view, 10.0);*/
  }
 
  -(void) goback{
      [self dismissViewControllerAnimated:YES completion:nil];
  }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if([self.dataErrors count]>0){
+        return [self.dataErrors count];
+    }else{
+        return 1;
+    }
+}
+
+
  - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
      return 10;
  }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 20;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return  20;
+}
 
  // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
  // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
@@ -87,34 +107,39 @@
      static NSString *cellID = @"cell";
      
      UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+     
      if (!cell) {
          cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+     }else{
+         while ([cell.subviews lastObject] != nil) {
+                    [(UIView*)[cell.subviews lastObject] removeFromSuperview];  //删除并进行重新分配
+                }
      }
+
      cell.backgroundColor = [UIColor whiteColor];
-     
      //左上
-     UILabel *label1 =[[UILabel alloc] initWithFrame:CGRectMake(0, 0, cell.frame.size.width/2.0, cell.frame.size.height/2.0)];
+     UILabel *label1 =[[UILabel alloc] initWithFrame:CGRectMake(10, 0, cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
      [label1 setTextColor:[UIColor grayColor]];
      [label1 setTextAlignment:NSTextAlignmentLeft];
      [label1 setFont:[UIFont fontWithName:@"Arial" size:10.0]];
      [cell addSubview:label1];
      
      //左下
-     UILabel *label2 =[[UILabel alloc] initWithFrame:CGRectMake(0, cell.frame.size.height/2.0, cell.frame.size.width/2.0, cell.frame.size.height/2.0)];
+     UILabel *label2 =[[UILabel alloc] initWithFrame:CGRectMake(10, cell.frame.size.height/2.0, cell.frame.size.width/2.0-10, cell.frame.size.height/2.0)];
      [label2 setTextColor:[UIColor blackColor]];
      [label2 setTextAlignment:NSTextAlignmentLeft];
      [label2 setFont:[UIFont fontWithName:@"Arial" size:15.0]];
      [cell addSubview:label2];
      
      //右上
-     UILabel *label3 =[[UILabel alloc] initWithFrame:CGRectMake(cell.frame.size.width/2.0, 0,cell.frame.size.width/2.0, cell.frame.size.height/2.0)];
+     UILabel *label3 =[[UILabel alloc] initWithFrame:CGRectMake(cell.frame.size.width/2.0-10, 0,cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
      [label3 setTextColor:[UIColor grayColor]];
      [label3 setTextAlignment:NSTextAlignmentLeft];
      [label3 setFont:[UIFont fontWithName:@"Arial" size:10.0]];
      [cell addSubview:label3];
      
      //左下
-     UILabel *label4 =[[UILabel alloc] initWithFrame:CGRectMake( cell.frame.size.width/2.0,cell.frame.size.height/2.0, cell.frame.size.width/2.0, cell.frame.size.height/2.0)];
+     UILabel *label4 =[[UILabel alloc] initWithFrame:CGRectMake( cell.frame.size.width/2.0-10,cell.frame.size.height/2.0, cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
      [label4 setTextColor:[UIColor blackColor]];
      [label4 setTextAlignment:NSTextAlignmentLeft];
      [label4 setFont:[UIFont fontWithName:@"Arial" size:15.0]];
@@ -124,6 +149,7 @@
      label1.text = [self.titles1 objectAtIndex:indexPath.row];
      label3.text = [self.titles2 objectAtIndex:indexPath.row];
      
+     self.datacode = [self.dataErrors objectAtIndex:indexPath.section];
      
      NSString *str = [[NSString alloc]init];
      switch(indexPath.row){
