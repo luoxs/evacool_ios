@@ -28,6 +28,7 @@
 @property (nonatomic,retain) UIButton *btswitchfan;
 @property (nonatomic,retain) UILabel *labelTimer;
 @property (nonatomic,retain) UISwitch *switchCount;
+@property (nonatomic,retain) UISwitch *switchUnit;
 @property (nonatomic,retain) UIButton *btauto;
 @property (nonatomic,retain) UIButton *btcool;
 @property (nonatomic,retain) UIButton *bthuimit;
@@ -36,6 +37,7 @@
 @property (nonatomic,retain) UIButton *btTurbo;
 @property (nonatomic,retain) UIButton *btSleep;
 @property (nonatomic,retain) UIButton *btLight;
+
 @end
 
 @implementation RoomViewController
@@ -348,7 +350,7 @@
     .topSpaceToView(view2, 22.0/frameHeight*viewY)
     .widthIs(94.0/frameWidth*viewX)
     .heightIs(36.0/frameHeight*viewY);
-    [self.switchCount addTarget:self action:@selector(setCount:) forControlEvents:UIControlEventValueChanged];
+    [self.switchCount addTarget:self action:@selector(setCount:) forControlEvents:UIControlEventTouchUpInside];
     
     //定时量
     self.labelTimer= [UILabel new];
@@ -363,6 +365,7 @@
     .widthIs(100.0/frameWidth*viewX)
     .heightIs(40.0/frameHeight*viewY)
     .bottomSpaceToView(view2, 34.0/frameHeight*viewY);
+    [self.labelTimer setAdjustsFontSizeToFitWidth:YES];
     
     //定时减
     UIButton *btTimeMinus = [UIButton new];
@@ -414,14 +417,14 @@
     .topSpaceToView(view3, 20.0/frameHeight*viewY);
     
     //温度单位切换按钮
-    UISwitch *swtUnit = [UISwitch new];
-    [view3 addSubview:swtUnit];
-    swtUnit.sd_layout
+    self.switchUnit = [UISwitch new];
+    [view3 addSubview:self.switchUnit];
+    self.switchUnit.sd_layout
     .centerXEqualToView(view3)
     .bottomSpaceToView(view3, 30.0/frameHeight*viewY)
     .widthIs(82.0/frameWidth*viewX)
     .heightIs(10.0/frameHeight*viewY);
-    [swtUnit addTarget:self action:@selector(chgunit) forControlEvents:UIControlEventTouchUpInside];
+    [self.switchUnit addTarget:self action:@selector(chgunit) forControlEvents:UIControlEventTouchUpInside];
 
      
     //底部左边turbo
@@ -667,10 +670,10 @@
     
 }
 
-//设置睡眠时间
+//开关睡眠定时
 -(void)setCount:(id)sender{
     UISwitch *swc = (UISwitch * )sender;
-    if(swc.isOn == NO){
+    if(swc.isOn == YES){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x16;
@@ -702,11 +705,10 @@
 
 //睡眠定时减
 -(void)droptimer{
-    if(self.dataRead.sleep>5 && self.switchCount.isOn){
-
+    if(self.dataRead.countdown>5 && self.switchCount.isOn){
         Byte  write[6];
         write[0] = 0xAA;
-        write[1] = 0x0B;
+        write[1] = 0x16;
         write[2] = self.dataRead.countdown -5;
         write[4] = 0xFF & CalcCRC(&write[1], 2);
         write[3] = 0xFF & (CalcCRC(&write[1], 2)>>8);
@@ -720,7 +722,7 @@
 
 //睡眠定时加
 -(void)addtimer{
-    if(self.dataRead.sleep<115 && self.switchCount.isOn){
+    if(self.dataRead.countdown<115 && self.switchCount.isOn){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x16;
@@ -806,11 +808,12 @@
 -(void) updateStatus{
     
     //温度
-    
     if(self.dataRead.unit == 0x01){
         self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
+        [self.switchUnit setOn:YES];
     }else{
         self.labelTemp.text = [NSString stringWithFormat:@"%d°F",self.dataRead.tempSetting];
+        [self.switchUnit setOn:NO];
     }
     
     self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
@@ -832,7 +835,6 @@
     }
 
     //模式
-    
     switch (self.dataRead.mode) {
         case 0:
             [self.btcool setImage:[UIImage imageNamed:@"4"] forState:UIControlStateNormal];break;
@@ -849,7 +851,12 @@
     }
     
     //定时显示
-    
+    self.labelTimer.text = [[NSString alloc]initWithFormat:@"%.1fh", self.dataRead.countdown*0.1];
+    if(self.dataRead.countdown>0){
+        [self.switchCount setOn:YES];
+    }else{
+        [self.switchCount setOn:NO];
+    }
     
     //超强模式显示
     if(self.dataRead.turbo == 0x01){
