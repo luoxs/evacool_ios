@@ -279,7 +279,7 @@
     
     UILabel *labelsleep= [UILabel new];
     [view2 addSubview:labelsleep];
-    labelsleep.text = @"0.5-10h";
+    labelsleep.text = @"0.5-7.5h";
     [labelsleep setTextAlignment:NSTextAlignmentLeft];
     [labelsleep setTextColor:[UIColor grayColor]];
     [labelsleep setFont:[UIFont fontWithName:@"Arial" size:12.0]];
@@ -840,7 +840,7 @@
 
 //睡眠定时加
 -(void)addtimer{
-    if(self.sleeplevel<16 && self.switchSleep.isOn){
+    if(self.sleeplevel<15 && self.switchSleep.isOn){
         self.sleeplevel++;
         Byte  write[6];
         write[0] = 0xAA;

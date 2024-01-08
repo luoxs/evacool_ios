@@ -195,7 +195,7 @@
     
     UILabel *labelscale = [UILabel new];
     [view1 addSubview:labelscale];
-    labelscale.text = @"1-5";
+    labelscale.text = @"AUTO";
     [labelscale setTextAlignment:NSTextAlignmentLeft];
     [labelscale setTextColor:[UIColor grayColor]];
     [labelscale setFont:[UIFont fontWithName:@"Arial" size:12.0]];
@@ -332,7 +332,7 @@
     
     UILabel *labelsleep= [UILabel new];
     [view2 addSubview:labelsleep];
-    labelsleep.text = @"0.5-10h";
+    labelsleep.text = @"0.5-12h";
     [labelsleep setTextAlignment:NSTextAlignmentLeft];
     [labelsleep setTextColor:[UIColor grayColor]];
     [labelsleep setFont:[UIFont fontWithName:@"Arial" size:12.0]];
@@ -600,7 +600,7 @@
 
 //改变风速
 -(void)chgfan{
-    if(self.characteristic != nil ){
+    if((self.characteristic != nil)&& (self.dataRead.power == 0x01)&&(self.dataRead.mode != 0x04)) {
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x12;
@@ -722,7 +722,7 @@
 
 //睡眠定时加
 -(void)addtimer{
-    if(self.dataRead.countdown<115 && self.switchCount.isOn){
+    if(self.dataRead.countdown<120 && self.switchCount.isOn){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x16;
@@ -807,6 +807,10 @@
 //更新控件
 -(void) updateStatus{
     
+    [self.btswitchfan setEnabled:YES];
+    [self.btTurbo setEnabled:YES];
+    [self.btSleep setEnabled:YES];
+    
     //温度
     if(self.dataRead.unit == 0x01){
         self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
@@ -838,14 +842,26 @@
     switch (self.dataRead.mode) {
         case 0:
             [self.btcool setImage:[UIImage imageNamed:@"4"] forState:UIControlStateNormal];break;
-        case 1:
-            [self.bthuimit setImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];break;
-        case 002:
-            [self.btvent setImage:[UIImage imageNamed:@"8"] forState:UIControlStateNormal];break;
-        case 003:
+        case 1:{
+            [self.bthuimit setImage:[UIImage imageNamed:@"6"] forState:UIControlStateNormal];
+            [self.btTurbo setEnabled:NO];
+            [self.btSleep setEnabled:NO];
+        }
+            break;
+        case 2:{
+            [self.btvent setImage:[UIImage imageNamed:@"8"] forState:UIControlStateNormal];
+            [self.btTurbo setEnabled:NO];
+            [self.btSleep setEnabled:NO];
+        }
+            break;
+        case 3:
             [self.btheat setImage:[UIImage imageNamed:@"10"] forState:UIControlStateNormal];break;
-        case 004:
-            [self.btauto setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];break;
+        case 4:{
+            [self.btauto setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
+            [self.btswitchfan setEnabled:NO];
+            [self.btTurbo setEnabled:NO];
+            [self.btSleep setEnabled:NO];
+        }break;
         default:
             break;
     }
