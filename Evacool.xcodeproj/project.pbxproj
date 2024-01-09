@@ -806,6 +806,7 @@
 				INFOPLIST_FILE = Evacool/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app will use your bluetooth to connect device";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "The app will connect device";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use your camera to scan QR code";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -815,7 +816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.luoxs.www.Evacool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -836,6 +837,7 @@
 				INFOPLIST_FILE = Evacool/Info.plist;
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app will use your bluetooth to connect device";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "The app will connect device";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use your camera to scan QR code";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -845,7 +847,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.luoxs.www.Evacool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
