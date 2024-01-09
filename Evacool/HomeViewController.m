@@ -259,23 +259,29 @@
     self.tableview.sd_layout
     .centerXEqualToView(self.viewMusk)
     .widthRatioToView(self.viewMusk, 0.9)
-    .bottomSpaceToView(self.viewMusk, 0)
+    .centerYEqualToView(self.viewMusk)
     .heightRatioToView(self.viewMusk, 0.5);
     self.tableview.layer.cornerRadius = 10.0f;
     self.tableview.layer.masksToBounds = YES;
     
+    UIButton *btclose = [UIButton new];
+    [btclose setImage:[UIImage imageNamed:@"no"] forState:UIControlStateNormal];
+    [self.viewMusk addSubview:btclose];
+    btclose.sd_layout
+    .rightEqualToView(self.tableview)
+    .bottomSpaceToView(self.tableview, 0)
+    .widthIs(viewX/10.0)
+    .heightEqualToWidth();
+    [btclose addTarget:self action:@selector(closemusk) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)scan{
     //baby.scanForPeripherals().begin();
     [self.viewMusk setHidden:NO];
-    //baby.scanForPeripherals().connectToPeripherals().begin();
-    /*
-    self.hud = [[MBProgressHUD alloc] init];
-    [self.view addSubview:self.hud];
-    self.hud.mode = MBProgressHUDModeIndeterminate;
-    self.hud.label.text = @"Search for device...";
-    [self.hud  showAnimated:YES];*/
+}
+
+-(void) closemusk{
+    [self.viewMusk setHidden:YES];
 }
 
 
