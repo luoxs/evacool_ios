@@ -80,17 +80,29 @@
         .widthIs(600.0/frameWidth*viewX)
         .heightIs(50.0/frameHeight*viewY);
     
+    //中间标题
+    UILabel *labelTitle = [UILabel new];
+    [self.view addSubview:labelTitle];
+    labelTitle.text = @"Product Catalogue";
+    [labelTitle setTextAlignment:NSTextAlignmentCenter];
+    [labelTitle setFont:[UIFont fontWithName:@"Arial" size:28.0]];
+    labelTitle.sd_layout
+        .centerXEqualToView(self.view)
+        .topSpaceToView(self.view, 628.0/frameHeight*viewY)
+        .widthIs(600.0/frameWidth*viewX)
+        .heightIs(40.0/frameHeight*viewY);
+    
     //中间文字下
     UILabel *labelDown = [UILabel new];
     [self.view addSubview:labelDown];
     labelDown.text = @"Select Production for Connection";
     [labelDown setTextAlignment:NSTextAlignmentCenter];
-    [labelDown setFont:[UIFont fontWithName:@"Arial" size:12.0]];
+    [labelDown setFont:[UIFont fontWithName:@"Arial" size:14.0]];
     labelDown.sd_layout
         .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 678.0/frameHeight*viewY)
+        .topSpaceToView(self.view, 688.0/frameHeight*viewY)
         .widthIs(600.0/frameWidth*viewX)
-        .heightIs(20.0/frameHeight*viewY);
+        .heightIs(22.0/frameHeight*viewY);
     
     //首页图片
     UIImageView *imageHome = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"imagehome"]];
