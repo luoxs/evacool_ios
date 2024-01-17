@@ -48,8 +48,6 @@
 		4543B0662B4833D60070A847 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0502B4833D60070A847 /* 3.png */; };
 		4543B0672B4833D60070A847 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0512B4833D60070A847 /* 1.png */; };
 		4543B0682B4833D60070A847 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0522B4833D60070A847 /* 0.png */; };
-		45471DBF2B5745F0001CFAA6 /* CDZQRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45471DBB2B5745F0001CFAA6 /* CDZQRScanViewController.m */; };
-		45471DC02B5745F0001CFAA6 /* CDZQRScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 45471DBD2B5745F0001CFAA6 /* CDZQRScanView.m */; };
 		454E9F102B3AEE93009F7B3A /* rv12.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F0D2B3AEE93009F7B3A /* rv12.png */; };
 		454E9F112B3AEE93009F7B3A /* trunk.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F0E2B3AEE93009F7B3A /* trunk.png */; };
 		454E9F122B3AEE93009F7B3A /* rv24.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F0F2B3AEE93009F7B3A /* rv24.png */; };
@@ -80,6 +78,8 @@
 		454E9F8E2B3AF08F009F7B3A /* heat_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F4D2B3AF08E009F7B3A /* heat_on.png */; };
 		454E9F8F2B3AF08F009F7B3A /* new_background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F4E2B3AF08F009F7B3A /* new_background.jpg */; };
 		454E9F932B3AF08F009F7B3A /* ice_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F522B3AF08F009F7B3A /* ice_on.png */; };
+		4552FDB02B57774000FE693F /* CDZQRScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4552FDAF2B57774000FE693F /* CDZQRScanView.m */; };
+		4552FDB32B57777900FE693F /* CDZQRScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4552FDB22B57777900FE693F /* CDZQRScanViewController.m */; };
 		4567B8C32B3B06EF006DD662 /* imagehome.png in Resources */ = {isa = PBXBuildFile; fileRef = 4567B8C22B3B06EE006DD662 /* imagehome.png */; };
 		4567B8C52B3B146D006DD662 /* imagetop.png in Resources */ = {isa = PBXBuildFile; fileRef = 4567B8C42B3B146D006DD662 /* imagetop.png */; };
 		457F8AFA2B1EAB0300FA7ABB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 457F8AF92B1EAB0300FA7ABB /* AppDelegate.m */; };
@@ -173,10 +173,6 @@
 		4543B0502B4833D60070A847 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		4543B0512B4833D60070A847 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		4543B0522B4833D60070A847 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
-		45471DBA2B5745F0001CFAA6 /* CDZQRScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDZQRScanViewController.h; path = "../../../Downloads/CDZQRScanView-master/CDZQRCodeDemo/CDZQRScanViewController.h"; sourceTree = "<group>"; };
-		45471DBB2B5745F0001CFAA6 /* CDZQRScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDZQRScanViewController.m; path = "../../../Downloads/CDZQRScanView-master/CDZQRCodeDemo/CDZQRScanViewController.m"; sourceTree = "<group>"; };
-		45471DBD2B5745F0001CFAA6 /* CDZQRScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDZQRScanView.m; sourceTree = "<group>"; };
-		45471DBE2B5745F0001CFAA6 /* CDZQRScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDZQRScanView.h; sourceTree = "<group>"; };
 		454E4D4A2B48086F00B0423E /* SemiCircleProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SemiCircleProgressView.h; path = Evacool/SemiCircleProgressView.h; sourceTree = SOURCE_ROOT; };
 		454E9F0D2B3AEE93009F7B3A /* rv12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rv12.png; sourceTree = "<group>"; };
 		454E9F0E2B3AEE93009F7B3A /* trunk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trunk.png; sourceTree = "<group>"; };
@@ -208,6 +204,10 @@
 		454E9F4D2B3AF08E009F7B3A /* heat_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heat_on.png; sourceTree = "<group>"; };
 		454E9F4E2B3AF08F009F7B3A /* new_background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = new_background.jpg; sourceTree = "<group>"; };
 		454E9F522B3AF08F009F7B3A /* ice_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_on.png; sourceTree = "<group>"; };
+		4552FDAE2B57774000FE693F /* CDZQRScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDZQRScanView.h; sourceTree = "<group>"; };
+		4552FDAF2B57774000FE693F /* CDZQRScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDZQRScanView.m; sourceTree = "<group>"; };
+		4552FDB12B57777900FE693F /* CDZQRScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDZQRScanViewController.h; sourceTree = "<group>"; };
+		4552FDB22B57777900FE693F /* CDZQRScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDZQRScanViewController.m; sourceTree = "<group>"; };
 		4567B8C22B3B06EE006DD662 /* imagehome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagehome.png; sourceTree = "<group>"; };
 		4567B8C42B3B146D006DD662 /* imagetop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagetop.png; sourceTree = "<group>"; };
 		457F8AF52B1EAB0300FA7ABB /* Evacool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Evacool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -316,16 +316,6 @@
 			path = Evacool/slice/GCA28;
 			sourceTree = SOURCE_ROOT;
 		};
-		45471DBC2B5745F0001CFAA6 /* CDZQRScanView */ = {
-			isa = PBXGroup;
-			children = (
-				45471DBD2B5745F0001CFAA6 /* CDZQRScanView.m */,
-				45471DBE2B5745F0001CFAA6 /* CDZQRScanView.h */,
-			);
-			name = CDZQRScanView;
-			path = "../../../Downloads/CDZQRScanView-master/CDZQRCodeDemo/CDZQRScanView";
-			sourceTree = "<group>";
-		};
 		454E9F0C2B3AEE93009F7B3A /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,9 +398,10 @@
 		457F8AEC2B1EAB0300FA7ABB = {
 			isa = PBXGroup;
 			children = (
-				45471DBC2B5745F0001CFAA6 /* CDZQRScanView */,
-				45471DBA2B5745F0001CFAA6 /* CDZQRScanViewController.h */,
-				45471DBB2B5745F0001CFAA6 /* CDZQRScanViewController.m */,
+				4552FDB12B57777900FE693F /* CDZQRScanViewController.h */,
+				4552FDB22B57777900FE693F /* CDZQRScanViewController.m */,
+				4552FDAE2B57774000FE693F /* CDZQRScanView.h */,
+				4552FDAF2B57774000FE693F /* CDZQRScanView.m */,
 				457F8AF72B1EAB0300FA7ABB /* Evacool */,
 				457F8AF62B1EAB0300FA7ABB /* Products */,
 				0739153C318866376E96C897 /* Pods */,
@@ -663,7 +654,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45471DBF2B5745F0001CFAA6 /* CDZQRScanViewController.m in Sources */,
 				4543B0332B4810590070A847 /* crc.c in Sources */,
 				4543B0362B4810590070A847 /* DataRead.m in Sources */,
 				457F8AFA2B1EAB0300FA7ABB /* AppDelegate.m in Sources */,
@@ -671,13 +661,14 @@
 				45DF31252B4547BA00519C55 /* detailViewController.m in Sources */,
 				450858A82B3B257100770387 /* TruckViewController.m in Sources */,
 				4543B03B2B4814BD0070A847 /* DataReadR.m in Sources */,
+				4552FDB02B57774000FE693F /* CDZQRScanView.m in Sources */,
 				4543B0352B4810590070A847 /* dataCode.m in Sources */,
 				45DF31282B4547E000519C55 /* faultsViewController.m in Sources */,
 				45A82F762B47EB5C002413AC /* RoomViewController.m in Sources */,
 				45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */,
+				4552FDB32B57777900FE693F /* CDZQRScanViewController.m in Sources */,
 				457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */,
 				453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */,
-				45471DC02B5745F0001CFAA6 /* CDZQRScanView.m in Sources */,
 				4543B0342B4810590070A847 /* DataWrite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
