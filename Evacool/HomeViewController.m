@@ -12,6 +12,7 @@
 #import "TruckViewController.h"
 #import "RoomViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "CDZQRScanViewController.h"
 
 @interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,AVCaptureMetadataOutputObjectsDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (retain, nonatomic)  MBProgressHUD *hud;
@@ -23,6 +24,7 @@
 @property (nonatomic,strong) UITableView *tableview;
 @property (nonatomic,retain)  AVCaptureSession *session; //扫描二维码会话
 @property (nonatomic,retain)  AVCaptureVideoPreviewLayer *layer;
+
 @end
 
 @implementation HomeViewController
@@ -41,6 +43,8 @@
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tongzhi:) name:@"tongzhi"object:nil];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -48,6 +52,38 @@
     [self babyDelegate];
     baby.scanForPeripherals().begin();
     //[self.viewMusk setHidden:NO];
+}
+
+-(void)tongzhi:(NSNotification *)text{
+    NSString *message = [NSString stringWithFormat:@"%@",text.userInfo[@"qrvalue"]];
+    
+    NSString *strtype = [[NSString alloc]init];
+    if(message.length>=40){
+        strtype = [message substringWithRange:NSMakeRange(32, 8)];
+    }
+    
+    int i=0;
+    for(i=0;i<self.devices.count;i++){
+        if([[self.devices objectAtIndex:i].name hasPrefix:strtype]){
+            [baby.centralManager stopScan];
+            [baby cancelAllPeripheralsConnection];
+            [baby.centralManager connectPeripheral:[self.devices objectAtIndex:i] options:nil];
+        }
+    }
+    //没有找到设备
+    if(i==self.devices.count){
+        self.hud.mode = MBProgressHUDModeText;
+        [self.view addSubview:self.hud];
+        self.hud.label.text = @"Device not found!";
+        [self.hud setMinShowTime:3];
+        [self.hud showAnimated:YES];
+        [self.hud hideAnimated:YES];
+    }
+
+    //2.停止会话
+    [self.session stopRunning];
+    //3.移除预览图层
+    [self.layer removeFromSuperlayer];
 }
 
 
@@ -293,6 +329,7 @@
 
 //扫描二维码
 -(void)scanQRcode{
+    /*
     //设置会话
     AVAuthorizationStatus authStatus =[AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     //判断摄像头状态是否可用
@@ -308,7 +345,10 @@
                 // 拒绝
             }
         }];
-    }
+    }*/
+    CDZQRScanViewController *vc = [CDZQRScanViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 
