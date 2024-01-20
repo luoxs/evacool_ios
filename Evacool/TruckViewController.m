@@ -40,7 +40,7 @@
 @property (nonatomic,retain) UIButton *btBattery;
 @property Byte batterylevel; //电池保护
 @property Byte sleeplevel; //睡眠定时级别
-@property Boolean swsleep;
+@property Boolean sw;
 @property (nonatomic,retain) NSMutableArray *dataErrors;
 @property (nonatomic,retain) NSTimer *timer;
 @end
@@ -190,8 +190,8 @@
     btTempMinus.sd_layout
         .leftSpaceToView(self.view, 210.0/frameWidth*viewX)
         .bottomEqualToView(self.labelTemp)
-        .widthIs(54.0/frameWidth*viewX)
-        .heightEqualToWidth();
+        .widthIs(32.0/frameWidth*viewX)
+        .heightIs(54.0/frameHeight*viewY);
     [btTempMinus addTarget:self action:@selector(subtemp) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -202,8 +202,8 @@
     btTempAdd.sd_layout
         .rightSpaceToView(self.view, 210.0/frameWidth*viewX)
         .bottomEqualToView(self.labelTemp)
-        .widthIs(54.0/frameWidth*viewX)
-        .heightEqualToWidth();
+        .widthIs(32.0/frameWidth*viewX)
+        .heightIs(54.0/frameHeight*viewY);
     [btTempAdd addTarget:self action:@selector(addtemp) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -320,7 +320,7 @@
         .topSpaceToView(view2, 22.0/frameHeight*viewY)
         .widthIs(94.0/frameWidth*viewX)
         .heightIs(36.0/frameHeight*viewY);
-    [self.switchSleep addTarget:self action:@selector(setSleep:) forControlEvents:UIControlEventValueChanged];
+    [self.switchSleep addTarget:self action:@selector(setcount:) forControlEvents:UIControlEventValueChanged];
     
     //定时量
     self.labelTimer= [UILabel new];
@@ -810,9 +810,9 @@
 }
 
 //设置睡眠时间
--(void)setSleep:(id)sender{
+-(void)setcount:(id)sender{
     //UISwitch *swc = (UISwitch * )sender;
-    if(self.swsleep == YES){
+    if(self.sw == NO){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x0B;
@@ -844,7 +844,7 @@
 
 //睡眠定时减
 -(void)droptimer{
-    if(self.sleeplevel>1 && self.swsleep==YES){
+    if(self.sleeplevel>1 && self.sw==YES){
         self.sleeplevel--;
         Byte  write[6];
         write[0] = 0xAA;
@@ -863,7 +863,7 @@
 
 //睡眠定时加
 -(void)addtimer{
-    if(self.sleeplevel<15 && self.swsleep == YES){
+    if(self.sleeplevel<15 && self.sw == YES){
         self.sleeplevel++;
         Byte  write[6];
         write[0] = 0xAA;
