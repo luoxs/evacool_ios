@@ -320,7 +320,7 @@
         .topSpaceToView(view2, 22.0/frameHeight*viewY)
         .widthIs(94.0/frameWidth*viewX)
         .heightIs(36.0/frameHeight*viewY);
-    [self.switchSleep addTarget:self action:@selector(setcount:) forControlEvents:UIControlEventValueChanged];
+    [self.switchSleep addTarget:self action:@selector(setcount:) forControlEvents:UIControlEventTouchUpInside];
     
     //定时量
     self.labelTimer= [UILabel new];
@@ -826,6 +826,8 @@
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
         self.sleeplevel = 1;
         self.labelTimer.text = @"0.5h";
+        self.sw = YES;
+        [self.switchSleep setBackgroundImage:[UIImage imageNamed:@"swon"] forState:UIControlStateNormal];
     }else{
         Byte  write[6];
         write[0] = 0xAA;
@@ -839,6 +841,8 @@
         [self.currPeripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
         self.labelTimer.text = @"0.0h";
+        self.sw = NO;
+        [self.switchSleep setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
     }
 }
 
@@ -1010,7 +1014,6 @@
             case 0x02:[self.imgfan setImage:[UIImage imageNamed:@"fanon"]];break;
             case 0x03:[self.imgturbo setImage:[UIImage imageNamed:@"turboon"]]; break;
         }
-        
     }
     //[self.view setNeedsLayout];
    // [self.view setNeedsDisplay];
