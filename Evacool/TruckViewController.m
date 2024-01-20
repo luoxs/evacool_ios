@@ -27,7 +27,7 @@
 @property (nonatomic,retain) UIImageView *imgfan5;
 @property (nonatomic,retain) UIButton *btswitchfan;
 @property (nonatomic,retain) UILabel *labelTimer;
-@property (nonatomic,retain) UISwitch *switchSleep;
+@property (nonatomic,retain) UIButton *switchSleep;
 @property (nonatomic,retain) UIImageView *imgfan;
 @property (nonatomic,retain) UIImageView *imgeco;
 @property (nonatomic,retain) UIImageView *imgnormal;
@@ -40,6 +40,7 @@
 @property (nonatomic,retain) UIButton *btBattery;
 @property Byte batterylevel; //电池保护
 @property Byte sleeplevel; //睡眠定时级别
+@property Boolean swsleep;
 @property (nonatomic,retain) NSMutableArray *dataErrors;
 @property (nonatomic,retain) NSTimer *timer;
 @end
@@ -185,7 +186,7 @@
     //温度减
     UIButton *btTempMinus = [UIButton new];
     [self.view addSubview:btTempMinus];
-    [btTempMinus setBackgroundImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
+    [btTempMinus setBackgroundImage:[UIImage imageNamed:@"jian"] forState:UIControlStateNormal];
     btTempMinus.sd_layout
         .leftSpaceToView(self.view, 210.0/frameWidth*viewX)
         .bottomEqualToView(self.labelTemp)
@@ -196,7 +197,7 @@
     
     //温度加
     UIButton *btTempAdd = [UIButton new];
-    [btTempAdd setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    [btTempAdd setBackgroundImage:[UIImage imageNamed:@"jia"] forState:UIControlStateNormal];
     [self.view addSubview:btTempAdd];
     btTempAdd.sd_layout
         .rightSpaceToView(self.view, 210.0/frameWidth*viewX)
@@ -311,8 +312,9 @@
         .heightIs(30.0/frameHeight*viewY);
     
     //开关
-    self.switchSleep = [UISwitch new];
+    self.switchSleep = [UIButton new];
     [view2 addSubview:self.switchSleep];
+    [self.switchSleep setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
     self.switchSleep.sd_layout
         .rightSpaceToView(view2, 22.0/frameWidth*viewX)
         .topSpaceToView(view2, 22.0/frameHeight*viewY)
@@ -809,8 +811,8 @@
 
 //设置睡眠时间
 -(void)setSleep:(id)sender{
-    UISwitch *swc = (UISwitch * )sender;
-    if(swc.isOn == YES){
+    //UISwitch *swc = (UISwitch * )sender;
+    if(self.swsleep == YES){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x0B;
@@ -842,7 +844,7 @@
 
 //睡眠定时减
 -(void)droptimer{
-    if(self.sleeplevel>1 && self.switchSleep.isOn){
+    if(self.sleeplevel>1 && self.swsleep==YES){
         self.sleeplevel--;
         Byte  write[6];
         write[0] = 0xAA;
@@ -861,7 +863,7 @@
 
 //睡眠定时加
 -(void)addtimer{
-    if(self.sleeplevel<15 && self.switchSleep.isOn){
+    if(self.sleeplevel<15 && self.swsleep == YES){
         self.sleeplevel++;
         Byte  write[6];
         write[0] = 0xAA;

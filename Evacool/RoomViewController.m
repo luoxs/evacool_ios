@@ -27,7 +27,7 @@
 @property (nonatomic,retain) UIImageView *imgfan5;
 @property (nonatomic,retain) UIButton *btswitchfan;
 @property (nonatomic,retain) UILabel *labelTimer;
-@property (nonatomic,retain) UISwitch *switchCount;
+@property (nonatomic,retain) UIButton *switchCount;
 @property (nonatomic,retain) UISwitch *switchUnit;
 @property (nonatomic,retain) UIButton *btauto;
 @property (nonatomic,retain) UIButton *btcool;
@@ -37,6 +37,7 @@
 @property (nonatomic,retain) UIButton *btTurbo;
 @property (nonatomic,retain) UIButton *btSleep;
 @property (nonatomic,retain) UIButton *btLight;
+@property Boolean sw;
 
 @end
 
@@ -359,13 +360,14 @@
     .heightIs(30.0/frameHeight*viewY);
     
     //倒计时开关
-    self.switchCount = [UISwitch new];
+    self.switchCount = [UIButton new];
     [view2 addSubview:self.switchCount];
+    [self.switchCount setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
     self.switchCount.sd_layout
     .rightSpaceToView(view2, 22.0/frameWidth*viewX)
     .topSpaceToView(view2, 22.0/frameHeight*viewY)
     .widthIs(94.0/frameWidth*viewX)
-    .heightIs(36.0/frameHeight*viewY);
+    .heightIs(42.0/frameHeight*viewY);
     [self.switchCount addTarget:self action:@selector(setCount:) forControlEvents:UIControlEventTouchUpInside];
     
     //定时量
@@ -688,8 +690,8 @@
 
 //开关睡眠定时
 -(void)setCount:(id)sender{
-    UISwitch *swc = (UISwitch * )sender;
-    if(swc.isOn == YES){
+   // UISwitch *swc = (UISwitch * )sender;
+    if(self.sw == NO){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x16;
@@ -721,7 +723,7 @@
 
 //睡眠定时减
 -(void)droptimer{
-    if(self.dataRead.countdown>5 && self.switchCount.isOn){
+    if(self.dataRead.countdown>5 && self.sw == YES){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x16;
@@ -738,7 +740,7 @@
 
 //睡眠定时加
 -(void)addtimer{
-    if(self.dataRead.countdown<120 && self.switchCount.isOn){
+    if(self.dataRead.countdown<120 && self.sw==YES){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x16;
@@ -885,9 +887,11 @@
     //定时显示
     self.labelTimer.text = [[NSString alloc]initWithFormat:@"%.1fh", self.dataRead.countdown*0.1];
     if(self.dataRead.countdown>0){
-        [self.switchCount setOn:YES];
+        self.sw = YES;
+        [self.switchCount setBackgroundImage:[UIImage imageNamed:@"swon"] forState:UIControlStateNormal];
     }else{
-        [self.switchCount setOn:NO];
+       self.sw = NO;
+    [self.switchCount setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
     }
     
     //超强模式显示
