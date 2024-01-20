@@ -38,6 +38,9 @@
 @property (nonatomic,retain) UIView*viewFault;
 @property (nonatomic,retain) UIView *batteryprotect;
 @property (nonatomic,retain) UIButton *btBattery;
+@property (nonatomic,retain) UIButton *buttonDetails;
+@property (nonatomic,retain) UIButton *buttonFaults;
+
 @property Byte batterylevel; //电池保护
 @property Byte sleeplevel; //睡眠定时级别
 @property Boolean sw;
@@ -454,31 +457,31 @@
     [self.btswitchmode addTarget:self action:@selector(chgmod:) forControlEvents:UIControlEventTouchUpInside];
     
     //底部左边按钮
-    UIButton *buttonDetails = [UIButton new];
-    [buttonDetails setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
-    [buttonDetails setTitle:@"Details" forState:UIControlStateNormal];
-    [self.view addSubview:buttonDetails];
-    buttonDetails.sd_layout
+    self.buttonDetails = [UIButton new];
+    [ self.buttonDetails setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
+    [ self.buttonDetails setTitle:@"Details" forState:UIControlStateNormal];
+    [self.view addSubview: self.buttonDetails];
+    self.buttonDetails.sd_layout
         .leftSpaceToView(self.view, 124.0/frameWidth*viewX)
         .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
         .widthIs(226.0/frameWidth*viewX)
         .heightIs(70.0/frameHeight*viewY);
-    [buttonDetails setSd_cornerRadius:@12.0];
-    [buttonDetails addTarget:self action:@selector(opendetails) forControlEvents:UIControlEventTouchUpInside];
+    [ self.buttonDetails setSd_cornerRadius:@12.0];
+    [ self.buttonDetails addTarget:self action:@selector(opendetails) forControlEvents:UIControlEventTouchUpInside];
     
     //底部右边边按钮
-    UIButton *buttonFaults = [UIButton new];
-    [buttonFaults setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
-    [buttonFaults setTitle:@"Faults Record" forState:UIControlStateNormal];
-    [self.view addSubview:buttonFaults];
-    buttonFaults.sd_layout
+    self.buttonFaults = [UIButton new];
+    [self.buttonFaults setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
+    [self.buttonFaults setTitle:@"Faults Record" forState:UIControlStateNormal];
+    [self.view addSubview:self.buttonFaults];
+    self.buttonFaults.sd_layout
         .rightSpaceToView(self.view, 124.0/frameWidth*viewX)
         .topSpaceToView(self.view, 1488.0/frameHeight*viewY)
         .widthIs(226.0/frameWidth*viewX)
         .heightIs(70.0/frameHeight*viewY);
-    [buttonFaults setSd_cornerRadius:@12.0];
-    [buttonFaults.titleLabel setAdjustsFontSizeToFitWidth:YES];
-    [buttonFaults addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
+    [self.buttonFaults setSd_cornerRadius:@12.0];
+    [self.buttonFaults.titleLabel setAdjustsFontSizeToFitWidth:YES];
+    [self.buttonFaults addTarget:self action:@selector(openfaults) forControlEvents:UIControlEventTouchUpInside];
     
     //蒙层
     self.viewMusk = [UIView new];
@@ -970,9 +973,25 @@
         [self.imgnormal setImage:[UIImage imageNamed:@"cooloff"]];
         [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
         [self.btBattery setBackgroundImage:[UIImage imageNamed:@"batteryoff"] forState:UIControlStateNormal];
+        [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switchoff"] forState:UIControlStateNormal];
+        [self.btswitchmode setBackgroundImage:[UIImage imageNamed:@"switchoff"] forState:UIControlStateNormal];
+        [self.buttonDetails setBackgroundColor:[UIColor grayColor]];
+        [self.buttonFaults setBackgroundColor:[UIColor grayColor]];
+        [self.buttonDetails setEnabled:NO];
+        [self.buttonFaults setEnabled:NO];
+        [self.switchSleep setEnabled:NO];
+        [self.btBattery setEnabled:NO];
+        [self.switchSleep setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
         
     }else{ //开机状态
         [self.btBattery setBackgroundImage:[UIImage imageNamed:@"batteryon"] forState:UIControlStateNormal];
+        [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+        [self.btswitchmode setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+        [self.buttonDetails setEnabled:YES];
+        [self.buttonFaults setEnabled:YES];
+        [self.btBattery setEnabled:YES];
+        [self.buttonDetails setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
+        [self.buttonFaults setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
         //温度
         self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
         self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;

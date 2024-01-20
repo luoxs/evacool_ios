@@ -51,6 +51,7 @@
 		454D86162B5C36A100938793 /* btreturn.png in Resources */ = {isa = PBXBuildFile; fileRef = 454D86152B5C36A100938793 /* btreturn.png */; };
 		454D86192B5C548100938793 /* swon.png in Resources */ = {isa = PBXBuildFile; fileRef = 454D86172B5C548100938793 /* swon.png */; };
 		454D861A2B5C548100938793 /* swoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 454D86182B5C548100938793 /* swoff.png */; };
+		454D861C2B5C83F200938793 /* switchoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 454D861B2B5C83F200938793 /* switchoff.png */; };
 		454E9F102B3AEE93009F7B3A /* rv12.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F0D2B3AEE93009F7B3A /* rv12.png */; };
 		454E9F112B3AEE93009F7B3A /* trunk.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F0E2B3AEE93009F7B3A /* trunk.png */; };
 		454E9F122B3AEE93009F7B3A /* rv24.png in Resources */ = {isa = PBXBuildFile; fileRef = 454E9F0F2B3AEE93009F7B3A /* rv24.png */; };
@@ -180,6 +181,7 @@
 		454D86152B5C36A100938793 /* btreturn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btreturn.png; sourceTree = "<group>"; };
 		454D86172B5C548100938793 /* swon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swon.png; sourceTree = "<group>"; };
 		454D86182B5C548100938793 /* swoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swoff.png; sourceTree = "<group>"; };
+		454D861B2B5C83F200938793 /* switchoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = switchoff.png; sourceTree = "<group>"; };
 		454E4D4A2B48086F00B0423E /* SemiCircleProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SemiCircleProgressView.h; path = Evacool/SemiCircleProgressView.h; sourceTree = SOURCE_ROOT; };
 		454E9F0D2B3AEE93009F7B3A /* rv12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rv12.png; sourceTree = "<group>"; };
 		454E9F0E2B3AEE93009F7B3A /* trunk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trunk.png; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 		454E9F0C2B3AEE93009F7B3A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				454D861B2B5C83F200938793 /* switchoff.png */,
 				454D86182B5C548100938793 /* swoff.png */,
 				454D86172B5C548100938793 /* swon.png */,
 				454D86152B5C36A100938793 /* btreturn.png */,
@@ -578,6 +581,7 @@
 				454E9F112B3AEE93009F7B3A /* trunk.png in Resources */,
 				454E9F682B3AF08F009F7B3A /* new_light_off.png in Resources */,
 				4508589B2B3B18ED00770387 /* battery.png in Resources */,
+				454D861C2B5C83F200938793 /* switchoff.png in Resources */,
 				450858A02B3B18ED00770387 /* eco.png in Resources */,
 				45D49FD92B3D820A001A4E22 /* add.png in Resources */,
 				45D49FD42B3C7352001A4E22 /* d2.png in Resources */,
