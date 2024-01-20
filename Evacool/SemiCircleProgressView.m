@@ -21,8 +21,8 @@
 - (instancetype)initWithFrame:(CGRect)frame{
     if ((self = [super initWithFrame:frame])) {
         [self drawBottomLayer];
-        [self drawUpperLayer];
-        [self drawLongLayer];
+        [self drawUpperLayer:0];
+        [self drawLongLayer:0];
         [self.layer addSublayer:_bottomShapeLayer ];
         [_bottomShapeLayer addSublayer:_upperShapeLayer];
         [_upperShapeLayer addSublayer:_longShapeLayer];
@@ -30,14 +30,14 @@
     return self;
 }
 
--(void) setchgt{
+-(void) setchgt:(int) c{
     [_longShapeLayer removeFromSuperlayer];
     [_upperShapeLayer removeFromSuperlayer];
     [_bottomShapeLayer removeFromSuperlayer];
     
     [self drawBottomLayer];
-    [self drawUpperLayer];
-    [self drawLongLayer];
+    [self drawUpperLayer:c];
+    [self drawLongLayer:c];
     [self.layer addSublayer:_bottomShapeLayer ];
     [_bottomShapeLayer addSublayer:_upperShapeLayer];
     [_upperShapeLayer addSublayer:_longShapeLayer];
@@ -63,7 +63,7 @@
 }
 
 
-- (CAShapeLayer *)drawUpperLayer{
+- (CAShapeLayer *)drawUpperLayer:(int) c{
     _upperShapeLayer                 = [[CAShapeLayer alloc] init];
     _upperShapeLayer.frame           = self.bounds;
     CGFloat width                     = self.bounds.size.width;
@@ -80,12 +80,17 @@
     _upperShapeLayer.lineWidth = 20;
     _upperShapeLayer.lineCap = kCALineCapButt;
     _upperShapeLayer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:4], nil];
-    _upperShapeLayer.strokeColor     = [UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0].CGColor;
+    if(c==0){
+        _upperShapeLayer.strokeColor = [UIColor blueColor].CGColor;
+    }else{
+        _upperShapeLayer.strokeColor = [UIColor brownColor].CGColor;
+    }
+   // _upperShapeLayer.strokeColor     = [UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0].CGColor;
     _upperShapeLayer.fillColor       = [UIColor clearColor].CGColor;
     return _upperShapeLayer;
 }
 
-- (CAShapeLayer *)drawLongLayer{
+- (CAShapeLayer *)drawLongLayer:(int) c{
     _longShapeLayer                 = [[CAShapeLayer alloc] init];
     _longShapeLayer.frame           = self.bounds;
     CGFloat width                     = self.bounds.size.width;
@@ -103,7 +108,12 @@
     _longShapeLayer.lineWidth = 25;
     _longShapeLayer.lineCap = kCALineCapButt;
     _longShapeLayer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:4], nil];
-    _longShapeLayer.strokeColor     = [UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0].CGColor;
+    //_longShapeLayer.strokeColor     = [UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0].CGColor;
+    if(c==0){
+        _longShapeLayer.strokeColor = [UIColor blueColor].CGColor;
+    }else{
+        _longShapeLayer.strokeColor = [UIColor brownColor].CGColor;
+    }
     _longShapeLayer.fillColor       = [UIColor clearColor].CGColor;
     return _longShapeLayer;
 }

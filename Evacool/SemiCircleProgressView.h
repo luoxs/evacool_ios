@@ -14,6 +14,6 @@
 
 @property (nonatomic,assign) CGFloat  lineWidth;
 
--(void) setchgt;
+-(void) setchgt: (int) c;
 
 @end

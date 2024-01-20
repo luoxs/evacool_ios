@@ -976,7 +976,11 @@
         //温度
         self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
         self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
-        [self.progress setchgt];
+        if(self.dataRead.tempReal>=self.dataRead.tempSetting){
+            [self.progress setchgt:0];  // 降温
+        }else{
+            [self.progress setchgt:1];  //加热
+        }
         
         //故障
         if(self.dataRead.errorcode == 0x00){

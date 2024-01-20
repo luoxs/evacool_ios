@@ -839,7 +839,11 @@
     }
     
     self.progress.percent = (self.dataRead.tempSetting - 16)/14.0;
-    [self.progress setchgt];
+    if(self.dataRead.tempReal>=self.dataRead.tempSetting){
+        [self.progress setchgt:0];  // 降温
+    }else{
+        [self.progress setchgt:1];  //加热
+    }
     
     //风量
     [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];
