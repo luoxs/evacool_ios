@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) CBCharacteristic *characteristic;
 @property (nonatomic,strong) CBPeripheral *currPeripheral;
 @property (nonatomic,retain) DataRead *dataRead;
+@property (nonatomic,strong) NSString *brand;
 
 @end
 

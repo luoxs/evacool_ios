@@ -18,7 +18,7 @@
 @property (retain, nonatomic)  MBProgressHUD *hud;
 @property (nonatomic,retain) NSMutableArray <CBPeripheral*> *devices;;
 @property (nonatomic,retain) NSMutableArray *localNames;
-@property (nonatomic,strong) NSString *brand;  //卡车 EVA24VTR EVA12VTR 房车 EVA2700RV
+//@property (nonatomic,strong) NSString *brand;  //卡车 EVA24VTR EVA12VTR 房车 EVA2700RV
 //@property (nonatomic,strong) NSString *strType;   //卡车 EVA24VTR EVA12VTR 房车 EVA2700RV
 @property (nonatomic,strong) UIView *viewMusk;
 @property (nonatomic,strong) UITableView *tableview;
