@@ -481,7 +481,7 @@
                     truckViewController.brand = weakSelf.brand;
                     [weakSelf.navigationController pushViewController:truckViewController animated:YES];
                   //  [weakSelf presentViewController:truckViewController animated:YES completion:nil];
-                }else  if([weakSelf.brand isEqualToString:@"EVA12VTR"]){
+                }else  if([weakSelf.brand isEqualToString:@"EVA12VRV"]){
                     TruckViewController *truckViewController = [[TruckViewController alloc]init];
                     [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
                     truckViewController.currPeripheral = weakSelf.currPeripheral;

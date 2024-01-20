@@ -1010,6 +1010,7 @@
             case 0x02:[self.imgfan setImage:[UIImage imageNamed:@"fanon"]];break;
             case 0x03:[self.imgturbo setImage:[UIImage imageNamed:@"turboon"]]; break;
         }
+        
     }
     //[self.view setNeedsLayout];
    // [self.view setNeedsDisplay];
