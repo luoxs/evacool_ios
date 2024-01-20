@@ -33,14 +33,14 @@
      } else {
          // Fallback on earlier versions
      }
-     [self.tableView setBackgroundColor:[UIColor grayColor]];
+     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0]];
      self.tableView.dataSource = self;
      self.tableView.delegate = self;
      //[self.tableView setSeparatorColor : [UIColor grayColor]];
      [self.tableView setShowsVerticalScrollIndicator:NO]; //不显示滚动条
      [self autolayout];
  
-     self.titles1 =[ NSArray arrayWithObjects:@"No",@"Time",@"Temperature Set",@"Accumulated Running Time",@"Voltage At Fault",@"Inner Fan Current",@"Outlet Air Temperature",@"Highest Voltage before Fault",@"Inner Highest Temperature",@"Outlet highest Temperature",nil];
+     self.titles1 =[ NSArray arrayWithObjects:@"NO.",@"Time",@"Temperature Set",@"Accumulated Running Time",@"Voltage At Fault",@"Inner Fan Current",@"Outlet Air Temperature",@"Highest Voltage before Fault",@"Inner Highest Temperature",@"Outlet highest Temperature",nil];
      self.titles2 =[ NSArray arrayWithObjects: @"Fault Code", @"Mode",@"Fan Speed",@"Compressor Current",@"Outer Fan Current",@"Inner Air Temperature",@"Lowest Voltage before Fault",@"Inlet Lowest Temperature",@"Outlet Lowest Temperature",@"Battery Protection Level",nil];
  }
 
@@ -99,13 +99,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return  20;
 }
-- (BOOL)tableView:(UITableView *)tv shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (BOOL)tableView:(UITableView *)tv shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath{
     // Determine if row is selectable based on the NSIndexPath.
-
     return NO;
 }
-
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return @"Faults Record";
+}
 
  // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
  // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
@@ -147,7 +147,11 @@
      
      //左下
      UILabel *label4 =[[UILabel alloc] initWithFrame:CGRectMake( cell.frame.size.width/2.0-10,cell.frame.size.height/2.0, cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
-     [label4 setTextColor:[UIColor blackColor]];
+     if(indexPath.row == 0){
+         [label4 setTextColor:[UIColor brownColor]];
+     }else{
+         [label4 setTextColor:[UIColor blackColor]];
+     }
      [label4 setTextAlignment:NSTextAlignmentLeft];
      [label4 setFont:[UIFont fontWithName:@"Arial" size:15.0]];
      [cell addSubview:label4];
@@ -160,7 +164,7 @@
      
      NSString *str = [[NSString alloc]init];
      switch(indexPath.row){
-         case 0: str = [NSString stringWithFormat:@"%d",self.datacode.code37];break;
+         case 0: str = [NSString stringWithFormat:@"%.2d",self.datacode.code37];break;
          case 1: str = [NSString stringWithFormat:@"%c%c/%c%c/20%c%c %c%c:%c%c",self.datacode.code3,self.datacode.code4,self.datacode.code5,self.datacode.code6,self.datacode.code1,self.datacode.code2,self.datacode.code8,self.datacode.code9,self.datacode.code10,self.datacode.code11];break;
          case 2: str = self.datacode.code16<128 ?  [NSString stringWithFormat:@"%d",self.datacode.code16]: [NSString stringWithFormat:@"%d",self.datacode.code16-256] ; break;
          case 3: str = [NSString stringWithFormat:@"%dh",self.datacode.code24/60];break;

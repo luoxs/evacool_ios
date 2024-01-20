@@ -88,11 +88,17 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
     }
     cell.backgroundColor = [UIColor whiteColor];
-    //cell.backgroundColor = [UIColor colorWithRed:204/255.0 green:208/255.0 blue:195/255.0 alpha:1.0];
-    cell.textLabel.text = [self.titles objectAtIndex:indexPath.row];
-    cell.textLabel.textColor = [UIColor grayColor];
-    cell.detailTextLabel.textColor = [UIColor grayColor];
+
+    UILabel *label1 =[[UILabel alloc] initWithFrame:CGRectMake(10, cell.frame.size.height/4, cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
+    [label1 setTextColor:[UIColor grayColor]];
+    [label1 setTextAlignment:NSTextAlignmentLeft];
+    [label1 setFont:[UIFont fontWithName:@"Arial" size:10.0]];
+    [cell addSubview:label1];
+    label1.text = [self.titles objectAtIndex:indexPath.row];
+    
+    //cell.detailTextLabel.textColor = [UIColor grayColor];
     //cell.detailTextLabel.text = @"aaaaa";
+    
     NSString *str = [[NSString alloc]init];
     switch(indexPath.row){
         case 0: str = self.datacode.code22 == 0x00 ? @"Off":@"On";break;
@@ -114,10 +120,17 @@
         case 6: str = [NSString stringWithFormat:@"%.1fA",self.datacode.code32/10.0];break;
         case 7: str = [NSString stringWithFormat:@"%d°C",self.datacode.code23];break;
         case 8: str = [NSString stringWithFormat:@"%d°C",self.datacode.code24];break;
-        case 9: str = [NSString stringWithFormat:@"%0.1lfV",self.datacode.code28*0.2+21.5];break;
+        case 9: str = [NSString stringWithFormat:@"B%d:%0.1lfV",self.datacode.code28,self.datacode.code28*0.2+21.5];break;
             
     }
-    cell.detailTextLabel.text = str;
+  //  cell.detailTextLabel.text = str;
+    UILabel *label2 =[[UILabel alloc] initWithFrame:CGRectMake(cell.frame.size.width/2.0, cell.frame.size.height/4.0, cell.frame.size.width/2.0-10, cell.frame.size.height/2.0)];
+    [label2 setTextColor:[UIColor blackColor]];
+    [label2 setTextAlignment:NSTextAlignmentLeft];
+    [label2 setFont:[UIFont fontWithName:@"Arial" size:15.0]];
+    label2.text = str;
+    [cell addSubview:label2];
+    
     return cell;
 }
 
