@@ -44,13 +44,13 @@
     [self babyDelegate];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tongzhi:) name:@"tongzhi"object:nil];
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [self.tableview reloadData];
     [self babyDelegate];
     baby.scanForPeripherals().begin();
+    [self.navigationController.navigationBar setHidden:YES];
     //[self.viewMusk setHidden:NO];
 }
 
@@ -88,7 +88,6 @@
 
 
 -(void)setAutoLayout{
-    
     double frameWidth = 750;
     double frameHeight = 1624;
     double viewX = [UIScreen mainScreen].bounds.size.width;
@@ -104,91 +103,30 @@
         .widthIs(228.0/frameWidth*viewX)
         .heightIs(82.0/frameHeight*viewY);
     
-    //中间文字上
-    UILabel *labelUp = [UILabel new];
-    [self.view addSubview:labelUp];
-    labelUp.text = self.brand;
-    [labelUp setTextAlignment:NSTextAlignmentCenter];
-    [labelUp setFont:[UIFont fontWithName:@"Arial" size:28.0]];
-    labelUp.sd_layout
-        .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 610.0/frameHeight*viewY)
-        .widthIs(600.0/frameWidth*viewX)
-        .heightIs(50.0/frameHeight*viewY);
+    //返回按钮
+    UIButton *btBack = [UIButton new];
+    [self.view addSubview:btBack];
+    [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
+   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
+    [btBack setContentMode:UIViewContentModeScaleAspectFill];
+    [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    //[btBack setcontentf]
+    btBack.sd_layout
+    .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
+    .centerYEqualToView(imageTop)
+    .widthIs(20/frameWidth*viewX)
+    .heightIs(40/frameHeight*viewY);
+    [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
     
-    //中间标题
-    UILabel *labelTitle = [UILabel new];
-    [self.view addSubview:labelTitle];
-    labelTitle.text = @"Product Catalogue";
-    [labelTitle setTextAlignment:NSTextAlignmentCenter];
-    [labelTitle setFont:[UIFont fontWithName:@"Arial" size:28.0]];
-    labelTitle.sd_layout
-        .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 628.0/frameHeight*viewY)
-        .widthIs(600.0/frameWidth*viewX)
-        .heightIs(40.0/frameHeight*viewY);
-    
-    //中间文字下
-    UILabel *labelDown = [UILabel new];
-    [self.view addSubview:labelDown];
-    labelDown.text = @"Select Production for Connection";
-    [labelDown setTextAlignment:NSTextAlignmentCenter];
-    [labelDown setFont:[UIFont fontWithName:@"Arial" size:14.0]];
-    labelDown.sd_layout
-        .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 688.0/frameHeight*viewY)
-        .widthIs(600.0/frameWidth*viewX)
-        .heightIs(22.0/frameHeight*viewY);
-    
-    //首页图片
-    UIImageView *imageHome = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"imagehome"]];
-    [self.view addSubview:imageHome];
-    imageHome.sd_layout
-        .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 210.0/frameHeight*viewY)
-        .widthIs(680.0/frameWidth*viewX)
-        .heightIs(360.0/frameHeight*viewY);
-    [imageHome setSd_cornerRadius:@10.0];
-    
-    //三个水平视图
-    UIImageView *view1 = [UIImageView new];
-    [view1 setImage:[UIImage imageNamed:@"trunk"]];
-    // [view1 setBackgroundColor:[UIColor redColor]];
-    [self.view addSubview:view1];
-    view1.sd_layout
-        .leftSpaceToView(self.view, 35.0/frameWidth*viewX)
-        .topSpaceToView(self.view, 748.0/frameHeight*viewY)
-        .widthIs(244.0/frameWidth*viewX)
-        .heightIs(340.0/frameHeight*viewY);
-    [view1 setSd_cornerRadius:@10.0];
-    
-    UIImageView *view2 = [UIImageView new];
-    [view2 setImage:[UIImage imageNamed:@"rv12"]];
-    [self.view addSubview:view2];
-    view2.sd_layout
-        .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 748.0/frameHeight*viewY)
-        .widthIs(244.0/frameWidth*viewX)
-        .heightIs(340.0/frameHeight*viewY);
-    [view2 setSd_cornerRadius:@10.0];
-    
-    UIImageView *view3 = [UIImageView new];
-    [view3 setImage:[UIImage imageNamed:@"rv24"]];
-    [self.view addSubview:view3];
-    view3.sd_layout
-        .rightSpaceToView(self.view, 35.0/frameWidth*viewX)
-        .topSpaceToView(self.view, 748.0/frameHeight*viewY)
-        .widthIs(244.0/frameWidth*viewX)
-        .heightIs(340.0/frameHeight*viewY);
-    [view3 setSd_cornerRadius:@10.0];
     
     //水平视图,扫描
     UIView *view4 = [UIView new];
     [view4 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:view4];
     view4.sd_layout
-        .leftSpaceToView(self.view, 35.0/frameWidth*viewX)
-        .topSpaceToView(self.view, 1152.0/frameHeight*viewY)
+       // .leftSpaceToView(self.view, 35.0/frameWidth*viewX)
+        .centerXEqualToView(self.view)
+        .topSpaceToView(self.view, 482.0/frameHeight*viewY)
         .widthIs(332.0/frameWidth*viewX)
         .heightIs(196.0/frameHeight*viewY);
     [view4 setSd_cornerRadius:@10.0];
@@ -221,8 +159,9 @@
     [view5 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:view5];
     view5.sd_layout
-        .rightSpaceToView(self.view, 35.0/frameWidth*viewX)
-        .topSpaceToView(self.view, 1152.0/frameHeight*viewY)
+        //.rightSpaceToView(self.view, 35.0/frameWidth*viewX)
+        .centerXEqualToView(self.view)
+        .topSpaceToView(self.view, 822.0/frameHeight*viewY)
         .widthIs(332.0/frameWidth*viewX)
         .heightIs(196.0/frameHeight*viewY);
     [view4 setSd_cornerRadius:@10.0];
@@ -250,6 +189,28 @@
         .widthIs(300.0/frameWidth*viewX)
         .heightIs(30.0/frameHeight*viewY);
     
+    
+    UILabel *lbbrand = [UILabel new];
+    [self.view addSubview:lbbrand];
+    [lbbrand setTextColor:[UIColor blackColor]];
+    [lbbrand setTextAlignment:NSTextAlignmentCenter];
+    [lbbrand setFont:[UIFont fontWithName:@"Arial" size:18]];
+    lbbrand.numberOfLines = 2;
+    lbbrand.sd_layout
+    .centerXEqualToView(self.view)
+    .topSpaceToView(view5, 100/frameHeight*viewY)
+    .widthIs(332.0/frameWidth*viewX)
+    .heightIs(196.0/frameHeight*viewY);
+    
+    if([self.brand isEqualToString:@"EVA24VTR"]){
+        [lbbrand setText:@"Truck\nAir Conditioner"];
+    }else if([self.brand isEqualToString:@"EVA12VRV"]){
+        [lbbrand setText:@"12V RV\nAir Conditioner"];
+    }else{
+        [lbbrand setText:@"RV\nAir Conditioner"];
+    }
+    
+    /*
     //底部logo1
     UIImageView *imageLogo1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"germany"]];
     [self.view addSubview:imageLogo1];
@@ -291,7 +252,7 @@
         .topSpaceToView(imageLogo2, 10.0/frameHeight*viewY)
         .widthIs(400.0/frameWidth*viewX)
         .heightIs(20.0/frameHeight*viewY);
-    
+    */
     
     //蒙层
     self.viewMusk = [UIView new];
@@ -327,26 +288,18 @@
     [btclose addTarget:self action:@selector(closemusk) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)goback{
+    [self.devices removeAllObjects];
+   // self.currPeripheral = nil;
+   // self.characteristic = nil;
+    [baby.centralManager stopScan];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 //扫描二维码
 -(void)scanQRcode{
-    /*
-    //设置会话
-    AVAuthorizationStatus authStatus =[AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-    //判断摄像头状态是否可用
-    if(authStatus==AVAuthorizationStatusAuthorized){
-        //开始扫描二维码
-        [self startScanQR];
-    }else{
-        NSLog(@"未开启相机权限，请前往设置中开启");
-        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-            if (granted) {
-                [self startScanQR];
-            } else {
-                // 拒绝
-            }
-        }];
-    }*/
     CDZQRScanViewController *vc = [CDZQRScanViewController new];
+    [self.navigationController.navigationBar setHidden:NO];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -357,6 +310,7 @@
     UIImage *image=[info objectForKey:UIImagePickerControllerOriginalImage];
     //将图片存储到相册
     UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    [self.navigationController.navigationBar setHidden:YES];
     [self dismissViewControllerAnimated:YES completion:nil];//返回原界面
 }
 
@@ -441,20 +395,29 @@
         
         //        if(([peripheral.name hasPrefix:@"CCA"]||[peripheral.name hasPrefix:@"GCA"]) && ![self.devices containsObject:peripheral])  {
         NSString *advertiseName = advertisementData[@"kCBAdvDataLocalName"];
-        if([advertiseName hasPrefix:@"G29"]||[advertiseName hasPrefix:@"G29A"]||[advertiseName hasPrefix:@"EVA"]||[advertiseName hasPrefix:@"GCA"])  {
+//        if([advertiseName hasPrefix:@"G29"]||[advertiseName hasPrefix:@"G29A"]||[advertiseName hasPrefix:@"EVA"]||[advertiseName hasPrefix:@"GCA"])  {
+//            [weakSelf.devices addObject:peripheral];
+//            [weakSelf.localNames addObject:advertiseName];
+//            // weakSelf.currPeripheral = peripheral;
+//            [weakSelf.tableview reloadData];
+//            if([weakSelf.devices count]>5){
+//                [central stopScan];
+//            }
+//            if([advertiseName hasPrefix:@"EVA24"]) {
+//                weakSelf.brand = @"EVA24VTR";
+//            }else if([advertiseName hasPrefix:@"EVA12"]){
+//                weakSelf.brand = @"EVA12VTR";
+//            }else{
+//                weakSelf.brand = @"EVA2700RV";
+//            }
+//        }
+        if([advertiseName hasPrefix:weakSelf.brand]){
             [weakSelf.devices addObject:peripheral];
             [weakSelf.localNames addObject:advertiseName];
-            // weakSelf.currPeripheral = peripheral;
+                       // weakSelf.currPeripheral = peripheral;
             [weakSelf.tableview reloadData];
-            if([weakSelf.devices count]>5){
+            if([weakSelf.devices count]>2){
                 [central stopScan];
-            }
-            if([advertiseName hasPrefix:@"EVA24"]) {
-                weakSelf.brand = @"EVA24VTR";
-            }else if([advertiseName hasPrefix:@"EVA12"]){
-                weakSelf.brand = @"EVA12VTR";
-            }else{
-                weakSelf.brand = @"EVA2700RV";
             }
         }
     }];

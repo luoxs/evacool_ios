@@ -18,10 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setAutolayout];
-    [self.navigationController.navigationBar setHidden:YES];
-
     // Do any additional setup after loading the view.
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [self.navigationController.navigationBar setHidden:YES];
+}
+
 
 -(void) setAutolayout{
     double frameWidth = 750;
@@ -244,7 +247,6 @@
 
 -(void)setrv24{
     HomeViewController *homeViewController = [HomeViewController new];
-    [self.navigationController pushViewController:homeViewController animated:YES];
     homeViewController.brand = @"EVA24VTR";
     [self.navigationController pushViewController:homeViewController animated:YES];
 }
