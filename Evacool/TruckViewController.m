@@ -976,7 +976,7 @@
         //温度
         self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
         self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
-        [self.progress setNeedsDisplay];
+        [self.progress setchgt];
         
         //故障
         if(self.dataRead.errorcode == 0x00){
@@ -1014,6 +1014,7 @@
             case 0x02:[self.imgfan setImage:[UIImage imageNamed:@"fanon"]];break;
             case 0x03:[self.imgturbo setImage:[UIImage imageNamed:@"turboon"]]; break;
         }
+        
     }
     //[self.view setNeedsLayout];
    // [self.view setNeedsDisplay];

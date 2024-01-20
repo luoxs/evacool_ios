@@ -838,8 +838,8 @@
         [self.switchUnit setOn:NO];
     }
     
-    self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;
-    [self.progress setNeedsDisplay];
+    self.progress.percent = (self.dataRead.tempSetting - 16)/14.0;
+    [self.progress setchgt];
     
     //风量
     [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];

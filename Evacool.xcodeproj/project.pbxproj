@@ -434,8 +434,8 @@
 			children = (
 				45D49FE02B3DAC47001A4E22 /* Datas */,
 				454E9F0C2B3AEE93009F7B3A /* images */,
-				45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */,
 				454E4D4A2B48086F00B0423E /* SemiCircleProgressView.h */,
+				45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */,
 				4562D7952B5C21FD007C871C /* LogoViewController.h */,
 				4562D7962B5C21FD007C871C /* LogoViewController.m */,
 				453E12492B3AC20200D5C032 /* HomeViewController.h */,
