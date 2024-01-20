@@ -71,8 +71,12 @@
     UIBezierPath *path                = [UIBezierPath bezierPathWithArcCenter:CGPointMake((CGRectGetMaxX(self.frame) - CGRectGetMinX(self.frame)) / 2, (CGRectGetMaxY(self.frame) - CGRectGetMinY(self.frame)) / 2)  radius:width / 2 startAngle:2.3625 endAngle:0.785 clockwise:YES];
     _upperShapeLayer.path            = path.CGPath;
     _upperShapeLayer.strokeStart = 0;
-    _upperShapeLayer.strokeEnd =   0;
-    [self performSelector:@selector(shapeChange) withObject:nil afterDelay:0.3];
+   // _upperShapeLayer.strokeEnd =   0;
+ //   [self performSelector:@selector(shapeChange) withObject:nil afterDelay:0.0];
+    _upperShapeLayer.strokeEnd = _percent;
+   // _longShapeLayer.strokeStart = _percent - 0.0225;
+   // _longShapeLayer.strokeStart = _percent - 0.01;
+  //  _longShapeLayer.strokeEnd = _percent;
     _upperShapeLayer.lineWidth = 20;
     _upperShapeLayer.lineCap = kCALineCapButt;
     _upperShapeLayer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:4], nil];
@@ -88,10 +92,15 @@
    
     UIBezierPath *path                = [UIBezierPath bezierPathWithArcCenter:CGPointMake((CGRectGetMaxX(self.frame) - CGRectGetMinX(self.frame)) / 2, (CGRectGetMaxY(self.frame) - CGRectGetMinY(self.frame)) / 2)  radius:width / 1.85 startAngle:2.3625 endAngle:0.785 clockwise:YES];
     _longShapeLayer.path            = path.CGPath;
-    _longShapeLayer.strokeStart = 0;
-    _longShapeLayer.strokeEnd =   0;
-    [self performSelector:@selector(shapeChange) withObject:nil afterDelay:0.3];
-    _longShapeLayer.lineWidth = 30;
+  //  _longShapeLayer.strokeStart = 0;
+  //  _longShapeLayer.strokeEnd =   0;
+ //   [self performSelector:@selector(shapeChange) withObject:nil afterDelay:0.0];
+  //  _upperShapeLayer.strokeEnd = _percent;
+   // _longShapeLayer.strokeStart = _percent - 0.0225;
+    _longShapeLayer.strokeStart = _percent - 0.01;
+    _longShapeLayer.strokeEnd = _percent;
+    
+    _longShapeLayer.lineWidth = 25;
     _longShapeLayer.lineCap = kCALineCapButt;
     _longShapeLayer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:4], nil];
     _longShapeLayer.strokeColor     = [UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0].CGColor;
