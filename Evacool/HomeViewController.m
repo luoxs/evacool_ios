@@ -290,6 +290,7 @@
 
 -(void)goback{
     [self.devices removeAllObjects];
+    [baby cancelAllPeripheralsConnection];
    // self.currPeripheral = nil;
    // self.characteristic = nil;
     [baby.centralManager stopScan];
@@ -299,6 +300,7 @@
 //扫描二维码
 -(void)scanQRcode{
     CDZQRScanViewController *vc = [CDZQRScanViewController new];
+    vc.brand = self.brand;
     [self.navigationController.navigationBar setHidden:NO];
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -477,21 +479,24 @@
                     truckViewController.currPeripheral = weakSelf.currPeripheral;
                     truckViewController.characteristic = c;
                     truckViewController.brand = weakSelf.brand;
-                    [weakSelf presentViewController:truckViewController animated:YES completion:nil];
+                    [weakSelf.navigationController pushViewController:truckViewController animated:YES];
+                  //  [weakSelf presentViewController:truckViewController animated:YES completion:nil];
                 }else  if([weakSelf.brand isEqualToString:@"EVA12VTR"]){
                     TruckViewController *truckViewController = [[TruckViewController alloc]init];
                     [truckViewController setModalPresentationStyle:UIModalPresentationFullScreen];
                     truckViewController.currPeripheral = weakSelf.currPeripheral;
                     truckViewController.characteristic = c;
                     truckViewController.brand = weakSelf.brand;
-                    [weakSelf presentViewController:truckViewController animated:YES completion:nil];
+                   // [weakSelf presentViewController:truckViewController animated:YES completion:nil];
+                    [weakSelf.navigationController pushViewController:truckViewController animated:YES];
                 }else{
                     RoomViewController *roomViewController = [[RoomViewController alloc]init];
                     [roomViewController setModalPresentationStyle:UIModalPresentationFullScreen];
                     roomViewController.currPeripheral = weakSelf.currPeripheral;
                     roomViewController.characteristic = c;
                     roomViewController.brand = weakSelf.brand;
-                    [weakSelf presentViewController:roomViewController animated:YES completion:nil];
+                    //[weakSelf presentViewController:roomViewController animated:YES completion:nil];
+                    [weakSelf.navigationController pushViewController:roomViewController animated:YES];
                 }
             }
         }

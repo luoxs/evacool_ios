@@ -72,6 +72,22 @@
     .topSpaceToView(self.view, 92.0/frameHeight*viewY)
     .widthIs(228.0/frameWidth*viewX)
     .heightIs(82.0/frameHeight*viewY);
+    
+    //返回按钮
+    UIButton *btBack = [UIButton new];
+    [self.view addSubview:btBack];
+    [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
+   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
+    [btBack setContentMode:UIViewContentModeScaleAspectFill];
+    [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    //[btBack setcontentf]
+    btBack.sd_layout
+    .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
+    .centerYEqualToView(imageTop)
+    .widthIs(20/frameWidth*viewX)
+    .heightIs(40/frameHeight*viewY);
+    [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    
    
     //左上文字1
     self.labelUp = [UILabel new];
@@ -484,7 +500,7 @@
     //设置读取characteristics的委托
     [baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
      //   NSLog(@"read characteristic successfully!");
-        weakSelf.labelUp.text = peripheral.name;
+       // weakSelf.labelUp.text = peripheral.name;
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
             weakSelf.characteristic = characteristics;
             NSData *data = characteristics.value;
@@ -905,6 +921,11 @@
 
 }
 
+
+-(void)goback{
+    [baby cancelAllPeripheralsConnection];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 /*
 #pragma mark - Navigation

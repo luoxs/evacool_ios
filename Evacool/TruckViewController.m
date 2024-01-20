@@ -75,10 +75,31 @@
         .widthIs(228.0/frameWidth*viewX)
         .heightIs(82.0/frameHeight*viewY);
     
+    
+    //返回按钮
+    UIButton *btBack = [UIButton new];
+    [self.view addSubview:btBack];
+    [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
+   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
+    [btBack setContentMode:UIViewContentModeScaleAspectFill];
+    [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    //[btBack setcontentf]
+    btBack.sd_layout
+    .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
+    .centerYEqualToView(imageTop)
+    .widthIs(20/frameWidth*viewX)
+    .heightIs(40/frameHeight*viewY);
+    [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     //左上文字1
     self.labelUp = [UILabel new];
     [self.view addSubview: self.labelUp];
-    self.labelUp.text = @"EVA 24V";
+    if([self.brand isEqualToString:@"EVA24VTR"]){
+        self.labelUp.text = @"EVA 24V";
+    }else{
+        self.labelUp.text = @"EVA 12V";
+    }
     [self.labelUp setTextAlignment:NSTextAlignmentLeft];
     [self.labelUp setTextColor:[UIColor blackColor]];
     [self.labelUp setFont:[UIFont fontWithName:@"Arial" size:22.0]];
@@ -596,7 +617,7 @@
     //设置读取characteristics的委托
     [baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
         //   NSLog(@"read characteristic successfully!");
-        weakSelf.labelUp.text = peripheral.name;
+       // weakSelf.labelUp.text = peripheral.name;
         
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
             NSData *data = characteristics.value;
@@ -992,6 +1013,14 @@
    // [self.view setNeedsDisplay];
 }
 
+
+-(void)goback{
+   // self.currPeripheral = nil;
+   // self.characteristic = nil;
+   // [self.navigationController popViewControllerAnimated:YES];
+    [baby cancelAllPeripheralsConnection];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 -(void)dealloc{
     [self.timer invalidate];

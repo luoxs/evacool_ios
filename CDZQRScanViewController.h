@@ -10,5 +10,6 @@
 
 
 @interface CDZQRScanViewController : UIViewController
+@property (nonatomic,strong) NSString *brand;
 
 @end
