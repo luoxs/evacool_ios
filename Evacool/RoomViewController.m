@@ -177,25 +177,27 @@
     //温度减
     UIButton *btTempMinus = [UIButton new];
     [self.view addSubview:btTempMinus];
-    [btTempMinus setBackgroundImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
+    [btTempMinus setBackgroundImage:[UIImage imageNamed:@"jian"] forState:UIControlStateNormal];
     btTempMinus.sd_layout
     .leftSpaceToView(self.view, 210.0/frameWidth*viewX)
     .bottomEqualToView(self.labelTemp)
-    .widthIs(54.0/frameWidth*viewX)
-    .heightEqualToWidth();
+    .widthIs(32.0/frameWidth*viewX)
+    .heightIs(54.0/frameHeight*viewY);
     [btTempMinus addTarget:self action:@selector(subtemp) forControlEvents:UIControlEventTouchUpInside];
+    
     
     
     //温度加
     UIButton *btTempAdd = [UIButton new];
-    [btTempAdd setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
+    [btTempAdd setBackgroundImage:[UIImage imageNamed:@"jia"] forState:UIControlStateNormal];
     [self.view addSubview:btTempAdd];
     btTempAdd.sd_layout
     .rightSpaceToView(self.view, 210.0/frameWidth*viewX)
     .bottomEqualToView(self.labelTemp)
-    .widthIs(54.0/frameWidth*viewX)
-    .heightEqualToWidth();
+    .widthIs(32.0/frameWidth*viewX)
+    .heightIs(54.0/frameHeight*viewY);
     [btTempAdd addTarget:self action:@selector(addtemp) forControlEvents:UIControlEventTouchUpInside];
+    
     
     
 #pragma mark 显示风速
@@ -876,8 +878,12 @@
             [self.btSleep setEnabled:NO];
         }
             break;
-        case 3:
-            [self.btheat setImage:[UIImage imageNamed:@"10"] forState:UIControlStateNormal];break;
+        case 3:{
+            [self.btheat setImage:[UIImage imageNamed:@"10"] forState:UIControlStateNormal];
+            [self.progress setchgt:1];  //加热
+        }
+             break;
+            
         case 4:{
             [self.btauto setImage:[UIImage imageNamed:@"2"] forState:UIControlStateNormal];
             [self.btswitchfan setEnabled:NO];
@@ -926,7 +932,47 @@
         self.labelStatus.text = [NSString stringWithFormat:@"Fault Code:E%d",self.dataRead.errcode];
         [self.labelStatus setTextColor:[UIColor redColor]];
     }
-
+    
+    if(self.dataRead.power == 0){
+        [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];
+        [self.imgfan2 setImage:[UIImage imageNamed:@"d3"]];
+        [self.imgfan3 setImage:[UIImage imageNamed:@"d3"]];
+        [self.imgfan4 setImage:[UIImage imageNamed:@"d4"]];
+        [self.imgfan5 setImage:[UIImage imageNamed:@"d5"]];
+        [self.btTurbo setImage:[UIImage imageNamed:@"16"] forState:UIControlStateNormal];
+        [self.btSleep setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
+        [self.btLight setImage:[UIImage imageNamed:@"20"] forState:UIControlStateNormal];
+        [self.btauto setEnabled:NO];
+        [self.btcool setEnabled:NO];
+        [self.bthuimit setEnabled:NO];
+        [self.btvent setEnabled:NO];
+        [self.btheat setEnabled:NO];
+        [self.btauto setBackgroundImage:[UIImage imageNamed:@"3"] forState:UIControlStateNormal];
+        [self.btcool setBackgroundImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];;
+        [self.bthuimit setBackgroundImage:[UIImage imageNamed:@"7"] forState:UIControlStateNormal];
+        [self.btvent setBackgroundImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
+        [self.btheat setBackgroundImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
+        [self.btTurbo setEnabled:NO];
+        [self.btSleep setEnabled:NO];
+        [self.btLight setEnabled:NO];
+        [self.btswitchfan setEnabled:NO];
+        [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switchoff"] forState:UIControlStateNormal];
+        [self.switchUnit setOn:NO];
+        [self.switchUnit setEnabled:NO];
+        
+    }else{
+        [self.btswitchfan setEnabled:YES];
+        [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+        [self.btTurbo setEnabled:YES];
+        [self.btSleep setEnabled:YES];
+        [self.btLight setEnabled:YES];
+        [self.switchUnit setEnabled:YES];
+        [self.btauto setEnabled:YES];
+        [self.btcool setEnabled:YES];
+        [self.bthuimit setEnabled:YES];
+        [self.btvent setEnabled:YES];
+        [self.btheat setEnabled:YES];
+    }
 }
 
 
