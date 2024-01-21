@@ -974,7 +974,9 @@
         [self.imgturbo setImage:[UIImage imageNamed:@"turbooff"]];
         [self.btBattery setBackgroundImage:[UIImage imageNamed:@"batteryoff"] forState:UIControlStateNormal];
         [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switchoff"] forState:UIControlStateNormal];
+        [self.btswitchfan setEnabled:NO];
         [self.btswitchmode setBackgroundImage:[UIImage imageNamed:@"switchoff"] forState:UIControlStateNormal];
+        [self.btswitchmode setEnabled:NO];
         [self.buttonDetails setBackgroundColor:[UIColor grayColor]];
         [self.buttonFaults setBackgroundColor:[UIColor grayColor]];
         [self.buttonDetails setEnabled:NO];
@@ -982,11 +984,14 @@
         [self.switchSleep setEnabled:NO];
         [self.btBattery setEnabled:NO];
         [self.switchSleep setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
+        [self.progress setchgt:2];
         
     }else{ //开机状态
         [self.btBattery setBackgroundImage:[UIImage imageNamed:@"batteryon"] forState:UIControlStateNormal];
         [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+        [self.btswitchfan setEnabled:YES];
         [self.btswitchmode setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
+        [self.btswitchmode setEnabled:YES];
         [self.buttonDetails setEnabled:YES];
         [self.buttonFaults setEnabled:YES];
         [self.btBattery setEnabled:YES];

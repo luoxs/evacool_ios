@@ -135,7 +135,7 @@
      UILabel *label2 =[[UILabel alloc] initWithFrame:CGRectMake(10, cell.frame.size.height/2.0, cell.frame.size.width/2.0-10, cell.frame.size.height/2.0)];
      [label2 setTextColor:[UIColor blackColor]];
      [label2 setTextAlignment:NSTextAlignmentLeft];
-     [label2 setFont:[UIFont fontWithName:@"Arial" size:15.0]];
+     [label2 setFont:[UIFont fontWithName:@"Verdana-Bold" size:14.0]];
      [cell addSubview:label2];
      
      //右上
@@ -148,12 +148,12 @@
      //左下
      UILabel *label4 =[[UILabel alloc] initWithFrame:CGRectMake( cell.frame.size.width/2.0-10,cell.frame.size.height/2.0, cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
      if(indexPath.row == 0){
-         [label4 setTextColor:[UIColor brownColor]];
+         [label4 setTextColor:[UIColor colorWithRed:1.0 green:97.0/255.0 blue:3.0/255.0 alpha:1]];
      }else{
          [label4 setTextColor:[UIColor blackColor]];
      }
      [label4 setTextAlignment:NSTextAlignmentLeft];
-     [label4 setFont:[UIFont fontWithName:@"Arial" size:15.0]];
+     [label4 setFont:[UIFont fontWithName:@"Verdana-Bold" size:14.0]];
      [cell addSubview:label4];
      
      

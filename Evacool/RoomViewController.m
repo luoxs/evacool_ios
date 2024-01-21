@@ -966,6 +966,7 @@
         [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switchoff"] forState:UIControlStateNormal];
         [self.switchUnit setOn:NO];
         [self.switchUnit setEnabled:NO];
+        [self.progress setchgt:2];
         
     }else{
         [self.btswitchfan setEnabled:YES];

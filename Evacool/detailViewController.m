@@ -106,7 +106,7 @@
             if(self.datacode.code29 == 0x00){
                 str = @"Eco";
             }else if(self.datacode.code29 == 0x01){
-                str = @"Cool";
+                str = @"Normal";
             }else if(self.datacode.code29 == 0x02){
                 str = @"Fan";
             }else{
@@ -124,10 +124,11 @@
             
     }
   //  cell.detailTextLabel.text = str;
-    UILabel *label2 =[[UILabel alloc] initWithFrame:CGRectMake(cell.frame.size.width/2.0, cell.frame.size.height/4.0, cell.frame.size.width/2.0-10, cell.frame.size.height/2.0)];
+    UILabel *label2 =[[UILabel alloc] initWithFrame:CGRectMake(cell.frame.size.width/2.0, cell.frame.size.height/8.0, cell.frame.size.width/2.0-10, cell.frame.size.height/1.2)];
     [label2 setTextColor:[UIColor blackColor]];
     [label2 setTextAlignment:NSTextAlignmentLeft];
-    [label2 setFont:[UIFont fontWithName:@"Arial" size:15.0]];
+    [label2 setFont:[UIFont fontWithName:@"Vedana-Bold" size:38.0]];
+   // [label2 setFont: [UIFont boldSystemFontOfSize:15.0]];
     label2.text = str;
     [cell addSubview:label2];
     

@@ -82,8 +82,10 @@
     _upperShapeLayer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:4], nil];
     if(c==0){
         _upperShapeLayer.strokeColor = [UIColor blueColor].CGColor;
-    }else{
+    }else if(c==1){
         _upperShapeLayer.strokeColor = [UIColor brownColor].CGColor;
+    }else{
+        _upperShapeLayer.strokeColor = [UIColor grayColor].CGColor;
     }
    // _upperShapeLayer.strokeColor     = [UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0].CGColor;
     _upperShapeLayer.fillColor       = [UIColor clearColor].CGColor;
@@ -111,8 +113,10 @@
     //_longShapeLayer.strokeColor     = [UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0].CGColor;
     if(c==0){
         _longShapeLayer.strokeColor = [UIColor blueColor].CGColor;
-    }else{
+    }else if(c==1){
         _longShapeLayer.strokeColor = [UIColor brownColor].CGColor;
+    }else{
+        _longShapeLayer.strokeColor = [UIColor grayColor].CGColor;
     }
     _longShapeLayer.fillColor       = [UIColor clearColor].CGColor;
     return _longShapeLayer;
