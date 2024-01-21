@@ -20,6 +20,7 @@
 		450858A42B3B195900770387 /* germany.png in Resources */ = {isa = PBXBuildFile; fileRef = 450858A22B3B195900770387 /* germany.png */; };
 		450858A52B3B195900770387 /* instein.png in Resources */ = {isa = PBXBuildFile; fileRef = 450858A32B3B195900770387 /* instein.png */; };
 		450858A82B3B257100770387 /* TruckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 450858A72B3B257100770387 /* TruckViewController.m */; };
+		453B79FA2B5CF97F008A6457 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453B79F92B5CF97F008A6457 /* RegistViewController.m */; };
 		453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E124A2B3AC20200D5C032 /* HomeViewController.m */; };
 		4543B0332B4810590070A847 /* crc.c in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02A2B4810580070A847 /* crc.c */; };
 		4543B0342B4810590070A847 /* DataWrite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02B2B4810580070A847 /* DataWrite.m */; };
@@ -144,6 +145,8 @@
 		450858A32B3B195900770387 /* instein.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = instein.png; sourceTree = "<group>"; };
 		450858A62B3B257100770387 /* TruckViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TruckViewController.h; path = Evacool/TruckViewController.h; sourceTree = SOURCE_ROOT; };
 		450858A72B3B257100770387 /* TruckViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TruckViewController.m; path = Evacool/TruckViewController.m; sourceTree = SOURCE_ROOT; };
+		453B79F82B5CF97F008A6457 /* RegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
+		453B79F92B5CF97F008A6457 /* RegistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
 		453E12492B3AC20200D5C032 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		453E124A2B3AC20200D5C032 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		4543B0292B4810580070A847 /* DataWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataWrite.h; path = Evacool/Datas/DataWrite.h; sourceTree = SOURCE_ROOT; };
@@ -439,6 +442,8 @@
 				454E9F0C2B3AEE93009F7B3A /* images */,
 				454E4D4A2B48086F00B0423E /* SemiCircleProgressView.h */,
 				45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */,
+				453B79F82B5CF97F008A6457 /* RegistViewController.h */,
+				453B79F92B5CF97F008A6457 /* RegistViewController.m */,
 				4562D7952B5C21FD007C871C /* LogoViewController.h */,
 				4562D7962B5C21FD007C871C /* LogoViewController.m */,
 				453E12492B3AC20200D5C032 /* HomeViewController.h */,
@@ -689,6 +694,7 @@
 				45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */,
 				4562D7972B5C21FD007C871C /* LogoViewController.m in Sources */,
 				4552FDB32B57777900FE693F /* CDZQRScanViewController.m in Sources */,
+				453B79FA2B5CF97F008A6457 /* RegistViewController.m in Sources */,
 				457F8AFD2B1EAB0300FA7ABB /* SceneDelegate.m in Sources */,
 				453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */,
 				4543B0342B4810590070A847 /* DataWrite.m in Sources */,

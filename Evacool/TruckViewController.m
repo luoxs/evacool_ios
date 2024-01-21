@@ -13,6 +13,8 @@
 #import "crc.h"
 #import "detailViewController.h"
 #import "faultsViewController.h"
+#import "RegistViewController.h"
+
 
 @interface TruckViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
 @property (nonatomic,retain) MBProgressHUD *hud;
@@ -94,6 +96,22 @@
     .widthIs(20/frameWidth*viewX)
     .heightIs(40/frameHeight*viewY);
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    //注册信息
+    UIButton *btprofile = [UIButton new];
+    [self.view addSubview:btprofile];
+    [btprofile setImage:[UIImage imageNamed:@"back_mine"] forState:UIControlStateNormal];
+   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
+   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
+   // [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    //[btBack setcontentf]
+    btprofile.sd_layout
+    .rightSpaceToView(self.view, 50.0/frameWidth*viewX)
+    .centerYEqualToView(imageTop)
+    .widthIs(40/frameWidth*viewX)
+    .heightIs(60/frameHeight*viewY);
+    [btprofile addTarget:self action:@selector(goprofile) forControlEvents:UIControlEventTouchUpInside];
     
     
     //左上文字1
@@ -1056,6 +1074,12 @@
     [baby cancelAllPeripheralsConnection];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
+-(void)goprofile{
+    RegistViewController *registViewController = [RegistViewController new];
+    [self.navigationController pushViewController:registViewController animated:YES];
+}
+
 
 -(void)dealloc{
     [self.timer invalidate];

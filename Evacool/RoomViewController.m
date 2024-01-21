@@ -13,6 +13,8 @@
 #import "crc.h"
 #import "detailViewController.h"
 #import "faultsViewController.h"
+#import "RegistViewController.h"
+
 
 @interface RoomViewController ()
 @property (nonatomic,retain) MBProgressHUD *hud;
