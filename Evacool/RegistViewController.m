@@ -9,7 +9,7 @@
 #import "SDAutoLayout.h"
 #import "MBProgressHUD.h"
 
-@interface RegistViewController ()
+@interface RegistViewController ()<UITextFieldDelegate>
 @property(nonatomic,strong)NSString *userNmae;
 @property(nonatomic,strong)NSString *phone;
 @property(nonatomic,strong)NSString *email;
@@ -86,6 +86,8 @@
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
     [txtname setTextAlignment:NSTextAlignmentLeft];
+    [txtname setReturnKeyType:UIReturnKeyDone];
+    [txtname setDelegate:self];
     
     
     //联系
@@ -113,6 +115,8 @@
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
     [txtphone setTextAlignment:NSTextAlignmentLeft];
+    [txtphone setReturnKeyType:UIReturnKeyDone];
+    [txtphone setDelegate:self];
     
     
     //电邮
@@ -139,7 +143,23 @@
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
     [txtmail setTextAlignment:NSTextAlignmentLeft];
+    [txtmail setReturnKeyType:UIReturnKeyDone];
+    [txtmail setDelegate:self];
     
+    
+    //确认按钮
+    UIButton *btconfirm = [UIButton new];
+    [self.view addSubview:btconfirm];
+    //[btconfirm setBackgroundColor:[UIColor blueColor]];
+    [btconfirm setTitle:@"Submit" forState:UIControlStateNormal];
+    [btconfirm setSd_cornerRadius:@10.0];
+    btconfirm.sd_layout
+    .centerXEqualToView(self.view)
+    .widthIs(500/frameWidth*viewX)
+    .topSpaceToView(self.view, 1050/frameHeight*viewY)
+    .heightIs(90/frameHeight*viewY);
+    [btconfirm setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
+    [btconfirm addTarget:self action:@selector(goinfo) forControlEvents:UIControlEventTouchUpInside];
     
     
 }
@@ -148,6 +168,20 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+-(void) goinfo{
+    
+    
+    
+}
+
+#pragma mark - UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)aTextfield {
+     [aTextfield resignFirstResponder];//关闭键盘
+    return YES;
+}
+
+
 
 
 /*
