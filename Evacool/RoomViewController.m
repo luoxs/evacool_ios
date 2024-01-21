@@ -21,6 +21,7 @@
 @property (nonatomic,retain) UILabel *labelUp;
 @property (nonatomic,retain) UILabel *labelTemp;
 @property (nonatomic,retain) UILabel *labelStatus;
+@property (nonatomic,retain) UIImageView *imgdot;
 @property (nonatomic,retain) SemiCircleProgressView *progress;
 @property (nonatomic,retain) UIImageView *imgfan1;
 @property (nonatomic,retain) UIImageView *imgfan2;
@@ -175,6 +176,18 @@
     .topSpaceToView(self.labelTemp, 30.0/frameHeight*viewY)
     .widthIs(600.0/frameWidth*viewX)
     .heightIs(24.0/frameHeight*viewY);
+    
+    //绿色点
+    self.imgdot = [UIImageView new];
+    [self.imgdot setImage:[UIImage imageNamed:@"greendot"]];
+    [self.view addSubview:self.imgdot];
+    self.imgdot.sd_layout
+    .centerYEqualToView(self.labelStatus)
+    .leftSpaceToView(self.view, 230/frameWidth*viewX)
+    .widthIs(20/frameWidth*viewX)
+    .heightEqualToWidth();
+    [self.imgdot setHidden:YES];
+    
      
     //温度减
     UIButton *btTempMinus = [UIButton new];
@@ -928,10 +941,12 @@
     //故障
     if(self.dataRead.errcode == 0x00){
         self.labelStatus.text = @"In Good Condition";
+        [self.imgdot setHidden:NO];
         [self.labelStatus setTextColor:[UIColor blackColor]];
     }else{
         self.labelStatus.text = [NSString stringWithFormat:@"Fault Code:E%d",self.dataRead.errcode];
         [self.labelStatus setTextColor:[UIColor redColor]];
+        [self.imgdot setHidden:YES];
     }
     
     if(self.dataRead.power == 0){
@@ -962,7 +977,7 @@
         [self.switchUnit setOn:NO];
         [self.switchUnit setEnabled:NO];
         [self.progress setchgt:2];
-        
+        [self.imgdot setHidden:YES];
     }else{
         [self.btswitchfan setEnabled:YES];
         [self.btswitchfan setBackgroundImage:[UIImage imageNamed:@"switch"] forState:UIControlStateNormal];
@@ -975,6 +990,7 @@
         [self.bthuimit setEnabled:YES];
         [self.btvent setEnabled:YES];
         [self.btheat setEnabled:YES];
+        [self.imgdot setHidden:NO];
     }
 }
 

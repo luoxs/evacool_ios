@@ -26,6 +26,7 @@
 		453B7A022B5D1C16008A6457 /* a1509.png in Resources */ = {isa = PBXBuildFile; fileRef = 453B79FF2B5D1C16008A6457 /* a1509.png */; };
 		453B7A032B5D1C16008A6457 /* wps.png in Resources */ = {isa = PBXBuildFile; fileRef = 453B7A002B5D1C16008A6457 /* wps.png */; };
 		453B7A052B5D2B70008A6457 /* goback.png in Resources */ = {isa = PBXBuildFile; fileRef = 453B7A042B5D2B70008A6457 /* goback.png */; };
+		453B7A072B5D2FEF008A6457 /* greendot.png in Resources */ = {isa = PBXBuildFile; fileRef = 453B7A062B5D2FEF008A6457 /* greendot.png */; };
 		453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E124A2B3AC20200D5C032 /* HomeViewController.m */; };
 		4543B0332B4810590070A847 /* crc.c in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02A2B4810580070A847 /* crc.c */; };
 		4543B0342B4810590070A847 /* DataWrite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02B2B4810580070A847 /* DataWrite.m */; };
@@ -158,6 +159,7 @@
 		453B79FF2B5D1C16008A6457 /* a1509.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = a1509.png; sourceTree = "<group>"; };
 		453B7A002B5D1C16008A6457 /* wps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wps.png; sourceTree = "<group>"; };
 		453B7A042B5D2B70008A6457 /* goback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goback.png; sourceTree = "<group>"; };
+		453B7A062B5D2FEF008A6457 /* greendot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greendot.png; sourceTree = "<group>"; };
 		453E12492B3AC20200D5C032 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		453E124A2B3AC20200D5C032 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		4543B0292B4810580070A847 /* DataWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataWrite.h; path = Evacool/Datas/DataWrite.h; sourceTree = SOURCE_ROOT; };
@@ -344,6 +346,7 @@
 		454E9F0C2B3AEE93009F7B3A /* images */ = {
 			isa = PBXGroup;
 			children = (
+				453B7A062B5D2FEF008A6457 /* greendot.png */,
 				453B7A042B5D2B70008A6457 /* goback.png */,
 				453B79FE2B5D1C16008A6457 /* a91.png */,
 				453B79FF2B5D1C16008A6457 /* a1509.png */,
@@ -583,6 +586,7 @@
 				454D86162B5C36A100938793 /* btreturn.png in Resources */,
 				45D49FBF2B3C7352001A4E22 /* turbooff.png in Resources */,
 				45D49FC42B3C7352001A4E22 /* cooloff.png in Resources */,
+				453B7A072B5D2FEF008A6457 /* greendot.png in Resources */,
 				45D49FC72B3C7352001A4E22 /* batteryon.png in Resources */,
 				454E9F652B3AF08F009F7B3A /* switch_off.png in Resources */,
 				4543B0542B4833D60070A847 /* 9.png in Resources */,
