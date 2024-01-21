@@ -62,7 +62,7 @@
     //返回按钮
     UIButton *btBack = [UIButton new];
     [self.view addSubview:btBack];
-    [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
+    [btBack setImage:[UIImage imageNamed:@"goback"] forState:UIControlStateNormal];
    // [btBack setContentMode:UIViewContentModeScaleAspectFill];
     [btBack setContentMode:UIViewContentModeScaleAspectFill];
     [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
@@ -73,7 +73,6 @@
     .widthIs(20/frameWidth*viewX)
     .heightIs(40/frameHeight*viewY);
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
-    
     
     //姓名
     UILabel *labelname = [UILabel new];
@@ -169,7 +168,6 @@
     .heightIs(50/frameHeight*viewY);
     [labelproduct setTextAlignment:NSTextAlignmentLeft];
     
-    
     UILabel *txtproduct= [UILabel new];
     [self.view addSubview:txtproduct];
     [txtproduct setText:@""];
@@ -181,7 +179,8 @@
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
     [txtproduct setTextAlignment:NSTextAlignmentLeft];
-    [txtproduct setText:self.userNmae];
+    NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+    [txtproduct setText:[mydefaults objectForKey:@"brand"]];
   
 
     //产品序列号
@@ -234,10 +233,15 @@
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
     [txtdate setTextAlignment:NSTextAlignmentLeft];
-    [txtdate setText:self.email];
-  
     
-    //确认按钮
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy hh:mm"];//设置格式
+    NSTimeZone* timeZone = [NSTimeZone localTimeZone];//设置时区
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    [txtdate setText:dateString];
+    
+    //查看手册
     UIButton *btmanual = [UIButton new];
     [self.view addSubview:btmanual];
     //[btconfirm setBackgroundColor:[UIColor blueColor]];
@@ -250,6 +254,19 @@
     .heightIs(90/frameHeight*viewY);
     [btmanual setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
   //  [btmanual addTarget:self action:@selector(goinfo) forControlEvents:UIControlEventTouchUpInside];
+    
+    UILabel *labelcpright = [UILabel new];
+    [self.view addSubview:labelcpright];
+    [labelcpright setText:@"Tel:0(535) 728 77 97\nE-mail:info@evacoll.com.tr"];
+    [labelcpright setNumberOfLines:2];
+    [labelcpright setTextColor:[UIColor blackColor]];
+    [labelcpright setFont:[UIFont fontWithName:@"Arial" size:10]];
+    [labelcpright setTextAlignment:NSTextAlignmentCenter];
+    labelcpright.sd_layout
+    .centerXEqualToView(self.view)
+    .bottomSpaceToView(self.view, 20/frameHeight*viewY)
+    .widthIs(400/frameWidth*viewX)
+    .heightIs(90/frameHeight*viewY);
     
     
 }

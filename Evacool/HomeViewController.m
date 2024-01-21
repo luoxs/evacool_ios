@@ -479,6 +479,8 @@
                     truckViewController.currPeripheral = weakSelf.currPeripheral;
                     truckViewController.characteristic = c;
                     truckViewController.brand = weakSelf.brand;
+                    NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+                    [mydefaults setObject:@"Eva 24V Trunck Air Conditioner" forKey:@"brand"];
                     [weakSelf.navigationController pushViewController:truckViewController animated:YES];
                   //  [weakSelf presentViewController:truckViewController animated:YES completion:nil];
                 }else  if([weakSelf.brand isEqualToString:@"EVA12VRV"]){
@@ -487,6 +489,8 @@
                     truckViewController.currPeripheral = weakSelf.currPeripheral;
                     truckViewController.characteristic = c;
                     truckViewController.brand = weakSelf.brand;
+                    NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+                    [mydefaults setObject:@"Eva 12V RV Air Conditioner" forKey:@"brand"];
                    // [weakSelf presentViewController:truckViewController animated:YES completion:nil];
                     [weakSelf.navigationController pushViewController:truckViewController animated:YES];
                 }else{
@@ -495,6 +499,8 @@
                     roomViewController.currPeripheral = weakSelf.currPeripheral;
                     roomViewController.characteristic = c;
                     roomViewController.brand = weakSelf.brand;
+                    NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+                    [mydefaults setObject:@"Eva 2700RV Air Conditioner" forKey:@"brand"];
                     //[weakSelf presentViewController:roomViewController animated:YES completion:nil];
                     [weakSelf.navigationController pushViewController:roomViewController animated:YES];
                 }
