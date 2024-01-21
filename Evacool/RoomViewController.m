@@ -838,20 +838,12 @@
         self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
         [self.switchUnit setOn:YES];
         self.progress.percent = (self.dataRead.tempSetting - 16)/14.0;
-        if(self.dataRead.tempReal>=self.dataRead.tempSetting){
-            [self.progress setchgt:0];  // 降温
-        }else{
-            [self.progress setchgt:1];  //加热
-        }
+        [self.progress setchgt:0];  // 降温
     }else{
         self.labelTemp.text = [NSString stringWithFormat:@"%d°F",self.dataRead.tempSetting];
         [self.switchUnit setOn:NO];
         self.progress.percent = (self.dataRead.tempSetting - 60)/26.0;
-        if(self.dataRead.tempReal>=self.dataRead.tempSetting){
-            [self.progress setchgt:0];  // 降温
-        }else{
-            [self.progress setchgt:1];  //加热
-        }
+        [self.progress setchgt:0];  // 降温
     }
     
    
@@ -951,16 +943,17 @@
         [self.btTurbo setImage:[UIImage imageNamed:@"16"] forState:UIControlStateNormal];
         [self.btSleep setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
         [self.btLight setImage:[UIImage imageNamed:@"20"] forState:UIControlStateNormal];
-        [self.btauto setEnabled:NO];
-        [self.btcool setEnabled:NO];
-        [self.bthuimit setEnabled:NO];
-        [self.btvent setEnabled:NO];
-        [self.btheat setEnabled:NO];
+
         [self.btauto setBackgroundImage:[UIImage imageNamed:@"3"] forState:UIControlStateNormal];
         [self.btcool setBackgroundImage:[UIImage imageNamed:@"5"] forState:UIControlStateNormal];;
         [self.bthuimit setBackgroundImage:[UIImage imageNamed:@"7"] forState:UIControlStateNormal];
         [self.btvent setBackgroundImage:[UIImage imageNamed:@"9"] forState:UIControlStateNormal];
         [self.btheat setBackgroundImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
+        [self.btauto setEnabled:NO];
+        [self.btcool setEnabled:NO];
+        [self.bthuimit setEnabled:NO];
+        [self.btvent setEnabled:NO];
+        [self.btheat setEnabled:NO];
         [self.btTurbo setEnabled:NO];
         [self.btSleep setEnabled:NO];
         [self.btLight setEnabled:NO];
