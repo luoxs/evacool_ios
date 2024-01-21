@@ -21,6 +21,7 @@
 		450858A52B3B195900770387 /* instein.png in Resources */ = {isa = PBXBuildFile; fileRef = 450858A32B3B195900770387 /* instein.png */; };
 		450858A82B3B257100770387 /* TruckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 450858A72B3B257100770387 /* TruckViewController.m */; };
 		453B79FA2B5CF97F008A6457 /* RegistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453B79F92B5CF97F008A6457 /* RegistViewController.m */; };
+		453B79FD2B5D0ED0008A6457 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453B79FC2B5D0ED0008A6457 /* ProfileViewController.m */; };
 		453E124B2B3AC20200D5C032 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E124A2B3AC20200D5C032 /* HomeViewController.m */; };
 		4543B0332B4810590070A847 /* crc.c in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02A2B4810580070A847 /* crc.c */; };
 		4543B0342B4810590070A847 /* DataWrite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02B2B4810580070A847 /* DataWrite.m */; };
@@ -147,6 +148,8 @@
 		450858A72B3B257100770387 /* TruckViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = TruckViewController.m; path = Evacool/TruckViewController.m; sourceTree = SOURCE_ROOT; };
 		453B79F82B5CF97F008A6457 /* RegistViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistViewController.h; sourceTree = "<group>"; };
 		453B79F92B5CF97F008A6457 /* RegistViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistViewController.m; sourceTree = "<group>"; };
+		453B79FB2B5D0ED0008A6457 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		453B79FC2B5D0ED0008A6457 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		453E12492B3AC20200D5C032 /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		453E124A2B3AC20200D5C032 /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		4543B0292B4810580070A847 /* DataWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataWrite.h; path = Evacool/Datas/DataWrite.h; sourceTree = SOURCE_ROOT; };
@@ -444,6 +447,8 @@
 				45D49FDD2B3D952F001A4E22 /* SemiCircleProgressView.m */,
 				453B79F82B5CF97F008A6457 /* RegistViewController.h */,
 				453B79F92B5CF97F008A6457 /* RegistViewController.m */,
+				453B79FB2B5D0ED0008A6457 /* ProfileViewController.h */,
+				453B79FC2B5D0ED0008A6457 /* ProfileViewController.m */,
 				4562D7952B5C21FD007C871C /* LogoViewController.h */,
 				4562D7962B5C21FD007C871C /* LogoViewController.m */,
 				453E12492B3AC20200D5C032 /* HomeViewController.h */,
@@ -683,6 +688,7 @@
 				4543B0332B4810590070A847 /* crc.c in Sources */,
 				4543B0362B4810590070A847 /* DataRead.m in Sources */,
 				457F8AFA2B1EAB0300FA7ABB /* AppDelegate.m in Sources */,
+				453B79FD2B5D0ED0008A6457 /* ProfileViewController.m in Sources */,
 				457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */,
 				45DF31252B4547BA00519C55 /* detailViewController.m in Sources */,
 				450858A82B3B257100770387 /* TruckViewController.m in Sources */,

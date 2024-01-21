@@ -1,24 +1,20 @@
 //
-//  RegistViewController.m
+//  ProfileViewController.m
 //  Evacool
 //
 //  Created by 罗路雅 on 2024/1/21.
 //
 
-#import "RegistViewController.h"
+#import "ProfileViewController.h"
 #import "SDAutoLayout.h"
 #import "MBProgressHUD.h"
-#import "ProfileViewController.h"
 
-@interface RegistViewController ()<UITextFieldDelegate>
-@property(nonatomic,strong)UITextField *userNmae;
-@property(nonatomic,strong)UITextField *phone;
-@property(nonatomic,strong)UITextField *email;
-@property(nonatomic,strong)NSString *product;
-@property(nonatomic,strong)NSDate *regdate;
+@interface ProfileViewController ()
+
 @end
 
-@implementation RegistViewController
+@implementation ProfileViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -49,18 +45,6 @@
     .heightIs(40/frameHeight*viewY);
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
     
-    //标题
-    UILabel *labeltitle = [UILabel new];
-    [self.view addSubview:labeltitle];
-    [labeltitle setText:@"Warranty Registration"];
-    [labeltitle setTextColor:[UIColor blackColor]];
-    [labeltitle setFont:[UIFont fontWithName:@"Arial" size:20]];
-    labeltitle.sd_layout
-    .centerXEqualToView(self.view)
-    .topSpaceToView(btBack, 50/frameHeight*viewY)
-    .widthIs(400/frameWidth*viewX)
-    .heightIs(50/frameHeight*viewY);
-    [labeltitle setTextAlignment:NSTextAlignmentCenter];
     
     //姓名
     UILabel *labelname = [UILabel new];
@@ -70,27 +54,26 @@
     [labelname setFont:[UIFont fontWithName:@"Arial" size:16]];
     labelname.sd_layout
     .leftSpaceToView(self.view, 50/frameWidth*viewX)
-    .topSpaceToView(self.view, 450/frameHeight*viewY)
+    .topSpaceToView(self.view, 650/frameHeight*viewY)
     .widthIs(400/frameWidth*viewX)
     .heightIs(50/frameHeight*viewY);
     [labelname setTextAlignment:NSTextAlignmentLeft];
     
     
-    self.userNmae = [UITextField new];
-    [self.view addSubview: self.userNmae];
-    [ self.userNmae setText:@""];
-    [ self.userNmae setTextColor:[UIColor blackColor]];
-    [ self.userNmae setFont:[UIFont fontWithName:@"Arial" size:16]];
-    self.userNmae.sd_layout
+    UILabel *txtname = [UILabel new];
+    [self.view addSubview:txtname];
+    [txtname setText:@""];
+    [txtname setTextColor:[UIColor blackColor]];
+    [txtname setFont:[UIFont fontWithName:@"Arial" size:16]];
+    txtname.sd_layout
         .leftSpaceToView(self.view, 260/frameWidth*viewX)
-        .topSpaceToView(self.view, 450/frameHeight*viewY)
+        .topSpaceToView(self.view, 650/frameHeight*viewY)
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
-    [ self.userNmae setTextAlignment:NSTextAlignmentLeft];
-    [ self.userNmae setReturnKeyType:UIReturnKeyDone];
-    [ self.userNmae setDelegate:self];
-    
-    
+    [txtname setTextAlignment:NSTextAlignmentLeft];
+    [txtname setText:self.userNmae];
+  
+
     //联系
     UILabel *labelphone = [UILabel new];
     [self.view addSubview:labelphone];
@@ -99,27 +82,24 @@
     [labelphone setFont:[UIFont fontWithName:@"Arial" size:16]];
     labelphone.sd_layout
     .leftSpaceToView(self.view, 50/frameWidth*viewX)
-    .topSpaceToView(self.view, 650/frameHeight*viewY)
+    .topSpaceToView(self.view, 780/frameHeight*viewY)
     .widthIs(400/frameWidth*viewX)
     .heightIs(50/frameHeight*viewY);
     [labelphone setTextAlignment:NSTextAlignmentLeft];
     
-    
-    self.phone = [UITextField new];
-    [self.view addSubview:self.phone];
-    [self.phone setText:@""];
-    [self.phone setTextColor:[UIColor blackColor]];
-    [self.phone setFont:[UIFont fontWithName:@"Arial" size:16]];
-    self.phone.sd_layout
+    UILabel *txtphone = [UILabel new];
+    [self.view addSubview:txtphone];
+    [txtphone setText:@""];
+    [txtphone setTextColor:[UIColor blackColor]];
+    [txtphone setFont:[UIFont fontWithName:@"Arial" size:16]];
+    txtphone.sd_layout
         .leftSpaceToView(self.view, 260/frameWidth*viewX)
-        .topSpaceToView(self.view, 650/frameHeight*viewY)
+        .topSpaceToView(self.view, 780/frameHeight*viewY)
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
-    [self.phone setTextAlignment:NSTextAlignmentLeft];
-    [self.phone setReturnKeyType:UIReturnKeyDone];
-    [self.phone setDelegate:self];
-    
-    
+    [txtphone setTextAlignment:NSTextAlignmentLeft];
+    [txtphone setText:self.phone];
+
     //电邮
     UILabel *labelmail = [UILabel new];
     [self.view addSubview:labelmail];
@@ -128,24 +108,26 @@
     [labelmail setFont:[UIFont fontWithName:@"Arial" size:16]];
     labelmail.sd_layout
     .leftSpaceToView(self.view, 50/frameWidth*viewX)
-    .topSpaceToView(self.view, 850/frameHeight*viewY)
+    .topSpaceToView(self.view, 910/frameHeight*viewY)
     .widthIs(400/frameWidth*viewX)
     .heightIs(50/frameHeight*viewY);
     [labelmail setTextAlignment:NSTextAlignmentLeft];
     
-    self.email = [UITextField new];
-    [self.view addSubview:self.email];
-    [self.email setText:@""];
-    [self.email setTextColor:[UIColor blackColor]];
-    [self.email setFont:[UIFont fontWithName:@"Arial" size:16]];
-    self.email.sd_layout
+    UILabel *txtmail = [UILabel new];
+    [self.view addSubview:txtmail];
+    [txtmail setText:@""];
+    [txtmail setTextColor:[UIColor blackColor]];
+    [txtmail setFont:[UIFont fontWithName:@"Arial" size:16]];
+    txtmail.sd_layout
         .leftSpaceToView(self.view, 260/frameWidth*viewX)
-        .topSpaceToView(self.view, 850/frameHeight*viewY)
+        .topSpaceToView(self.view, 910/frameHeight*viewY)
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
-    [self.email setTextAlignment:NSTextAlignmentLeft];
-    [self.email setReturnKeyType:UIReturnKeyDone];
-    [self.email setDelegate:self];
+    [txtmail setTextAlignment:NSTextAlignmentLeft];
+    [txtmail setText:self.email];
+  
+    
+    
     
     
     //确认按钮
@@ -169,26 +151,6 @@
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-
--(void) goinfo{
-    ProfileViewController *profileViewController = [ProfileViewController new];
-    profileViewController.userNmae =  self.userNmae.text;
-    profileViewController.phone = self.phone.text;
-    profileViewController.email = self.email.text;
-    [self.navigationController pushViewController:profileViewController animated:YES];
-    
-    
-}
-
-#pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)aTextfield {
-     [aTextfield resignFirstResponder];//关闭键盘
-    return YES;
-}
-
-
-
-
 /*
 #pragma mark - Navigation
 
