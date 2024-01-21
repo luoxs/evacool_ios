@@ -835,17 +835,24 @@
     if(self.dataRead.unit == 0x01){
         self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
         [self.switchUnit setOn:YES];
+        self.progress.percent = (self.dataRead.tempSetting - 16)/14.0;
+        if(self.dataRead.tempReal>=self.dataRead.tempSetting){
+            [self.progress setchgt:0];  // 降温
+        }else{
+            [self.progress setchgt:1];  //加热
+        }
     }else{
         self.labelTemp.text = [NSString stringWithFormat:@"%d°F",self.dataRead.tempSetting];
         [self.switchUnit setOn:NO];
+        self.progress.percent = (self.dataRead.tempSetting - 60)/26.0;
+        if(self.dataRead.tempReal>=self.dataRead.tempSetting){
+            [self.progress setchgt:0];  // 降温
+        }else{
+            [self.progress setchgt:1];  //加热
+        }
     }
     
-    self.progress.percent = (self.dataRead.tempSetting - 16)/14.0;
-    if(self.dataRead.tempReal>=self.dataRead.tempSetting){
-        [self.progress setchgt:0];  // 降温
-    }else{
-        [self.progress setchgt:1];  //加热
-    }
+   
     
     //风量
     [self.imgfan1 setImage:[UIImage imageNamed:@"d1"]];
