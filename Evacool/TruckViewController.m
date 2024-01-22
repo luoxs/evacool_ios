@@ -1014,8 +1014,9 @@
         [self.buttonDetails setEnabled:NO];
         [self.buttonFaults setEnabled:NO];
         [self.switchSleep setEnabled:NO];
+        [self.labelTimer setTextColor:[UIColor grayColor]];
         [self.btBattery setEnabled:NO];
-        [self.switchSleep setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
+     //   [self.switchSleep setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
         [self.progress setchgt:2];
         [self.imgdot setHidden:YES];
         
@@ -1030,6 +1031,8 @@
         [self.btBattery setEnabled:YES];
         [self.buttonDetails setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
         [self.buttonFaults setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
+        [self.switchSleep setEnabled:YES];
+        [self.labelTimer setTextColor:[UIColor blackColor]];
         //温度
         self.labelTemp.text = [NSString stringWithFormat:@"%d°C",self.dataRead.tempSetting];
         self.progress.percent = (self.dataRead.tempSetting - 15)/15.0;

@@ -572,6 +572,16 @@
     self.hud.label.text = @"connect to device.....";
     [self.hud showAnimated:YES];
     
+    CBPeripheral *pereipheral = (CBPeripheral *)[self.devices objectAtIndex:indexPath.row];
+    NSArray *strs = [pereipheral.name componentsSeparatedByString:@"-"];
+    if(strs.count>=2){
+        NSString *strSerial = [strs objectAtIndex:1];
+        NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+        [mydefaults setObject:strSerial forKey:@"serial"];
+    }
+    
+   
+    
 }
 #pragma mark - Navigation
 

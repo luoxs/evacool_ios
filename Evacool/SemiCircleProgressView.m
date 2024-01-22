@@ -81,7 +81,7 @@
     _upperShapeLayer.lineCap = kCALineCapButt;
     _upperShapeLayer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:4], nil];
     if(c==0){
-        _upperShapeLayer.strokeColor = [UIColor blueColor].CGColor;
+        _upperShapeLayer.strokeColor = [UIColor colorWithRed:29/255.0 green:130/255.0 blue:254/255.0 alpha:1].CGColor;
     }else if(c==1){
         _upperShapeLayer.strokeColor = [UIColor brownColor].CGColor;
     }else{
@@ -112,7 +112,8 @@
     _longShapeLayer.lineDashPattern = [NSArray arrayWithObjects:[NSNumber numberWithInt:2],[NSNumber numberWithInt:4], nil];
     //_longShapeLayer.strokeColor     = [UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0].CGColor;
     if(c==0){
-        _longShapeLayer.strokeColor = [UIColor blueColor].CGColor;
+        _longShapeLayer.strokeColor  = [UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0].CGColor;
+       // _longShapeLayer.strokeColor = [UIColor blueColor].CGColor;
     }else if(c==1){
         _longShapeLayer.strokeColor = [UIColor brownColor].CGColor;
     }else{

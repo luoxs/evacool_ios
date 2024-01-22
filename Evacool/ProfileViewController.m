@@ -207,7 +207,8 @@
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
     [txtserial setTextAlignment:NSTextAlignmentLeft];
-    [txtserial setText:self.phone];
+   // NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+    [txtserial setText:[mydefaults objectForKey:@"serial"]];
 
     //日期
     UILabel *labeldate = [UILabel new];
