@@ -24,7 +24,6 @@
 @property (nonatomic,strong) UITableView *tableview;
 @property (nonatomic,retain)  AVCaptureSession *session; //扫描二维码会话
 @property (nonatomic,retain)  AVCaptureVideoPreviewLayer *layer;
-
 @end
 
 @implementation HomeViewController
@@ -42,7 +41,6 @@
     [self setAutoLayout];
     baby = [BabyBluetooth shareBabyBluetooth];
     [self babyDelegate];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tongzhi:) name:@"tongzhi"object:nil];
 }
 
@@ -94,7 +92,7 @@
     double viewY = [UIScreen mainScreen].bounds.size.height;
     [self.view setBackgroundColor:[UIColor colorWithRed:246.0/255 green:248.0/255 blue:249.0/255 alpha:1.0]];
     
-    //顶部文字
+    //顶部logo
     UIImageView *imageTop = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"imagetop"]];
     [self.view addSubview:imageTop];
     imageTop.sd_layout
@@ -119,19 +117,18 @@
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
     
     
-    //水平视图,扫描
+    //水平视图
     UIView *view4 = [UIView new];
     [view4 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:view4];
     view4.sd_layout
-       // .leftSpaceToView(self.view, 35.0/frameWidth*viewX)
         .centerXEqualToView(self.view)
         .topSpaceToView(self.view, 482.0/frameHeight*viewY)
         .widthIs(332.0/frameWidth*viewX)
         .heightIs(196.0/frameHeight*viewY);
     [view4 setSd_cornerRadius:@10.0];
     
-    //扫描按钮
+    //二维码扫描按钮
     UIButton *imageScan = [UIButton new];
     [imageScan setBackgroundImage:[UIImage imageNamed:@"qr"] forState:UIControlStateNormal];
     [view4 addSubview:imageScan];
@@ -210,50 +207,6 @@
         [lbbrand setText:@"RV\nAir Conditioner"];
     }
     
-    /*
-    //底部logo1
-    UIImageView *imageLogo1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"germany"]];
-    [self.view addSubview:imageLogo1];
-    imageLogo1.sd_layout
-        .leftSpaceToView(self.view, 116.0/frameWidth*viewX)
-        .topSpaceToView(self.view, 1440.0/frameHeight*viewY)
-        .widthIs(154.0/frameWidth*viewX)
-        .heightIs(84.0/frameHeight*viewY);
-    
-    //底部logo2
-    UIImageView *imageLogo2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"instein"]];
-    [self.view addSubview:imageLogo2];
-    imageLogo2.sd_layout
-        .rightSpaceToView(self.view, 116.0/frameWidth*viewX)
-        .topSpaceToView(self.view, 1440.0/frameHeight*viewY)
-        .widthIs(154.0/frameWidth*viewX)
-        .heightIs(84.0/frameHeight*viewY);
-    
-    UILabel *labelEva = [UILabel new];
-    [self.view addSubview:labelEva];
-    labelEva.text = @"www.evacool.com.tr";
-    [labelEva setTextColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0]];
-    [labelEva setTextAlignment:NSTextAlignmentCenter];
-    [labelEva setFont:[UIFont fontWithName:@"Arial" size:12.0]];
-    labelEva.sd_layout
-        .centerXEqualToView(imageLogo1)
-        .topSpaceToView(imageLogo1, 10.0/frameHeight*viewY)
-        .widthIs(300.0/frameWidth*viewX)
-        .heightIs(20.0/frameHeight*viewY);
-    
-    UILabel *labeleinstein = [UILabel new];
-    [self.view addSubview:labeleinstein];
-    labeleinstein.text = @"www.einsteinmobilehomes.de";
-    [labeleinstein setTextColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0]];
-    [labeleinstein setTextAlignment:NSTextAlignmentCenter];
-    [labeleinstein setFont:[UIFont fontWithName:@"Arial" size:12.0]];
-    labeleinstein.sd_layout
-        .centerXEqualToView(imageLogo2)
-        .topSpaceToView(imageLogo2, 10.0/frameHeight*viewY)
-        .widthIs(400.0/frameWidth*viewX)
-        .heightIs(20.0/frameHeight*viewY);
-    */
-    
     //蒙层
     self.viewMusk = [UIView new];
     [self.view addSubview:self.viewMusk];
@@ -291,8 +244,6 @@
 -(void)goback{
     [self.devices removeAllObjects];
     [baby cancelAllPeripheralsConnection];
-   // self.currPeripheral = nil;
-   // self.characteristic = nil;
     [baby.centralManager stopScan];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -303,7 +254,6 @@
     vc.brand = self.brand;
     [self.navigationController.navigationBar setHidden:NO];
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
 
 
@@ -318,7 +268,6 @@
 
 
 //点击cancle（取消）之后执行的代码
-
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -544,19 +493,30 @@
     return [self.devices count];
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellID = @"cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     if(!cell){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
     [cell setBackgroundColor:[UIColor whiteColor]];
     
     //CBPeripheral *peripheral = [self.devices objectAtIndex:indexPath.row];
     NSString *advertiseName = [self.localNames objectAtIndex:indexPath.row];
-    [cell.textLabel setText:advertiseName];
-    [cell.textLabel setTextColor:[UIColor blackColor]];
+//    [cell.textLabel setText:advertiseName];
+//    [cell.textLabel setTextColor:[UIColor blackColor]];
+   
+    UILabel *labelname = [UILabel new];
+    [cell addSubview:labelname];
+    [labelname setTextColor:[UIColor colorWithRed:29/255.0 green:130/255.0 blue:254/255.0 alpha:1]];
+    [labelname setFont:[UIFont fontWithName:@"Arial" size:18]];
+    [labelname setFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
+    [labelname setTextAlignment:NSTextAlignmentCenter];
+    [labelname setText:advertiseName];
+    
+    
+    
+    
     
     return cell;
 }
@@ -565,6 +525,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [baby.centralManager stopScan];
     [baby cancelAllPeripheralsConnection];
+    [baby.centralManager stopScan];
     [baby.centralManager connectPeripheral:[self.devices objectAtIndex:indexPath.row] options:nil];
     
     self.hud = [MBProgressHUD showHUDAddedTo:self.viewMusk animated:YES];
@@ -579,9 +540,6 @@
         NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
         [mydefaults setObject:strSerial forKey:@"serial"];
     }
-    
-   
-    
 }
 #pragma mark - Navigation
 
