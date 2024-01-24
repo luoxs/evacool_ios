@@ -82,7 +82,7 @@
     //中间文字下
     UILabel *labelDown = [UILabel new];
     [self.view addSubview:labelDown];
-    labelDown.text = @"Select Production for Connection";
+    labelDown.text = @"Select Product for Connection";
     [labelDown setTextColor:[UIColor blackColor]];
     [labelDown setTextAlignment:NSTextAlignmentCenter];
     [labelDown setFont:[UIFont fontWithName:@"Arial" size:14.0]];

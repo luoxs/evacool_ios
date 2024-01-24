@@ -116,14 +116,35 @@
     .heightIs(40/frameHeight*viewY);
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
     
+    //品牌
+    UILabel *lbbrand = [UILabel new];
+    [self.view addSubview:lbbrand];
+    [lbbrand setTextColor:[UIColor blackColor]];
+    [lbbrand setTextAlignment:NSTextAlignmentCenter];
+    [lbbrand setFont:[UIFont fontWithName:@"Arial" size:18]];
+    lbbrand.numberOfLines = 2;
+    lbbrand.sd_layout
+    .centerXEqualToView(self.view)
+    .topSpaceToView(self.view, 382/frameHeight*viewY)
+    .widthIs(332.0/frameWidth*viewX)
+    .heightIs(196.0/frameHeight*viewY);
     
-    //水平视图
+    if([self.brand isEqualToString:@"EVA24VTR"]){
+        [lbbrand setText:@"Truck\nAir Conditioner"];
+    }else if([self.brand isEqualToString:@"EVA12VRV"]){
+        [lbbrand setText:@"12V RV\nAir Conditioner"];
+    }else{
+        [lbbrand setText:@"RV\nAir Conditioner"];
+    }
+    
+    
+    //视图4，包含二维码按钮和文字提示
     UIView *view4 = [UIView new];
     [view4 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:view4];
     view4.sd_layout
         .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 482.0/frameHeight*viewY)
+        .topSpaceToView(self.view, 722.0/frameHeight*viewY)
         .widthIs(332.0/frameWidth*viewX)
         .heightIs(196.0/frameHeight*viewY);
     [view4 setSd_cornerRadius:@10.0];
@@ -139,7 +160,7 @@
         .heightEqualToWidth();
     [imageScan addTarget:self action:@selector(scanQRcode) forControlEvents:UIControlEventTouchUpInside];
     
-    //扫描文字
+    //文字提示
     UILabel *labelscan = [UILabel new];
     [view4 addSubview:labelscan];
     labelscan.text = @"Scan QR Code";
@@ -151,14 +172,14 @@
         .widthIs(300.0/frameWidth*viewX)
         .heightIs(30.0/frameHeight*viewY);
     
-    //水平视图，蓝牙
+    //视图5，包含蓝牙按钮和文字提示
     UIView *view5 = [UIView new];
     [view5 setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:view5];
     view5.sd_layout
         //.rightSpaceToView(self.view, 35.0/frameWidth*viewX)
         .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 822.0/frameHeight*viewY)
+        .topSpaceToView(view4, 100/frameHeight*viewY)
         .widthIs(332.0/frameWidth*viewX)
         .heightIs(196.0/frameHeight*viewY);
     [view4 setSd_cornerRadius:@10.0];
@@ -174,7 +195,7 @@
         .heightEqualToWidth();
     [imageBluetooth addTarget:self action:@selector(scan) forControlEvents:UIControlEventTouchUpInside];
     
-    //蓝牙文字
+    //文字提示
     UILabel *labelBluetooth = [UILabel new];
     [view5 addSubview:labelBluetooth];
     labelBluetooth.text = @"Search For Device";
@@ -186,26 +207,6 @@
         .widthIs(300.0/frameWidth*viewX)
         .heightIs(30.0/frameHeight*viewY);
     
-    
-    UILabel *lbbrand = [UILabel new];
-    [self.view addSubview:lbbrand];
-    [lbbrand setTextColor:[UIColor blackColor]];
-    [lbbrand setTextAlignment:NSTextAlignmentCenter];
-    [lbbrand setFont:[UIFont fontWithName:@"Arial" size:18]];
-    lbbrand.numberOfLines = 2;
-    lbbrand.sd_layout
-    .centerXEqualToView(self.view)
-    .topSpaceToView(view5, 100/frameHeight*viewY)
-    .widthIs(332.0/frameWidth*viewX)
-    .heightIs(196.0/frameHeight*viewY);
-    
-    if([self.brand isEqualToString:@"EVA24VTR"]){
-        [lbbrand setText:@"Truck\nAir Conditioner"];
-    }else if([self.brand isEqualToString:@"EVA12VRV"]){
-        [lbbrand setText:@"12V RV\nAir Conditioner"];
-    }else{
-        [lbbrand setText:@"RV\nAir Conditioner"];
-    }
     
     //蒙层
     self.viewMusk = [UIView new];
