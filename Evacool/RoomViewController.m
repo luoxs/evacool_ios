@@ -77,19 +77,29 @@
         .widthIs(228.0/frameWidth*viewX)
         .heightIs(82.0/frameHeight*viewY);
     
+    
+    UIImageView *imgback = [UIImageView new];
+    [self.view addSubview:imgback];
+    [imgback setImage:[UIImage imageNamed:@"btreturn"]];
+    imgback.sd_layout
+        .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
+        .centerYEqualToView(imageTop)
+        .widthIs(20/frameWidth*viewX)
+        .heightIs(40/frameHeight*viewY);
+    
     //返回按钮
     UIButton *btBack = [UIButton new];
     [self.view addSubview:btBack];
-    [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
+  //  [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
     // [btBack setContentMode:UIViewContentModeScaleAspectFill];
     [btBack setContentMode:UIViewContentModeScaleAspectFill];
     [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     //[btBack setcontentf]
     btBack.sd_layout
-        .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
+        .centerXEqualToView(imgback)
         .centerYEqualToView(imageTop)
-        .widthIs(20/frameWidth*viewX)
-        .heightIs(40/frameHeight*viewY);
+        .widthIs(100/frameWidth*viewX)
+        .heightIs(100/frameHeight*viewY);
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
     
     //注册信息

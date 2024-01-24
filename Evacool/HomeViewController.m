@@ -101,19 +101,25 @@
         .widthIs(228.0/frameWidth*viewX)
         .heightIs(82.0/frameHeight*viewY);
     
-    //返回按钮
-    UIButton *btBack = [UIButton new];
-    [self.view addSubview:btBack];
-    [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
-   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
-    [btBack setContentMode:UIViewContentModeScaleAspectFill];
-    [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-    //[btBack setcontentf]
-    btBack.sd_layout
+    
+    UIImageView *imgreturn = [UIImageView new];
+    [self.view addSubview:imgreturn];
+    [imgreturn setImage:[UIImage imageNamed:@"btreturn"]];
+    imgreturn.sd_layout
     .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
     .centerYEqualToView(imageTop)
     .widthIs(20/frameWidth*viewX)
     .heightIs(40/frameHeight*viewY);
+    
+    //返回按钮
+    UIButton *btBack = [UIButton new];
+    [self.view addSubview:btBack];
+   // [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
+    btBack.sd_layout
+    .centerYEqualToView(imageTop)
+    .centerXEqualToView(imgreturn)
+    .widthIs(100/frameWidth*viewX)
+    .heightIs(100/frameHeight*viewY);
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
     
     //品牌
@@ -363,7 +369,7 @@
 //                weakSelf.brand = @"EVA2700RV";
 //            }
 //        }
-        if([advertiseName hasPrefix:weakSelf.brand]){
+        if([advertiseName hasPrefix:weakSelf.brand]&&(![self.devices containsObject:peripheral])){
             [weakSelf.devices addObject:peripheral];
             [weakSelf.localNames addObject:advertiseName];
                        // weakSelf.currPeripheral = peripheral;
@@ -511,7 +517,7 @@
     [cell addSubview:labelname];
     [labelname setTextColor:[UIColor colorWithRed:29/255.0 green:130/255.0 blue:254/255.0 alpha:1]];
     [labelname setFont:[UIFont fontWithName:@"Arial" size:18]];
-    [labelname setFrame:CGRectMake(0, 0, cell.frame.size.width, cell.frame.size.height)];
+    [labelname setFrame:CGRectMake(0, 0, cell.frame.size.width*0.9, cell.frame.size.height)];
     [labelname setTextAlignment:NSTextAlignmentCenter];
     [labelname setText:advertiseName];
     

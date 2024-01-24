@@ -58,20 +58,23 @@
     .topSpaceToView(self.view, 0)
     .autoHeightRatio(468.0/750);
     
+    UIImageView *imgback3 = [UIImageView new];
+    [self.view addSubview:imgback3];
+    [imgback3 setImage:[UIImage imageNamed:@"goback"]];
+    imgback3.sd_layout
+        .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 100/frameHeight*viewY)
+        .widthIs(20/frameWidth*viewX)
+        .heightIs(40/frameHeight*viewY);
     
     //返回按钮
     UIButton *btBack = [UIButton new];
     [self.view addSubview:btBack];
-    [btBack setImage:[UIImage imageNamed:@"goback"] forState:UIControlStateNormal];
-   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
-    [btBack setContentMode:UIViewContentModeScaleAspectFill];
-    [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-    //[btBack setcontentf]
     btBack.sd_layout
-    .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 100/frameHeight*viewY)
-    .widthIs(20/frameWidth*viewX)
-    .heightIs(40/frameHeight*viewY);
+    .centerXEqualToView(imgback3)
+    .centerYEqualToView(imgback3)
+    .widthIs(100/frameWidth*viewX)
+    .heightIs(100/frameHeight*viewY);
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
     
     //姓名

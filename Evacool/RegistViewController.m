@@ -34,19 +34,23 @@
     double viewX = [UIScreen mainScreen].bounds.size.width;
     double viewY = [UIScreen mainScreen].bounds.size.height;
     
+    UIImageView *imgback = [UIImageView new];
+    [self.view addSubview:imgback];
+    [imgback setImage:[UIImage imageNamed:@"btreturn"]];
+    imgback.sd_layout
+        .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
+        .topSpaceToView(self.view, 100/frameHeight*viewY)
+        .widthIs(20/frameWidth*viewX)
+        .heightIs(40/frameHeight*viewY);
+    
     //返回按钮
     UIButton *btBack = [UIButton new];
     [self.view addSubview:btBack];
-    [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
-   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
-    [btBack setContentMode:UIViewContentModeScaleAspectFill];
-    [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-    //[btBack setcontentf]
     btBack.sd_layout
-    .leftSpaceToView(self.view, 50.0/frameWidth*viewX)
-    .topSpaceToView(self.view, 100/frameHeight*viewY)
-    .widthIs(20/frameWidth*viewX)
-    .heightIs(40/frameHeight*viewY);
+    .centerXEqualToView(imgback)
+    .centerYEqualToView(imgback)
+    .widthIs(100/frameWidth*viewX)
+    .heightIs(100/frameHeight*viewY);
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
     
     //标题
@@ -90,6 +94,15 @@
     [ self.userNmae setReturnKeyType:UIReturnKeyDone];
     [ self.userNmae setDelegate:self];
     
+    //划一条线
+    UIView *vline1 = [UIView new];
+    [self.view addSubview:vline1];
+    [vline1 setBackgroundColor:[UIColor grayColor]];
+    vline1.sd_layout
+    .topSpaceToView(self.userNmae, 5)
+    .centerXEqualToView(self.userNmae)
+    .widthRatioToView(self.userNmae, 1.0)
+    .heightIs(1);
     
     //联系
     UILabel *labelphone = [UILabel new];
@@ -119,6 +132,15 @@
     [self.phone setReturnKeyType:UIReturnKeyDone];
     [self.phone setDelegate:self];
     
+    //划一条线
+    UIView *vline2 = [UIView new];
+    [self.view addSubview:vline2];
+    [vline2 setBackgroundColor:[UIColor grayColor]];
+    vline2.sd_layout
+    .topSpaceToView(self.phone, 5)
+    .centerXEqualToView(self.phone)
+    .widthRatioToView(self.phone, 1.0)
+    .heightIs(1);
     
     //电邮
     UILabel *labelmail = [UILabel new];
@@ -147,6 +169,15 @@
     [self.email setReturnKeyType:UIReturnKeyDone];
     [self.email setDelegate:self];
     
+    //划一条线
+    UIView *vline3 = [UIView new];
+    [self.view addSubview:vline3];
+    [vline3 setBackgroundColor:[UIColor grayColor]];
+    vline3.sd_layout
+    .topSpaceToView(self.email, 5)
+    .centerXEqualToView(self.email)
+    .widthRatioToView(self.email, 1.0)
+    .heightIs(1);
     
     //确认按钮
     UIButton *btconfirm = [UIButton new];

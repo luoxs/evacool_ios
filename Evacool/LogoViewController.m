@@ -131,92 +131,30 @@
     [view3 setSd_cornerRadius:@10.0];
     [view3 addTarget:self action:@selector(setrv2700) forControlEvents:UIControlEventTouchUpInside];
     
-//    //水平视图,扫描
-//    UIView *view4 = [UIView new];
-//    [view4 setBackgroundColor:[UIColor whiteColor]];
-//    [self.view addSubview:view4];
-//    view4.sd_layout
-//        .leftSpaceToView(self.view, 35.0/frameWidth*viewX)
-//        .topSpaceToView(self.view, 1152.0/frameHeight*viewY)
-//        .widthIs(332.0/frameWidth*viewX)
-//        .heightIs(196.0/frameHeight*viewY);
-//    [view4 setSd_cornerRadius:@10.0];
-//
-//    //扫描按钮
-//    UIButton *imageScan = [UIButton new];
-//    [imageScan setBackgroundImage:[UIImage imageNamed:@"qr"] forState:UIControlStateNormal];
-//    [view4 addSubview:imageScan];
-//    imageScan.sd_layout
-//        .centerXEqualToView(view4)
-//        .topSpaceToView(view4, 46.0/frameHeight*viewY)
-//        .widthIs(54.0/frameWidth*viewX)
-//        .heightEqualToWidth();
-//    [imageScan addTarget:self action:@selector(scanQRcode) forControlEvents:UIControlEventTouchUpInside];
-//
-//    //扫描文字
-//    UILabel *labelscan = [UILabel new];
-//    [view4 addSubview:labelscan];
-//    labelscan.text = @"Scan QR Code";
-//    [labelscan setTextAlignment:NSTextAlignmentCenter];
-//    [labelscan setFont:[UIFont fontWithName:@"Arial" size:14.0]];
-//    labelscan.sd_layout
-//        .centerXEqualToView(view4)
-//        .topSpaceToView(imageScan, 20.0/frameHeight*viewY)
-//        .widthIs(300.0/frameWidth*viewX)
-//        .heightIs(30.0/frameHeight*viewY);
-//
-//    //水平视图，蓝牙
-//    UIView *view5 = [UIView new];
-//    [view5 setBackgroundColor:[UIColor whiteColor]];
-//    [self.view addSubview:view5];
-//    view5.sd_layout
-//        .rightSpaceToView(self.view, 35.0/frameWidth*viewX)
-//        .topSpaceToView(self.view, 1152.0/frameHeight*viewY)
-//        .widthIs(332.0/frameWidth*viewX)
-//        .heightIs(196.0/frameHeight*viewY);
-//    [view4 setSd_cornerRadius:@10.0];
-//
-//    //蓝牙按钮
-//    UIButton *imageBluetooth = [UIButton new];
-//    [imageBluetooth setBackgroundImage:[UIImage imageNamed:@"bluetooth"] forState:UIControlStateNormal];
-//    [view5 addSubview:imageBluetooth];
-//    imageBluetooth.sd_layout
-//        .centerXEqualToView(view5)
-//        .topSpaceToView(view5, 46.0/frameHeight*viewY)
-//        .widthIs(54.0/frameWidth*viewX)
-//        .heightEqualToWidth();
-//    [imageBluetooth addTarget:self action:@selector(scan) forControlEvents:UIControlEventTouchUpInside];
-//
-//    //蓝牙文字
-//    UILabel *labelBluetooth = [UILabel new];
-//    [view5 addSubview:labelBluetooth];
-//    labelBluetooth.text = @"Search For Device";
-//    [labelBluetooth setTextAlignment:NSTextAlignmentCenter];
-//    [labelBluetooth setFont:[UIFont fontWithName:@"Arial" size:14.0]];
-//    labelBluetooth.sd_layout
-//        .centerXEqualToView(view5)
-//        .topSpaceToView(imageBluetooth, 20.0/frameHeight*viewY)
-//        .widthIs(300.0/frameWidth*viewX)
-//        .heightIs(30.0/frameHeight*viewY);
-//
+
     //底部logo1
-    UIImageView *imageLogo1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"germany"]];
-    [self.view addSubview:imageLogo1];
-    imageLogo1.sd_layout
+    UIButton *btLogo1 = [UIButton new];
+    [btLogo1 setImage:[UIImage imageNamed:@"germany"] forState:UIControlStateNormal];
+    [self.view addSubview:btLogo1];
+    btLogo1.sd_layout
         .leftSpaceToView(self.view, 116.0/frameWidth*viewX)
         .topSpaceToView(self.view, 1380.0/frameHeight*viewY)
         .widthIs(154.0/frameWidth*viewX)
         .heightIs(84.0/frameHeight*viewY);
+    [btLogo1 addTarget:self action:@selector(gosite1) forControlEvents:UIControlEventTouchUpInside];
     
     //底部logo2
-    UIImageView *imageLogo2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"instein"]];
-    [self.view addSubview:imageLogo2];
-    imageLogo2.sd_layout
+    UIButton *btLogo2 = [UIButton new];
+    [btLogo2 setImage:[UIImage imageNamed:@"instein"] forState:UIControlStateNormal];
+    [self.view addSubview:btLogo2];
+    btLogo2.sd_layout
         .rightSpaceToView(self.view, 116.0/frameWidth*viewX)
         .topSpaceToView(self.view, 1380.0/frameHeight*viewY)
         .widthIs(154.0/frameWidth*viewX)
         .heightIs(84.0/frameHeight*viewY);
+    [btLogo2 addTarget:self action:@selector(gosite2) forControlEvents:UIControlEventTouchUpInside];
     
+   
     UILabel *labelEva = [UILabel new];
     [self.view addSubview:labelEva];
     labelEva.text = @"www.evacool.com.tr";
@@ -224,8 +162,8 @@
     [labelEva setTextAlignment:NSTextAlignmentCenter];
     [labelEva setFont:[UIFont fontWithName:@"Arial" size:12.0]];
     labelEva.sd_layout
-        .centerXEqualToView(imageLogo1)
-        .topSpaceToView(imageLogo1, 10.0/frameHeight*viewY)
+        .centerXEqualToView(btLogo1)
+        .topSpaceToView(btLogo1, 10.0/frameHeight*viewY)
         .widthIs(300.0/frameWidth*viewX)
         .heightIs(20.0/frameHeight*viewY);
     
@@ -236,15 +174,27 @@
     [labeleinstein setTextAlignment:NSTextAlignmentCenter];
     [labeleinstein setFont:[UIFont fontWithName:@"Arial" size:12.0]];
     labeleinstein.sd_layout
-        .centerXEqualToView(imageLogo2)
-        .topSpaceToView(imageLogo2, 10.0/frameHeight*viewY)
+        .centerXEqualToView(btLogo2)
+        .topSpaceToView(btLogo2, 10.0/frameHeight*viewY)
         .widthIs(400.0/frameWidth*viewX)
         .heightIs(20.0/frameHeight*viewY);
+   
+}
+-(void)gosite1{
+    NSURL *URL = [NSURL URLWithString:@"http://www.evacool.com.tr"];
+    [[UIApplication sharedApplication] openURL:URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly:@NO} completionHandler:^(BOOL success) {
+        nil;
+    }];
+}
+
+-(void)gosite2{
+    NSURL *URL = [NSURL URLWithString:@"http://www.einsteinmobilehomes.de"];
+    [[UIApplication sharedApplication] openURL:URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly:@NO} completionHandler:^(BOOL success) {
+        nil;
+    }];
 }
 
 //卡车 EVA24VTR EVA12VTR 房车 EVA2700RV
-
-
 -(void)setrv24{
     HomeViewController *homeViewController = [HomeViewController new];
     homeViewController.brand = @"EVA24VTR";
