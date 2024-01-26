@@ -20,6 +20,22 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UIDatePicker *datePicker;
 
+@property(nonatomic,strong) NSString *para1;
+@property(nonatomic,strong) NSString *para2;
+@property(nonatomic,strong) NSString *para3;
+@property(nonatomic,strong) NSString *para4;
+@property(nonatomic,strong) NSString *para5;
+@property(nonatomic,strong) NSString *para6;
+@property(nonatomic,strong) NSString *para7;
+@property(nonatomic,strong) NSString *para8;
+@property(nonatomic,strong) NSString *para9;
+@property(nonatomic,strong) NSString *para10;
+@property(nonatomic,strong) NSString *para11;
+@property(nonatomic,strong) NSString *para12;
+@property(nonatomic,strong) NSString *para13;
+@property(nonatomic,strong) NSString *para14;
+@property(nonatomic,strong) NSString *para15;
+
 @end
 
 @implementation RegistViewController
@@ -33,7 +49,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.celltitles = [[NSArray alloc]initWithObjects:@"User Name",@"Contact No",@"Buying Day",@"Notes",@"Type of Car",@"Type of Product",@"Mode",@"Sub Mode", nil];
+    self.celltitles = [[NSArray alloc]initWithObjects:@"User Name",@"Contact No",@"Buying Day",@"Notes of User",@"Note of Product",@"Type of Car",@"Type of Product",@"Mode",@"Sub Mode", nil];
     
     // Do any additional setup after loading the view.
     [self setAutolayout];
@@ -98,7 +114,7 @@
         .topSpaceToView(self.tableView, 50/frameHeight*viewY)
         .heightIs(90/frameHeight*viewY);
     [btconfirm setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
-    [btconfirm addTarget:self action:@selector(goinfo) forControlEvents:UIControlEventTouchUpInside];
+    [btconfirm addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark tableview delegate
@@ -131,7 +147,7 @@
     UITextField *txtField = [UITextField new];
     [cell addSubview:txtField];
     [txtField setFrame:CGRectMake(self.view.width/2, 0, cell.frame.size.width*0.5, cell.frame.size.height)];
-    if(indexPath.row == 1 ||indexPath.row == 6)
+    if(indexPath.row == 1)
         [txtField setPlaceholder:@"required"];
     [txtField setTag:indexPath.row+1];
     txtField.delegate = self;
@@ -353,6 +369,16 @@
     return YES;
 }
 
+-(void) textFieldDidEndEditing:(UITextField *)textField{
+    if(textField.tag == 1) _para1 = textField.text;  //User Name
+    if(textField.tag == 2) _para2 = textField.text;  //Contact No
+    if(textField.tag == 4) _para6 = textField.text;   //Note of User
+    if(textField.tag == 5) _para7 = textField.text;   //Note of Product
+    if(textField.tag == 6) _para9 = textField.text;   //Type of Car
+    if(textField.tag == 8) _para11 = textField.text;   //Mode
+    if(textField.tag == 9) _para12 = textField.text;   //sub Mode
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     
 }
@@ -372,7 +398,7 @@
     }
     
     [self.view endEditing:YES];
-    self.datePicker.frame = CGRectMake(self.view.width/2, 530/frameHeight*viewY, self.view.width/2, 100/frameHeight*viewY);
+    self.datePicker.frame = CGRectMake(self.view.width/2, 500/frameHeight*viewY, self.view.width/2, 100/frameHeight*viewY);
     self.datePicker.backgroundColor = [UIColor colorWithRed:209/255.0 green:209/255.0 blue:214/255.0 alpha:1];
     self.datePicker.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 
@@ -391,9 +417,39 @@
     if (self.datePicker.superview) {
         [self.datePicker removeFromSuperview];
     }
+    _para4 = str;
     
 }
 
+
+-(void) confirm{
+    NSDictionary *objectDic = @{@"youhu_name":_para1,
+                                @"yonghu_phone":_para2,
+                                @"chanpin_xiaoshou_sn":_para3,
+                                @"gouma_shijian":_para4,
+                                @"zhuce_shijian":_para5,
+                                @"yonghu_beizhu":_para6,
+                                @"chanpin_beizhu":_para7,
+                                @"chanpin_xinghao_id":_para8,
+                                @"che_xing":_para9,
+                                @"chanpin_type":_para10,
+                                @"chanxing_xinghao":_para11,
+                                @"chanpin_zixinghao":_para12,
+                                @"zhuce_lng":_para13,
+                                @"zhuce_lat":_para14,
+                                @"zhuce_openid":_para15
+                                
+    };
+        
+
+//    NSDictionary *dataDic = @{@"data" : objectDic};
+//    NSDictionary *methodDic = @{@"method" : @"login", @"data": dataDic};
+//
+    NSData *requestData = [NSJSONSerialization dataWithJSONObject:objectDic
+                                                  options:NSJSONWritingPrettyPrinted
+                                                    error:nil];
+   // [request setHTTPBody: requestData];
+}
 
 /*
  #pragma mark - Navigation
