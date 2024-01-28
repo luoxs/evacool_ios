@@ -169,7 +169,7 @@
     
     UILabel *labeleinstein = [UILabel new];
     [self.view addSubview:labeleinstein];
-    labeleinstein.text = @"www.einsteinmobilehomes.de";
+    labeleinstein.text = @"www.einsteinmobilehomes.com";
     [labeleinstein setTextColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0]];
     [labeleinstein setTextAlignment:NSTextAlignmentCenter];
     [labeleinstein setFont:[UIFont fontWithName:@"Arial" size:12.0]];
@@ -188,7 +188,7 @@
 }
 
 -(void)gosite2{
-    NSURL *URL = [NSURL URLWithString:@"http://www.einsteinmobilehomes.de"];
+    NSURL *URL = [NSURL URLWithString:@"http://www.einsteinmobilehomes.com"];
     [[UIApplication sharedApplication] openURL:URL options:@{UIApplicationOpenURLOptionUniversalLinksOnly:@NO} completionHandler:^(BOOL success) {
         nil;
     }];
