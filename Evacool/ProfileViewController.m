@@ -10,6 +10,12 @@
 #import "MBProgressHUD.h"
 
 @interface ProfileViewController ()
+@property(nonatomic,strong)NSString *userNmae;
+@property(nonatomic,strong)NSString *phone;
+@property(nonatomic,strong)NSString *email;
+@property(nonatomic,strong)NSString *product;
+@property(nonatomic,strong)NSString *serial;
+@property(nonatomic,strong)NSDate *regdate;
 
 @end
 
@@ -21,6 +27,7 @@
     [self.view setBackgroundColor:[UIColor colorWithRed:246.0/255 green:248.0/255 blue:249.0/255 alpha:1.0]];
     // Do any additional setup after loading the view.
     [self setAutolayout];
+    [self getinfo];
 }
 
 -(void)setAutolayout{
@@ -131,6 +138,7 @@
     [txtphone setTextAlignment:NSTextAlignmentLeft];
     [txtphone setText:self.phone];
 
+    /*
     //电邮
     UILabel *labelmail = [UILabel new];
     [self.view addSubview:labelmail];
@@ -157,6 +165,7 @@
     [txtmail setTextAlignment:NSTextAlignmentLeft];
     [txtmail setText:self.email];
   
+    */
     
     //product
     UILabel *labelproduct = [UILabel new];
@@ -166,7 +175,7 @@
     [labelproduct setFont:[UIFont fontWithName:@"Arial" size:14]];
     labelproduct.sd_layout
     .leftSpaceToView(self.view, 50/frameWidth*viewX)
-    .topSpaceToView(self.view,1000/frameHeight*viewY)
+    .topSpaceToView(self.view,900/frameHeight*viewY)
     .widthIs(400/frameWidth*viewX)
     .heightIs(50/frameHeight*viewY);
     [labelproduct setTextAlignment:NSTextAlignmentLeft];
@@ -178,7 +187,7 @@
     [txtproduct setFont:[UIFont fontWithName:@"Arial" size:14]];
     txtproduct.sd_layout
         .leftSpaceToView(self.view, 310/frameWidth*viewX)
-        .topSpaceToView(self.view, 1000/frameHeight*viewY)
+        .topSpaceToView(self.view, 900/frameHeight*viewY)
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
     [txtproduct setTextAlignment:NSTextAlignmentLeft];
@@ -194,7 +203,7 @@
     [labelserial setFont:[UIFont fontWithName:@"Arial" size:14]];
     labelserial.sd_layout
     .leftSpaceToView(self.view, 50/frameWidth*viewX)
-    .topSpaceToView(self.view, 1100/frameHeight*viewY)
+    .topSpaceToView(self.view, 1000/frameHeight*viewY)
     .widthIs(400/frameWidth*viewX)
     .heightIs(50/frameHeight*viewY);
     [labelserial setTextAlignment:NSTextAlignmentLeft];
@@ -206,12 +215,12 @@
     [txtserial setFont:[UIFont fontWithName:@"Arial" size:14]];
     txtserial.sd_layout
         .leftSpaceToView(self.view, 310/frameWidth*viewX)
-        .topSpaceToView(self.view, 1100/frameHeight*viewY)
+        .topSpaceToView(self.view, 1000/frameHeight*viewY)
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
     [txtserial setTextAlignment:NSTextAlignmentLeft];
    // NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
-    [txtserial setText:[mydefaults objectForKey:@"serial"]];
+    [txtserial setText:self.serial];
 
     //日期
     UILabel *labeldate = [UILabel new];
@@ -221,7 +230,7 @@
     [labeldate setFont:[UIFont fontWithName:@"Arial" size:14]];
     labeldate.sd_layout
     .leftSpaceToView(self.view, 50/frameWidth*viewX)
-    .topSpaceToView(self.view, 1200/frameHeight*viewY)
+    .topSpaceToView(self.view, 1100/frameHeight*viewY)
     .widthIs(400/frameWidth*viewX)
     .heightIs(50/frameHeight*viewY);
     [labeldate setTextAlignment:NSTextAlignmentLeft];
@@ -233,17 +242,20 @@
     [txtdate setFont:[UIFont fontWithName:@"Arial" size:14]];
     txtdate.sd_layout
         .leftSpaceToView(self.view, 310/frameWidth*viewX)
-        .topSpaceToView(self.view, 1200/frameHeight*viewY)
+        .topSpaceToView(self.view, 1100/frameHeight*viewY)
         .widthIs(400/frameWidth*viewX)
         .heightIs(50/frameHeight*viewY);
     [txtdate setTextAlignment:NSTextAlignmentLeft];
     
+    /*
     NSDate *currentDate = [NSDate date];//获取当前时间，日期
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"dd/MM/yyyy hh:mm"];//设置格式
     NSTimeZone* timeZone = [NSTimeZone localTimeZone];//设置时区
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
     [txtdate setText:dateString];
+    */
+    
     
     //查看手册
     UIButton *btmanual = [UIButton new];
@@ -254,7 +266,7 @@
     btmanual.sd_layout
     .centerXEqualToView(self.view)
     .widthIs(500/frameWidth*viewX)
-    .topSpaceToView(self.view, 1330/frameHeight*viewY)
+    .topSpaceToView(self.view, 1230/frameHeight*viewY)
     .heightIs(90/frameHeight*viewY);
     [btmanual setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
   //  [btmanual addTarget:self action:@selector(goinfo) forControlEvents:UIControlEventTouchUpInside];
@@ -271,6 +283,44 @@
     .bottomSpaceToView(self.view, 20/frameHeight*viewY)
     .widthIs(400/frameWidth*viewX)
     .heightIs(90/frameHeight*viewY);
+}
+
+-(void)getinfo{
+    NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+    NSString *strSerial = [mydefaults objectForKey:@"serial"];
+    NSString *serial = [strSerial substringFromIndex:strSerial.length-8];
+    NSString *strURL = [NSString stringWithFormat:@"https://wrmes.colku.cn/api/wrmes/ggshouhou/yonghu_chanpin_xinxi_get?page=1&size=10&chanpin_xinghao_id=%@",serial];
+    NSURL *url = [NSURL URLWithString:strURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"GET";
+    request.timeoutInterval = 60;
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        //判断错误
+        if (error) {
+            NSLog(@"net error:%@", error);
+            return;
+        }
+        NSError *jsonError = nil;
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+        NSString *jsonText = [NSString stringWithFormat:@"%@", dic];
+        NSLog(@"jsonText: %@",jsonText);
+        //找到序列号，则进入产品信息页，否则进入注册页
+        
+        if([[[dic objectForKey:@"return_list_json"] objectForKey:@"chanpin_xinghao_id"] isEqualToString:strSerial]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+               self.userNmae =  [[dic objectForKey:@"return_list_json"] objectForKey:@"yonghu_name"];
+                self.phone = [[dic objectForKey:@"return_list_json"] objectForKey:@"yonghu_phone"];
+                self.product = [[dic objectForKey:@"return_list_json"] objectForKey:@"chanpin_type"];
+                self.serial = [[dic objectForKey:@"return_list_json"] objectForKey:@"chanpin_xinghao_id"];
+                self.regdate = [[dic objectForKey:@"return_list_json"] objectForKey:@"zhuce_shijian"];
+            });
+        }
+        //回到主线程 来刷新文字
+        //  [_textView performSelectorOnMainThread:@selector(setText:) withObject:jsonText waitUntilDone:NO];
+    }];
+    [dataTask resume];
     
     
 }
