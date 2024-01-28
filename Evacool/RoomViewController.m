@@ -14,6 +14,7 @@
 #import "detailViewController.h"
 #import "faultsViewController.h"
 #import "RegistViewController.h"
+#import "ProfileViewController.h"
 
 
 @interface RoomViewController ()
@@ -90,7 +91,7 @@
     //返回按钮
     UIButton *btBack = [UIButton new];
     [self.view addSubview:btBack];
-  //  [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
+    //  [btBack setImage:[UIImage imageNamed:@"btreturn"] forState:UIControlStateNormal];
     // [btBack setContentMode:UIViewContentModeScaleAspectFill];
     [btBack setContentMode:UIViewContentModeScaleAspectFill];
     [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
@@ -115,7 +116,7 @@
         .centerYEqualToView(imageTop)
         .widthIs(40/frameWidth*viewX)
         .heightIs(60/frameHeight*viewY);
-    [btprofile addTarget:self action:@selector(goprofile) forControlEvents:UIControlEventTouchUpInside];
+    [btprofile addTarget:self action:@selector(searchSN) forControlEvents:UIControlEventTouchUpInside];
     
     
     //左上文字1
@@ -939,13 +940,13 @@
     
     //定时显示
     self.labelTimer.text = [[NSString alloc]initWithFormat:@"%.1fh", self.dataRead.countdown*0.1];
-//    if(self.dataRead.countdown>0){
-//        self.sw = YES;
-//        [self.switchCount setBackgroundImage:[UIImage imageNamed:@"swon"] forState:UIControlStateNormal];
-//    }else{
-//        self.sw = NO;
-//        [self.switchCount setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
-//    }
+    //    if(self.dataRead.countdown>0){
+    //        self.sw = YES;
+    //        [self.switchCount setBackgroundImage:[UIImage imageNamed:@"swon"] forState:UIControlStateNormal];
+    //    }else{
+    //        self.sw = NO;
+    //        [self.switchCount setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
+    //    }
     
     //超强模式显示
     if(self.dataRead.turbo == 0x01){
@@ -1008,7 +1009,7 @@
         [self.labelTimer setTextColor:[UIColor grayColor]];
         [self.progress setchgt:2];
         [self.imgdot setHidden:YES];
-       // [self.switchCount setImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
+        // [self.switchCount setImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
         [self.switchCount setEnabled:NO];
     }else{
         [self.btswitchfan setEnabled:YES];
@@ -1034,11 +1035,55 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+-(void)searchSN{
+    NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+    NSString *strSerial = [mydefaults objectForKey:@"serial"];
+    NSString *serial = [strSerial substringFromIndex:strSerial.length-8];
+    NSString *strURL = [NSString stringWithFormat:@"https://wrmes.colku.cn/api/wrmes/ggshouhou/yonghu_chanpin_xinxi_get?page=1&size=10&chanpin_xinghao_id=%@",serial];
+    NSURL *url = [NSURL URLWithString:strURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"GET";
+    request.timeoutInterval = 60;
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        //判断错误
+        if (error) {
+            NSLog(@"net error:%@", error);
+            return;
+        }
+        NSError *jsonError = nil;
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+        NSString *jsonText = [NSString stringWithFormat:@"%@", dic];
+        NSLog(@"jsonText: %@",jsonText);
+        //找到序列号，则进入产品信息页，否则进入注册页
+        
+        if([[[dic objectForKey:@"return_list_json"] objectForKey:@"chanpin_xinghao_id"] isEqualToString:strSerial]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self goinfo];
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self goprofile];
+            });
+        }
+        //回到主线程 来刷新文字
+        //  [_textView performSelectorOnMainThread:@selector(setText:) withObject:jsonText waitUntilDone:NO];
+    }];
+    [dataTask resume];
+}
+
+
 -(void)goprofile{
     RegistViewController *registViewController = [RegistViewController new];
     [self.navigationController pushViewController:registViewController animated:YES];
 }
 
+
+-(void) goinfo{
+    ProfileViewController *profileViewController = [ProfileViewController new];
+    [self.navigationController pushViewController:profileViewController animated:YES];
+}
 
 /*
  #pragma mark - Navigation

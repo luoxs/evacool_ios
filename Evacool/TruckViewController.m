@@ -14,6 +14,7 @@
 #import "detailViewController.h"
 #import "faultsViewController.h"
 #import "RegistViewController.h"
+#import "ProfileViewController.h"
 
 
 @interface TruckViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
@@ -97,10 +98,10 @@
     UIButton *btBack = [UIButton new];
     [self.view addSubview:btBack];
     btBack.sd_layout
-    .centerXEqualToView(imgback)
-    .centerYEqualToView(imageTop)
-    .widthIs(100/frameWidth*viewX)
-    .heightIs(100/frameHeight*viewY);
+        .centerXEqualToView(imgback)
+        .centerYEqualToView(imageTop)
+        .widthIs(100/frameWidth*viewX)
+        .heightIs(100/frameHeight*viewY);
     [btBack addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -108,16 +109,16 @@
     UIButton *btprofile = [UIButton new];
     [self.view addSubview:btprofile];
     [btprofile setImage:[UIImage imageNamed:@"back_mine"] forState:UIControlStateNormal];
-   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
-   // [btBack setContentMode:UIViewContentModeScaleAspectFill];
-   // [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
+    // [btBack setContentMode:UIViewContentModeScaleAspectFill];
+    // [btBack setContentMode:UIViewContentModeScaleAspectFill];
+    // [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
     //[btBack setcontentf]
     btprofile.sd_layout
-    .rightSpaceToView(self.view, 50.0/frameWidth*viewX)
-    .centerYEqualToView(imageTop)
-    .widthIs(40/frameWidth*viewX)
-    .heightIs(60/frameHeight*viewY);
-    [btprofile addTarget:self action:@selector(goprofile) forControlEvents:UIControlEventTouchUpInside];
+        .rightSpaceToView(self.view, 50.0/frameWidth*viewX)
+        .centerYEqualToView(imageTop)
+        .widthIs(40/frameWidth*viewX)
+        .heightIs(60/frameHeight*viewY);
+    [btprofile addTarget:self action:@selector(searchSN) forControlEvents:UIControlEventTouchUpInside];
     
     
     //左上文字1
@@ -215,10 +216,10 @@
     [self.imgdot setImage:[UIImage imageNamed:@"greendot"]];
     [self.view addSubview:self.imgdot];
     self.imgdot.sd_layout
-    .centerYEqualToView(self.labelStatus)
-    .leftSpaceToView(self.view, 230/frameWidth*viewX)
-    .widthIs(20/frameWidth*viewX)
-    .heightEqualToWidth();
+        .centerYEqualToView(self.labelStatus)
+        .leftSpaceToView(self.view, 230/frameWidth*viewX)
+        .widthIs(20/frameWidth*viewX)
+        .heightEqualToWidth();
     [self.imgdot setHidden:YES];
     
     
@@ -658,7 +659,7 @@
     //设置读取characteristics的委托
     [baby setBlockOnReadValueForCharacteristic:^(CBPeripheral *peripheral, CBCharacteristic *characteristics, NSError *error) {
         //   NSLog(@"read characteristic successfully!");
-       // weakSelf.labelUp.text = peripheral.name;
+        // weakSelf.labelUp.text = peripheral.name;
         
         if([characteristics.UUID.UUIDString isEqualToString:@"FFE1"]){
             NSData *data = characteristics.value;
@@ -1020,7 +1021,7 @@
         [self.switchSleep setEnabled:NO];
         [self.labelTimer setTextColor:[UIColor grayColor]];
         [self.btBattery setEnabled:NO];
-     //   [self.switchSleep setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
+        //   [self.switchSleep setBackgroundImage:[UIImage imageNamed:@"swoff"] forState:UIControlStateNormal];
         [self.progress setchgt:2];
         [self.imgdot setHidden:YES];
         
@@ -1083,21 +1084,66 @@
         
     }
     //[self.view setNeedsLayout];
-   // [self.view setNeedsDisplay];
+    // [self.view setNeedsDisplay];
 }
 
 
 -(void)goback{
-   // self.currPeripheral = nil;
-   // self.characteristic = nil;
-   // [self.navigationController popViewControllerAnimated:YES];
+    // self.currPeripheral = nil;
+    // self.characteristic = nil;
+    // [self.navigationController popViewControllerAnimated:YES];
     [baby cancelAllPeripheralsConnection];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+-(void)searchSN{
+    NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+    NSString *strSerial = [mydefaults objectForKey:@"serial"];
+    NSString *serial = [strSerial substringFromIndex:strSerial.length-8];
+    NSString *strURL = [NSString stringWithFormat:@"https://wrmes.colku.cn/api/wrmes/ggshouhou/yonghu_chanpin_xinxi_get?page=1&size=10&chanpin_xinghao_id=%@",serial];
+    NSURL *url = [NSURL URLWithString:strURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"GET";
+    request.timeoutInterval = 60;
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        //判断错误
+        if (error) {
+            NSLog(@"net error:%@", error);
+            return;
+        }
+        NSError *jsonError = nil;
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+        NSString *jsonText = [NSString stringWithFormat:@"%@", dic];
+        NSLog(@"jsonText: %@",jsonText);
+        //找到序列号，则进入产品信息页，否则进入注册页
+        
+        if([[[dic objectForKey:@"return_list_json"] objectForKey:@"chanpin_xinghao_id"] isEqualToString:strSerial]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self goinfo];
+            });
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self goprofile];
+            });
+        }
+        //回到主线程 来刷新文字
+        //  [_textView performSelectorOnMainThread:@selector(setText:) withObject:jsonText waitUntilDone:NO];
+    }];
+    [dataTask resume];
+}
+
+
 -(void)goprofile{
     RegistViewController *registViewController = [RegistViewController new];
     [self.navigationController pushViewController:registViewController animated:YES];
+}
+
+
+-(void) goinfo{
+    ProfileViewController *profileViewController = [ProfileViewController new];
+    [self.navigationController pushViewController:profileViewController animated:YES];
 }
 
 

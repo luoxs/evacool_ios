@@ -176,13 +176,7 @@
     
 }
 
--(void) goinfo{
-    ProfileViewController *profileViewController = [ProfileViewController new];
-    profileViewController.userNmae =  self.userNmae.text;
-    profileViewController.phone = self.phone.text;
-    profileViewController.email = self.email.text;
-    [self.navigationController pushViewController:profileViewController animated:YES];
-}
+
 
 - (UIDatePicker *)datePicker {
     if (!_datePicker) {
