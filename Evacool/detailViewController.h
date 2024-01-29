@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface detailViewController : UIViewController
 @property (nonatomic,strong) dataCode *datacode;
+@property (nonatomic,strong) NSString *brand;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -115,9 +115,8 @@
         .rightSpaceToView(self.view, 50.0/frameWidth*viewX)
         .centerYEqualToView(imageTop)
         .widthIs(40/frameWidth*viewX)
-        .heightIs(60/frameHeight*viewY);
+        .heightEqualToWidth();
     [btprofile addTarget:self action:@selector(searchSN) forControlEvents:UIControlEventTouchUpInside];
-    
     
     //左上文字1
     self.labelUp = [UILabel new];

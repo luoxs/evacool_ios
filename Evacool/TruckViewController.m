@@ -75,12 +75,12 @@
     double viewY = [UIScreen mainScreen].bounds.size.height;
     [self.view setBackgroundColor:[UIColor colorWithRed:246.0/255 green:248.0/255 blue:249.0/255 alpha:1.0]];
     
-    //顶部文字
+    //顶部logo图案
     UIImageView *imageTop = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"imagetop"]];
     [self.view addSubview:imageTop];
     imageTop.sd_layout
         .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 92.0/frameHeight*viewY)
+        .topSpaceToView(self.view, 108.0/frameHeight*viewY)
         .widthIs(228.0/frameWidth*viewX)
         .heightIs(82.0/frameHeight*viewY);
     
@@ -109,10 +109,6 @@
     UIButton *btprofile = [UIButton new];
     [self.view addSubview:btprofile];
     [btprofile setImage:[UIImage imageNamed:@"back_mine"] forState:UIControlStateNormal];
-    // [btBack setContentMode:UIViewContentModeScaleAspectFill];
-    // [btBack setContentMode:UIViewContentModeScaleAspectFill];
-    // [btBack setContentHorizontalAlignment:UIControlContentHorizontalAlignmentCenter];
-    //[btBack setcontentf]
     btprofile.sd_layout
         .rightSpaceToView(self.view, 50.0/frameWidth*viewX)
         .centerYEqualToView(imageTop)
@@ -924,7 +920,6 @@
     }
 }
 
-
 //页面跳转
 -(void)pushViewController{
     
@@ -932,13 +927,14 @@
         detailViewController *detail = [[detailViewController alloc]init];
         [detail setModalPresentationStyle:UIModalPresentationFullScreen];
         detail.datacode = self.datacode;
+        detail.brand = self.brand;
         [self presentViewController:detail animated:YES completion:nil];
-        
     }else{
         faultsViewController *faults = [[faultsViewController alloc]init];
         [faults setModalPresentationStyle:UIModalPresentationFullScreen];
         //faults.datacode = self.datacode;
         faults.dataErrors = self.dataErrors;
+        faults.brand = self.brand;
         [self presentViewController:faults animated:YES completion:nil];
     }
 }

@@ -46,14 +46,22 @@
 
  -(void) autolayout{
      
+     UIImageView *imgback = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"jian"]];
+     [self.view addSubview:imgback];
+     imgback.sd_layout
+     .leftSpaceToView(self.view, 20)
+     .topSpaceToView(self.view, 50.0)
+     .widthIs(10)
+     .heightIs(20);
+     
      self.btback = [UIButton new];
      [self.view addSubview:self.btback];
-     [self.btback setBackgroundImage:[UIImage imageNamed:@"jian"] forState:UIControlStateNormal];
+     [self.btback setBackgroundColor:[UIColor clearColor]];
      self.btback.sd_layout
-         .leftSpaceToView(self.view, 30)
-         .topSpaceToView(self.view, 40.0)
-         .widthIs(10)
-         .heightIs(20);
+     .leftSpaceToView(self.view, 4)
+     .topSpaceToView(self.view, 20)
+     .widthIs(80)
+     .heightIs(50);
      [self.btback addTarget:self action:@selector(goback) forControlEvents:UIControlEventTouchUpInside];
      
      self.labeltitle = [UILabel new];
@@ -61,12 +69,13 @@
      [self.labeltitle setTextColor:[UIColor blackColor]];
      [self.labeltitle setFont:[UIFont fontWithName:@"Arial" size:18.0]];
      self.labeltitle.sd_layout
-         .centerXEqualToView(self.view)
-         .topSpaceToView(self.view, 60.0)
-         .widthIs(self.view.width)
-         .heightIs(40);
+     .centerXEqualToView(self.view)
+     .topSpaceToView(self.view, 50.0)
+     .widthIs(self.view.width)
+     .heightIs(40);
      [self.labeltitle setTextAlignment:NSTextAlignmentCenter];
-     [self.labeltitle setText:@"EVA 24V Trunck Air Conditioner"];
+     //[self.labeltitle setText:@"EVA 24V Trunck Air Conditioner"];
+     [self.labeltitle setText:self.brand];
     
      [self.view addSubview:self.tableView];
     /* self.tableView.sd_layout
@@ -113,7 +122,8 @@
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
      static NSString *cellID = @"cell";
      
-     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
      
      if (!cell) {
          cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
@@ -123,6 +133,10 @@
                 }
      }
 
+     for (UIView *view in cell.contentView.subviews) {
+         [view removeFromSuperview];
+     }
+     
      cell.backgroundColor = [UIColor whiteColor];
      //左上
      UILabel *label1 =[[UILabel alloc] initWithFrame:CGRectMake(10, 0, cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];

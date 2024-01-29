@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface faultsViewController : UIViewController
 @property (nonatomic,strong) dataCode *datacode;
 @property (nonatomic,strong) NSMutableArray *dataErrors;
+@property (nonatomic,strong) NSString *brand;
 
 @end
 

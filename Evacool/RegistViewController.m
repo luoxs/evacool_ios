@@ -136,12 +136,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellID = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];     会有重影
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if(!cell){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
     [cell setBackgroundColor:[UIColor whiteColor]];
     
+    for (UIView *view in cell.contentView.subviews) {
+        [view removeFromSuperview];
+    }
     //行标题
     UILabel *labelname = [UILabel new];
     [cell addSubview:labelname];
