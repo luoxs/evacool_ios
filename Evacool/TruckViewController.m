@@ -333,7 +333,8 @@
         .topSpaceToView(self.view, 1082.0/frameHeight*viewY)
         .widthIs(462.0/frameWidth*viewX)
         .heightIs(168.0/frameHeight*viewY);
-    [view1 setSd_cornerRadius:@10.0];
+    [view2 setSd_cornerRadius:@10.0];
+    
     
     UILabel *labelsleep= [UILabel new];
     [view2 addSubview:labelsleep];
@@ -343,10 +344,10 @@
     [labelsleep setFont:[UIFont fontWithName:@"Arial" size:12.0]];
     labelsleep.sd_layout
         .leftSpaceToView(view2, 74.0/frameWidth*viewX)
-        .topSpaceToView(view2, 32.0/frameHeight*viewY)
-        .widthIs(100.0/frameWidth*viewX)
+        .topSpaceToView(view2, 4.0/frameHeight*viewY)
+        .widthIs(150.0/frameWidth*viewX)
         .heightIs(30.0/frameHeight*viewY);
-    
+    /*
     //开关
     self.switchSleep = [UIButton new];
     [view2 addSubview:self.switchSleep];
@@ -356,7 +357,7 @@
         .topSpaceToView(view2, 22.0/frameHeight*viewY)
         .widthIs(94.0/frameWidth*viewX)
         .heightIs(36.0/frameHeight*viewY);
-    [self.switchSleep addTarget:self action:@selector(setcount:) forControlEvents:UIControlEventTouchUpInside];
+    [self.switchSleep addTarget:self action:@selector(setcount:) forControlEvents:UIControlEventTouchUpInside];*/
     
     //定时量
     self.labelTimer= [UILabel new];
@@ -369,17 +370,18 @@
     self.labelTimer.sd_layout
         .centerXEqualToView(view2)
         .widthIs(100.0/frameWidth*viewX)
-        .heightIs(40.0/frameHeight*viewY)
-        .bottomSpaceToView(view2, 34.0/frameHeight*viewY);
+        .heightIs(80.0/frameHeight*viewY)
+        //.bottomSpaceToView(view2, 34.0/frameHeight*viewY);
+        .centerYEqualToView(view2);
     
     //定时减
     UIButton *btTimeMinus = [UIButton new];
     [btTimeMinus setBackgroundImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     [view2 addSubview:btTimeMinus];
     btTimeMinus.sd_layout
-        .leftSpaceToView(view2, 98.0/frameWidth*viewX)
+        .leftSpaceToView(view2, 68.0/frameWidth*viewX)
         .centerYEqualToView(self.labelTimer)
-        .widthIs(42.0/frameWidth*viewX)
+        .widthIs(62.0/frameWidth*viewX)
         .heightEqualToWidth();
     [btTimeMinus addTarget:self action:@selector(droptimer) forControlEvents:UIControlEventTouchUpInside];
     
@@ -389,9 +391,9 @@
     [btTimeAdd setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
     [view2 addSubview:btTimeAdd];
     btTimeAdd.sd_layout
-        .rightSpaceToView(view2, 98.0/frameWidth*viewX)
+        .rightSpaceToView(view2, 68.0/frameWidth*viewX)
         .centerYEqualToView(self.labelTimer)
-        .widthIs(42.0/frameWidth*viewX)
+        .widthIs(62.0/frameWidth*viewX)
         .heightEqualToWidth();
     [btTimeAdd addTarget:self action:@selector(addtimer) forControlEvents:UIControlEventTouchUpInside];
     
@@ -846,7 +848,7 @@
 }
 
 //设置睡眠时间
--(void)setcount:(id)sender{
+-(void)setcount{
     //UISwitch *swc = (UISwitch * )sender;
     if(self.sw == NO){
         Byte  write[6];
@@ -884,7 +886,8 @@
 
 //睡眠定时减
 -(void)droptimer{
-    if(self.sleeplevel>1 && self.sw==YES){
+   // if(self.sleeplevel>0 && self.sw==YES){
+    if(self.sleeplevel>0){
         self.sleeplevel--;
         Byte  write[6];
         write[0] = 0xAA;
@@ -899,11 +902,16 @@
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
         self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
     }
+//    if(self.sleeplevel == 0){
+//        self.sw = YES;
+//        [self setcount];
+//    }
 }
 
 //睡眠定时加
 -(void)addtimer{
-    if(self.sleeplevel<15 && self.sw == YES){
+    //if(self.sleeplevel<15 && self.sw == YES){
+    if(self.sleeplevel<15){
         self.sleeplevel++;
         Byte  write[6];
         write[0] = 0xAA;
@@ -918,6 +926,10 @@
         [self.currPeripheral setNotifyValue:YES forCharacteristic:self.characteristic];
         self.labelTimer.text = [NSString stringWithFormat:@"%.1fh",self.sleeplevel*0.5];
     }
+//    if(self.sleeplevel == 0){
+//        self.sw = NO;
+//        [self setcount];
+//    }
 }
 
 //页面跳转

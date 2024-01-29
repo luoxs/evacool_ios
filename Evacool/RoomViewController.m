@@ -396,11 +396,12 @@
     [labelsleep setTextColor:[UIColor grayColor]];
     [labelsleep setFont:[UIFont fontWithName:@"Arial" size:12.0]];
     labelsleep.sd_layout
-        .leftSpaceToView(view2, 74.0/frameWidth*viewX)
-        .topSpaceToView(view2, 32.0/frameHeight*viewY)
+        .leftSpaceToView(view2, 10.0/frameWidth*viewX)
+        .topSpaceToView(view2, 4.0/frameHeight*viewY)
         .widthIs(100.0/frameWidth*viewX)
         .heightIs(30.0/frameHeight*viewY);
     
+    /*
     //倒计时开关
     self.switchCount = [UIButton new];
     [view2 addSubview:self.switchCount];
@@ -411,6 +412,7 @@
         .widthIs(94.0/frameWidth*viewX)
         .heightIs(42.0/frameHeight*viewY);
     [self.switchCount addTarget:self action:@selector(setCount:) forControlEvents:UIControlEventTouchUpInside];
+     */
     
     //定时量
     self.labelTimer= [UILabel new];
@@ -423,7 +425,7 @@
     self.labelTimer.sd_layout
         .centerXEqualToView(view2)
         .widthIs(100.0/frameWidth*viewX)
-        .heightIs(40.0/frameHeight*viewY)
+        .heightIs(80.0/frameHeight*viewY)
         .bottomSpaceToView(view2, 34.0/frameHeight*viewY);
     [self.labelTimer setAdjustsFontSizeToFitWidth:YES];
     
@@ -432,9 +434,9 @@
     [btTimeMinus setBackgroundImage:[UIImage imageNamed:@"minus"] forState:UIControlStateNormal];
     [view2 addSubview:btTimeMinus];
     btTimeMinus.sd_layout
-        .leftSpaceToView(view2, 98.0/frameWidth*viewX)
+        .leftSpaceToView(view2, 68.0/frameWidth*viewX)
         .centerYEqualToView(self.labelTimer)
-        .widthIs(42.0/frameWidth*viewX)
+        .widthIs(62.0/frameWidth*viewX)
         .heightEqualToWidth();
     [btTimeMinus addTarget:self action:@selector(droptimer) forControlEvents:UIControlEventTouchUpInside];
     
@@ -444,9 +446,9 @@
     [btTimeAdd setBackgroundImage:[UIImage imageNamed:@"add"] forState:UIControlStateNormal];
     [view2 addSubview:btTimeAdd];
     btTimeAdd.sd_layout
-        .rightSpaceToView(view2, 98.0/frameWidth*viewX)
+        .rightSpaceToView(view2, 68.0/frameWidth*viewX)
         .centerYEqualToView(self.labelTimer)
-        .widthIs(42.0/frameWidth*viewX)
+        .widthIs(62.0/frameWidth*viewX)
         .heightEqualToWidth();
     [btTimeAdd addTarget:self action:@selector(addtimer) forControlEvents:UIControlEventTouchUpInside];
     
@@ -769,7 +771,8 @@
 
 //睡眠定时减
 -(void)droptimer{
-    if(self.dataRead.countdown>5 && self.sw == YES){
+ //   if(self.dataRead.countdown>5 && self.sw == YES){
+    if(self.dataRead.countdown>0 ){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x16;
@@ -786,7 +789,8 @@
 
 //睡眠定时加
 -(void)addtimer{
-    if(self.dataRead.countdown<120 && self.sw==YES){
+  //  if(self.dataRead.countdown<120 && self.sw==YES){
+    if(self.dataRead.countdown<120){
         Byte  write[6];
         write[0] = 0xAA;
         write[1] = 0x16;
