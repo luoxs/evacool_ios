@@ -238,7 +238,7 @@
     self.tableview.layer.masksToBounds = YES;
     
     UIButton *btclose = [UIButton new];
-    [btclose setImage:[UIImage imageNamed:@"btn_cancel"] forState:UIControlStateNormal];
+    [btclose setImage:[UIImage imageNamed:@"no"] forState:UIControlStateNormal];
     [self.viewMusk addSubview:btclose];
     btclose.sd_layout
         .rightEqualToView(self.tableview)
