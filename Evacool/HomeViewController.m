@@ -58,7 +58,6 @@
     if(message.length>=40){
         strtype = [message substringWithRange:NSMakeRange(32, 8)];
     }
-    
     int i=0;
     for(i=0;i<self.devices.count;i++){
         if([[self.devices objectAtIndex:i].name hasPrefix:strtype]){
@@ -353,12 +352,23 @@
             self.hud.label.text = @"connect to device.....";
             [self.hud showAnimated:YES];
             
-            NSArray *strs = [pereipheral.name componentsSeparatedByString:@"-"];
-            if(strs.count>=2){
-                NSString *strSerial = [strs objectAtIndex:1];
-                NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
-                [mydefaults setObject:strSerial forKey:@"serial"];
+            
+            NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+            [mydefaults setObject:pereipheral.name forKey:@"sn"];    //蓝牙全名
+            
+            if(pereipheral.name.length >=8){
+                NSString *serialno = [pereipheral.name substringWithRange:NSMakeRange(pereipheral.name.length-8, 8)];
+                [mydefaults setObject:serialno forKey:@"serialno"];
             }
+    
+            
+            NSArray *strs = [pereipheral.name componentsSeparatedByString:@"-"];
+            if(strs.count>=1){
+                NSString *strType = [strs objectAtIndex:0];
+                [mydefaults setObject:strType forKey:@"type"];      //蓝牙型号
+            }
+            
+            [mydefaults synchronize];
         }];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             nil;

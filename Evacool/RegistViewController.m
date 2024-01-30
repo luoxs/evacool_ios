@@ -30,14 +30,7 @@
 @property(nonatomic,strong) NSString *para5;
 @property(nonatomic,strong) NSString *para6;
 @property(nonatomic,strong) NSString *para7;
-@property(nonatomic,strong) NSString *para8;
-@property(nonatomic,strong) NSString *para9;
-@property(nonatomic,strong) NSString *para10;
-@property(nonatomic,strong) NSString *para11;
-@property(nonatomic,strong) NSString *para12;
-@property(nonatomic,strong) NSString *para13;
-@property(nonatomic,strong) NSString *para14;
-@property(nonatomic,strong) NSString *para15;
+
 
 //设置一个定位管理者
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -56,7 +49,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.celltitles = [[NSArray alloc]initWithObjects:@"User Name",@"Contact No",@"Serial No.",@"Buying Day",@"Notes of User",@"Note of Product",@"Type of Car",@"Type of Product",@"Mode",@"Sub Mode",@"Open ID", nil];
+    self.celltitles = [[NSArray alloc]initWithObjects:@"User Name",@"Contact No",@"City",@"Remarks", nil];
     
     // Do any additional setup after loading the view.
     [self startLocation];
@@ -107,7 +100,7 @@
         .centerXEqualToView(self.view)
         .widthIs(self.view.width)
         .topSpaceToView(self.view, 300/frameHeight*viewY)
-        .heightIs(1100/frameHeight*viewY);
+        .heightIs(400/frameHeight*viewY);
     
     
     //确认按钮
@@ -159,13 +152,13 @@
     UITextField *txtField = [UITextField new];
     [cell addSubview:txtField];
     [txtField setFrame:CGRectMake(self.view.width/2, 0, cell.frame.size.width*0.6, cell.frame.size.height)];
-    if(indexPath.row == 0||indexPath.row == 1||indexPath.row == 2)
+    if(indexPath.row == 0||indexPath.row == 1)
         [txtField setPlaceholder:@"required"];
-    if(indexPath.row == 8)
-        [txtField setPlaceholder:@"1:fregator,2:aircondition"];
     [txtField setTag:indexPath.row+1];
     txtField.delegate = self;
-    
+
+    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:cell.frame];//这句不可省略
+    cell.selectedBackgroundView.backgroundColor = [UIColor whiteColor];
     return  cell;
 }
 
@@ -181,7 +174,7 @@
 }
 
 
-
+/*
 - (UIDatePicker *)datePicker {
     if (!_datePicker) {
         // 创建 UIDatePicker 对象
@@ -202,6 +195,7 @@
     }
     return _datePicker;
 }
+ */
 
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)aTextfield {
@@ -212,8 +206,11 @@
 -(void) textFieldDidEndEditing:(UITextField *)textField{
     if(textField.tag == 1) _para1 = textField.text;  //User Name
     if(textField.tag == 2) _para2 = textField.text;  //Contact No
-    if(textField.tag == 3) _para3 = textField.text;  //Serial  No
-    if(textField.tag == 4) _para4 = textField.text;  //Buying time
+    if(textField.tag == 3) _para6 = textField.text;  //City
+    if(textField.tag == 4) {
+        _para7 = textField.text;  //Remark
+    }
+    /*
     if(textField.tag == 5) _para6 = textField.text;   //Note of User
     if(textField.tag == 6) _para7 = textField.text;   //Note of Product
     if(textField.tag == 7) _para9 = textField.text;   //Type of Car
@@ -221,13 +218,14 @@
     if(textField.tag == 9) _para11 = textField.text;   //Mode
     if(textField.tag == 10) _para12 = textField.text;   //sub Mode
     if(textField.tag == 11) _para15 = textField.text;   //open id
+     */
     
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     
 }
-
+/*
 //是痘弹出键盘
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     // double frameWidth = 750;
@@ -250,7 +248,8 @@
     [self.view addSubview:self.datePicker];
     return NO;
 }
-
+*/
+/*
 -(void)datePickerValueChanged:(UIDatePicker *)sender{
     NSDate *date = sender.date;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -263,62 +262,49 @@
         [self.datePicker removeFromSuperview];
     }
     _para4 = str;
-    
 }
-
+*/
 
 -(void) confirm{
+    if(_para1 == nil){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"User Name Required!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
     if(_para2 == nil){
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"Contact No. cannot be null!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"Contact No. Required!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleCancel handler:nil];
         [alert addAction:cancelAction];
         [self presentViewController:alert animated:YES completion:nil];
     }
     
-    if(_para3 == nil){
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"Serial No. cannot be null!" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:cancelAction];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-    
-    
+    /*
     if(_para10 == nil){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"Type of product cannot be null!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleCancel handler:nil];
         [alert addAction:cancelAction];
         [self presentViewController:alert animated:YES completion:nil];
     }
-    
+    */
     
     NSDate* currentTime = [NSDate date];
-    _para5 = [currentTime descriptionWithLocale:[NSLocale systemLocale]];
+    _para3 = [currentTime descriptionWithLocale:[NSLocale systemLocale]];  //注册时间
     
     NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
-    NSString *strSerial = [mydefaults objectForKey:@"serial"];
-    _para8 = [strSerial substringFromIndex:strSerial.length-8];
+    NSString *devicename = [mydefaults objectForKey:@"sn"];
+    _para4 = devicename;  //蓝牙全名
     
+    _para5 = [mydefaults objectForKey:@"serialno"];   //序列号，数字
     
-    _para13 = [NSString stringWithFormat:@"%f" ,_myLocation.coordinate.longitude];
-    _para14 = [NSString stringWithFormat:@"%f" ,_myLocation.coordinate.latitude];
-    
-    
-    NSDictionary *objectDic = @{@"youhu_name":_para1==nil?@"":_para1,
-                                @"yonghu_phone":_para2==nil?@"":_para2,
-                                @"chanpin_xiaoshou_sn":_para3==nil?@"":_para3,
-                                @"gouma_shijian":_para4==nil?@"":_para4,
-                                @"zhuce_shijian":_para5==nil?@"":_para5,
-                                @"yonghu_beizhu":_para6==nil?@"":_para6,
-                                @"chanpin_beizhu":_para7==nil?@"":_para7,
-                                @"chanpin_xinghao_id":_para8,
-                                @"che_xing":_para9==nil?@"":_para9,
-                                @"chanpin_type":_para10==nil?@"":_para10,
-                                @"chanpin_xinghao":_para11==nil?@"":_para11,
-                                @"chanpin_zixinghao":_para12==nil?@"":_para12,
-                                @"zhuce_lng":_para13==nil?@"":_para13,
-                                @"zhuce_lat":_para14==nil?@"":_para14,
-                                @"zhuce_openid":_para15==nil?@"":_para15
-                                
+    NSDictionary *objectDic = @{@"username":_para1==nil?@"":_para1,
+                                @"lianxifangshi":_para2==nil?@"":_para2,
+                                @"gouma_shijian":_para3==nil?@"":_para3,
+                                @"chanpin_xiaoshou_sn":_para4==nil?@"":_para4,
+                                @"chanpin_xinghao":_para5==nil?@"":_para5,
+                                @"zhuce_chengshi":_para6==nil?@"":_para6,
+                                @"beizhu":_para7==nil?@"":_para7,
     };
     
     //    [self goinfo];
@@ -335,11 +321,6 @@
      NSLog(@"%@", str);
      }];*/
     
-    //对请求路径的说明
-    //http://120.25.226.186:32812/login
-    //协议头+主机地址+接口名称
-    //协议头(http://)+主机地址(120.25.226.186:32812)+接口名称(login)
-    //POST请求需要修改请求方法为POST，并把参数转换为二进制数据设置为请求体
     
     //1.创建会话对象
     NSURLSession *session = [NSURLSession sharedSession];
