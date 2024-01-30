@@ -334,7 +334,41 @@
 
 //打开蓝牙列表
 -(void)scan{
-    [self.viewMusk setHidden:NO];
+  //  [self.viewMusk setHidden:NO];
+    UIAlertController *alertViewController = [UIAlertController alertControllerWithTitle:@"Select a Device" message:@"To Connect" preferredStyle:UIAlertControllerStyleAlert];
+    if([self.devices count] == 0){
+        UIAlertAction *noaction = [UIAlertAction actionWithTitle:@"No Device" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            nil;
+        }];
+        [alertViewController addAction:noaction];
+    }
+    for(CBPeripheral *pereipheral in self.devices){
+        UIAlertAction *action = [UIAlertAction actionWithTitle:pereipheral.name style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [baby.centralManager stopScan];
+            [baby cancelAllPeripheralsConnection];
+            [baby.centralManager connectPeripheral:pereipheral options:nil];
+            
+            self.hud = [MBProgressHUD showHUDAddedTo:self.viewMusk animated:YES];
+            self.hud.mode = MBProgressHUDModeIndeterminate;
+            self.hud.label.text = @"connect to device.....";
+            [self.hud showAnimated:YES];
+            
+            NSArray *strs = [pereipheral.name componentsSeparatedByString:@"-"];
+            if(strs.count>=2){
+                NSString *strSerial = [strs objectAtIndex:1];
+                NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+                [mydefaults setObject:strSerial forKey:@"serial"];
+            }
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            nil;
+        }];
+        [alertViewController addAction:action];
+        [alertViewController addAction:cancelAction];
+    }
+    [self presentViewController:alertViewController animated:YES completion:^{
+        nil;
+    }];
 }
 
 //关闭蓝牙列表
@@ -532,7 +566,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [baby.centralManager stopScan];
     [baby cancelAllPeripheralsConnection];
-    [baby.centralManager stopScan];
     [baby.centralManager connectPeripheral:[self.devices objectAtIndex:indexPath.row] options:nil];
     
     self.hud = [MBProgressHUD showHUDAddedTo:self.viewMusk animated:YES];
