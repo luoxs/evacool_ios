@@ -159,7 +159,7 @@
     UITextField *txtField = [UITextField new];
     [cell addSubview:txtField];
     [txtField setFrame:CGRectMake(self.view.width/2, 0, cell.frame.size.width*0.6, cell.frame.size.height)];
-    if(indexPath.row == 1||indexPath.row == 2)
+    if(indexPath.row == 0||indexPath.row == 1||indexPath.row == 2)
         [txtField setPlaceholder:@"required"];
     if(indexPath.row == 8)
         [txtField setPlaceholder:@"1:fregator,2:aircondition"];

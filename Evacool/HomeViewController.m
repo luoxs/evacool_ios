@@ -14,14 +14,14 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CDZQRScanViewController.h"
 
-@interface HomeViewController ()<UITableViewDelegate,UITableViewDataSource,AVCaptureMetadataOutputObjectsDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface HomeViewController ()<AVCaptureMetadataOutputObjectsDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 @property (retain, nonatomic)  MBProgressHUD *hud;
 @property (nonatomic,retain) NSMutableArray <CBPeripheral*> *devices;;
 @property (nonatomic,retain) NSMutableArray *localNames;
 //@property (nonatomic,strong) NSString *brand;  //卡车 EVA24VTR EVA12VTR 房车 EVA2700RV
 //@property (nonatomic,strong) NSString *strType;   //卡车 EVA24VTR EVA12VTR 房车 EVA2700RV
-@property (nonatomic,strong) UIView *viewMusk;
-@property (nonatomic,strong) UITableView *tableview;
+//@property (nonatomic,strong) UIView *viewMusk;
+//@property (nonatomic,strong) UITableView *tableview;
 @property (nonatomic,retain)  AVCaptureSession *session; //扫描二维码会话
 @property (nonatomic,retain)  AVCaptureVideoPreviewLayer *layer;
 @end
@@ -31,9 +31,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.tableview = [[UITableView alloc]init];
-    self.tableview.delegate = self;
-    self.tableview.dataSource = self;
+//    self.tableview = [[UITableView alloc]init];
+  //  self.tableview.delegate = self;
+   // self.tableview.dataSource = self;
     self.devices = [[NSMutableArray alloc]init];
     self.localNames = [[NSMutableArray alloc]init];
     self.hud = [[MBProgressHUD alloc] init];
@@ -45,7 +45,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self.tableview reloadData];
+//    [self.tableview reloadData];
     [self babyDelegate];
     baby.scanForPeripherals().begin();
     [self.navigationController.navigationBar setHidden:YES];
@@ -54,7 +54,6 @@
 
 -(void)tongzhi:(NSNotification *)text{
     NSString *message = [NSString stringWithFormat:@"%@",text.userInfo[@"qrvalue"]];
-    
     NSString *strtype = [[NSString alloc]init];
     if(message.length>=40){
         strtype = [message substringWithRange:NSMakeRange(32, 8)];
@@ -213,7 +212,7 @@
         .widthIs(300.0/frameWidth*viewX)
         .heightIs(30.0/frameHeight*viewY);
     
-    
+    /*
     //蒙层
     self.viewMusk = [UIView new];
     [self.view addSubview:self.viewMusk];
@@ -246,6 +245,7 @@
         .widthIs(viewX/10.0)
         .heightEqualToWidth();
     [btclose addTarget:self action:@selector(closemusk) forControlEvents:UIControlEventTouchUpInside];
+     */
 }
 
 -(void)goback{
@@ -335,9 +335,9 @@
 //打开蓝牙列表
 -(void)scan{
   //  [self.viewMusk setHidden:NO];
-    UIAlertController *alertViewController = [UIAlertController alertControllerWithTitle:@"Select a Device" message:@"To Connect" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertViewController = [UIAlertController alertControllerWithTitle:@"Select a Device to Connect" message:nil preferredStyle:UIAlertControllerStyleAlert];
     if([self.devices count] == 0){
-        UIAlertAction *noaction = [UIAlertAction actionWithTitle:@"No Device" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *noaction = [UIAlertAction actionWithTitle:@"Device Not Found" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             nil;
         }];
         [alertViewController addAction:noaction];
@@ -348,7 +348,7 @@
             [baby cancelAllPeripheralsConnection];
             [baby.centralManager connectPeripheral:pereipheral options:nil];
             
-            self.hud = [MBProgressHUD showHUDAddedTo:self.viewMusk animated:YES];
+            self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             self.hud.mode = MBProgressHUDModeIndeterminate;
             self.hud.label.text = @"connect to device.....";
             [self.hud showAnimated:YES];
@@ -371,11 +371,12 @@
     }];
 }
 
+/*
 //关闭蓝牙列表
 -(void) closemusk{
     [self.viewMusk setHidden:YES];
 }
-
+*/
 
 #pragma mark - babyDelegate
 //蓝牙网关初始化和委托方法设置
@@ -407,7 +408,7 @@
             [weakSelf.devices addObject:peripheral];
             [weakSelf.localNames addObject:advertiseName];
                        // weakSelf.currPeripheral = peripheral;
-            [weakSelf.tableview reloadData];
+          //  [weakSelf.tableview reloadData];
             if([weakSelf.devices count]>2){
                 [central stopScan];
             }
@@ -461,7 +462,7 @@
             NSLog(@"charateristic name is :%@",c.UUID);
             
             if([c.UUID.UUIDString isEqualToString:@"FFE1"]){
-                [weakSelf.viewMusk setHidden:YES];
+              //  [weakSelf.viewMusk setHidden:YES];
                 
                 if([weakSelf.brand isEqualToString:@"EVA24VTR"]){
                     TruckViewController *truckViewController = [[TruckViewController alloc]init];
@@ -528,7 +529,7 @@
     }];
 }
 
-
+/*
 #pragma mark tableviewdatasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.devices count];
@@ -554,11 +555,6 @@
     [labelname setFrame:CGRectMake(0, 0, cell.frame.size.width*0.9, cell.frame.size.height)];
     [labelname setTextAlignment:NSTextAlignmentCenter];
     [labelname setText:advertiseName];
-    
-    
-    
-    
-    
     return cell;
 }
 
@@ -581,6 +577,8 @@
         [mydefaults setObject:strSerial forKey:@"serial"];
     }
 }
+ */
+ 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

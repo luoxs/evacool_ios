@@ -27,7 +27,7 @@
     [self.view setBackgroundColor:[UIColor colorWithRed:246.0/255 green:248.0/255 blue:249.0/255 alpha:1.0]];
     // Do any additional setup after loading the view.
     [self setAutolayout];
-    [self getinfo];
+   // [self getinfo];
 }
 
 -(void)setAutolayout{
@@ -321,8 +321,6 @@
         //  [_textView performSelectorOnMainThread:@selector(setText:) withObject:jsonText waitUntilDone:NO];
     }];
     [dataTask resume];
-    
-    
 }
 
 -(void)goback{
