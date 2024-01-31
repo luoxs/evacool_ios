@@ -153,14 +153,14 @@
      [cell addSubview:label2];
      
      //右上
-     UILabel *label3 =[[UILabel alloc] initWithFrame:CGRectMake(cell.frame.size.width/2.0-10, 0,cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
+     UILabel *label3 =[[UILabel alloc] initWithFrame:CGRectMake(cell.frame.size.width/2.0+20, 0,cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
      [label3 setTextColor:[UIColor grayColor]];
      [label3 setTextAlignment:NSTextAlignmentLeft];
      [label3 setFont:[UIFont fontWithName:@"Arial" size:10.0]];
      [cell addSubview:label3];
      
-     //左下
-     UILabel *label4 =[[UILabel alloc] initWithFrame:CGRectMake( cell.frame.size.width/2.0-10,cell.frame.size.height/2.0, cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
+     //右下
+     UILabel *label4 =[[UILabel alloc] initWithFrame:CGRectMake( cell.frame.size.width/2.0+20,cell.frame.size.height/2.0, cell.frame.size.width/2.0-20, cell.frame.size.height/2.0)];
      if(indexPath.row == 0){
          [label4 setTextColor:[UIColor colorWithRed:1.0 green:97.0/255.0 blue:3.0/255.0 alpha:1]];
      }else{

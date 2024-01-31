@@ -56,6 +56,11 @@
     [self setAutolayout];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    
+//    [self getinfo];
+}
+
 -(void)setAutolayout{
     double frameWidth = 750;
     double frameHeight = 1624;
@@ -169,7 +174,10 @@
 }
 
 -(void)goback{
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+        nil;
+    }];
     
 }
 
@@ -316,16 +324,45 @@
     [self.locationManager stopUpdatingLocation];
 }
 
-
-
 /*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+-(void)getinfo{
+    NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
+    NSString *strSerial = [mydefaults objectForKey:@"serial"];
+    NSString *serial = [strSerial substringFromIndex:strSerial.length-8];
+    NSString *strURL = [NSString stringWithFormat:@"https://wrmes.colku.cn/api/wrmes/ggshouhou/zd_yonghu_chanpin_zhuce_teq_get",serial];
+    NSURL *url = [NSURL URLWithString:strURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"GET";
+    request.timeoutInterval = 60;
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        //判断错误
+        if (error) {
+            NSLog(@"net error:%@", error);
+            return;
+        }
+        NSError *jsonError = nil;
+        NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+        NSString *jsonText = [NSString stringWithFormat:@"%@", dic];
+        NSLog(@"jsonText: %@",jsonText);
+        //找到序列号，则进入产品信息页，否则进入注册页
+        
+        if([[[dic objectForKey:@"return_list_json"] objectForKey:@"chanpin_xinghao_id"] isEqualToString:strSerial]){
+            dispatch_async(dispatch_get_main_queue(), ^{
+               self.userNmae =  [[dic objectForKey:@"return_list_json"] objectForKey:@"yonghu_name"];
+                self.phone = [[dic objectForKey:@"return_list_json"] objectForKey:@"yonghu_phone"];
+                self.product = [[dic objectForKey:@"return_list_json"] objectForKey:@"chanpin_type"];
+                self.serial = [[dic objectForKey:@"return_list_json"] objectForKey:@"chanpin_xinghao_id"];
+                self.regdate = [[dic objectForKey:@"return_list_json"] objectForKey:@"zhuce_shijian"];
+            });
+        }
+        //回到主线程 来刷新文字
+        //  [_textView performSelectorOnMainThread:@selector(setText:) withObject:jsonText waitUntilDone:NO];
+    }];
+    [dataTask resume];
+}*/
+
+
 
 @end

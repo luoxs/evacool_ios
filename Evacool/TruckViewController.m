@@ -114,7 +114,7 @@
         .centerYEqualToView(imageTop)
         .widthIs(40/frameWidth*viewX)
         .heightEqualToWidth();
-    [btprofile addTarget:self action:@selector(goprofile) forControlEvents:UIControlEventTouchUpInside];
+    [btprofile addTarget:self action:@selector(goinfo) forControlEvents:UIControlEventTouchUpInside];
     
     
     //左上文字1
