@@ -49,7 +49,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.celltitles = [[NSArray alloc]initWithObjects:@"User Name",@"Contact No",@"City",@"Remarks", nil];
+    self.celltitles = [[NSArray alloc]initWithObjects:@"User Name",@"Contact No",@"City", nil];
     
     // Do any additional setup after loading the view.
     [self startLocation];
@@ -105,7 +105,7 @@
         .centerXEqualToView(self.view)
         .widthIs(self.view.width)
         .topSpaceToView(self.view, 300/frameHeight*viewY)
-        .heightIs(400/frameHeight*viewY);
+        .heightIs(300/frameHeight*viewY);
     
     
     //确认按钮
@@ -191,9 +191,9 @@
     if(textField.tag == 1) _para1 = textField.text;  //User Name
     if(textField.tag == 2) _para2 = textField.text;  //Contact No
     if(textField.tag == 3) _para6 = textField.text;  //City
-    if(textField.tag == 4) {
-        _para7 = textField.text;  //Remark
-    }
+//    if(textField.tag == 4) {
+//        _para7 = textField.text;  //Remark
+//    }
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -231,7 +231,8 @@
                                 @"chanpin_xiaoshou_sn":_para4==nil?@"":_para4,
                                 @"chanpin_xingaho":_para5==nil?@"":_para5,
                                 @"zhuce_chengshi":_para6==nil?@"":_para6,
-                                @"beizhu":_para7==nil?@"":_para7,
+                              //  @"beizhu":_para7==nil?@"":_para7,
+                                @"beizhu":@"",
     };
     
     //    [self goinfo];
