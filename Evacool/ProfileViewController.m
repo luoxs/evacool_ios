@@ -289,7 +289,7 @@
     NSUserDefaults *mydefaults = [NSUserDefaults standardUserDefaults];
     NSString *strSerial = [mydefaults objectForKey:@"serial"];
     NSString *serial = [strSerial substringFromIndex:strSerial.length-8];
-    NSString *strURL = [NSString stringWithFormat:@"https://wrmes.colku.cn/api/wrmes/ggshouhou/yonghu_chanpin_xinxi_get?page=1&size=10&chanpin_xinghao_id=%@",serial];
+    NSString *strURL = [NSString stringWithFormat:@"https://wrmes.colku.cn/api/wrmes/ggshouhou/zd_yonghu_chanpin_zhuce_teq_get",serial];
     NSURL *url = [NSURL URLWithString:strURL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"GET";

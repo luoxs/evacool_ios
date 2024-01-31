@@ -173,30 +173,6 @@
     
 }
 
-
-/*
-- (UIDatePicker *)datePicker {
-    if (!_datePicker) {
-        // 创建 UIDatePicker 对象
-        _datePicker = [[UIDatePicker alloc] init];
-        // 设置背景颜色
-        _datePicker.backgroundColor = [UIColor whiteColor];
-        // 设置日期选择器模式:日期模式
-        _datePicker.datePickerMode = UIDatePickerModeDate;
-        // 设置可供选择的最小时间：昨天
-        NSTimeInterval time = 24 * 60 * 60; // 24H 的时间戳值
-        _datePicker.minimumDate = [[NSDate alloc] initWithTimeIntervalSinceNow:- 91*time];
-        // 设置可供选择的最大时间：明天
-        _datePicker.maximumDate = [[NSDate alloc] initWithTimeIntervalSinceNow:time];
-        // 添加 Target-Action
-        [_datePicker addTarget:self
-                        action:@selector(datePickerValueChanged:)
-              forControlEvents:UIControlEventValueChanged];
-    }
-    return _datePicker;
-}
- */
-
 #pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)aTextfield {
     [aTextfield resignFirstResponder];//关闭键盘
@@ -210,60 +186,11 @@
     if(textField.tag == 4) {
         _para7 = textField.text;  //Remark
     }
-    /*
-    if(textField.tag == 5) _para6 = textField.text;   //Note of User
-    if(textField.tag == 6) _para7 = textField.text;   //Note of Product
-    if(textField.tag == 7) _para9 = textField.text;   //Type of Car
-    if(textField.tag == 8) _para10 = textField.text;   //type of Product
-    if(textField.tag == 9) _para11 = textField.text;   //Mode
-    if(textField.tag == 10) _para12 = textField.text;   //sub Mode
-    if(textField.tag == 11) _para15 = textField.text;   //open id
-     */
-    
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     
 }
-/*
-//是痘弹出键盘
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    // double frameWidth = 750;
-    double frameHeight = 1624;
-    // double viewX = [UIScreen mainScreen].bounds.size.width;
-    double viewY = [UIScreen mainScreen].bounds.size.height;
-    // 如果需要显示键盘，则隐藏 datePicker
-    if (textField.tag != 4) {
-        if (self.datePicker.superview) {
-            [self.datePicker removeFromSuperview];
-        }
-        return YES;
-    }
-    
-    [self.view endEditing:YES];
-    self.datePicker.frame = CGRectMake(self.view.width/2, 600/frameHeight*viewY, self.view.width/2, 100/frameHeight*viewY);
-    self.datePicker.backgroundColor = [UIColor colorWithRed:209/255.0 green:209/255.0 blue:214/255.0 alpha:1];
-    self.datePicker.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    
-    [self.view addSubview:self.datePicker];
-    return NO;
-}
-*/
-/*
--(void)datePickerValueChanged:(UIDatePicker *)sender{
-    NSDate *date = sender.date;
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *str = [dateFormatter stringFromDate:date];
-    // 将日期赋值给 textField
-    UITextField *txtField = [(UITextField *) self.view viewWithTag:4];
-    txtField.text = str;
-    if (self.datePicker.superview) {
-        [self.datePicker removeFromSuperview];
-    }
-    _para4 = str;
-}
-*/
 
 -(void) confirm{
     if(_para1 == nil){
@@ -280,14 +207,6 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
     
-    /*
-    if(_para10 == nil){
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"Type of product cannot be null!" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:cancelAction];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-    */
     
     NSDate* currentTime = [NSDate date];
     _para3 = [currentTime descriptionWithLocale:[NSLocale systemLocale]];  //注册时间
@@ -299,10 +218,10 @@
     _para5 = [mydefaults objectForKey:@"serialno"];   //序列号，数字
     
     NSDictionary *objectDic = @{@"username":_para1==nil?@"":_para1,
-                                @"lianxifangshi":_para2==nil?@"":_para2,
+                                @"liangxi_fangshi":_para2==nil?@"":_para2,
                                 @"gouma_shijian":_para3==nil?@"":_para3,
                                 @"chanpin_xiaoshou_sn":_para4==nil?@"":_para4,
-                                @"chanpin_xinghao":_para5==nil?@"":_para5,
+                                @"chanpin_xingaho":_para5==nil?@"":_para5,
                                 @"zhuce_chengshi":_para6==nil?@"":_para6,
                                 @"beizhu":_para7==nil?@"":_para7,
     };
@@ -325,7 +244,7 @@
     //1.创建会话对象
     NSURLSession *session = [NSURLSession sharedSession];
     //2.确立请求路径
-    NSURL *url = [NSURL URLWithString:@"https://wrmes.colku.cn/api/wrmes/ggshouhou/yonghu_chanpin_zhuce"];
+    NSURL *url = [NSURL URLWithString:@"https://wrmes.colku.cn/api/wrmes/ggshouhou/zd_yonghu_chanpin_zhuce_teq_c"];
     //3.创建可变的请求对象
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     //4.修改请求方法为POST,若不修改则默认为GET
