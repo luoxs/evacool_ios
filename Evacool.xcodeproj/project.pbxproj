@@ -33,28 +33,6 @@
 		4543B0352B4810590070A847 /* dataCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B02D2B4810580070A847 /* dataCode.m */; };
 		4543B0362B4810590070A847 /* DataRead.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B0302B4810580070A847 /* DataRead.m */; };
 		4543B03B2B4814BD0070A847 /* DataReadR.m in Sources */ = {isa = PBXBuildFile; fileRef = 4543B0392B4814BC0070A847 /* DataReadR.m */; };
-		4543B0532B4833D60070A847 /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B03D2B4833D60070A847 /* 8.png */; };
-		4543B0542B4833D60070A847 /* 9.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B03E2B4833D60070A847 /* 9.png */; };
-		4543B0552B4833D60070A847 /* 14.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B03F2B4833D60070A847 /* 14.png */; };
-		4543B0562B4833D60070A847 /* 15.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0402B4833D60070A847 /* 15.png */; };
-		4543B0572B4833D60070A847 /* 17.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0412B4833D60070A847 /* 17.png */; };
-		4543B0582B4833D60070A847 /* 16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0422B4833D60070A847 /* 16.png */; };
-		4543B0592B4833D60070A847 /* 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0432B4833D60070A847 /* 12.png */; };
-		4543B05A2B4833D60070A847 /* 13.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0442B4833D60070A847 /* 13.png */; };
-		4543B05B2B4833D60070A847 /* 11.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0452B4833D60070A847 /* 11.png */; };
-		4543B05C2B4833D60070A847 /* 10.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0462B4833D60070A847 /* 10.png */; };
-		4543B05D2B4833D60070A847 /* 21.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0472B4833D60070A847 /* 21.png */; };
-		4543B05E2B4833D60070A847 /* 20.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0482B4833D60070A847 /* 20.png */; };
-		4543B05F2B4833D60070A847 /* 18.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0492B4833D60070A847 /* 18.png */; };
-		4543B0602B4833D60070A847 /* 19.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B04A2B4833D60070A847 /* 19.png */; };
-		4543B0612B4833D60070A847 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B04B2B4833D60070A847 /* 4.png */; };
-		4543B0622B4833D60070A847 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B04C2B4833D60070A847 /* 5.png */; };
-		4543B0632B4833D60070A847 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B04D2B4833D60070A847 /* 7.png */; };
-		4543B0642B4833D60070A847 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B04E2B4833D60070A847 /* 6.png */; };
-		4543B0652B4833D60070A847 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B04F2B4833D60070A847 /* 2.png */; };
-		4543B0662B4833D60070A847 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0502B4833D60070A847 /* 3.png */; };
-		4543B0672B4833D60070A847 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0512B4833D60070A847 /* 1.png */; };
-		4543B0682B4833D60070A847 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 4543B0522B4833D60070A847 /* 0.png */; };
 		454D86162B5C36A100938793 /* btreturn.png in Resources */ = {isa = PBXBuildFile; fileRef = 454D86152B5C36A100938793 /* btreturn.png */; };
 		454D86192B5C548100938793 /* swon.png in Resources */ = {isa = PBXBuildFile; fileRef = 454D86172B5C548100938793 /* swon.png */; };
 		454D861A2B5C548100938793 /* swoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 454D86182B5C548100938793 /* swoff.png */; };
@@ -172,28 +150,6 @@
 		4543B0382B4812620070A847 /* DataRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataRead.h; path = Datas/DataRead.h; sourceTree = SOURCE_ROOT; };
 		4543B0392B4814BC0070A847 /* DataReadR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataReadR.m; path = Datas/DataReadR.m; sourceTree = SOURCE_ROOT; };
 		4543B03A2B4814BC0070A847 /* DataReadR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataReadR.h; path = Datas/DataReadR.h; sourceTree = SOURCE_ROOT; };
-		4543B03D2B4833D60070A847 /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
-		4543B03E2B4833D60070A847 /* 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 9.png; sourceTree = "<group>"; };
-		4543B03F2B4833D60070A847 /* 14.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 14.png; sourceTree = "<group>"; };
-		4543B0402B4833D60070A847 /* 15.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 15.png; sourceTree = "<group>"; };
-		4543B0412B4833D60070A847 /* 17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 17.png; sourceTree = "<group>"; };
-		4543B0422B4833D60070A847 /* 16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 16.png; sourceTree = "<group>"; };
-		4543B0432B4833D60070A847 /* 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 12.png; sourceTree = "<group>"; };
-		4543B0442B4833D60070A847 /* 13.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 13.png; sourceTree = "<group>"; };
-		4543B0452B4833D60070A847 /* 11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 11.png; sourceTree = "<group>"; };
-		4543B0462B4833D60070A847 /* 10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 10.png; sourceTree = "<group>"; };
-		4543B0472B4833D60070A847 /* 21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 21.png; sourceTree = "<group>"; };
-		4543B0482B4833D60070A847 /* 20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 20.png; sourceTree = "<group>"; };
-		4543B0492B4833D60070A847 /* 18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 18.png; sourceTree = "<group>"; };
-		4543B04A2B4833D60070A847 /* 19.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 19.png; sourceTree = "<group>"; };
-		4543B04B2B4833D60070A847 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
-		4543B04C2B4833D60070A847 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
-		4543B04D2B4833D60070A847 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
-		4543B04E2B4833D60070A847 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 6.png; sourceTree = "<group>"; };
-		4543B04F2B4833D60070A847 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		4543B0502B4833D60070A847 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
-		4543B0512B4833D60070A847 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		4543B0522B4833D60070A847 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
 		454D86152B5C36A100938793 /* btreturn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btreturn.png; sourceTree = "<group>"; };
 		454D86172B5C548100938793 /* swon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swon.png; sourceTree = "<group>"; };
 		454D86182B5C548100938793 /* swoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swoff.png; sourceTree = "<group>"; };
@@ -330,36 +286,6 @@
 			path = Datas;
 			sourceTree = "<group>";
 		};
-		4543B03C2B4833D60070A847 /* GCA28 */ = {
-			isa = PBXGroup;
-			children = (
-				4543B03D2B4833D60070A847 /* 8.png */,
-				4543B03E2B4833D60070A847 /* 9.png */,
-				4543B03F2B4833D60070A847 /* 14.png */,
-				4543B0402B4833D60070A847 /* 15.png */,
-				4543B0412B4833D60070A847 /* 17.png */,
-				4543B0422B4833D60070A847 /* 16.png */,
-				4543B0432B4833D60070A847 /* 12.png */,
-				4543B0442B4833D60070A847 /* 13.png */,
-				4543B0452B4833D60070A847 /* 11.png */,
-				4543B0462B4833D60070A847 /* 10.png */,
-				4543B0472B4833D60070A847 /* 21.png */,
-				4543B0482B4833D60070A847 /* 20.png */,
-				4543B0492B4833D60070A847 /* 18.png */,
-				4543B04A2B4833D60070A847 /* 19.png */,
-				4543B04B2B4833D60070A847 /* 4.png */,
-				4543B04C2B4833D60070A847 /* 5.png */,
-				4543B04D2B4833D60070A847 /* 7.png */,
-				4543B04E2B4833D60070A847 /* 6.png */,
-				4543B04F2B4833D60070A847 /* 2.png */,
-				4543B0502B4833D60070A847 /* 3.png */,
-				4543B0512B4833D60070A847 /* 1.png */,
-				4543B0522B4833D60070A847 /* 0.png */,
-			);
-			name = GCA28;
-			path = Evacool/slice/GCA28;
-			sourceTree = SOURCE_ROOT;
-		};
 		454E9F0C2B3AEE93009F7B3A /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -373,7 +299,6 @@
 				454D86172B5C548100938793 /* swon.png */,
 				454D86152B5C36A100938793 /* btreturn.png */,
 				450384812B4D0B5900184684 /* no.png */,
-				4543B03C2B4833D60070A847 /* GCA28 */,
 				45D4A13C2B45357B001A4E22 /* switch.png */,
 				45D49FD52B3D820A001A4E22 /* add.png */,
 				45D49FD62B3D820A001A4E22 /* jia.png */,
@@ -575,12 +500,10 @@
 				457F8B082B1EAB0700FA7ABB /* LaunchScreen.storyboard in Resources */,
 				454E9F642B3AF08F009F7B3A /* heat_off.png in Resources */,
 				454E9F7C2B3AF08F009F7B3A /* share_logo.png in Resources */,
-				4543B05E2B4833D60070A847 /* 20.png in Resources */,
 				453B7A052B5D2B70008A6457 /* goback.png in Resources */,
 				457F8B052B1EAB0700FA7ABB /* Assets.xcassets in Resources */,
 				454E9F872B3AF08F009F7B3A /* arefaction_off.png in Resources */,
 				4567B8C32B3B06EF006DD662 /* imagehome.png in Resources */,
-				4543B0572B4833D60070A847 /* 17.png in Resources */,
 				45D49FD12B3C7352001A4E22 /* f1.png in Resources */,
 				454D86162B5C36A100938793 /* btreturn.png in Resources */,
 				45D49FBF2B3C7352001A4E22 /* turbooff.png in Resources */,
@@ -588,22 +511,15 @@
 				453B7A072B5D2FEF008A6457 /* greendot.png in Resources */,
 				45D49FC72B3C7352001A4E22 /* batteryon.png in Resources */,
 				454E9F652B3AF08F009F7B3A /* switch_off.png in Resources */,
-				4543B0542B4833D60070A847 /* 9.png in Resources */,
 				4508589D2B3B18ED00770387 /* fan1.png in Resources */,
 				45D49FCD2B3C7352001A4E22 /* f5.png in Resources */,
-				4543B0562B4833D60070A847 /* 15.png in Resources */,
 				450858A42B3B195900770387 /* germany.png in Resources */,
 				454E9F562B3AF08F009F7B3A /* swap.png in Resources */,
 				454E9F572B3AF08F009F7B3A /* home_car.png in Resources */,
-				4543B0632B4833D60070A847 /* 7.png in Resources */,
 				453B7A022B5D1C16008A6457 /* a1509.png in Resources */,
 				454E9F7A2B3AF08F009F7B3A /* ice.png in Resources */,
-				4543B05B2B4833D60070A847 /* 11.png in Resources */,
-				4543B0582B4833D60070A847 /* 16.png in Resources */,
 				454E9F5F2B3AF08F009F7B3A /* new_light_on.png in Resources */,
-				4543B05A2B4833D60070A847 /* 13.png in Resources */,
 				454E9F632B3AF08F009F7B3A /* light_off.png in Resources */,
-				4543B05D2B4833D60070A847 /* 21.png in Resources */,
 				454D86192B5C548100938793 /* swon.png in Resources */,
 				454D861A2B5C548100938793 /* swoff.png in Resources */,
 				454E9F112B3AEE93009F7B3A /* trunk.png in Resources */,
@@ -614,21 +530,15 @@
 				45D49FD92B3D820A001A4E22 /* add.png in Resources */,
 				45D49FD42B3C7352001A4E22 /* d2.png in Resources */,
 				453B7A032B5D1C16008A6457 /* wps.png in Resources */,
-				4543B0532B4833D60070A847 /* 8.png in Resources */,
 				45D49FCC2B3C7352001A4E22 /* d4.png in Resources */,
 				454E9F5B2B3AF08F009F7B3A /* fan_off.png in Resources */,
 				454E9F6B2B3AF08F009F7B3A /* qrcode.jpg in Resources */,
-				4543B0612B4833D60070A847 /* 4.png in Resources */,
 				45D49FC32B3C7352001A4E22 /* batteryoff.png in Resources */,
-				4543B0552B4833D60070A847 /* 14.png in Resources */,
-				4543B0662B4833D60070A847 /* 3.png in Resources */,
 				454E9F102B3AEE93009F7B3A /* rv12.png in Resources */,
 				454E9F7D2B3AF08F009F7B3A /* switch_on.png in Resources */,
-				4543B0652B4833D60070A847 /* 2.png in Resources */,
 				45D49FC12B3C7352001A4E22 /* turboon.png in Resources */,
 				457F8B032B1EAB0300FA7ABB /* Main.storyboard in Resources */,
 				450384822B4D0B5900184684 /* no.png in Resources */,
-				4543B0602B4833D60070A847 /* 19.png in Resources */,
 				45D49FD02B3C7352001A4E22 /* d1.png in Resources */,
 				45D49FCB2B3C7352001A4E22 /* f2.png in Resources */,
 				45D49FCE2B3C7352001A4E22 /* coolon.png in Resources */,
@@ -641,28 +551,21 @@
 				454E9F7F2B3AF08F009F7B3A /* switch.png in Resources */,
 				4508589C2B3B18ED00770387 /* fan2.png in Resources */,
 				45D49FC62B3C7352001A4E22 /* f3.png in Resources */,
-				4543B0672B4833D60070A847 /* 1.png in Resources */,
-				4543B05C2B4833D60070A847 /* 10.png in Resources */,
 				454E9F762B3AF08F009F7B3A /* sleep_on.png in Resources */,
 				45D49FDC2B3D820A001A4E22 /* minus.png in Resources */,
-				4543B0592B4833D60070A847 /* 12.png in Resources */,
 				45D4A13D2B45357B001A4E22 /* switch.png in Resources */,
 				45D49FC22B3C7352001A4E22 /* d3.png in Resources */,
 				454E9F742B3AF08F009F7B3A /* back_mine.png in Resources */,
 				45D49FC82B3C7352001A4E22 /* 23.png in Resources */,
-				4543B0682B4833D60070A847 /* 0.png in Resources */,
 				454E9F122B3AEE93009F7B3A /* rv24.png in Resources */,
-				4543B0622B4833D60070A847 /* 5.png in Resources */,
 				454E9F542B3AF08F009F7B3A /* arefaction_on.png in Resources */,
 				454E9F842B3AF08F009F7B3A /* light_on.png in Resources */,
 				45D49FC92B3C7352001A4E22 /* f4.png in Resources */,
-				4543B05F2B4833D60070A847 /* 18.png in Resources */,
 				454E9F8C2B3AF08F009F7B3A /* sleep_off.png in Resources */,
 				454E9F8E2B3AF08F009F7B3A /* heat_on.png in Resources */,
 				4567B8C52B3B146D006DD662 /* imagetop.png in Resources */,
 				4508589A2B3B18ED00770387 /* fan3.png in Resources */,
 				45D49FCF2B3C7352001A4E22 /* power.png in Resources */,
-				4543B0642B4833D60070A847 /* 6.png in Resources */,
 				454E9F6A2B3AF08F009F7B3A /* fan_on.png in Resources */,
 				454E9F552B3AF08F009F7B3A /* plus.png in Resources */,
 				4508589E2B3B18ED00770387 /* bluetooth.png in Resources */,
@@ -869,6 +772,8 @@
 				DEVELOPMENT_TEAM = KVC8NZTYE2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Evacool/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Evacool;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app will use your bluetooth to connect device";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "The app will connect device";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use your camera to scan QR code";
@@ -878,17 +783,20 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.5;
+				MARKETING_VERSION = 1.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.luoxs.www.Evacool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -903,6 +811,8 @@
 				DEVELOPMENT_TEAM = KVC8NZTYE2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Evacool/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Evacool;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "This app will use your bluetooth to connect device";
 				INFOPLIST_KEY_NSBluetoothPeripheralUsageDescription = "The app will connect device";
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app will use your camera to scan QR code";
@@ -912,17 +822,20 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.5;
+				MARKETING_VERSION = 1.3.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.luoxs.www.Evacool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

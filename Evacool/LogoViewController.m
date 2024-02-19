@@ -72,12 +72,12 @@
     labelTitle.text = @"Product Catalogue";
     [labelTitle setTextColor:[UIColor blackColor]];
     [labelTitle setTextAlignment:NSTextAlignmentCenter];
-    [labelTitle setFont:[UIFont fontWithName:@"Arial" size:28.0]];
+    [labelTitle setFont:[UIFont fontWithName:@"Arial" size:26.0]];
     labelTitle.sd_layout
         .centerXEqualToView(self.view)
         .topSpaceToView(self.view, 708.0/frameHeight*viewY)
         .widthIs(600.0/frameWidth*viewX)
-        .heightIs(48.0/frameHeight*viewY);
+        .heightIs(56.0/frameHeight*viewY);
     
     //中间文字下
     UILabel *labelDown = [UILabel new];
@@ -88,7 +88,7 @@
     [labelDown setFont:[UIFont fontWithName:@"Arial" size:14.0]];
     labelDown.sd_layout
         .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 798.0/frameHeight*viewY)
+        .topSpaceToView(self.view, 804.0/frameHeight*viewY)
         .widthIs(600.0/frameWidth*viewX)
         .heightIs(28.0/frameHeight*viewY);
     
@@ -101,7 +101,7 @@
     [self.view addSubview:view1];
     view1.sd_layout
         .leftSpaceToView(self.view, 35.0/frameWidth*viewX)
-        .topSpaceToView(self.view, 888.0/frameHeight*viewY)
+        .topSpaceToView(self.view, 896.0/frameHeight*viewY)
         .widthIs(244.0/frameWidth*viewX)
         .heightIs(340.0/frameHeight*viewY);
     [view1 setSd_cornerRadius:@10.0];
@@ -113,7 +113,7 @@
     [self.view addSubview:view2];
     view2.sd_layout
         .centerXEqualToView(self.view)
-        .topSpaceToView(self.view, 888.0/frameHeight*viewY)
+        .topSpaceToView(self.view, 896.0/frameHeight*viewY)
         .widthIs(244.0/frameWidth*viewX)
         .heightIs(340.0/frameHeight*viewY);
     [view2 setSd_cornerRadius:@10.0];
@@ -125,7 +125,7 @@
     [self.view addSubview:view3];
     view3.sd_layout
         .rightSpaceToView(self.view, 35.0/frameWidth*viewX)
-        .topSpaceToView(self.view, 888.0/frameHeight*viewY)
+        .topSpaceToView(self.view, 896.0/frameHeight*viewY)
         .widthIs(244.0/frameWidth*viewX)
         .heightIs(340.0/frameHeight*viewY);
     [view3 setSd_cornerRadius:@10.0];
