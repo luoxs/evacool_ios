@@ -186,7 +186,7 @@
         .topSpaceToView(view4, 100/frameHeight*viewY)
         .widthIs(332.0/frameWidth*viewX)
         .heightIs(196.0/frameHeight*viewY);
-    [view4 setSd_cornerRadius:@10.0];
+    [view5 setSd_cornerRadius:@10.0];
     
     //蓝牙按钮
     UIButton *imageBluetooth = [UIButton new];
