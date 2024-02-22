@@ -8,6 +8,7 @@
 #import "ProfileViewController.h"
 #import "SDAutoLayout.h"
 #import "MBProgressHUD.h"
+#import "ListfileViewController.h"
 #import "RegistViewController.h"
 
 @interface ProfileViewController ()
@@ -278,7 +279,7 @@
         .topSpaceToView(self.view, 1280/frameHeight*viewY)
         .heightIs(90/frameHeight*viewY);
     [btmanual setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
-    //  [btmanual addTarget:self action:@selector(goinfo) forControlEvents:UIControlEventTouchUpInside];
+    [btmanual addTarget:self action:@selector(filelist) forControlEvents:UIControlEventTouchUpInside];
     
     UILabel *labelcpright = [UILabel new];
     [self.view addSubview:labelcpright];
@@ -368,6 +369,11 @@
 -(void)goback{
     [self.navigationController popViewControllerAnimated:YES];
     
+}
+
+-(void)filelist{
+    ListfileViewController *listfileViewController = [ListfileViewController new];
+    [self.navigationController pushViewController:listfileViewController animated:YES];
 }
 /*
  #pragma mark - Navigation

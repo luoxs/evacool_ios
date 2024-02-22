@@ -157,6 +157,7 @@
     UITextField *txtField = [UITextField new];
     [cell addSubview:txtField];
     [txtField setFrame:CGRectMake(self.view.width/2, 0, cell.frame.size.width*0.6, cell.frame.size.height)];
+    [txtField setTextColor:[UIColor blackColor]];
     if(indexPath.row == 0||indexPath.row == 1)
         [txtField setPlaceholder:@"required"];
     [txtField setTag:indexPath.row+1];

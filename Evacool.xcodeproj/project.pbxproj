@@ -78,6 +78,13 @@
 		457F8B052B1EAB0700FA7ABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 457F8B042B1EAB0700FA7ABB /* Assets.xcassets */; };
 		457F8B082B1EAB0700FA7ABB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 457F8B062B1EAB0700FA7ABB /* LaunchScreen.storyboard */; };
 		457F8B0B2B1EAB0700FA7ABB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 457F8B0A2B1EAB0700FA7ABB /* main.m */; };
+		45863D5F2B872D7500D32783 /* G29ATE.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 45863D592B872D7400D32783 /* G29ATE.pdf */; };
+		45863D602B872D7500D32783 /* GCA28E.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 45863D5A2B872D7400D32783 /* GCA28E.pdf */; };
+		45863D612B872D7500D32783 /* GCA28T.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 45863D5B2B872D7400D32783 /* GCA28T.pdf */; };
+		45863D622B872D7500D32783 /* G29ATT.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 45863D5C2B872D7400D32783 /* G29ATT.pdf */; };
+		45863D632B872D7500D32783 /* G29TE.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 45863D5D2B872D7500D32783 /* G29TE.pdf */; };
+		45863D642B872D7500D32783 /* G29TT.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 45863D5E2B872D7500D32783 /* G29TT.pdf */; };
+		45863D682B872E0700D32783 /* ListfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45863D672B872E0700D32783 /* ListfileViewController.m */; };
 		45A82F762B47EB5C002413AC /* RoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45A82F752B47EB5B002413AC /* RoomViewController.m */; };
 		45D49FBE2B3C7352001A4E22 /* d5.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FA72B3C7350001A4E22 /* d5.png */; };
 		45D49FBF2B3C7352001A4E22 /* turbooff.png in Resources */ = {isa = PBXBuildFile; fileRef = 45D49FA82B3C7350001A4E22 /* turbooff.png */; };
@@ -220,6 +227,14 @@
 		457F8B072B1EAB0700FA7ABB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		457F8B092B1EAB0700FA7ABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		457F8B0A2B1EAB0700FA7ABB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		45863D592B872D7400D32783 /* G29ATE.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = G29ATE.pdf; sourceTree = "<group>"; };
+		45863D5A2B872D7400D32783 /* GCA28E.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = GCA28E.pdf; sourceTree = "<group>"; };
+		45863D5B2B872D7400D32783 /* GCA28T.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = GCA28T.pdf; sourceTree = "<group>"; };
+		45863D5C2B872D7400D32783 /* G29ATT.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = G29ATT.pdf; sourceTree = "<group>"; };
+		45863D5D2B872D7500D32783 /* G29TE.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = G29TE.pdf; sourceTree = "<group>"; };
+		45863D5E2B872D7500D32783 /* G29TT.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = G29TT.pdf; sourceTree = "<group>"; };
+		45863D662B872E0700D32783 /* ListfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ListfileViewController.h; sourceTree = "<group>"; };
+		45863D672B872E0700D32783 /* ListfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListfileViewController.m; sourceTree = "<group>"; };
 		45A82F742B47EB5B002413AC /* RoomViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoomViewController.h; sourceTree = "<group>"; };
 		45A82F752B47EB5B002413AC /* RoomViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoomViewController.m; sourceTree = "<group>"; };
 		45D49FA72B3C7350001A4E22 /* d5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = d5.png; sourceTree = "<group>"; };
@@ -427,10 +442,8 @@
 		457F8AEC2B1EAB0300FA7ABB = {
 			isa = PBXGroup;
 			children = (
-				4552FDB12B57777900FE693F /* CDZQRScanViewController.h */,
-				4552FDB22B57777900FE693F /* CDZQRScanViewController.m */,
-				4552FDAE2B57774000FE693F /* CDZQRScanView.h */,
-				4552FDAF2B57774000FE693F /* CDZQRScanView.m */,
+				45863D652B872D8300D32783 /* QR */,
+				45863D582B872D5B00D32783 /* pdffile */,
 				453B7A082B5DFE9D008A6457 /* Datas */,
 				454E9F0C2B3AEE93009F7B3A /* images */,
 				457F8AF72B1EAB0300FA7ABB /* Evacool */,
@@ -469,6 +482,8 @@
 				453B79F92B5CF97F008A6457 /* RegistViewController.m */,
 				453B79FB2B5D0ED0008A6457 /* ProfileViewController.h */,
 				453B79FC2B5D0ED0008A6457 /* ProfileViewController.m */,
+				45863D662B872E0700D32783 /* ListfileViewController.h */,
+				45863D672B872E0700D32783 /* ListfileViewController.m */,
 				457F8AF82B1EAB0300FA7ABB /* AppDelegate.h */,
 				457F8AF92B1EAB0300FA7ABB /* AppDelegate.m */,
 				457F8AFB2B1EAB0300FA7ABB /* SceneDelegate.h */,
@@ -480,6 +495,30 @@
 				457F8B0A2B1EAB0700FA7ABB /* main.m */,
 			);
 			path = Evacool;
+			sourceTree = "<group>";
+		};
+		45863D582B872D5B00D32783 /* pdffile */ = {
+			isa = PBXGroup;
+			children = (
+				45863D592B872D7400D32783 /* G29ATE.pdf */,
+				45863D5C2B872D7400D32783 /* G29ATT.pdf */,
+				45863D5D2B872D7500D32783 /* G29TE.pdf */,
+				45863D5E2B872D7500D32783 /* G29TT.pdf */,
+				45863D5A2B872D7400D32783 /* GCA28E.pdf */,
+				45863D5B2B872D7400D32783 /* GCA28T.pdf */,
+			);
+			path = pdffile;
+			sourceTree = "<group>";
+		};
+		45863D652B872D8300D32783 /* QR */ = {
+			isa = PBXGroup;
+			children = (
+				4552FDB12B57777900FE693F /* CDZQRScanViewController.h */,
+				4552FDB22B57777900FE693F /* CDZQRScanViewController.m */,
+				4552FDAE2B57774000FE693F /* CDZQRScanView.h */,
+				4552FDAF2B57774000FE693F /* CDZQRScanView.m */,
+			);
+			path = QR;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -545,6 +584,7 @@
 				454E9F812B3AF08F009F7B3A /* logo.png in Resources */,
 				45D49FC02B3C7352001A4E22 /* ecooff.png in Resources */,
 				45D49FD22B3C7352001A4E22 /* fanoff.png in Resources */,
+				45863D622B872D7500D32783 /* G29ATT.pdf in Resources */,
 				45D49FD32B3C7352001A4E22 /* fanon.png in Resources */,
 				454E9F832B3AF08F009F7B3A /* mine.png in Resources */,
 				453B7A012B5D1C16008A6457 /* a91.png in Resources */,
@@ -558,6 +598,7 @@
 				4567B8C32B3B06EF006DD662 /* imagehome.png in Resources */,
 				45D49FD12B3C7352001A4E22 /* f1.png in Resources */,
 				454D86162B5C36A100938793 /* btreturn.png in Resources */,
+				45863D602B872D7500D32783 /* GCA28E.pdf in Resources */,
 				45D49FBF2B3C7352001A4E22 /* turbooff.png in Resources */,
 				45D49FC42B3C7352001A4E22 /* cooloff.png in Resources */,
 				453B7A072B5D2FEF008A6457 /* greendot.png in Resources */,
@@ -598,11 +639,13 @@
 				45D537CA2B871E5C0067ECD5 /* 20.png in Resources */,
 				45D537B92B871AE30067ECD5 /* 5.png in Resources */,
 				454E9F7D2B3AF08F009F7B3A /* switch_on.png in Resources */,
+				45863D632B872D7500D32783 /* G29TE.pdf in Resources */,
 				45D49FC12B3C7352001A4E22 /* turboon.png in Resources */,
 				457F8B032B1EAB0300FA7ABB /* Main.storyboard in Resources */,
 				450384822B4D0B5900184684 /* no.png in Resources */,
 				45D537B52B871AE30067ECD5 /* 2.png in Resources */,
 				45D49FD02B3C7352001A4E22 /* d1.png in Resources */,
+				45863D612B872D7500D32783 /* GCA28T.pdf in Resources */,
 				45D49FCB2B3C7352001A4E22 /* f2.png in Resources */,
 				45D49FCE2B3C7352001A4E22 /* coolon.png in Resources */,
 				45D49FDA2B3D820A001A4E22 /* jia.png in Resources */,
@@ -625,9 +668,11 @@
 				454E9F742B3AF08F009F7B3A /* back_mine.png in Resources */,
 				45D49FC82B3C7352001A4E22 /* 23.png in Resources */,
 				454E9F122B3AEE93009F7B3A /* rv24.png in Resources */,
+				45863D5F2B872D7500D32783 /* G29ATE.pdf in Resources */,
 				454E9F542B3AF08F009F7B3A /* arefaction_on.png in Resources */,
 				454E9F842B3AF08F009F7B3A /* light_on.png in Resources */,
 				45D49FC92B3C7352001A4E22 /* f4.png in Resources */,
+				45863D642B872D7500D32783 /* G29TT.pdf in Resources */,
 				454E9F8C2B3AF08F009F7B3A /* sleep_off.png in Resources */,
 				454E9F8E2B3AF08F009F7B3A /* heat_on.png in Resources */,
 				4567B8C52B3B146D006DD662 /* imagetop.png in Resources */,
@@ -685,6 +730,7 @@
 				4543B03B2B4814BD0070A847 /* DataReadR.m in Sources */,
 				4552FDB02B57774000FE693F /* CDZQRScanView.m in Sources */,
 				4543B0352B4810590070A847 /* dataCode.m in Sources */,
+				45863D682B872E0700D32783 /* ListfileViewController.m in Sources */,
 				45DF31282B4547E000519C55 /* faultsViewController.m in Sources */,
 				45A82F762B47EB5C002413AC /* RoomViewController.m in Sources */,
 				45D49FDF2B3D952F001A4E22 /* SemiCircleProgressView.m in Sources */,
