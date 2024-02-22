@@ -178,7 +178,7 @@
     //product
     UILabel *labelproduct = [UILabel new];
     [self.view addSubview:labelproduct];
-    [labelproduct setText:@"Product"];
+    [labelproduct setText:@"Serial Number"];
     [labelproduct setTextColor:[UIColor blackColor]];
     [labelproduct setFont:[UIFont fontWithName:@"Arial" size:14]];
     labelproduct.sd_layout
@@ -206,7 +206,7 @@
     //产品序列号
     UILabel *labelserial = [UILabel new];
     [self.view addSubview:labelserial];
-    [labelserial setText:@"Serial Number"];
+    [labelserial setText:@"Product"];
     [labelserial setTextColor:[UIColor blackColor]];
     [labelserial setFont:[UIFont fontWithName:@"Arial" size:14]];
     labelserial.sd_layout
@@ -282,7 +282,7 @@
     
     UILabel *labelcpright = [UILabel new];
     [self.view addSubview:labelcpright];
-    [labelcpright setText:@"Tel:0(535) 728 77 97\nE-mail:info@evacoll.com.tr"];
+    [labelcpright setText:@"Tel:0(535) 728 77 97\nE-mail:info@evacool.com.tr"];
     [labelcpright setNumberOfLines:2];
     [labelcpright setTextColor:[UIColor blackColor]];
     [labelcpright setFont:[UIFont fontWithName:@"Arial" size:10]];

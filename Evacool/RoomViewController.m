@@ -491,7 +491,7 @@
     
     //底部左边turbo
     self.btTurbo = [UIButton new];
-    [self.btTurbo setImage:[UIImage imageNamed:@"16"] forState:UIControlStateNormal];
+    [self.btTurbo setImage:[UIImage imageNamed:@"turbooff"] forState:UIControlStateNormal];
     [self.view addSubview:self.btTurbo];
     self.btTurbo.sd_layout
         .leftEqualToView(view1)
@@ -503,7 +503,7 @@
     
     //底部中间 sleep
     self.btSleep = [UIButton new];
-    [self.btSleep setImage:[UIImage imageNamed:@"18"] forState:UIControlStateNormal];
+    [self.btSleep setImage:[UIImage imageNamed:@"sleep_off"] forState:UIControlStateNormal];
     [self.view addSubview:self.btSleep];
     self.btSleep.sd_layout
         .centerXEqualToView(self.view)
@@ -515,7 +515,7 @@
     
     //底部左边右边
     self.btLight = [UIButton new];
-    [self.btLight setImage:[UIImage imageNamed:@"20"] forState:UIControlStateNormal];
+    [self.btLight setImage:[UIImage imageNamed:@"light_off"] forState:UIControlStateNormal];
     [self.view addSubview:self.btLight];
     self.btLight.sd_layout
         .rightEqualToView(view1)
