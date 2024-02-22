@@ -199,18 +199,36 @@
     HomeViewController *homeViewController = [HomeViewController new];
     homeViewController.brand = @"EVA24VTR";
     [self.navigationController pushViewController:homeViewController animated:YES];
+    
+//    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"EVA24VTR" forKey:@"brand"];
+//    NSNotification *notification =[NSNotification notificationWithName:@"brandnoty" object:nil userInfo:dict];
+//    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"EVA24VTR" forKey:@"brandeee"];
 }
 
 -(void)setrv12{
     HomeViewController *homeViewController = [HomeViewController new];
     homeViewController.brand = @"EVA12VRV";
     [self.navigationController pushViewController:homeViewController animated:YES];
+    
+//    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"EVA12VRV" forKey:@"brand"];
+//    NSNotification *notification =[NSNotification notificationWithName:@"brandnoty" object:nil userInfo:dict];
+//    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"EVA12VRV" forKey:@"brandeee"];
 }
 
 -(void)setrv2700{
     HomeViewController *homeViewController = [HomeViewController new];
     homeViewController.brand = @"EVA2700RV";
     [self.navigationController pushViewController:homeViewController animated:YES];
+    
+//    NSDictionary *dict = [NSDictionary dictionaryWithObject:@"EVA2700RV" forKey:@"brand"];
+//    NSNotification *notification =[NSNotification notificationWithName:@"brandnoty" object:nil userInfo:dict];
+//    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"EVA2700RV" forKey:@"brandeee"];
 }
 
 /*

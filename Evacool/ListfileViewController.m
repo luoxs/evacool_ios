@@ -8,9 +8,13 @@
 #import "ListfileViewController.h"
 #import "SDAutoLayout.h"
 #import "ListfileViewController.h"
+#import <QuickLook/QuickLook.h>
 
-@interface ListfileViewController ()
 
+@interface ListfileViewController ()<QLPreviewControllerDelegate,QLPreviewControllerDataSource>
+@property (nonatomic,retain) NSString *mybrand;
+@property (nonatomic,retain) QLPreviewController *qlvc;
+@property (nonatomic,retain) NSString *filename;
 @end
 
 @implementation ListfileViewController
@@ -18,8 +22,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.qlvc = [[QLPreviewController alloc] init];
+    self.qlvc.dataSource = self;
+    self.qlvc.delegate = self;
+      
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.mybrand = [defaults objectForKey:@"brandeee"];
     [self setAutolayout];
+    
+   
     
 }
 
@@ -69,7 +82,7 @@
         .topSpaceToView(self.view, 500/frameHeight*viewY)
         .heightIs(80/frameHeight*viewY);
     [btturkey setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
-    //  [btmanual addTarget:self action:@selector(goinfo) forControlEvents:UIControlEventTouchUpInside];
+    [btturkey addTarget:self action:@selector(openturkey) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *btenglish = [UIButton new];
     [self.view addSubview:btenglish];
@@ -81,14 +94,54 @@
         .topSpaceToView(self.view, 700/frameHeight*viewY)
         .heightIs(80/frameHeight*viewY);
     [btenglish setBackgroundColor:[UIColor colorWithRed:29.0/255 green:130.0/255 blue:254.0/255 alpha:1.0]];
-    //  [btmanual addTarget:self action:@selector(goinfo) forControlEvents:UIControlEventTouchUpInside];
-    
+    [btenglish addTarget:self action:@selector(openenglish) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 -(void)goback{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)openturkey{
+    if([self.mybrand isEqualToString:@"EVA24VTR"]){
+        self.filename = @"G29TT";
+    }else if([self.mybrand isEqualToString:@"EVA12VRV"]){
+        self.filename = @"G29ATT";
+    }else{
+        self.filename = @"GCA28T";
+    }
+    [self.navigationController.navigationBar setHidden:NO];
+    [self.navigationController pushViewController:self.qlvc animated:YES];
     
 }
+
+-(void) openenglish{
+    if([self.mybrand isEqualToString:@"EVA24VTR"]){
+        self.filename = @"G29TE";
+    }else if([self.mybrand isEqualToString:@"EVA12VRV"]){
+        self.filename = @"G29ATE";
+    }else{
+        self.filename = @"GCA28E";
+    }
+    [self.navigationController.navigationBar setHidden:NO];
+    self.qlvc.navigationItem.title = @"aaaa";
+    [self.navigationController pushViewController:self.qlvc animated:YES];
+}
+
+///代理
+- (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)controller{
+    return 1;
+}
+- (id<QLPreviewItem>)previewController:(QLPreviewController *)controller previewItemAtIndex:(NSInteger)index{
+    
+    NSURL *filePath = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:self.filename ofType:@"pdf"]];
+    return filePath;
+}
+-(void)previewControllerDidDismiss:(QLPreviewController *)controller{
+    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController.navigationBar setHidden:YES];
+}
+
 
 /*
 #pragma mark - Navigation
