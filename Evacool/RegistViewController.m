@@ -279,14 +279,14 @@
         //        NSLog(@"%@", str);
         if([[dict objectForKey:@"msg"] isEqualToString: @"操作成功"]){
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:[[dict objectForKey:@"data"] objectForKey:@"return_msg"] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"Device registration successfully!" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleCancel handler:nil];
                 [alert addAction:cancelAction];
                 [self presentViewController:alert animated:YES completion:nil];
             });
         }else{
             dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:[dict objectForKey:@"msg"] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"Device registration failed!" preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleCancel handler:nil];
                 [alert addAction:cancelAction];
                 [self presentViewController:alert animated:YES completion:nil];
