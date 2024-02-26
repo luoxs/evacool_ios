@@ -51,7 +51,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property Byte code38;
 @property Byte code39;
 @property Byte code40;
-@property Byte code41;
 @end
 
 NS_ASSUME_NONNULL_END

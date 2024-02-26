@@ -728,7 +728,6 @@
                 weakSelf.datacode.code38=r[38];
                 weakSelf.datacode.code39=r[39];
                 weakSelf.datacode.code40=r[40];
-                weakSelf.datacode.code41=r[41];
                 [weakSelf.dataErrors addObject:weakSelf.datacode];
             }
         }
