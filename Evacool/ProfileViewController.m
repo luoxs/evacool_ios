@@ -336,7 +336,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.userNmae = [dic objectForKey:@"username"];
                 self.phone = [dic objectForKey:@"liangxi_fangshi"];
-                self.regdate = [dic objectForKey:@"zhuce_shijian"];
+                NSString *str = [dic objectForKey:@"zhuce_shijian"];
+                self.regdate = [str stringByReplacingOccurrencesOfString:@"T" withString:@" "];
                 self.product = [dic objectForKey:@"chanpin_xiaoshou_sn"];
               //  self.serial = [dic objectForKey:@"zhuce_chengshi"];
                 

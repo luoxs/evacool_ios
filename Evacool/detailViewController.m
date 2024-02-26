@@ -32,7 +32,7 @@
     self.tableView.delegate = self;
     [self Autolayout];
     
-    self.titles =[ NSArray arrayWithObjects:@"Power",@"Mode",@"Fan Speed",@"Voltage",@"Compressor Current",@"Outer Fan Current",@"Inner Fan Current",@"Inlet Air Temprature",@"Outlet Air Temprature",@"Battery Pretection Lever",nil];
+    self.titles =[ NSArray arrayWithObjects:@"Power",@"Mode",@"Fan Speed",@"Voltage",@"Compressor Current",@"Outer Fan Current",@"Inner Fan Current",@"Inlet Air Temprature",@"Outlet Air Temprature",@"Battery Protection Level",nil];
 }
 
 -(void)Autolayout{
